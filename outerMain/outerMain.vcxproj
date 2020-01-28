@@ -118,6 +118,7 @@
     <ClCompile Include="GBMap.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
