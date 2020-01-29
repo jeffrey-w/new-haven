@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8038B328-02C5-4266-A39B-841E5D192C15}</ProjectGuid>
     <RootNamespace>outerMain</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="GBMap.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="HarvestTile.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -124,6 +125,8 @@
   <ItemGroup>
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="HarvestTile.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
