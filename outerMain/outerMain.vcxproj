@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Building.cpp" />
     <ClCompile Include="GBMap.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Building.h" />
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HarvestTile.h" />
