@@ -1,31 +1,37 @@
-#pragma once
-
+#include <map>
 #include <vector>
+#include "GameObject.h"
+#include <set>
 
-#include "Resource.h"
+using namespace std;
 
-using std::vector;
 
-struct Node {
-
-	Resource* item;
-	Node* next;
-
-};
-
-class Graph {
+class Node{
+    friend class Graph;
+private:
+    pair<int,int>* coordinates;
+    set<Node*>* adj;
+    GameObject* obj;
 
 public:
-
-	Graph();
-	Node* addVertex();
-	void addEdge(Node* u, Node* v);
-	void setResource(Resource* r);
-	int search(); // can either be BFS or DFS (BFS seems easier)
-
-private:
-
-	vector<Node*>* vertecies;
-
+    Node();
+    Node(pair<int,int>*);
+    void setObject(GameObject*);
 };
 
+
+
+class Graph{
+private:
+    map<pair<int,int>, Node*>* coordinatesMap;
+    vector<Node*>* nodes;
+
+public:
+    Graph();
+
+    bool addNode(pair<int,int>*, Node* node);
+    bool addEdge(pair<int,int>*, pair<int,int>*);
+    void display();
+    int search();
+
+};

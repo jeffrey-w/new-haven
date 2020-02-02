@@ -5,12 +5,13 @@ and number (1-6) on the other side
 #pragma once
 #include <iostream>
 #include <string>
+#include "GameObject.h"
 
 using std::cout;
 using std::cin;
 using std::string;
 
-class Building
+class Building:public GameObject
 {
 public:
 	enum Type { MEADOW, QUARRY, FOREST, WHEATFIELD };

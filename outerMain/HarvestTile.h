@@ -3,12 +3,13 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include "GameObject.h"
 
 using std::cout;
 using std::cin;
 using std::string;
 
-class HarvestTile
+class HarvestTile:public GameObject
 {
 	//-----------------------
 	//position0 | position1 |
