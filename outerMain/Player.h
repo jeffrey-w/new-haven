@@ -1,6 +1,5 @@
 #pragma once
 
-#include "GBMap.h"
 #include "VGMap.h"
 #include "HarvestTile.h"
 #include "Building.h"
@@ -8,20 +7,18 @@
 #include "ScoringFacilities.h"
 
 
-using std::vector;
-
 class Player {
 private:
-    GBMap* gameBoard;//all players can share same gameBoard, no need to implement this for A1
     VGMap* villageBoard;
-    vector<HarvestTile*>* harvestTiles;
-    vector<Building*>* buildings;
+    std::vector<HarvestTile*>* harvestTiles;
+    std::vector<Building*>* buildings;
     //ResourceMarkers TODO
     GatherFacility* gatherFacility;
     BuildFacility* buildFacility;
 
 
 public:
+    Player();
     bool placeHarvestTile(int,int, HarvestTile*);
     Building* drawBuilding();
     HarvestTile* drawHarvestTile();
