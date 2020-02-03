@@ -5,6 +5,9 @@ GBMap::GBMap(int numPlayers) {
 	// TODO switch on numPlayers for number of spaces
 }
 
+
+//commenting out since no search() method, use isConnected() from Graph and vector.size() to find out size
+/*
 bool GBMap::isConnected(int numPlayers) { // TODO refactor magic constants
 	int numSpaces = space->search();
 	switch (numPlayers) {
@@ -16,3 +19,4 @@ bool GBMap::isConnected(int numPlayers) { // TODO refactor magic constants
 		return numSpaces == 45;
 	}
 }
+*/
