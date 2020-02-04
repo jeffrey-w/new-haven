@@ -28,7 +28,22 @@ Node::~Node() {
 
 GBMap::GBMap(int numPlayers) {
 	area = new map<Coord,Node*>();
-	// TODO switch on numPlayers
+	switch (numPlayers) { // TODO avoid magic constants
+	case 2:
+		*rowMax = 5;
+		*colMax = 5;
+		break;
+	case 3:
+		*rowMax = 7;
+		*colMax = 5;
+		break;
+	case 4:
+		*rowMax = 7;
+		*colMax = 7;
+	default:
+		throw new std::exception; // TODO need richer exception type
+	}
+	// TODO dispatch to node and edge creation functions
 }
 
 GBMap::~GBMap() {
@@ -39,15 +54,13 @@ GBMap::~GBMap() {
 	area = nullptr;
 }
 
-void GBMap::setSpace(int row, int col, int orientation, HarvestTile* tile) {
-	// TODO need to validate row and col
+void GBMap::setSpace(Coord coord, HarvestTile* tile, int orientation) {
 	tile->changeTileOrientation(orientation);
-	nodeAt(Coord(row, col))->tile = tile;
+	nodeAt(validateCoord(coord))->tile = tile;
 }
 
-bool GBMap::spaceIsEmpty(int row, int col) {
-	// TODO need to validate row and col
-	return nodeAt(Coord(row, col))->tile == nullptr;
+bool GBMap::spaceIsEmpty(Coord coord) {
+	return nodeAt(validateCoord(coord))->tile == nullptr;
 }
 
 void GBMap::addNode(Coord coord) {
@@ -61,10 +74,24 @@ void GBMap::addEdge(Coord one, Coord two) {
 	n->adj->insert(m);
 }
 
+Node* GBMap::getOrigin() {
+	return nodeAt({ 0, 0 });
+}
+
 Node* GBMap::nodeAt(Coord coord) {
 	return area->at(coord);
 }
 
 void GBMap::search(Node*) {
 	// TODO
+}
+
+Coord GBMap::validateCoord(Coord coord) {
+	int row = coord.first, col = coord.second;
+	bool xInBounds = col >= 0 && col < *colMax;
+	bool yInBounds = row >= 0 && row < *rowMax;
+	if (!(xInBounds && yInBounds)) {
+		throw new std::exception; // TODO need richer exception type
+	}
+	return coord;
 }

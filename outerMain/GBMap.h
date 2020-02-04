@@ -36,19 +36,23 @@ class GBMap {
 
 private:
 
+	int* rowMax;
+	int* colMax;
 	map<Coord,Node*>* area;
 
 public:
 
 	GBMap(int);
 	~GBMap();
-	void setSpace(int, int, int, HarvestTile*);
-	bool spaceIsEmpty(int, int);
+	void setSpace(Coord, HarvestTile*, int);
+	bool spaceIsEmpty(Coord);
 
 private:
 	
 	void addNode(Coord);
 	void addEdge(Coord, Coord);
+	Node* getOrigin();
 	Node* nodeAt(Coord);
 	void search(Node*);
+	Coord validateCoord(Coord coord);
 };
