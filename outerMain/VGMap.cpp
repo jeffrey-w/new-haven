@@ -1,13 +1,16 @@
 #include "VGMap.h"
 
+using std::map;
+using std::pair;
+using std::vector;
 
 //constructor
 Circle::Circle(){
-    adjCircles=new std::vector<Circle*>;
+    adjCircles=new vector<Circle*>;
     building= nullptr;
     visited=new bool();
 }
-Circle::Circle(std::pair<int,int>* coord):Circle(){
+Circle::Circle(pair<int,int>* coord):Circle(){
     coordinates=coord;
     number=coord->second;
 }
@@ -19,17 +22,17 @@ bool Circle::setBuilding(Building* building) {
 
 
 VGMap::VGMap(){
-    coordinatesMap=new std::map<std::pair<int,int>, Circle*>;
-    circles=new std::vector<Circle*>;
+    coordinatesMap=new map<pair<int,int>, Circle*>;
+    circles=new vector<Circle*>;
 }
-std::vector<Circle *> * VGMap::getCircles() {
+vector<Circle *> * VGMap::getCircles() {
     return circles;
 }
 bool VGMap::addCircle(int x, int y) {
     if(coordinatesMap->count({x,y})>0){
-        return false;//circle already created at this coordinate
+        return false; //circle already created at this coordinate
     }
-    std::pair<int,int>* p=new std::pair<int,int>(x,y);
+    pair<int,int>* p=new pair<int,int>(x,y);
     Circle* newCircle=new Circle(p);
     coordinatesMap->insert({{x,y}, newCircle});
     circles->push_back(newCircle);
