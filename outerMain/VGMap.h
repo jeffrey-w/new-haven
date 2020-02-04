@@ -16,7 +16,7 @@ private:
 public:
     Circle();
     Circle(std::pair<int,int>*);//remove if getting rid of coordinates member
-    bool setBuilding(Building*);
+    bool setBuilding(Building*);//TODO sure this isn't void?
 };
 
 class VGMap {
