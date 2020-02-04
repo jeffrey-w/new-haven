@@ -9,7 +9,6 @@ using Adj = set<Node*>;
 Node::Node() {
 	tile = nullptr;
 	adj = new set<Node*>();
-	visited = new bool(false);
 	color = new int(WHITE);
 	distance = new int(INFINITY); // TOOD float to int is dangerous
 	prev = nullptr;
@@ -20,8 +19,6 @@ Node::~Node() {
 	tile = nullptr;
 	delete adj;
 	adj = nullptr;
-	delete visited;
-	visited = nullptr;
 	delete color;
 	color = nullptr;
 	delete distance;
@@ -58,8 +55,8 @@ GBMap::~GBMap() {
 	area = nullptr;
 }
 
-void GBMap::setSpace(Coord coord, HarvestTile* tile, int orientation) {
-	tile->changeTileOrientation(orientation);
+void GBMap::setSpace(Coord coord, HarvestTile* tile) {
+	// TODO tile should already be oriented correctly
 	nodeAt(coord)->tile = tile;
 }
 
@@ -86,7 +83,7 @@ Node* GBMap::nodeAt(Coord coord) {
 	return area->at(validateCoord(coord));
 }
 
-Coord GBMap::validateCoord(Coord coord) {
+Coord GBMap::validateCoord(Coord coord) { // TODO do not zero-index
 	int row = coord.first, col = coord.second;
 	bool xInBounds = col >= 0 && col < *colMax;
 	bool yInBounds = row >= 0 && row < *rowMax;

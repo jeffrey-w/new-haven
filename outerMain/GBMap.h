@@ -20,7 +20,6 @@ private:
 
 	HarvestTile* tile;
 	set<Node*>* adj;
-	bool* visited;
 	
 	// Search attributes
 	int* color;
@@ -44,7 +43,7 @@ public:
 
 	GBMap(int);
 	~GBMap();
-	void setSpace(Coord, HarvestTile*, int);
+	void setSpace(Coord, HarvestTile*);
 	bool spaceIsEmpty(Coord);
 
 private:
