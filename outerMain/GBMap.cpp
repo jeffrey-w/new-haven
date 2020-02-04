@@ -1,6 +1,10 @@
+#include <vector>
+
 #include "GBMap.h"
 
+using std::vector;
 using Nodes = map<Coord,Node*>;
+using Adj = set<Node*>;
 
 Node::Node() {
 	tile = nullptr;
@@ -56,11 +60,11 @@ GBMap::~GBMap() {
 
 void GBMap::setSpace(Coord coord, HarvestTile* tile, int orientation) {
 	tile->changeTileOrientation(orientation);
-	nodeAt(validateCoord(coord))->tile = tile;
+	nodeAt(coord)->tile = tile;
 }
 
 bool GBMap::spaceIsEmpty(Coord coord) {
-	return nodeAt(validateCoord(coord))->tile == nullptr;
+	return nodeAt(coord)->tile == nullptr;
 }
 
 void GBMap::addNode(Coord coord) {
@@ -79,11 +83,7 @@ Node* GBMap::getOrigin() {
 }
 
 Node* GBMap::nodeAt(Coord coord) {
-	return area->at(coord);
-}
-
-void GBMap::search(Node*) {
-	// TODO
+	return area->at(validateCoord(coord));
 }
 
 Coord GBMap::validateCoord(Coord coord) {
@@ -94,4 +94,28 @@ Coord GBMap::validateCoord(Coord coord) {
 		throw new std::exception; // TODO need richer exception type
 	}
 	return coord;
+}
+
+// Breadth-first search
+void GBMap::search(Node* s) {
+	*s->color = Node::GRAY;
+	*s->distance = 0;
+	s->prev = nullptr; // TODO is this needed?
+	vector<Node*> queue = vector<Node*>();
+	queue.push_back(s);
+	while (!queue.empty()) {
+		Node* u = queue.front();
+		Adj* list = u->adj;
+		for (Adj::iterator i = list->begin(); i != list->end(); i++) {
+			Node* v = *i;
+			if (v->color == Node::WHITE) {
+				*v->color = Node::GRAY;
+				*v->distance = *u->distance + 1;
+				v->prev = u;
+				queue.push_back(v);
+			}
+		}
+		*u->color = Node::BLACK;
+	}
+	// TODO reset Node search attributes for next search
 }
