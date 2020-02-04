@@ -14,6 +14,7 @@ Circle::Circle(std::pair<int,int>* coord):Circle(){
 
 bool Circle::setBuilding(Building* building) {
     this->building=building;
+    return true;
 }
 
 
