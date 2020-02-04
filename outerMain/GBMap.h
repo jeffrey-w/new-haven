@@ -1,25 +1,54 @@
 #pragma once
 
-#include <vector>
+#include <map>
+#include <set>
 
-#include "Graph.h"
-#include "Player.h"
+#include "Player.h" // TODO as of yet unused
 
-using std::vector;
+using std::map;
+using std::pair;
+using std::set;
+using Coord = pair<int, int>;
 
-class GBMap {
+class Node {
 
-public:
-
-	GBMap(int numPlayers);
-	bool isConnected(int numPlayers);
-	int getConnectedResources();
-	//void setSpace(int index, int orientation, Tile tile); TODO need Tile class/maybe richer type for orientation
+	friend class GBMap;
 
 private:
 
-	Graph* space;
-	vector<Player*>* owners ;
+	const int WHITE = 0, GRAY = 1, BLACK = 2;
+
+	HarvestTile* tile;
+	set<Node*>* adj;
+	bool* visited;
+	
+	// Search attributes
+	int* color;
+	int* distance;
+	Node* prev;
+
+	Node();
+	~Node();
 
 };
 
+class GBMap {
+
+private:
+
+	map<Coord,Node*>* area;
+
+public:
+
+	GBMap(int);
+	~GBMap();
+	void setSpace(int, int, int, HarvestTile*);
+	bool spaceIsEmpty(int, int);
+
+private:
+	
+	void addNode(Coord);
+	void addEdge(Coord, Coord);
+	Node* nodeAt(Coord);
+	void search(Node*);
+};
