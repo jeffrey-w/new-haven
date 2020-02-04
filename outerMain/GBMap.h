@@ -16,7 +16,7 @@ class Node {
 
 private:
 
-	const int WHITE = 0, GRAY = 1, BLACK = 2;
+	static const int WHITE = 0, GRAY = 1, BLACK = 2;
 
 	HarvestTile* tile;
 	set<Node*>* adj;
@@ -53,6 +53,6 @@ private:
 	void addEdge(Coord, Coord);
 	Node* getOrigin();
 	Node* nodeAt(Coord);
-	void search(Node*);
 	Coord validateCoord(Coord coord);
+	void search(Node*);
 };
