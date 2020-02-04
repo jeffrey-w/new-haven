@@ -89,7 +89,7 @@ void HarvestTile::printTile()
 //shifts go from 0 to 3, where nothing happens at 0
 //the tile remains shifted until it is shifted again
 void HarvestTile::changeTileOrientation(int shift)
-{
+{ // TODO need error checking
 	if (shift == 0)
 	{
 		return;

@@ -14,13 +14,13 @@ using std::string;
 class Building:public GameObject
 {
 public:
-	enum Type { MEADOW, QUARRY, FOREST, WHEATFIELD };
+	enum Type { MEADOW, QUARRY, FOREST, WHEATFIELD }; // TODO consider using enum class
 	Building(Type, int);  //example: Building myBuilding = Building(Building::WHEATFIELD, 1);
 	~Building();
 	void printBuilding();
 	void flip();
 
-private:
+private: // TODO make colour and number const (if they won't change, make it so they can't change)
 	Type* colour;
 	int* number;  //1 to 6
 	bool* buildingFaceUp; //the building is face up by default in the constructor, unless flip() is called

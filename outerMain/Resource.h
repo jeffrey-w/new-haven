@@ -9,7 +9,7 @@ using std::cout;
 using std::cin;
 using std::string;
 
-class Resource
+class Resource // TODO this isn't needed anymore right?
 {
 	string type;
 
