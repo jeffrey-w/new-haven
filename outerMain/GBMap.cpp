@@ -105,7 +105,7 @@ void GBMap::search(Node* s) {
 		Adj* list = u->adj;
 		for (Adj::iterator i = list->begin(); i != list->end(); i++) {
 			Node* v = *i;
-			if (v->color == Node::WHITE) {
+			if (*v->color == Node::WHITE) {
 				*v->color = Node::GRAY;
 				*v->distance = *u->distance + 1;
 				v->prev = u;
