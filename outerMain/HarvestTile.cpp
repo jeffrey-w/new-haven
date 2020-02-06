@@ -8,7 +8,6 @@ using std::cout;
 using std::cin;
 using std::string;
 
-//constructor
 HarvestTile::HarvestTile()
 {
 	buildTile();
@@ -18,92 +17,77 @@ void HarvestTile::buildTile()
 {
 	srand(time(0));
 
-	string arr[3];
-	//storing a max of 3 different resources in arr and then putting them in the tile
+	int arr[3];
+	int randNumber;
+	
+	//storing a max of 3 different Resources in arr and then putting them in the first 3 positions of the tile
 	for (int i = 0; i < 3; i++)
 	{
-		arr[i].assign(randomResourceGenerator());
-		position[i].assign(arr[i]);
+		randNumber = randomIntGenerator(3,0);
+		arr[i] = randNumber;
+		assignResourceToPosition(randNumber, i);
 	}
 
 	//the last position will choose a random arr index
-	int randIndex = rand() % (2 - 0 + 1) + 0;
-
-	switch (randIndex)
-	{
-	case 0:
-		position[3].assign(arr[0]);
-		break;
-	case 1:
-		position[3].assign(arr[1]);
-		break;
-	case 2:
-		position[3].assign(arr[2]);
-		break;
-	default:
-		break;
-	}
+	int randArrayIndex = randomIntGenerator(2, 0);
+	int valueAtIndex = arr[randArrayIndex];
+	assignResourceToPosition(valueAtIndex, 3);
 }
 
-//generates a random resource
-//WHEAT
-//STONE
-//TIMBER
-//SHEEP
-string HarvestTile::randomResourceGenerator()
+int HarvestTile::randomIntGenerator(int max, int min)
 {
-	int randNumber = rand() % (4 - 1 + 1) + 1;
-	string resourceType;
+	int randNumber = rand() % (max - min + 1) + min;
+	return randNumber;
+}
 
+void HarvestTile::assignResourceToPosition(int randNumber, int index)
+{
 	switch (randNumber)
 	{
+	case 0:
+		position[index] = Resource::WHEAT;
+		break;
 	case 1:
-		resourceType.assign("WHEAT");
+		position[index] = Resource::STONE;
 		break;
 	case 2:
-		resourceType.assign("STONE");
+		position[index] = Resource::TIMBER;
 		break;
 	case 3:
-		resourceType.assign("TIMBER");
-		break;
-	case 4:
-		resourceType.assign("SHEEP");
+		position[index] = Resource::SHEEP;
 		break;
 	default:
 		break;
 	}
-
-	return resourceType;
 }
 
 void HarvestTile::printTile()
 {
+	string resArr[] = { "WHEAT", "STONE", "TIMBER", "SHEEP" };
+	
 	cout << "-----------------------\n";
-	cout << "|  " << position[0] << "  |  " << position[1] << "  |\n";
+	cout << "|  " << resArr[position[0]] << "  |  " << resArr[position[1]] << "  |\n";
 	cout << "|----------|---------|\n";
-	cout << "|  " << position[3] << "  |  " << position[2] << "  |\n";
+	cout << "|  " << resArr[position[3]] << "  |  " << resArr[position[2]] << "  |\n";
 	cout << "-----------------------\n";
 }
 
 //from its current state, all positions are shifted from their current location in a clockwise manner
-//shifts go from 0 to 3, where nothing happens at 0
+//shifts go from 0 to 3, where nothing happens at 0 and invalid inputs
 //the tile remains shifted until it is shifted again
 void HarvestTile::changeTileOrientation(int shift)
-{ // TODO need to validate shift
-	if (shift == 0)
+{ 
+	if (shift <= 0 || shift > 3)
 	{
 		return;
 	}
 
-	string temp1;
-	temp1.assign(position[1]);
-	string temp2;
-	temp2.assign(position[2]);
-	string temp3;
-	temp3.assign(position[3]);
+	Resource temp1 = position[1];
+	Resource temp2 = position[2];
+	Resource temp3 = position[3];
 
-	position[shift % 4].assign(position[0]);
-	position[(shift + 1) % 4].assign(temp1);
-	position[(shift + 2) % 4].assign(temp2);
-	position[(shift + 3) % 4].assign(temp3);
+	position[shift % 4] = position[0];
+	position[(shift + 1) % 4] = temp1;
+	position[(shift + 2) % 4] = temp2;
+	position[(shift + 3) % 4] = temp3;
 }

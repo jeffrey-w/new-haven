@@ -22,11 +22,11 @@ int main()
             pair<int, int>* p = new pair<int,int>(i, j);
             Node* newNode=new Node(p);
             HarvestTile* ht=new HarvestTile();
-            ht->buildTile();
             newNode->setObject(ht);
             g->addNode(p, newNode);
 
-        }}
+        }
+    }
     for(int i=0; i<3; i++) {
         for (int j = 0; j < 4; j++) {
             pair<int, int> *p1 = new pair<int, int>(i, j);
@@ -47,8 +47,12 @@ int main()
 
     g->display();
 
+    /*HarvestTile* test = new HarvestTile();
+    test->printTile();
+    test->changeTileOrientation(1);
+    test->printTile();*/
 
-
+    
     system("pause");
 
     return 0;
