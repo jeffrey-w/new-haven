@@ -56,12 +56,12 @@ GBMap::~GBMap() {
 	area = nullptr;
 }
 
-void GBMap::setSpace(Coord coord, HarvestTile* tile) {
+void GBMap::setTile(Coord coord, HarvestTile* tile) {
 	// TODO tile should already be oriented correctly
 	nodeAt(coord)->tile = tile;
 }
 
-bool GBMap::spaceIsEmpty(Coord coord) {
+bool GBMap::isTileAvailable(Coord coord) {
 	return nodeAt(coord)->tile == nullptr;
 }
 

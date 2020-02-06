@@ -33,25 +33,25 @@ private:
 
 class GBMap {
 
+public:
+
+	GBMap(int);
+	~GBMap();
+	void setTile(Coord, HarvestTile*);
+	bool isTileAvailable(Coord);
+
 private:
 
 	int* rowMax;
 	int* colMax;
 	map<Coord,Node*>* area;
 
-public:
-
-	GBMap(int);
-	~GBMap();
-	void setSpace(Coord, HarvestTile*);
-	bool spaceIsEmpty(Coord);
-
-private:
-	
 	void addNode(Coord);
 	void addEdge(Coord, Coord);
 	Node* getOrigin();
 	Node* nodeAt(Coord);
 	Coord validateCoord(Coord coord);
 	void search(Node*);
+
+	
 };
