@@ -41,6 +41,7 @@ GBMap::GBMap(int numPlayers) {
 	case 4:
 		*rowMax = 7;
 		*colMax = 7;
+		break;
 	default:
 		throw new std::exception; // TODO need richer exception type
 	}
