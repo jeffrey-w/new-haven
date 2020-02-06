@@ -33,12 +33,6 @@ private:
 
 class GBMap {
 
-private:
-
-	int* rowMax;
-	int* colMax;
-	map<Coord,Node*>* area;
-
 public:
 
 	GBMap(int);
@@ -47,11 +41,17 @@ public:
 	bool isTileAvailable(Coord);
 
 private:
-	
+
+	int* rowMax;
+	int* colMax;
+	map<Coord,Node*>* area;
+
 	void addNode(Coord);
 	void addEdge(Coord, Coord);
 	Node* getOrigin();
 	Node* nodeAt(Coord);
 	Coord validateCoord(Coord coord);
 	void search(Node*);
+
+	
 };
