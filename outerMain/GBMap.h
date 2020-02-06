@@ -43,8 +43,8 @@ public:
 
 	GBMap(int);
 	~GBMap();
-	void setSpace(Coord, HarvestTile*);
-	bool spaceIsEmpty(Coord);
+	void setTile(Coord, HarvestTile*);
+	bool isTileAvailable(Coord);
 
 private:
 	
