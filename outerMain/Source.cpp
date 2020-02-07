@@ -49,7 +49,7 @@ int main()
 
     /*HarvestTile* test = new HarvestTile();
     test->printTile();
-    test->changeTileOrientation(1);
+    test->changeTileOrientation(3);
     test->printTile();*/
 
     

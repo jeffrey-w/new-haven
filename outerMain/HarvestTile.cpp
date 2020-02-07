@@ -10,7 +10,14 @@ using std::string;
 
 HarvestTile::HarvestTile()
 {
+	position = new Resource[4];
 	buildTile();
+}
+
+HarvestTile::~HarvestTile()
+{
+	delete[] position;
+	position = nullptr;
 }
 
 void HarvestTile::buildTile()

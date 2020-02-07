@@ -19,6 +19,7 @@ class HarvestTile:public GameObject
 public:
 	enum Resource { WHEAT, STONE, TIMBER, SHEEP };
 	HarvestTile();
+	~HarvestTile();
 	void printTile();
 	//from its current state, all positions are shifted from their current location in a clockwise manner
 	//shifts go from 0 to 3, where nothing happens at 0
@@ -26,7 +27,7 @@ public:
 	void changeTileOrientation(int shift);
 
 private:
-	Resource position[4]; //this array contains the types of the ressources contained in the tile
+	Resource* position; //this array contains the Resources contained in the tile
 	void buildTile();
 	int randomIntGenerator(int max, int min);
 	void assignResourceToPosition(int randNumber, int index);
