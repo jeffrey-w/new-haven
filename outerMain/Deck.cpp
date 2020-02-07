@@ -10,6 +10,17 @@ using std::stack;
 
 Deck::Deck()
 {
+	generateAllBuildings();
+	generateAllHarvestTiles();
+}
+
+void Deck::generateAllBuildings()
+{
+
+}
+
+void Deck::generateAllHarvestTiles()
+{
 
 }
 

@@ -17,5 +17,7 @@ public:
 
 private:
 	stack<HarvestTile> harvestTileStack;
-	stack<Building> buildingStack;
+	stack<Building> buildingStack; //TODO need to make sure the buildings are put in the stack in a randomized order!
+	void generateAllBuildings(); //Stores buildings in the stack
+	void generateAllHarvestTiles(); //stores harvesttiles in the stack
 };
