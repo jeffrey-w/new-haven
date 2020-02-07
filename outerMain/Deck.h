@@ -16,5 +16,6 @@ public:
 	void drawHarvestTile();
 
 private:
-	stack<HarvestTile> tileStack;
+	stack<HarvestTile> harvestTileStack;
+	stack<Building> buildingStack;
 };
