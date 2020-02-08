@@ -7,15 +7,15 @@ using std::pair;
 using std::set;
 using std::vector;
 
-Node::Node() {
+GBMap::Node::Node() {
 	tile = nullptr;
 	adj = new set<Node*>();
 	color = new int(WHITE);
-	distance = new int(INFINITY); // TOOD float to int is dangerous
+	distance = new int(INT32_MAX);
 	prev = nullptr;
 }
 
-Node::~Node() {
+GBMap::Node::~Node() {
 	delete tile;
 	delete adj;
 	delete color;
@@ -77,11 +77,11 @@ void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 	n->adj->insert(m);
 }
 
-Node* GBMap::getOrigin() {
+GBMap::Node* GBMap::getOrigin() {
 	return nodeAt({ 0, 0 });
 }
 
-Node* GBMap::nodeAt(pair<int, int> coord) {
+GBMap::Node* GBMap::nodeAt(pair<int, int> coord) {
 	return area->at(validateCoord(coord));
 }
 
@@ -118,10 +118,4 @@ int GBMap::search(Node* s) {
 	}
 	return count;
 	// TODO reset Node search attributes for next search
-}
-
-void GBMap::validate() {
-	if (search(getOrigin()) != *rowMax * *colMax) {
-		throw new std::exception(); // TODO need richer exception type
-	}
 }
