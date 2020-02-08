@@ -50,8 +50,8 @@ GBMap::GBMap(int numPlayers) {
 }
 
 GBMap::~GBMap() {
-	for (map<pair<int, int>, Node*>::iterator i = area->begin(); i != area->end(); i++) {
-		delete i->second;
+	for (auto i : *area) {
+		delete i.second;
 	}
 	delete area;
 	area = nullptr;
