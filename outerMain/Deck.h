@@ -14,8 +14,8 @@ public:
 	Building* giveBuilding();   //draw()
 
 private:
-	std::vector<HarvestTile> harvestTileVector;
-	std::vector<Building> buildingVector;
+	std::vector<HarvestTile*>* harvestTileVector;
+	std::vector<Building*>* buildingVector;
 	void generateAllBuildings();
 	void generateAllHarvestTiles();
 };
