@@ -3,9 +3,8 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
-#include "GameObject.h"
 
-class HarvestTile:public GameObject
+class HarvestTile
 {
 	//-----------------------
 	//position0 | position1 |

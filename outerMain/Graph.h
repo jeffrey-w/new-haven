@@ -1,6 +1,5 @@
 #include <map>
 #include <vector>
-#include "GameObject.h"
 #include <set>
 
 using namespace std;
@@ -11,14 +10,11 @@ class Node{
 private:
     pair<int,int>* coordinates;
     set<Node*>* adj;
-    GameObject* obj;
     bool* visited;
 
 public:
     Node();
     Node(pair<int,int>*);
-    void setObject(GameObject*);
-    GameObject* getObject(Node*);
 };
 
 
