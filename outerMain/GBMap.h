@@ -13,6 +13,8 @@ public:
 	~GBMap();
 	void setTile(std::pair<int, int>, HarvestTile*);
 	bool isTileAvailable(std::pair<int, int>);
+	int search(std::pair<int, int>);
+	void display();
 
 private:
 
