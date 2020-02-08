@@ -32,6 +32,7 @@ private:
 
 		Node();
 		~Node();
+		void init(HarvestTile*, std::set<Node*>*);
 
 	};
 
@@ -47,5 +48,6 @@ private:
 	Node* nodeAt(std::pair<int, int>);
 	std::pair<int, int> validateCoord(std::pair<int, int>);
 	int search(Node*);
+	void resetSearchAttributes();
 
 };
