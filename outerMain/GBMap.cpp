@@ -32,7 +32,7 @@ void GBMap::setDimensions(int numPlayers) {
 		*height = DIM_MAX;
 		break;
 	default:
-		throw new std::exception; // TODO need richer exception type
+		throw new std::exception(); // TODO need richer exception type
 	}
 }
 
@@ -97,7 +97,7 @@ pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-
 	bool xInBounds = x >= 0 && x < *width;
 	bool yInBounds = y >= 0 && y < *height;
 	if (!(xInBounds && yInBounds)) {
-		throw new std::exception; // TODO need richer exception type
+		throw new std::exception(); // TODO need richer exception type
 	}
 	return coord;
 }
