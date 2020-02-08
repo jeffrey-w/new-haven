@@ -38,36 +38,36 @@ void Deck::generateAllHarvestTiles()
 	}
 }
 
-Building Deck::giveBuilding()
+Building* Deck::giveBuilding()
 {
 	if (buildingVector.empty())
 	{
 		cout << "The building deck is empty!\n";
-		return;
+		return nullptr;
 	}
 
 	srand(time(0));
 	int size = buildingVector.size();
 	int randNumber = rand() % (size-1 - 0 + 1) + 0;
-	Building holder = buildingVector[randNumber];
+	Building* holder = &buildingVector[randNumber];
 	
 	//removing the building from the vector
 	vector<Building>::iterator it;
 	it = buildingVector.begin() + randNumber;
 	buildingVector.erase(it);
 	
-	return buildingVector[randNumber];
+	return holder;
 }
 
-HarvestTile Deck::giveHarvestTile()
+HarvestTile* Deck::giveHarvestTile()
 {
 	if (harvestTileVector.empty())
 	{
 		cout << "The harvest tile deck is empty!\n";
-		return;
+		return nullptr;
 	}
 	
-	HarvestTile holder = harvestTileVector.back();
+	HarvestTile* holder = &harvestTileVector.back();
 	harvestTileVector.pop_back();
 	return holder;
 }

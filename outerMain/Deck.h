@@ -10,8 +10,8 @@ class Deck
 {
 public:
 	Deck();
-	HarvestTile giveHarvestTile();  //draw()
-	Building giveBuilding();   //draw()
+	HarvestTile* giveHarvestTile();  //draw()
+	Building* giveBuilding();   //draw()
 
 private:
 	std::vector<HarvestTile> harvestTileVector;
