@@ -3,12 +3,7 @@
 #include <map>
 #include <set>
 
-#include "Player.h" // TODO as of yet unused
-
-//using std::map;
-//using std::pair;
-//using std::set;
-//using Coord = pair<int, int>;
+#include "HarvestTile.h"
 
 class Node { // TODO make this an inner class
 
@@ -44,7 +39,7 @@ private:
 
 	int* rowMax;
 	int* colMax;
-	map<std::pair<int, int>,Node*>* area;
+	std::map<std::pair<int, int>,Node*>* area;
 
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
@@ -52,6 +47,5 @@ private:
 	Node* nodeAt(std::pair<int, int>);
 	std::pair<int, int> validateCoord(std::pair<int, int> coord);
 	void search(Node*);
-
 	
 };
