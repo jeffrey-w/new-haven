@@ -3,6 +3,7 @@
 #include <vector>
 #include "Graph.h"
 #include "HarvestTile.h"
+#include "GBMap.h"
 
 using std::cout;
 using std::cin;
@@ -13,9 +14,6 @@ using std::vector;
 int main()
 {
     cout << "Hi New Haven!\n";
-
-
-
     Graph* g=new Graph();
     for(int i=0; i<4; i++){
         for(int j=0; j<4; j++) {
@@ -46,6 +44,11 @@ int main()
 
 
     g->display();
+
+    // TEST GBMap
+    GBMap gbmap(2);
+    cout << gbmap.search({ 0, 0 }) << "\n";
+    gbmap.display();
 
     /*HarvestTile* test = new HarvestTile();
     test->printTile();
