@@ -6,30 +6,29 @@ using std::map;
 using std::pair;
 using std::queue;
 using std::set;
+using std::cout;
+using std::endl;
 
-constexpr int DIM_MIN = 5, DIM_MAX = 7;
+const int SMALL_MAP = 25, MEDIUM_MAP = 35, LARGE_MAP = 45; // constexpr?
 
 GBMap::GBMap(int numPlayers) {
-	width = new int();
-	height = new int();
-	area = new map<pair<int, int>, Node*>();
-	setDimensions(numPlayers);
+	number_of_nodes_on_playing_board = new int();
+	playing_board = new map<int, Node*>;
 	build();
+
+	generate_map_size(numPlayers);
 }
 
-void GBMap::setDimensions(int numPlayers) {
+void GBMap::generate_map_size(int numPlayers) {
 	switch (numPlayers) {
 	case 2:
-		*width = DIM_MIN;
-		*height = DIM_MIN;
+		*number_of_nodes_on_playing_board = SMALL_MAP;
 		break;
 	case 3:
-		*width = DIM_MAX;
-		*height = DIM_MIN;
+		*number_of_nodes_on_playing_board = MEDIUM_MAP;
 		break;
 	case 4:
-		*width = DIM_MAX;
-		*height = DIM_MAX;
+		*number_of_nodes_on_playing_board = LARGE_MAP;
 		break;
 	default:
 		throw new std::exception(); // TODO need richer exception type
@@ -37,29 +36,19 @@ void GBMap::setDimensions(int numPlayers) {
 }
 
 void GBMap::build() {
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			addNode({ i, j });
-		}
-	}
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			pair<int, int> coord{ i, j };
-			if (i < *width - 1) {
-				addEdge(coord, { i + 1, j });
-			}
-			if (j < *height - 1) {
-				addEdge(coord, { i, j + 1 });
-			}
-		}
-	}
+
+	addNode(1);
+	addNode(5);
+	addNode(21);
+	addNode(25);
+
 }
 
-void GBMap::addNode(pair<int, int> coord) {
-	area->insert({ coord, new Node() });
+void GBMap::addNode(int position) {
+	playing_board->insert({ position, new Node() });
 }
 
-void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
+void GBMap::addEdge(int one, int two) {
 	Node* m = nodeAt(one);
 	Node* n = nodeAt(two);
 	m->adj->insert(n);
@@ -67,44 +56,43 @@ void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 }
 
 GBMap::~GBMap() {
-	for (auto i : *area) {
+	for (auto i : *playing_board) {
 		delete i.second;
 	}
-	delete area;
-	area = nullptr;
+	delete playing_board;
+	playing_board = nullptr;
 }
 
-void GBMap::setTile(pair<int, int> coord, HarvestTile* tile) {
+void GBMap::set_tile_above_node(int position, HarvestTile* tile) {
 	// TODO tile should already be oriented correctly
-	nodeAt(coord)->tile = tile;
+	nodeAt(position)->tile = tile;
 }
 
-bool GBMap::isTileAvailable(pair<int, int> coord) {
-	return nodeAt(coord)->tile;
+bool GBMap::is_node_available(int position) {
+	return nodeAt(position)->tile;
 }
 
 
 GBMap::Node* GBMap::getOrigin() {
-	return nodeAt({ 0, 0 });
+	return nodeAt(1);
 }
 
-GBMap::Node* GBMap::nodeAt(pair<int, int> coord) {
-	return area->at(validateCoord(coord));
+GBMap::Node* GBMap::nodeAt(int position) {
+	return playing_board->at(validate_position(position));  
 }
 
-pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-index
-	int x = coord.first, y = coord.second;
-	bool xInBounds = x >= 0 && x < *width;
-	bool yInBounds = y >= 0 && y < *height;
-	if (!(xInBounds && yInBounds)) {
-		throw new std::exception(); // TODO need richer exception type
+int GBMap::validate_position(int position) { 
+	
+	if (!(position > 0 && position <= *number_of_nodes_on_playing_board)) {
+		cout << "invalid position" << endl;
+		//throw new std::exception(); 
 	}
-	return coord;
+	return position;
 }
 
-int GBMap::search(pair<int, int> coord) {
-	return search(nodeAt(coord));
-}
+//int GBMap::search(pair<int, int> coord) {
+//	return search(nodeAt(coord));
+//}
 
 
 // Breadth-first search
@@ -134,26 +122,26 @@ int GBMap::search(Node* s) {
 }
 
 void GBMap::resetSearchAttributes() {
-	for (auto entry : *area) {
+	for (auto entry : *playing_board) {
 		Node* n = entry.second;
 		n->init(n->tile, n->adj);
 	}
 }
 
-void GBMap::display() {
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			HarvestTile* tile = nodeAt({ i, j })->tile;
-			if (tile) {
-				std::cout << tile << '\t';
-			}
-			else {
-				std::cout << "-\t";
-			}
-		}
-		std::cout << "\n\n";
-	}
-}
+//void GBMap::display() {
+//	for (int i = 0; i < *width; i++) {
+//		for (int j = 0; j < *height; j++) {
+//			HarvestTile* tile = nodeAt({ i, j })->tile;
+//			if (tile) {
+//				std::cout << tile << '\t';
+//			}
+//			else {
+//				std::cout << "-\t";
+//			}
+//		}
+//		std::cout << "\n\n";
+//	}
+//}
 
 GBMap::Node::Node() {
 	init(nullptr, nullptr);

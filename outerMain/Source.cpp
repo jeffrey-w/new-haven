@@ -15,32 +15,51 @@ int main()
 {
     cout << "Hi New Haven!\n";
     Graph* g=new Graph();
-    for(int i=0; i<4; i++){
-        for(int j=0; j<4; j++) {
-            pair<int, int>* p = new pair<int,int>(i, j);
-            Node* newNode=new Node(p);
-            HarvestTile* ht=new HarvestTile();
-            newNode->setObject(ht);
-            g->addNode(p, newNode);
 
-        }
-    }
-    for(int i=0; i<3; i++) {
-        for (int j = 0; j < 4; j++) {
-            pair<int, int> *p1 = new pair<int, int>(i, j);
-            pair<int, int> *p2 = new pair<int, int>(i + 1, j);
+    pair<int, int>* free_square_0 = new pair<int, int>(0, 0);
+    Node* node_0 = new Node(free_square_0);
+    HarvestTile* ht_0 = new HarvestTile();
+    node_0->setTile(ht_0);   
 
-            g->addEdge(p1, p2);
-        }
-    }
-    for(int i=0; i<4; i++) {
-        for (int j = 0; j < 3; j++) {
-            pair<int, int> *p1 = new pair<int, int>(i, j);
-            pair<int, int> *p2 = new pair<int, int>(i, j+1);
+    pair<int, int>* free_square_1 = new pair<int, int>(0, 1);
+    Node* node_1 = new Node(free_square_1);
+    HarvestTile* ht_1 = new HarvestTile();
+    node_1->setTile(ht_1);
 
-            g->addEdge(p1, p2);
-        }
-    }
+    g->addNode(free_square_0, node_0);
+    g->addNode(free_square_1, node_1);
+
+    g->addEdge(free_square_0, free_square_1);
+
+
+
+
+    //for(int i=0; i<4; i++){
+    //    for(int j=0; j<4; j++) {
+    //        pair<int, int>* p = new pair<int,int>(i, j);
+    //        Node* newNode=new Node(p);
+    //        HarvestTile* ht=new HarvestTile();
+    //        newNode->setTile(ht);
+    //        g->addNode(p, newNode);
+
+    //    }
+    //}
+    //for(int i=0; i<3; i++) {
+    //    for (int j = 0; j < 4; j++) {
+    //        pair<int, int> *p1 = new pair<int, int>(i, j);
+    //        pair<int, int> *p2 = new pair<int, int>(i + 1, j);
+
+    //        g->addEdge(p1, p2);
+    //    }
+    //}
+    //for(int i=0; i<4; i++) {
+    //    for (int j = 0; j < 3; j++) {
+    //        pair<int, int> *p1 = new pair<int, int>(i, j);
+    //        pair<int, int> *p2 = new pair<int, int>(i, j+1);
+
+    //        g->addEdge(p1, p2);
+    //    }
+    //}
 
 
     g->display();

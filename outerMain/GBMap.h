@@ -11,8 +11,8 @@ public:
 
 	GBMap(int);
 	~GBMap();
-	void setTile(std::pair<int, int>, HarvestTile*);
-	bool isTileAvailable(std::pair<int, int>);
+	void set_tile_above_node(int, HarvestTile*);
+	bool is_node_available(int);
 	int search(std::pair<int, int>);
 	void display();
 
@@ -40,15 +40,17 @@ private:
 
 	int* width;
 	int* height;
-	std::map<std::pair<int, int>,Node*>* area;
+	std::map<int,Node*>* playing_board;
 
-	void setDimensions(int);
+	int* number_of_nodes_on_playing_board;
+
+	void generate_map_size(int);
 	void build();
-	void addNode(std::pair<int, int>);
-	void addEdge(std::pair<int, int>, std::pair<int, int>);
+	void addNode(int);
+	void addEdge(int, int);
 	Node* getOrigin();
-	Node* nodeAt(std::pair<int, int>);
-	std::pair<int, int> validateCoord(std::pair<int, int>);
+	Node* nodeAt(int);
+	int validate_position(int);
 	int search(Node*);
 	void resetSearchAttributes();
 
