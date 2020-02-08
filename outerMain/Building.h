@@ -5,9 +5,9 @@ and number (1-6) on the other side
 #pragma once
 #include <iostream>
 #include <string>
-#include "GameObject.h"
 
-class Building:public GameObject
+
+class Building
 {
 public:
 	bool* buildingFaceUp; //the building is face up by default in the constructor, unless flip() is called
