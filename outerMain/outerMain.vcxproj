@@ -117,10 +117,8 @@
   <ItemGroup>
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="Deck.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GBMap.cpp" />
     <ClCompile Include="GBMapLoader.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -130,13 +128,9 @@
   <ItemGroup>
     <ClInclude Include="Building.h" />
     <ClInclude Include="Deck.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="GBMapLoader.h" />
-    <ClInclude Include="Graph.h" />
     <ClInclude Include="HarvestTile.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="VGMap.h" />
   </ItemGroup>
