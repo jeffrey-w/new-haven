@@ -59,6 +59,6 @@ int GBMapLoader::getNumPlayers() {
 	case 49:
 		return 4;
 	default:
-		0;
+		return 0;
 	}
 }
