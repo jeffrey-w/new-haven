@@ -3,6 +3,7 @@
 using std::map;
 using std::pair;
 using std::vector;
+using std::cout;
 
 //constructor
 Circle::Circle(){
