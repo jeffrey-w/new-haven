@@ -2,13 +2,14 @@
 
 #include "GBMap.h"
 
-using Coord = pair<int, int>;
-using Nodes = map<Coord,Node*>;
-using Adj = std::set<Node*>;
+using std::map;
+using std::pair;
+using std::set;
+using std::vector;
 
 Node::Node() {
 	tile = nullptr;
-	adj = new std::set<Node*>();
+	adj = new set<Node*>();
 	color = new int(WHITE);
 	distance = new int(INFINITY); // TOOD float to int is dangerous
 	prev = nullptr;
@@ -28,7 +29,7 @@ Node::~Node() {
 }
 
 GBMap::GBMap(int numPlayers) {
-	area = new map<Coord,Node*>();
+	area = new map<pair<int, int>,Node*>();
 	switch (numPlayers) { // TODO avoid magic constants
 	case 2:
 		*rowMax = 5;
@@ -49,27 +50,27 @@ GBMap::GBMap(int numPlayers) {
 }
 
 GBMap::~GBMap() {
-	for (Nodes::iterator i = area->begin(); i != area->end(); i++) {
+	for (map<pair<int, int>, Node*>::iterator i = area->begin(); i != area->end(); i++) {
 		delete i->second;
 	}
 	delete area;
 	area = nullptr;
 }
 
-void GBMap::setTile(Coord coord, HarvestTile* tile) {
+void GBMap::setTile(pair<int, int> coord, HarvestTile* tile) {
 	// TODO tile should already be oriented correctly
 	nodeAt(coord)->tile = tile;
 }
 
-bool GBMap::isTileAvailable(Coord coord) {
+bool GBMap::isTileAvailable(pair<int, int> coord) {
 	return nodeAt(coord)->tile == nullptr;
 }
 
-void GBMap::addNode(Coord coord) {
+void GBMap::addNode(pair<int, int> coord) {
 	area->insert({ coord, new Node() });
 }
 
-void GBMap::addEdge(Coord one, Coord two) {
+void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 	Node* m = nodeAt(one);
 	Node* n = nodeAt(two);
 	m->adj->insert(n);
@@ -80,11 +81,11 @@ Node* GBMap::getOrigin() {
 	return nodeAt({ 0, 0 });
 }
 
-Node* GBMap::nodeAt(Coord coord) {
+Node* GBMap::nodeAt(pair<int, int> coord) {
 	return area->at(validateCoord(coord));
 }
 
-Coord GBMap::validateCoord(Coord coord) { // TODO do not zero-index
+pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-index
 	int row = coord.first, col = coord.second;
 	bool xInBounds = col >= 0 && col < *colMax;
 	bool yInBounds = row >= 0 && row < *rowMax;
@@ -103,8 +104,8 @@ void GBMap::search(Node* s) {
 	queue.push_back(s);
 	while (!queue.empty()) {
 		Node* u = queue.front();
-		Adj* list = u->adj;
-		for (Adj::iterator i = list->begin(); i != list->end(); i++) {
+		set<Node*>* list = u->adj;
+		for (set<Node*>::iterator i = list->begin(); i != list->end(); i++) {
 			Node* v = *i;
 			if (*v->color == Node::WHITE) {
 				*v->color = Node::GRAY;
