@@ -89,7 +89,7 @@ GBMap::Node* GBMap::getOrigin() {
 }
 
 GBMap::Node* GBMap::nodeAt(pair<int, int> coord) {
-	return area[validateCoord(coord)];
+	return area->at(validateCoord(coord));
 }
 
 pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-index
@@ -100,9 +100,8 @@ pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-
 }
 
 int GBMap::search(pair<int, int> coord) {
-	return search(nodeAt(coord));
+	return search(nodeAt(coord)); // TODO firgure out how to use []
 }
-
 
 // Breadth-first search
 int GBMap::search(Node* s) {
