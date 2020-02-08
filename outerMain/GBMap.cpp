@@ -89,15 +89,12 @@ GBMap::Node* GBMap::getOrigin() {
 }
 
 GBMap::Node* GBMap::nodeAt(pair<int, int> coord) {
-	return area->at(validateCoord(coord));
+	return area[validateCoord(coord)];
 }
 
 pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-index
-	int x = coord.first, y = coord.second;
-	bool xInBounds = x >= 0 && x < *width;
-	bool yInBounds = y >= 0 && y < *height;
-	if (!(xInBounds && yInBounds)) {
-		throw new std::exception(); // TODO need richer exception type
+	if (area->find(coord) == area->end()) {
+		throw new std::exception(); // TODO need richer exceotion type
 	}
 	return coord;
 }
