@@ -46,6 +46,7 @@ private:
 	Node* getOrigin();
 	Node* nodeAt(std::pair<int, int>);
 	std::pair<int, int> validateCoord(std::pair<int, int> coord);
-	void search(Node*);
-	
+	int search(Node*);
+	void validate();
+
 };

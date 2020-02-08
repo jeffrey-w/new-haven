@@ -96,7 +96,8 @@ pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-
 }
 
 // Breadth-first search
-void GBMap::search(Node* s) {
+int GBMap::search(Node* s) {
+	int count = 0;
 	*s->color = Node::GRAY;
 	*s->distance = 0;
 	s->prev = nullptr; // TODO is this needed?
@@ -108,6 +109,7 @@ void GBMap::search(Node* s) {
 		for (set<Node*>::iterator i = list->begin(); i != list->end(); i++) {
 			Node* v = *i;
 			if (*v->color == Node::WHITE) {
+				count++;
 				*v->color = Node::GRAY;
 				*v->distance = *u->distance + 1;
 				v->prev = u;
@@ -116,5 +118,12 @@ void GBMap::search(Node* s) {
 		}
 		*u->color = Node::BLACK;
 	}
+	return count;
 	// TODO reset Node search attributes for next search
+}
+
+void GBMap::validate() {
+	if (search(getOrigin()) != *rowMax * *colMax) {
+		throw new std::exception(); // TODO need richer exception type
+	}
 }
