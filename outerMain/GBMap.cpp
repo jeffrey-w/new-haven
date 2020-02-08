@@ -7,6 +7,8 @@ using std::pair;
 using std::set;
 using std::vector;
 
+constexpr int DIM_MIN = 5, DIM_MAX = 7;
+
 GBMap::GBMap(int numPlayers) {
 	area = new map<pair<int, int>,Node*>();
 	setDimensions(numPlayers);
@@ -14,18 +16,18 @@ GBMap::GBMap(int numPlayers) {
 }
 
 void GBMap::setDimensions(int numPlayers) {
-	switch (numPlayers) { // TODO avoid magic constants
+	switch (numPlayers) {
 	case 2:
-		*width = 5;
-		*height = 5;
+		*width = DIM_MIN;
+		*height = DIM_MIN;
 		break;
 	case 3:
-		*width = 7;
-		*height = 5;
+		*width = DIM_MAX;
+		*height = DIM_MIN;
 		break;
 	case 4:
-		*width = 7;
-		*height = 7;
+		*width = DIM_MAX;
+		*height = DIM_MAX;
 		break;
 	default:
 		throw new std::exception; // TODO need richer exception type
@@ -72,7 +74,7 @@ void GBMap::setTile(pair<int, int> coord, HarvestTile* tile) {
 }
 
 bool GBMap::isTileAvailable(pair<int, int> coord) {
-	return nodeAt(coord)->tile == nullptr;
+	return nodeAt(coord)->tile;
 }
 
 GBMap::Node* GBMap::getOrigin() {
@@ -96,9 +98,9 @@ pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-
 // Breadth-first search
 int GBMap::search(Node* s) {
 	int count = 0;
+	resetSearchAttributes();
 	*s->color = Node::GRAY;
 	*s->distance = 0;
-	s->prev = nullptr; // TODO is this needed?
 	vector<Node*> queue = vector<Node*>();
 	queue.push_back(s);
 	while (!queue.empty()) {
@@ -115,15 +117,17 @@ int GBMap::search(Node* s) {
 		*u->color = Node::BLACK;
 	}
 	return count;
-	// TODO reset Node search attributes for next search
+}
+
+void GBMap::resetSearchAttributes() {
+	for (auto entry : *area) {
+		Node* n = entry.second;
+		n->init(n->tile, n->adj);
+	}
 }
 
 GBMap::Node::Node() {
-	tile = nullptr;
-	adj = new set<Node*>();
-	color = new int(WHITE);
-	distance = new int(INT32_MAX);
-	prev = nullptr;
+	init(nullptr, nullptr);
 }
 
 GBMap::Node::~Node() {
@@ -136,5 +140,13 @@ GBMap::Node::~Node() {
 	adj = nullptr;
 	color = nullptr;
 	distance = nullptr;
+	prev = nullptr;
+}
+
+void GBMap::Node::init(HarvestTile* tile, set<Node*>* adj) {
+	this->tile = tile;
+	this->adj = (adj) ? adj : new set<Node*>();
+	color = new int(WHITE);
+	distance = new int(INT_MAX);
 	prev = nullptr;
 }
