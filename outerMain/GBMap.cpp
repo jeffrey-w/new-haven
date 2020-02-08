@@ -17,14 +17,14 @@ Node::Node() {
 
 Node::~Node() {
 	delete tile;
-	tile = nullptr;
 	delete adj;
-	adj = nullptr;
 	delete color;
-	color = nullptr;
 	delete distance;
-	distance = nullptr;
 	delete prev;
+	tile = nullptr;
+	adj = nullptr;
+	color = nullptr;
+	distance = nullptr;
 	prev = nullptr;
 }
 
@@ -105,15 +105,13 @@ int GBMap::search(Node* s) {
 	queue.push_back(s);
 	while (!queue.empty()) {
 		Node* u = queue.front();
-		set<Node*>* list = u->adj;
-		for (set<Node*>::iterator i = list->begin(); i != list->end(); i++) {
-			Node* v = *i;
+		for (auto v : *u->adj) {
 			if (*v->color == Node::WHITE) {
-				count++;
 				*v->color = Node::GRAY;
 				*v->distance = *u->distance + 1;
 				v->prev = u;
 				queue.push_back(v);
+				count++;
 			}
 		}
 		*u->color = Node::BLACK;
