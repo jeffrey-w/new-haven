@@ -14,15 +14,14 @@ public:
 
 	GBMapLoader(std::string path);
 	~GBMapLoader();
-	GBMap load();
+	GBMap* load();
 
 private:
 
+	int* numPlayers;
 	std::map<std::pair<int, int>, HarvestTile*>* nodes;
-	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>>* edges;
 
 	void read(std::ifstream*);
-	int getNumPlayers();
 
 };
 
