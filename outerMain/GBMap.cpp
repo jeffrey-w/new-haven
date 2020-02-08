@@ -124,6 +124,7 @@ int GBMap::search(Node* s) {
 			}
 		}
 		*u->color = Node::BLACK;
+		u->prev = nullptr;
 		q.pop();
 	}
 	return count;
