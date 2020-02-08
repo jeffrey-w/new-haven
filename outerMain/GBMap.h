@@ -40,7 +40,7 @@ private:
 
 	int* width;
 	int* height;
-	std::map<std::pair<int, int>,Node*>* area;
+	std::map<std::pair<int, int>, Node*>* area;
 
 	void setDimensions(int);
 	void build();
