@@ -5,10 +5,6 @@
 #include <ctime>
 #include "GameObject.h"
 
-using std::cout;
-using std::cin;
-using std::string;
-
 class HarvestTile:public GameObject
 {
 	//-----------------------

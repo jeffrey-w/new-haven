@@ -7,10 +7,6 @@ and number (1-6) on the other side
 #include <string>
 #include "GameObject.h"
 
-using std::cout;
-using std::cin;
-using std::string;
-
 class Building:public GameObject
 {
 public:

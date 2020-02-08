@@ -1,23 +1,21 @@
 #pragma once
 #include <iostream>
-#include <stack>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 #include "HarvestTile.h"
 #include "Building.h"
-
-using std::cout;
-using std::cin;
-using std::stack;
 
 class Deck
 {
 public:
 	Deck();
-	void drawBuilding();
-	void drawHarvestTile();
+	HarvestTile giveHarvestTile();  //draw()
+	Building giveBuilding();   //draw()
 
 private:
-	stack<HarvestTile> harvestTileStack;
-	stack<Building> buildingStack; //TODO need to make sure the buildings are put in the stack in a randomized order!
-	void generateAllBuildings(); //Stores buildings in the stack
-	void generateAllHarvestTiles(); //stores harvesttiles in the stack
+	std::vector<HarvestTile> harvestTileVector;
+	std::vector<Building> buildingVector;
+	void generateAllBuildings();
+	void generateAllHarvestTiles();
 };
