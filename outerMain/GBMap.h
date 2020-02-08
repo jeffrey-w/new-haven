@@ -5,12 +5,12 @@
 
 #include "Player.h" // TODO as of yet unused
 
-using std::map;
-using std::pair;
-using std::set;
-using Coord = pair<int, int>;
+//using std::map;
+//using std::pair;
+//using std::set;
+//using Coord = pair<int, int>;
 
-class Node {
+class Node { // TODO make this an inner class
 
 	friend class GBMap;
 
@@ -19,7 +19,7 @@ private:
 	static const int WHITE = 0, GRAY = 1, BLACK = 2;
 
 	HarvestTile* tile;
-	set<Node*>* adj;
+	std::set<Node*>* adj;
 	
 	// Search attributes
 	int* color;
@@ -37,20 +37,20 @@ public:
 
 	GBMap(int);
 	~GBMap();
-	void setTile(Coord, HarvestTile*);
-	bool isTileAvailable(Coord);
+	void setTile(std::pair<int,int>, HarvestTile*);
+	bool isTileAvailable(std::pair<int, int>);
 
 private:
 
 	int* rowMax;
 	int* colMax;
-	map<Coord,Node*>* area;
+	map<std::pair<int, int>,Node*>* area;
 
-	void addNode(Coord);
-	void addEdge(Coord, Coord);
+	void addNode(std::pair<int, int>);
+	void addEdge(std::pair<int, int>, std::pair<int, int>);
 	Node* getOrigin();
-	Node* nodeAt(Coord);
-	Coord validateCoord(Coord coord);
+	Node* nodeAt(std::pair<int, int>);
+	std::pair<int, int> validateCoord(std::pair<int, int> coord);
 	void search(Node*);
 
 	
