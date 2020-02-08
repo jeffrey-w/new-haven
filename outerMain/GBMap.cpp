@@ -1,16 +1,18 @@
-#include <vector>
+#include <queue>
 
 #include "GBMap.h"
 
 using std::map;
 using std::pair;
+using std::queue;
 using std::set;
-using std::vector;
 
 constexpr int DIM_MIN = 5, DIM_MAX = 7;
 
 GBMap::GBMap(int numPlayers) {
-	area = new map<pair<int, int>,Node*>();
+	width = new int();
+	height = new int();
+	area = new map<pair<int, int>, Node*>();
 	setDimensions(numPlayers);
 	build();
 }
@@ -37,8 +39,12 @@ void GBMap::setDimensions(int numPlayers) {
 void GBMap::build() {
 	for (int i = 0; i < *width; i++) {
 		for (int j = 0; j < *height; j++) {
+			addNode({ i, j });
+		}
+	}
+	for (int i = 0; i < *width; i++) {
+		for (int j = 0; j < *height; j++) {
 			pair<int, int> coord{ i, j };
-			addNode(coord);
 			if (i < *width - 1) {
 				addEdge(coord, { i + 1, j });
 			}
@@ -77,6 +83,7 @@ bool GBMap::isTileAvailable(pair<int, int> coord) {
 	return nodeAt(coord)->tile;
 }
 
+
 GBMap::Node* GBMap::getOrigin() {
 	return nodeAt({ 0, 0 });
 }
@@ -95,26 +102,33 @@ pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-
 	return coord;
 }
 
+int GBMap::search(pair<int, int> coord) {
+	return search(nodeAt(coord));
+}
+
+
 // Breadth-first search
 int GBMap::search(Node* s) {
-	int count = 0;
+	int count = 1;
 	resetSearchAttributes();
 	*s->color = Node::GRAY;
 	*s->distance = 0;
-	vector<Node*> queue = vector<Node*>();
-	queue.push_back(s);
-	while (!queue.empty()) {
-		Node* u = queue.front();
+	queue<Node*> q = queue<Node*>();
+	q.push(s);
+	while (!q.empty()) {
+		Node* u = q.front();
+		q.front();
 		for (auto v : *u->adj) {
 			if (*v->color == Node::WHITE) {
 				*v->color = Node::GRAY;
 				*v->distance = *u->distance + 1;
 				v->prev = u;
-				queue.push_back(v);
+				q.push(v);
 				count++;
 			}
 		}
 		*u->color = Node::BLACK;
+		q.pop();
 	}
 	return count;
 }
@@ -123,6 +137,21 @@ void GBMap::resetSearchAttributes() {
 	for (auto entry : *area) {
 		Node* n = entry.second;
 		n->init(n->tile, n->adj);
+	}
+}
+
+void GBMap::display() {
+	for (int i = 0; i < *width; i++) {
+		for (int j = 0; j < *height; j++) {
+			HarvestTile* tile = nodeAt({ i, j })->tile;
+			if (tile) {
+				std::cout << tile << '\t';
+			}
+			else {
+				std::cout << "-\t";
+			}
+		}
+		std::cout << "\n\n";
 	}
 }
 
