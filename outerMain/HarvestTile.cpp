@@ -22,7 +22,7 @@ HarvestTile::~HarvestTile()
 
 void HarvestTile::buildTile()
 {
-	srand(time(0));
+	//srand(time(0));
 
 	int arr[3];
 	int randNumber;

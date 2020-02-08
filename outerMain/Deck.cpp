@@ -48,7 +48,6 @@ Building* Deck::giveBuilding()
 		return nullptr;
 	}
 
-	srand(time(0));
 	int size = buildingVector->size();
 	int randNumber = rand() % (size-1 - 0 + 1) + 0;
 	Building* holder = buildingVector->at(randNumber);

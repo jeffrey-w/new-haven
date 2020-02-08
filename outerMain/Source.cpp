@@ -15,6 +15,7 @@ using std::vector;
 
 int main()
 {
+    srand(time(0));
     cout << "Hi New Haven!\n";
     
     // TEST GBMap
@@ -24,13 +25,15 @@ int main()
 
     /*HarvestTile* test = new HarvestTile();
     test->printTile();
-    test->changeTileOrientation(3);
-    test->printTile();*/
+    HarvestTile* test2 = new HarvestTile();
+    test2->printTile();
+    HarvestTile* test3 = new HarvestTile();
+    test3->printTile();*/
 
-    Deck* test = new Deck();
+    /*Deck* test = new Deck();
 
     Building* testBuild = test->giveBuilding();
-    testBuild->printBuilding();
+    testBuild->printBuilding();*/
 
     /*Building* test = new Building(Building::FOREST, 4);
     test->printBuilding();*/
