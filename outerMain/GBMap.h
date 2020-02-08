@@ -28,11 +28,13 @@ private:
 
 class GBMap {
 
+	friend class GBMapLoader;
+
 public:
 
 	GBMap(int);
 	~GBMap();
-	void setTile(std::pair<int,int>, HarvestTile*);
+	void setTile(std::pair<int, int>, HarvestTile*);
 	bool isTileAvailable(std::pair<int, int>);
 
 private:
