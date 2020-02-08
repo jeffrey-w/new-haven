@@ -119,6 +119,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GBMap.cpp" />
+    <ClCompile Include="GBMapLoader.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GBMap.h" />
+    <ClInclude Include="GBMapLoader.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="HarvestTile.h" />
     <ClInclude Include="Node.h" />
