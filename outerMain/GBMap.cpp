@@ -1,3 +1,4 @@
+#include <climits>
 #include <queue>
 
 #include "GBMap.h"
@@ -7,7 +8,7 @@ using std::pair;
 using std::queue;
 using std::set;
 
-constexpr int DIM_MIN = 5, DIM_MAX = 7, INF = 10000; // TODO put these elsewhere
+constexpr int DIM_MIN = 5, DIM_MAX = 7; // TODO put these elsewhere
 
 GBMap::GBMap(int numPlayers) {
 	width = new int();
@@ -173,6 +174,6 @@ void GBMap::Node::init(HarvestTile* tile, set<Node*>* adj) {
 	this->tile = tile;
 	this->adj = (adj) ? adj : new set<Node*>();
 	color = new int(WHITE);
-	distance = new int(INF);
+	distance = new int(INT_MAX);
 	prev = nullptr;
 }
