@@ -2,13 +2,13 @@
 
 #include "GBMap.h"
 
-using std::vector;
+using Coord = pair<int, int>;
 using Nodes = map<Coord,Node*>;
-using Adj = set<Node*>;
+using Adj = std::set<Node*>;
 
 Node::Node() {
 	tile = nullptr;
-	adj = new set<Node*>();
+	adj = new std::set<Node*>();
 	color = new int(WHITE);
 	distance = new int(INFINITY); // TOOD float to int is dangerous
 	prev = nullptr;
