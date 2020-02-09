@@ -8,22 +8,24 @@ using std::vector;
 using std::map;
 
 
-class Circle {
-    friend class VGMap;
-private:
-    pair<int,int>* coordinates;//only usefull for testing, consider removing
-    vector<Circle*> *adjCircles;
-    Building *building;
-    bool *visited;
-    int number;
 
-public:
-    Circle();
-    Circle(pair<int,int>*);//remove if getting rid of coordinates member
-    bool setBuilding(Building*);//TODO sure this isn't void?
-};
 
 class VGMap {
+    class Circle {
+        friend class VGMap;
+    private:
+        pair<int,int>* coordinates;//only usefull for testing, consider removing
+        vector<Circle*> *adjCircles;
+        Building *building;
+        bool *visited;
+        int number;
+
+    public:
+        Circle();
+        Circle(pair<int,int>*);//remove if getting rid of coordinates member
+        bool setBuilding(Building*);//TODO sure this isn't void?
+    };
+
 private:
     map<pair<int,int>, Circle*>* coordinatesMap;
     vector<Circle*>* circles;
@@ -38,4 +40,7 @@ public:
     bool isConnected();
     void dfs(Circle*);
     bool isValid();
+
+    //methods that go in driver later
+    void buildMap();
 };

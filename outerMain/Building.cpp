@@ -14,7 +14,7 @@ Building::Building(Type theColour, int theNumber)
 {
 	colour = new Type(theColour);
 	number = new int(theNumber);
-	buildingFaceUp = new bool(true);
+	faceUp = new bool(true);
 }
 
 Building::~Building()
@@ -23,28 +23,38 @@ Building::~Building()
 	colour = nullptr;
 	delete number;
 	number = nullptr;
-	delete buildingFaceUp;
-	buildingFaceUp = nullptr;
+	delete faceUp;
+	faceUp = nullptr;
 }
 
 void Building::printBuilding()
 {
-	string types[] = { "MEADOW", "QUARRY", "FOREST", "WHEATFIELD" };
+	string types[] = { "M", "Q", "F", "W" };
 
-	if (*buildingFaceUp)
+	if (*faceUp)
 	{
-		cout << "Face up: " << types[*colour] << "\n";
-		cout << "Face down: " << *number << "\n";
+		cout << types[*colour] << "[U]["<<*number<<"]";
 	}
 	else
 	{
-		cout << "Face up: " << *number << "\n";
-		cout << "Face down: " << types[*colour] << "\n";
+        cout << types[*colour] << "[D]["<<*number<<"]";
 	}
 
 }
 
 void Building::flip()
 {
-	*buildingFaceUp = !(*buildingFaceUp);
+	*faceUp = !(*faceUp);
+}
+
+int Building::getNumber() {
+    return *number;
+}
+
+bool Building::getFaceUp() {
+    return *faceUp;
+}
+
+enum Building::Type Building::getColour() {
+    return *colour;
 }

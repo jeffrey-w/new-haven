@@ -7,14 +7,15 @@
 #include "ScoringFacilities.h"
 
 
+
 class Player {
 private:
-    VGMap* villageBoard;
+    //VGMap* villageBoard;
     std::vector<HarvestTile*>* harvestTiles;
     std::vector<Building*>* buildings;
-    //ResourceMarkers TODO
     GatherFacility* gatherFacility;
     BuildFacility* buildFacility;
+    static int resourceMarkers[];
 
 
 public:
@@ -22,10 +23,14 @@ public:
     bool placeHarvestTile(int,int, HarvestTile*);
     Building* drawBuilding();
     HarvestTile* drawHarvestTile();
-    //resourceTracker() it seemed resourceMarkers will track Resources so have to confirm with prof what is this for
-    bool buildVillage(Building*);
-    //ResourceMarkers* calculateResources() TODO implement Resourcemarkers first
+    //int* resourceTracker();//TODO find use for it since no needed right now
+    bool buildVillage(int,int, Building*);
+    //ResourceMarkers* calculateResources() TODO
+
+    VGMap* villageBoard;//TODO make private later, but now needed to print VGMap from main
+
 
 
 };
+
 
