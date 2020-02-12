@@ -1,7 +1,6 @@
-/***************
-Building class creates a building given it's type (MEADOW,QUARRY,FOREST,WHEATFIELD) on one side
-and number (1-6) on the other side
-****************/
+/**
+Implementation of Building class
+*/
 #include <iostream>
 #include <string>
 #include "Building.h"
@@ -15,6 +14,13 @@ Building::Building(Type theColour, int theNumber)
 	colour = new Type(theColour);
 	number = new int(theNumber);
 	faceUp = new bool(true);
+}
+
+Building::Building(const Building& obj)
+{
+	colour = new Type(obj.Building::getColour);
+	number = new int(obj.Building::getNumber);
+	faceUp = new bool(obj.Building::getFaceUp);
 }
 
 Building::~Building()

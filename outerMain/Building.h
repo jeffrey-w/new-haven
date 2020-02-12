@@ -12,8 +12,16 @@ class Building
 public:
 	enum Type { MEADOW, QUARRY, FOREST, WHEATFIELD }; // TODO consider using enum class
 	Building(Type, int);  //example: Building myBuilding = Building(Building::WHEATFIELD, 1);
+	Building(const Building& obj);
 	~Building();
+	/*
+	prints building
+	*/
 	void printBuilding();
+	/*
+	flips the building
+	if the building was faceUp, it becomes face down and vice versa
+	*/
 	void flip();
 	int getNumber();
 	bool getFaceUp();
