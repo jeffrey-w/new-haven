@@ -1,3 +1,6 @@
+/**
+Implements HarvestTile class
+*/
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -79,9 +82,6 @@ void HarvestTile::printTile()
 	cout << "-----------------------\n";
 }
 
-//from its current state, all positions are shifted from their current location in a clockwise manner
-//shifts go from 0 to 3, where nothing happens at 0 and invalid inputs
-//the tile remains shifted until it is shifted again
 void HarvestTile::changeTileOrientation(int shift)
 { 
 	if (shift <= 0 || shift > 3)
