@@ -16,11 +16,11 @@ Building::Building(Type theColour, int theNumber)
 	faceUp = new bool(true);
 }
 
-Building::Building(const Building& obj)
+Building::Building(Building& obj)
 {
-	colour = new Type(obj.Building::getColour);
-	number = new int(obj.Building::getNumber);
-	faceUp = new bool(obj.Building::getFaceUp);
+	colour = new Type(*obj.colour);
+	number = new int(*obj.number);
+	faceUp = new bool(*obj.faceUp);
 }
 
 Building::~Building()
