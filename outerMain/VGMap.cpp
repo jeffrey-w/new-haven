@@ -5,7 +5,6 @@ using std::pair;
 using std::vector;
 using std::cout;
 
-
 //constructor
 VGMap::Circle::Circle(){
     adjCircles=new vector<Circle*>;
@@ -16,6 +15,8 @@ VGMap::Circle::Circle(pair<int,int>* coord):Circle(){
     coordinates=coord;
     number=coord->second;
 }
+
+Building* VGMap::Circle::getBuilding() { return building;}
 
 bool VGMap::Circle::setBuilding(Building* building) {
     this->building=building;
@@ -31,6 +32,11 @@ VGMap::VGMap(){
 vector<VGMap::Circle *> * VGMap::getCircles() {
     return circles;
 }
+
+VGMap::Circle* VGMap::getCircle(int x, int y){
+    return coordinatesMap->find({x,y})->second;
+}
+
 bool VGMap::addCircle(int x, int y) {
     if(coordinatesMap->count({x,y})>0){
         return false; //circle already created at this coordinate

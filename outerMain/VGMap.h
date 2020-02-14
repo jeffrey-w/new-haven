@@ -3,36 +3,32 @@
 #include <vector>
 #include <map>
 
-using std::pair;
-using std::vector;
-using std::map;
-
-
-
 
 class VGMap {
     class Circle {
         friend class VGMap;
     private:
-        pair<int,int>* coordinates;//only usefull for testing, consider removing
-        vector<Circle*> *adjCircles;
+        std::pair<int,int>* coordinates;//only usefull for testing, consider removing
+        std::vector<Circle*> *adjCircles;
         Building *building;
         bool *visited;
         int number;
 
     public:
         Circle();
-        Circle(pair<int,int>*);//remove if getting rid of coordinates member
+        Circle(std::pair<int,int>*);//remove if getting rid of coordinates member
+        Building* getBuilding();
         bool setBuilding(Building*);//TODO sure this isn't void?
     };
 
 private:
-    map<pair<int,int>, Circle*>* coordinatesMap;
-    vector<Circle*>* circles;
+    std::map<std::pair<int,int>, Circle*>* coordinatesMap;
+    std::vector<Circle*>* circles;
 
 public:
     VGMap();
-    vector<Circle*>* getCircles();
+    Circle* getCircle(int,int);
+    std::vector<Circle*>* getCircles();
     bool addCircle(int,int);
     bool addEdge(int,int,int,int);
     bool placeBuilding(int,int, Building*);

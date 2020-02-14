@@ -11,6 +11,7 @@ class Building
 {
 public:
 	enum Type { MEADOW, QUARRY, FOREST, WHEATFIELD }; // TODO consider using enum class
+	Building();
 	Building(Type, int);  //example: Building myBuilding = Building(Building::WHEATFIELD, 1);
 	Building(Building& obj);
 	~Building();

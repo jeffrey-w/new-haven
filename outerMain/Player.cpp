@@ -1,17 +1,20 @@
 #include "Player.h"
-int Player::resourceMarkers[]={50,50,50,50};
+
+using std::vector;
+
+int Player::resourceMarkers[]={200,200,200,200};
 
 Player::Player(){
     villageBoard=new VGMap();
-    std::vector<HarvestTile*>* harvestTiles=new vector<HarvestTile*>;
-    std::vector<Building*>* buildings=new vector<Building*>;
-    GatherFacility* gatherFacility=new GatherFacility;
-    BuildFacility* buildFacility=new BuildFacility;
+    harvestTiles=new vector<HarvestTile*>;
+    buildings=new vector<Building*>;
+    gatherFacility=new GatherFacility;
+    buildFacility=new BuildFacility(villageBoard);
 }
 
 
 
-bool Player::buildVillage(int x, int y, Building* building) {
+bool Player::buildVillage(int x, int y, Building* building) {//TODO make sure placed next to similar color
     if(building->getFaceUp() && building->getNumber()!=y){return false;}
     int buildingResource=building->getColour();
     if(resourceMarkers[buildingResource]<y){return false;}//not enough resources to build
@@ -20,4 +23,8 @@ bool Player::buildVillage(int x, int y, Building* building) {
         return true;
     }
     return false;
+}
+
+int Player::calculateScore() {
+   return buildFacility->calculateVillageScore();
 }

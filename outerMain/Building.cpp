@@ -9,11 +9,14 @@ using std::cout;
 using std::cin;
 using std::string;
 
-Building::Building(Type theColour, int theNumber)
+Building::Building(){
+    faceUp = new bool(true);
+}
+
+Building::Building(Type theColour, int theNumber) : Building()
 {
 	colour = new Type(theColour);
 	number = new int(theNumber);
-	faceUp = new bool(true);
 }
 
 Building::Building(Building& obj)

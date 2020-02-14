@@ -26,7 +26,7 @@ public:
     //int* resourceTracker();//TODO find use for it since no needed right now
     bool buildVillage(int,int, Building*);
     //ResourceMarkers* calculateResources() TODO
-
+    int calculateScore();
     VGMap* villageBoard;//TODO make private later, but now needed to print VGMap from main
 
 
