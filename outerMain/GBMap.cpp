@@ -7,6 +7,7 @@ using std::map;
 using std::pair;
 using std::queue;
 using std::set;
+using std::vector;
 
 GBMap::GBMap(int numPlayers) {
 	this->numPlayers = new int(validateNumPlayers(numPlayers));
@@ -32,40 +33,14 @@ void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 }
 
 GBMap::~GBMap() {
-	for (auto i : *area) {
-		delete i.second;
-	}
+	delete numPlayers;
 	delete area;
-	area = nullptr;
 }
 
-void GBMap::setTile(pair<int, int> coord, HarvestTile* tile) {
-	// TODO tile should already be oriented correctly
-	nodeAt(coord)->tile = tile;
-}
-
-bool GBMap::isTileAvailable(pair<int, int> coord) {
-	return nodeAt(coord)->tile;
-}
-
-
-GBMap::Node* GBMap::getOrigin() {
-	return nodeAt({ 0, 0 });
-}
-
-GBMap::Node* GBMap::nodeAt(pair<int, int> coord) {
-	return area->at(validateCoord(coord));
-}
-
-pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-index
-	if (area->find(coord) == area->end()) {
-		throw new std::exception(); // TODO need richer exceotion type
+void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
+	for (auto node : nodeSet(coord)) {
+		node->tile = tile->next();
 	}
-	return coord;
-}
-
-int GBMap::search(pair<int, int> coord) {
-	return search(nodeAt(coord)); // TODO firgure out how to use []
 }
 
 // Breadth-first search
@@ -78,7 +53,6 @@ int GBMap::search(Node* s) {
 	q.push(s);
 	while (!q.empty()) {
 		Node* u = q.front();
-		q.front();
 		for (auto v : *u->adj) {
 			if (*v->color == Node::WHITE) {
 				*v->color = Node::GRAY;
@@ -89,7 +63,7 @@ int GBMap::search(Node* s) {
 			}
 		}
 		*u->color = Node::BLACK;
-		u->prev = nullptr;
+		// u->prev = nullptr; TODO is this needed?
 		q.pop();
 	}
 	return count;
@@ -99,21 +73,6 @@ void GBMap::resetSearchAttributes() {
 	for (auto entry : *area) {
 		Node* n = entry.second;
 		n->init(n->tile, n->adj);
-	}
-}
-
-void GBMap::display() {
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			HarvestTile* tile = nodeAt({ i, j })->tile;
-			if (tile) {
-				std::cout << tile << '\t';
-			}
-			else {
-				std::cout << "-\t";
-			}
-		}
-		std::cout << "\n\n";
 	}
 }
 
@@ -127,14 +86,9 @@ GBMap::Node::~Node() {
 	delete color;
 	delete distance;
 	delete prev;
-	tile = nullptr;
-	adj = nullptr;
-	color = nullptr;
-	distance = nullptr;
-	prev = nullptr;
 }
 
-void GBMap::Node::init(HarvestTile* tile, set<Node*>* adj) {
+void GBMap::Node::init(Resource* tile, set<Node*>* adj) {
 	this->tile = tile;
 	this->adj = (adj) ? adj : new set<Node*>();
 	color = new int(WHITE);
