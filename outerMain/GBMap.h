@@ -25,8 +25,8 @@ private:
 
 		static const int WHITE = 0, GRAY = 1, BLACK = 2;
 
-		Resource* tile; // TODO rename this
-		std::set<Node*>* adj;
+		Resource* resource; // TODO rename this
+		std::set<Node*>* adjacents;
 
 		// Search attributes
 		int* color;
@@ -35,7 +35,7 @@ private:
 
 		Node();
 		~Node();
-		void init(Resource* tile, std::set<Node*>*);
+		void init(Resource* resource, std::set<Node*>*);
 
 	};
 
