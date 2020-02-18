@@ -32,7 +32,7 @@ GBMapLoader::~GBMapLoader() {
 GBMap* GBMapLoader::load() {
 	GBMap* map = new GBMap(*numPlayers);
 	for (auto node : *nodes) {
-		map->setTile(node.first, node.second);
+		map->setSquare(node.first, node.second);
 	}
 	// TODO validate if required, but this is guaranteed to be "valid"
 	return map;
