@@ -28,8 +28,8 @@ void GBMap::addNode(pair<int, int> coord) {
 void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 	Node* m = nodeAt(one);
 	Node* n = nodeAt(two);
-	m->adj->insert(n);
-	n->adj->insert(m);
+	m->adjacents->insert(n);
+	n->adjacents->insert(m);
 }
 
 GBMap::~GBMap() {
@@ -39,7 +39,7 @@ GBMap::~GBMap() {
 
 void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
 	for (auto node : nodeSet(coord)) {
-		node->tile = tile->next();
+		node->resource = tile->next();
 	}
 }
 
@@ -53,7 +53,7 @@ int GBMap::search(Node* s) {
 	q.push(s);
 	while (!q.empty()) {
 		Node* u = q.front();
-		for (auto v : *u->adj) {
+		for (auto v : *u->adjacents) {
 			if (*v->color == Node::WHITE) {
 				*v->color = Node::GRAY;
 				*v->distance = *u->distance + 1;
@@ -72,7 +72,7 @@ int GBMap::search(Node* s) {
 void GBMap::resetSearchAttributes() {
 	for (auto entry : *area) {
 		Node* n = entry.second;
-		n->init(n->tile, n->adj);
+		n->init(n->resource, n->adjacents);
 	}
 }
 
@@ -81,16 +81,16 @@ GBMap::Node::Node() {
 }
 
 GBMap::Node::~Node() {
-	delete tile;
-	delete adj;
+	delete resource;
+	delete adjacents;
 	delete color;
 	delete distance;
 	delete prev;
 }
 
-void GBMap::Node::init(Resource* tile, set<Node*>* adj) {
-	this->tile = tile;
-	this->adj = (adj) ? adj : new set<Node*>();
+void GBMap::Node::init(Resource* resource, set<Node*>* adjacents) {
+	this->resource = resource;
+	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
 	color = new int(WHITE);
 	distance = new int(INT_MAX);
 	prev = nullptr;
