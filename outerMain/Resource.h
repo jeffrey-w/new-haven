@@ -1,21 +1,33 @@
-/*************************************************
-This class represents resources nodes that constitute the game board
-**************************************************/
 #pragma once
-#include <iostream>
-#include <string>
 
-using std::cout;
-using std::cin;
-using std::string;
+// Instances of the Resource class inhabit spaces on a GBMap.
+class Resource {
 
-class Resource // TODO this isn't needed anymore right?
-{
-	string type;
+public:
 
-	//constructor
+	// The types a Resource may have.
+	enum class ResourceType {
+		SHEEP,
+		STONE,
+		TIMBER,
+		WHEAT
+	};
+
+	// Constructs a new Resource object with a random type.
 	Resource();
+	// Constructs a new Resource object with the specified type.
+	Resource(ResourceType);
+	// Constructs a new Resource object with the same type as the specified Resource.
+	Resource(Resource&);
+	// Destructs this Resource object.
+	~Resource();
+	// Returns the type of this Resource.
+	ResourceType getType() const;
 
-	//sets the resource type once the tile is placed onto the board
-	void setType(string theType);
+private:
+
+	ResourceType* type;
+
+	Resource::ResourceType randomType();
+
 };
