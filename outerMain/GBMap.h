@@ -4,6 +4,7 @@
 #include <set>
 
 #include "HarvestTile.h"
+#include "Resource.h"
 
 class GBMap {
 
@@ -26,7 +27,7 @@ private:
 
 		static const int WHITE = 0, GRAY = 1, BLACK = 2;
 
-		HarvestTile* tile;
+		Resource* tile; // TODO rename this
 		std::set<Node*>* adj;
 
 		// Search attributes
