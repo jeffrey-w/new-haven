@@ -9,49 +9,15 @@ using std::queue;
 using std::set;
 
 GBMap::GBMap(int numPlayers) {
-	width = new int();
-	height = new int();
+	this->numPlayers = new int(validateNumPlayers(numPlayers));
 	area = new map<pair<int, int>, Node*>();
-	setDimensions(numPlayers);
-	build();
 }
 
-void GBMap::setDimensions(int numPlayers) {
-	switch (numPlayers) {
-	case 2:
-		*width = DIM_MIN;
-		*height = DIM_MIN;
-		break;
-	case 3:
-		*width = DIM_MAX;
-		*height = DIM_MIN;
-		break;
-	case 4:
-		*width = DIM_MAX;
-		*height = DIM_MAX;
-		break;
-	default:
+int GBMap::validateNumPlayers(int numPlayers) {
+	if ((numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
 		throw new std::exception(); // TODO need richer exception type
 	}
-}
-
-void GBMap::build() {
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			addNode({ i, j });
-		}
-	}
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			pair<int, int> coord{ i, j };
-			if (i < *width - 1) {
-				addEdge(coord, { i + 1, j });
-			}
-			if (j < *height - 1) {
-				addEdge(coord, { i, j + 1 });
-			}
-		}
-	}
+	return numPlayers;
 }
 
 void GBMap::addNode(pair<int, int> coord) {
