@@ -121,6 +121,7 @@
     <ClCompile Include="GBMapLoader.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="VGMap.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="GBMapLoader.h" />
     <ClInclude Include="HarvestTile.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="VGMap.h" />
   </ItemGroup>
