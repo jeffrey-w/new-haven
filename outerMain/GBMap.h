@@ -2,6 +2,7 @@
 
 #include <map>
 #include <set>
+#include <vector>
 
 #include "HarvestTile.h"
 #include "Resource.h"
@@ -14,10 +15,7 @@ public:
 
 	GBMap(int);
 	~GBMap();
-	void setTile(std::pair<int, int>, HarvestTile*);
-	bool isTileAvailable(std::pair<int, int>);
-	int search(std::pair<int, int>);
-	void display();
+	void setSquare(std::pair<int, int>, HarvestTile*);
 
 private:
 
@@ -37,7 +35,7 @@ private:
 
 		Node();
 		~Node();
-		void init(HarvestTile*, std::set<Node*>*);
+		void init(Resource* tile, std::set<Node*>*);
 
 	};
 
@@ -45,11 +43,10 @@ private:
 	std::map<std::pair<int, int>, Node*>* area;
 
 	static int validateNumPlayers(int);
+
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
-	Node* getOrigin();
-	Node* nodeAt(std::pair<int, int>);
-	std::pair<int, int> validateCoord(std::pair<int, int>);
+	std::vector<Node*> nodeSet(std::pair<int, int>);
 	int search(Node*);
 	void resetSearchAttributes();
 
