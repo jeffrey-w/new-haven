@@ -13,10 +13,12 @@ where each position represent a resource (enum)
 #include <cstdlib>
 #include <ctime>
 
+#include "Resource.h"
+
 class HarvestTile
 {
 public:
-	enum Resource { WHEAT, STONE, TIMBER, SHEEP };
+	//enum Resource { WHEAT, STONE, TIMBER, SHEEP };
 	HarvestTile();
 	~HarvestTile();
 	/**
@@ -29,6 +31,8 @@ public:
 	the tile remains shifted until it is shifted again
 	*/
 	void changeTileOrientation(int shift);
+
+	Resource* next();
 
 private:
 	Resource* position; //this array contains the Resources (enums) contained in the tile
