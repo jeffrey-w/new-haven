@@ -7,6 +7,8 @@
 
 class GBMap {
 
+	static constexpr int DIM_MIN = 5, DIM_MAX = 7;
+
 public:
 
 	GBMap(int);

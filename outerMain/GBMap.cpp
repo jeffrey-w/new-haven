@@ -8,8 +8,6 @@ using std::pair;
 using std::queue;
 using std::set;
 
-constexpr int DIM_MIN = 5, DIM_MAX = 7; // TODO put these elsewhere
-
 GBMap::GBMap(int numPlayers) {
 	width = new int();
 	height = new int();
