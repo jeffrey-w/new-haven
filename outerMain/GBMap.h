@@ -41,8 +41,7 @@ private:
 
 	};
 
-	int* width;
-	int* height;
+	int* numPlayers;
 	std::map<std::pair<int, int>, Node*>* area;
 
 	void setDimensions(int);
