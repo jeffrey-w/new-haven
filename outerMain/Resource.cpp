@@ -1,9 +1,7 @@
 #include "Random.h"
 #include "Resource.h"
 
-Resource::Resource() {
-	type = new ResourceType(randomType());
-}
+Resource::Resource() : Resource(randomType()) {}
 
 Resource::ResourceType Resource::randomType() {
 	return static_cast<Resource::ResourceType>(Random::next(0, 3)); // TODO can bound be obtained programmatically?
