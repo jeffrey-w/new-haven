@@ -47,6 +47,7 @@ private:
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
 	std::vector<Node*> nodeSet(std::pair<int, int>);
+	Node* nodeAt(std::pair<int, int>);
 	int search(Node*);
 	void resetSearchAttributes();
 
