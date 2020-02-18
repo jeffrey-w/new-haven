@@ -44,8 +44,7 @@ private:
 	int* numPlayers;
 	std::map<std::pair<int, int>, Node*>* area;
 
-	void setDimensions(int);
-	void build();
+	static int validateNumPlayers(int);
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
 	Node* getOrigin();
