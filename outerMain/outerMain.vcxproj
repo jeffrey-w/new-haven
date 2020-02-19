@@ -120,9 +120,11 @@
     <ClCompile Include="GBMap.cpp" />
     <ClCompile Include="GBMapLoader.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
+    <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="VGMap.cpp" />
   </ItemGroup>
@@ -132,9 +134,11 @@
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="GBMapLoader.h" />
     <ClInclude Include="HarvestTile.h" />
+    <ClInclude Include="Piece.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="VGMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
