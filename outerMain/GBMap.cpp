@@ -14,6 +14,7 @@ GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
 GBMap::GBMap(int numPlayers) {
 	this->numPlayers = new int(validateNumPlayers(numPlayers));
 	area = new map<pair<int, int>, Node*>();
+	build();
 }
 
 int GBMap::validateNumPlayers(int numPlayers) {
@@ -23,14 +24,23 @@ int GBMap::validateNumPlayers(int numPlayers) {
 	return numPlayers;
 }
 
-GBMap::~GBMap() {
-	delete numPlayers;
-	delete area;
-}
-
-void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
-	for (auto node : nodeSet(coord)) {
-		node->resource = tile->next();
+void GBMap::build() {
+	int h = height(), w = width();
+	for (int i = 0; i < h; i++) {
+		for (int j = 0; j < w; j++) {
+			addNode({ i, j });
+		}
+	}
+	for (int i = 0; i < h; i++) {
+		for (int j = 0; j < w; j++) {
+			pair<int, int> coord{ i, j };
+			if (i < h - 1) {
+				addEdge(coord, { i + 1, j });
+			}
+			if (j < w - 1) {
+				addEdge(coord, { i, j + 1 });
+			}
+		}
 	}
 }
 
@@ -43,6 +53,17 @@ void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 	Node* n = nodeAt(two);
 	m->adjacents->insert(n);
 	n->adjacents->insert(m);
+}
+
+GBMap::~GBMap() {
+	delete numPlayers;
+	delete area;
+}
+
+void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
+	for (auto node : nodeSet(coord)) {
+		node->resource = tile->next();
+	}
 }
 
 vector<GBMap::Node*> GBMap::nodeSet(pair<int, int> square) {
