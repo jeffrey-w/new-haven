@@ -93,7 +93,7 @@ GBMap::Node* GBMap::nodeAt(std::pair<int, int> coordinate) {
 // Breadth-first search
 int GBMap::search(Node* s) {
 	int count = 1;
-	resetSearchAttributes();
+	resetSearchAttributes(s->resource);
 	*s->color = Node::GRAY;
 	*s->distance = 0;
 	queue<Node*> q = queue<Node*>();
@@ -116,15 +116,15 @@ int GBMap::search(Node* s) {
 	return count;
 }
 
-void GBMap::resetSearchAttributes() {
+void GBMap::resetSearchAttributes(Resource* match) {
 	for (auto entry : *area) {
 		Node* n = entry.second;
-		n->init(n->resource, n->adjacents);
+		n->init(n->resource, match, n->adjacents);
 	}
 }
 
 GBMap::Node::Node() {
-	init(nullptr, nullptr);
+	init(nullptr, nullptr, nullptr);
 }
 
 GBMap::Node::~Node() {
@@ -135,10 +135,15 @@ GBMap::Node::~Node() {
 	delete prev;
 }
 
-void GBMap::Node::init(Resource* resource, set<Node*>* adjacents) {
+void GBMap::Node::init(Resource* resource, Resource* match, set<Node*>* adjacents) {
 	this->resource = resource;
 	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
-	color = new int(WHITE);
+	if (Resource::equals(match, resource)) {
+		color = new int(WHITE);
+	}
+	else {
+		color = new int(BLACK);
+	}
 	distance = new int(INT_MAX);
 	prev = nullptr;
 }
