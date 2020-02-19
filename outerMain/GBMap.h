@@ -37,13 +37,14 @@ private:
 		Node* prev;
 
 		Node();
+		Node(Node&);
 		~Node();
 		void init(Resource*, Resource*, std::set<Node*>*);
 
 	};
 
 	int* numPlayers;
-	std::map<std::pair<int, int>, Node*>* area;
+	std::map<std::pair<int, int>, Node*>* nodes;
 
 	static int validateNumPlayers(int);
 

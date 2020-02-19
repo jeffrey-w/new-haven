@@ -13,7 +13,7 @@ GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
 
 GBMap::GBMap(int numPlayers) {
 	this->numPlayers = new int(validateNumPlayers(numPlayers));
-	area = new map<pair<int, int>, Node*>();
+	nodes = new map<pair<int, int>, Node*>();
 	build();
 }
 
@@ -45,7 +45,7 @@ void GBMap::build() {
 }
 
 void GBMap::addNode(pair<int, int> coord) {
-	area->insert({ coord, new Node() });
+	nodes->insert({ coord, new Node() });
 }
 
 void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
@@ -57,7 +57,7 @@ void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 
 GBMap::~GBMap() {
 	delete numPlayers;
-	delete area;
+	delete nodes;
 }
 
 void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
@@ -110,7 +110,7 @@ int GBMap::width() {
 }
 
 GBMap::Node* GBMap::nodeAt(std::pair<int, int> coordinate) {
-	return area->at(coordinate);
+	return nodes->at(coordinate);
 }
 
 // Breadth-first search
@@ -140,7 +140,7 @@ int GBMap::search(Node* s) {
 }
 
 void GBMap::resetSearchAttributes(Resource* match) {
-	for (auto entry : *area) {
+	for (auto entry : *nodes) {
 		Node* n = entry.second;
 		n->init(n->resource, match, n->adjacents);
 	}
@@ -148,6 +148,14 @@ void GBMap::resetSearchAttributes(Resource* match) {
 
 GBMap::Node::Node() {
 	init(nullptr, nullptr, nullptr);
+}
+
+GBMap::Node::Node(Node& other) {
+	resource = new Resource(*other.resource);
+	adjacents = new set<Node*>(*other.adjacents);
+	color = new int(*other.color);
+	distance = new int(*other.distance);
+	prev = nullptr; // TODO can this be copied without infinite recursion
 }
 
 GBMap::Node::~Node() {
