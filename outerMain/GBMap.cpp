@@ -25,7 +25,7 @@ int GBMap::validateNumPlayers(int numPlayers) {
 }
 
 void GBMap::build() {
-	int h = height(), w = width();
+	int h = height() * 2, w = width() * 2;
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {
 			addNode({ i, j });
@@ -33,7 +33,7 @@ void GBMap::build() {
 	}
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {
-			pair<int, int> coordinate{ i, j };
+			pair<int, int> coordinate(i, j);
 			if (i < h - 1) {
 				addEdge(coordinate, { i + 1, j });
 			}
@@ -133,7 +133,7 @@ int GBMap::search(Node* s) {
 			}
 		}
 		*u->color = Node::BLACK;
-		// u->prev = nullptr; TODO is this needed?
+		u->prev = nullptr;
 		q.pop();
 	}
 	return count;
