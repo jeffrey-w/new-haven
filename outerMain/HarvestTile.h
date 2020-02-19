@@ -18,6 +18,7 @@ where each position represent a resource (enum)
 class HarvestTile
 {
 public:
+	constexpr static int NUM_RESOURCES = 4;
 	//enum Resource { WHEAT, STONE, TIMBER, SHEEP };
 	HarvestTile();
 	~HarvestTile();
