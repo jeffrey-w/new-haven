@@ -15,15 +15,21 @@ Resource::ResourceType Resource::randomType() {
 }
 
 Resource::Resource(ResourceType type) {
-	this->type = &type;
+	placed = new bool(false);
+	this->type = new ResourceType(type);
 }
 
 Resource::Resource(Resource& other) {
+	placed = new bool(*other.placed);
 	type = new ResourceType(*other.type);
 }
 
 Resource::~Resource() {
 	delete type;
+}
+
+bool Resource::isPlaced() {
+	return *placed;
 }
 
 Resource::ResourceType Resource::getType() const {

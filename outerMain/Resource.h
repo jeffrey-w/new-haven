@@ -24,11 +24,14 @@ public:
 	Resource(Resource&);
 	// Destructs this Resource object.
 	~Resource();
+	// Returns true iff this Resource inhabits a GBMap, otherwise false,
+	bool isPlaced();
 	// Returns the type of this Resource.
 	ResourceType getType() const;
 
 private:
 
+	bool* placed;
 	ResourceType* type;
 
 	Resource::ResourceType randomType();
