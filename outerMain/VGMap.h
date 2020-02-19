@@ -1,42 +1,51 @@
 #pragma once
-#include "Building.h"
-#include <vector>
-#include <map>
 
+#include <map>
+#include <set>
+#include <vector>
+
+#include "Building.h"
 
 class VGMap {
-    class Circle {
-        friend class VGMap;
-    private:
-        std::pair<int,int>* coordinates;//only usefull for testing, consider removing
-        std::vector<Circle*> *adjCircles;
-        Building *building;
-        bool *visited;
-        int number;
 
-    public:
-        Circle();
-        Circle(std::pair<int,int>*);//remove if getting rid of coordinates member
-        Building* getBuilding();
-        bool setBuilding(Building*);//TODO sure this isn't void?
-    };
-
-private:
-    std::map<std::pair<int,int>, Circle*>* coordinatesMap;
-    std::vector<Circle*>* circles;
+    static constexpr int HEIGHT = 6, WIDTH = 5;
 
 public:
-    VGMap();
-    Circle* getCircle(int,int);
-    std::vector<Circle*>* getCircles();
-    bool addCircle(int,int);
-    bool addEdge(int,int,int,int);
-    bool placeBuilding(int,int, Building*);
-    void display();
-    bool isConnected();
-    void dfs(Circle*);
-    bool isValid();
 
-    //methods that go in driver later
-    void buildMap();
+    VGMap();
+    VGMap(VGMap&) = delete; // Supress copy constructor
+    ~VGMap();
+    void setCicle(std::pair<int, int>, Building*);
+
+private:
+
+    class Node {
+
+    public:
+
+        static constexpr int WHITE = 0, GRAY = 1, BLACK = 2;
+
+        Building* building;
+        std::set<Node*>* adjacents;
+
+        // Search Attributes.
+        int* color;
+        int* distance;
+        Node* prev;
+
+        Node();
+        Node(Node&);
+        void init(Building*, Building*, std::set<Node*>, int*);
+    };
+
+    std::map<std::pair<int,int>, Node*>* nodes;
+
+    void build();
+    void addNode(std::pair<int, int>);
+    void addEdge(std::pair<int, int>, std::pair<int, int>);
+    Node* nodeAt(std::pair<int, int>);
+    std::pair<int, int> validateCoordinate(std::pair<int, int>);
+    int search(Node*);
+    void resetSearchAttributes(Building*);
+
 };
