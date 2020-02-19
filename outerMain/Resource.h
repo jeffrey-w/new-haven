@@ -13,6 +13,9 @@ public:
 		WHEAT
 	};
 
+	// Returns true iff the specified resources have the same type, otherwise false.
+	static bool equals(Resource*, Resource*);
+
 	// Constructs a new Resource object with a random type.
 	Resource();
 	// Constructs a new Resource object with the specified type.
