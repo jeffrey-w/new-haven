@@ -9,11 +9,14 @@
 
 class GBMap {
 
+	static constexpr int DEFAULT_NUM_PLAYERS = 2;
 	static constexpr int DIM_MIN = 5, DIM_MAX = 7;
 
 public:
 
+	GBMap();
 	GBMap(int);
+	GBMap(GBMap&) = delete; // Supress copy constructor.
 	~GBMap();
 	void setSquare(std::pair<int, int>, HarvestTile*);
 
@@ -25,10 +28,10 @@ private:
 
 		static constexpr int WHITE = 0, GRAY = 1, BLACK = 2;
 
-		Resource* resource; // TODO rename this
+		Resource* resource;
 		std::set<Node*>* adjacents;
 
-		// Search attributes
+		// Search attributes.
 		int* color;
 		int* distance;
 		Node* prev;

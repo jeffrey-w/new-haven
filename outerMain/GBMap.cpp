@@ -9,6 +9,8 @@ using std::queue;
 using std::set;
 using std::vector;
 
+GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
+
 GBMap::GBMap(int numPlayers) {
 	this->numPlayers = new int(validateNumPlayers(numPlayers));
 	area = new map<pair<int, int>, Node*>();
