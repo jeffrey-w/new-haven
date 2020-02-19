@@ -1,22 +1,12 @@
 #pragma once
-#include "VGMap.h"
+class ScoringFacility {
+};
 
-class GatherFacility{
-
-
+class BuildFacility : public ScoringFacility {
 
 };
 
-
-class BuildFacility{
-private:
-    VGMap* map;
-
-public:
-    BuildFacility();
-    BuildFacility(VGMap*);
-    int calculateVillageScore();
-
-
+class GatherFacility : public ScoringFacility {
 
 };
+
