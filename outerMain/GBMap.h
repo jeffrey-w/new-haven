@@ -35,7 +35,7 @@ private:
 
 		Node();
 		~Node();
-		void init(Resource* resource, std::set<Node*>*);
+		void init(Resource*, Resource*, std::set<Node*>*);
 
 	};
 
@@ -52,6 +52,6 @@ private:
 	int width();
 	Node* nodeAt(std::pair<int, int>);
 	int search(Node*);
-	void resetSearchAttributes();
+	void resetSearchAttributes(Resource*);
 
 };
