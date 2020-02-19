@@ -13,9 +13,10 @@ where each position represent a resource (enum)
 #include <cstdlib>
 #include <ctime>
 
+#include "Piece.h"
 #include "Resource.h"
 
-class HarvestTile
+class HarvestTile : public Piece
 {
 public:
 	constexpr static int NUM_RESOURCES = 4;
