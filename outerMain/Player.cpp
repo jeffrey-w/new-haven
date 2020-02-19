@@ -4,16 +4,10 @@ void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, std::pair<int, int>
 	map->setSquare(square, tile);
 }
 
-Building* Player::drawBuilding() {
-	if (true) { // TODO !harvestTiles.empty()
-		return buildings->giveBuilding();
-	}
-	throw new std::exception(); // TODO need richer exception type
+Building* Player::drawBuilding(BuildingDeck* deck) {
+	return deck->drawAs(); // TODO throws exception
 }
 
-HarvestTile* Player::drawHarvestTile() {
-	if (true) {
-		return harvestTiles->giveHarvestTile();
-	}
-	throw new std::exception(); // TODO need richer exception type
+HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
+	return deck->drawAs(); // TODO throws exception
 }
