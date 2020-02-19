@@ -125,12 +125,12 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="ScoringFacilities.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="VGMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Building.h" />
-    <ClInclude Include="Deck.h" />
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="GBMapLoader.h" />
     <ClInclude Include="HarvestTile.h" />
@@ -139,6 +139,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="ScoringFacilities.h" />
     <ClInclude Include="VGMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
