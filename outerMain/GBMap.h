@@ -23,7 +23,7 @@ private:
 
 	public:
 
-		static const int WHITE = 0, GRAY = 1, BLACK = 2;
+		static constexpr int WHITE = 0, GRAY = 1, BLACK = 2;
 
 		Resource* resource; // TODO rename this
 		std::set<Node*>* adjacents;
@@ -47,6 +47,9 @@ private:
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
 	std::vector<Node*> nodeSet(std::pair<int, int>);
+	std::pair<int, int> expand(int, int);
+	int height();
+	int width();
 	Node* nodeAt(std::pair<int, int>);
 	int search(Node*);
 	void resetSearchAttributes();
