@@ -21,6 +21,17 @@ int GBMap::validateNumPlayers(int numPlayers) {
 	return numPlayers;
 }
 
+GBMap::~GBMap() {
+	delete numPlayers;
+	delete area;
+}
+
+void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
+	for (auto node : nodeSet(coord)) {
+		node->resource = tile->next();
+	}
+}
+
 void GBMap::addNode(pair<int, int> coord) {
 	area->insert({ coord, new Node() });
 }
@@ -32,15 +43,51 @@ void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
 	n->adjacents->insert(m);
 }
 
-GBMap::~GBMap() {
-	delete numPlayers;
-	delete area;
+vector<GBMap::Node*> GBMap::nodeSet(pair<int, int> square) {
+	pair<int, int> rowLimits = expand(square.first, height());
+	pair<int, int> colLimits = expand(square.second, width());
+	vector<Node*> nodes(HarvestTile::NUM_RESOURCES);
+	for (int i = rowLimits.first; i <= rowLimits.second; i++) {
+		for (int j = colLimits.first; j <= colLimits.second; j++) {
+			nodes.push_back(nodeAt({ i, j }));
+		}
+	}
+	return nodes;
 }
 
-void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
-	for (auto node : nodeSet(coord)) {
-		node->resource = tile->next();
+std::pair<int, int> GBMap::expand(int coordinate, int dimension) {
+	if (coordinate < 0 || coordinate >= dimension) {
+		throw new std::exception(); // TODO need richer exception type
 	}
+	if (coordinate == 0) {
+		return { 0, 1 };
+	}
+	pair<int, int> prev = expand(coordinate - 1, dimension);
+	return { prev.first + 2, prev.second + 2 };
+}
+
+int GBMap::height() {
+	switch (*numPlayers) {
+	case 2:
+		return DIM_MIN;
+	case 3:
+	case 4:
+		return DIM_MAX;
+	}
+}
+
+int GBMap::width() {
+	switch (*numPlayers) {
+	case 2:
+	case 3:
+		return DIM_MIN;
+	case 4:
+		return DIM_MAX;
+	}
+}
+
+GBMap::Node* GBMap::nodeAt(std::pair<int, int> coordinate) {
+	return area->at(coordinate);
 }
 
 // Breadth-first search
