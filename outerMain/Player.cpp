@@ -5,9 +5,9 @@ void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, std::pair<int, int>
 }
 
 Building* Player::drawBuilding(BuildingDeck* deck) {
-	return deck->drawAs(); // TODO throws exception
+	return deck->drawAs(); // TODO document exception
 }
 
 HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
-	return deck->drawAs(); // TODO throws exception
+	return deck->drawAs(); // TODO document exception
 }
