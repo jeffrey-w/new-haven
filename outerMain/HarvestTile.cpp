@@ -1,100 +1,46 @@
-/**
-Implements HarvestTile class
-*/
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
 #include "HarvestTile.h"
 
-using std::cout;
-using std::cin;
-using std::string;
+using std::array;
 
-HarvestTile::HarvestTile()
-{
-	position = new Resource[4];
-	buildTile();
-}
-
-HarvestTile::~HarvestTile()
-{
-	delete[] position;
-	position = nullptr;
-}
-
-void HarvestTile::buildTile()
-{
-	//srand(time(0));
-
-	int arr[3];
-	int randNumber;
-	
-	//storing a max of 3 different Resources in arr and then putting them in the first 3 positions of the tile
-	for (int i = 0; i < 3; i++)
-	{
-		randNumber = randomIntGenerator(3,0);
-		arr[i] = randNumber;
-		assignResourceToPosition(randNumber, i);
-	}
-
-	//the last position will choose a random arr index
-	int randArrayIndex = randomIntGenerator(2, 0);
-	int valueAtIndex = arr[randArrayIndex];
-	assignResourceToPosition(valueAtIndex, 3);
-}
-
-int HarvestTile::randomIntGenerator(int max, int min)
-{
-	int randNumber = rand() % (max - min + 1) + min;
-	return randNumber;
-}
-
-void HarvestTile::assignResourceToPosition(int randNumber, int index)
-{
-	switch (randNumber)
-	{
-	case 0:
-		position[index] = Resource::WHEAT;
-		break;
-	case 1:
-		position[index] = Resource::STONE;
-		break;
-	case 2:
-		position[index] = Resource::TIMBER;
-		break;
-	case 3:
-		position[index] = Resource::SHEEP;
-		break;
-	default:
-		break;
+HarvestTile::HarvestTile() {
+	orientation = new Orientation(Orientation::NORTHEAST);
+	resources = new array<Resource*, NUM_RESOURCES>();
+	for (int i = 0; i < NUM_RESOURCES; i++) {
+		resources->at(i) = new Resource(); // Default constructor returns a random Resource.
 	}
 }
 
-void HarvestTile::printTile()
-{
-	string resArr[] = { "WHEAT", "STONE", "TIMBER", "SHEEP" };
-	
-	cout << "-----------------------\n";
-	cout << "|  " << resArr[position[0]] << "  |  " << resArr[position[1]] << "  |\n";
-	cout << "|----------|---------|\n";
-	cout << "|  " << resArr[position[3]] << "  |  " << resArr[position[2]] << "  |\n";
-	cout << "-----------------------\n";
+HarvestTile::HarvestTile(HarvestTile& other) {
+	orientation = new Orientation(*other.orientation);
+	resources = new array<Resource*, NUM_RESOURCES>(*other.resources);
 }
 
-void HarvestTile::changeTileOrientation(int shift)
-{ 
-	if (shift <= 0 || shift > 3)
-	{
-		return;
+HarvestTile::~HarvestTile() {
+	delete orientation;
+	delete resources;
+}
+
+void HarvestTile::orient(Orientation orientation) {
+	ensureNotPlaced(); // TODO document exception
+	this->orientation = new Orientation(orientation);
+}
+
+void HarvestTile::ensureNotPlaced() {
+	for (auto resource : *resources) {
+		if (resource->isPlaced()) {
+			throw new std::exception(); // TODO need richer exception type
+		}
 	}
-
-	Resource temp1 = position[1];
-	Resource temp2 = position[2];
-	Resource temp3 = position[3];
-
-	position[shift % 4] = position[0];
-	position[(shift + 1) % 4] = temp1;
-	position[(shift + 2) % 4] = temp2;
-	position[(shift + 3) % 4] = temp3;
 }
+
+Resource* HarvestTile::next() {
+	array<int, NUM_RESOURCES> indices = ORDER->at(*orientation);
+	for (int i = 0; i < NUM_RESOURCES; i++) {
+		Resource* resource = resources->at(indices[i]);
+		if (!resource->isPlaced()) {
+			return resource;
+		}
+	}
+	throw new std::exception(); // TODO need richer return type;
+}
+

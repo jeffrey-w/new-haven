@@ -1,56 +1,38 @@
-/**
-creates a harvest tile in the form
------------------------
-position0 | position1 |
-----------|-----------|
-position3 | position2 |
------------------------
-where each position represent a resource (enum)
-*/
 #pragma once
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
+
+#include <array>
+#include <map>
 
 #include "Piece.h"
 #include "Resource.h"
 
-class HarvestTile : public Piece
-{
-public:
-	constexpr static int NUM_RESOURCES = 4;
-	//enum Resource { WHEAT, STONE, TIMBER, SHEEP };
-	HarvestTile();
-	~HarvestTile();
-	/**
-	prints tile
-	*/
-	void printTile();
-	/**
-	from its current state, all positions are shifted from their current location in a clockwise manner
-	shifts go from 0 to 3, where nothing happens at 0
-	the tile remains shifted until it is shifted again
-	*/
-	void changeTileOrientation(int shift);
 
+class HarvestTile : public Piece {
+
+public:
+
+	enum class Orientation {
+		NORTHWEST,
+		SOUTHWEST,
+		SOUTHEAST,
+		NORTHEAST
+	};
+
+	constexpr static int NUM_RESOURCES = 4;
+	
+	HarvestTile();
+	HarvestTile(HarvestTile&);
+	~HarvestTile();
+	void orient(Orientation);
 	Resource* next();
 
 private:
-	Resource* position; //this array contains the Resources (enums) contained in the tile
-	/**
-	helper method
-	called by the constructor to assign each position a ressource randomly
-	*/
-	void buildTile();
-	/**
-	helper method
-	generates a random integer within specified bounds
-	*/
-	int randomIntGenerator(int max, int min);
-	/**
-	helper method
-	uses the random number to assign a ressource to position[index]
-	*/
-	void assignResourceToPosition(int randNumber, int index);
+
+	static std::map<Orientation, std::array<int, NUM_RESOURCES>>* ORDER;
+
+	Orientation* orientation;
+	std::array<Resource*, NUM_RESOURCES>* resources;
+
+	void ensureNotPlaced();
+	
 };
