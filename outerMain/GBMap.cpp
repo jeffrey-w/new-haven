@@ -33,19 +33,19 @@ void GBMap::build() {
 	}
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < w; j++) {
-			pair<int, int> coord{ i, j };
+			pair<int, int> coordinate{ i, j };
 			if (i < h - 1) {
-				addEdge(coord, { i + 1, j });
+				addEdge(coordinate, { i + 1, j });
 			}
 			if (j < w - 1) {
-				addEdge(coord, { i, j + 1 });
+				addEdge(coordinate, { i, j + 1 });
 			}
 		}
 	}
 }
 
-void GBMap::addNode(pair<int, int> coord) {
-	nodes->insert({ coord, new Node() });
+void GBMap::addNode(pair<int, int> coordinate) {
+	nodes->insert({ coordinate, new Node() });
 }
 
 void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
@@ -60,8 +60,8 @@ GBMap::~GBMap() {
 	delete nodes;
 }
 
-void GBMap::setSquare(pair<int, int> coord, HarvestTile* tile) {
-	for (auto node : nodeSet(coord)) {
+void GBMap::setSquare(pair<int, int> square, HarvestTile* tile) {
+	for (auto node : nodeSet(square)) {
 		node->resource = tile->next();
 	}
 }
@@ -78,14 +78,14 @@ vector<GBMap::Node*> GBMap::nodeSet(pair<int, int> square) {
 	return nodes;
 }
 
-std::pair<int, int> GBMap::expand(int coordinate, int dimension) {
-	if (coordinate < 0 || coordinate >= dimension) {
+std::pair<int, int> GBMap::expand(int index, int dimension) {
+	if (index < 0 || index >= dimension) {
 		throw new std::exception(); // TODO need richer exception type
 	}
-	if (coordinate == 0) {
+	if (index == 0) {
 		return { 0, 1 };
 	}
-	pair<int, int> prev = expand(coordinate - 1, dimension);
+	pair<int, int> prev = expand(index - 1, dimension);
 	return { prev.first + 2, prev.second + 2 };
 }
 
