@@ -2,8 +2,9 @@
 
 #include <stack>
 
+#include "Building.h"
+#include "HarvestTile.h"
 #include "Piece.h"
-#include "Player.h"
 
 class Deck {
 
