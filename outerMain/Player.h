@@ -19,7 +19,7 @@ public:
     Building* drawBuilding(BuildingDeck*);
     HarvestTile* drawHarvestTile(HarvestTileDeck*);
     void resourceTracker(); // TODO what is this for?
-    void buildVillage(VGMap*);
+    void buildVillage();
     void calculateResources(GBMap*);
 
 private:
