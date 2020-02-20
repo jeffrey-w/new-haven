@@ -1,7 +1,9 @@
 #include "Player.h"
 
-void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, std::pair<int, int> square) {
-	map->setSquare(square, tile);
+using std::pair;
+
+void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, pair<int, int> square) {
+	map->setSquare(tile, square);
 }
 
 Building* Player::drawBuilding(BuildingDeck* deck) {
