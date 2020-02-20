@@ -28,8 +28,6 @@ public:
 
 private:
 
-	static std::map<Orientation, std::array<int, NUM_RESOURCES>>* ORDER;
-
 	Orientation* orientation;
 	std::array<Resource*, NUM_RESOURCES>* resources;
 
