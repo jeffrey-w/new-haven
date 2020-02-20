@@ -1,92 +1,46 @@
-#include <climits>
-#include <queue>
-
 #include "GBMap.h"
 
-using std::map;
-using std::pair;
-using std::queue;
-using std::set;
 using std::vector;
+using std::pair;
 
 GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
 
 GBMap::GBMap(int numPlayers) {
-	this->numPlayers = new int(validateNumPlayers(numPlayers));
-	nodes = new map<pair<int, int>, Node*>();
-	build();
+	setNumPlayers(numPlayers); // TODO document exception
+	prev = nullptr;
+	build(height(), width());
 }
 
-int GBMap::validateNumPlayers(int numPlayers) {
-	if ((numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
+void GBMap::setNumPlayers(int numPlayers) {
+	if (!(numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
 		throw new std::exception(); // TODO need richer exception type
 	}
-	return numPlayers;
-}
-
-void GBMap::build() {
-	int h = height() * 2, w = width() * 2;
-	for (int i = 0; i < h; i++) {
-		for (int j = 0; j < w; j++) {
-			addNode({ i, j });
-		}
-	}
-	for (int i = 0; i < h; i++) {
-		for (int j = 0; j < w; j++) {
-			pair<int, int> coordinate(i, j);
-			if (i < h - 1) {
-				addEdge(coordinate, { i + 1, j });
-			}
-			if (j < w - 1) {
-				addEdge(coordinate, { i, j + 1 });
-			}
-		}
-	}
-}
-
-void GBMap::addNode(pair<int, int> coordinate) {
-	nodes->insert({ coordinate, new Node() });
-}
-
-void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
-	Node* m = nodeAt(one);
-	Node* n = nodeAt(two);
-	m->adjacents->insert(n);
-	n->adjacents->insert(m);
+	this->numPlayers = new int(numPlayers);
 }
 
 GBMap::~GBMap() {
 	delete numPlayers;
-	delete nodes;
+	delete prev;
 }
 
-void GBMap::setSquare(pair<int, int> square, HarvestTile* tile) {
-	for (auto node : nodeSet(square)) {
-		node->resource = tile->next();
+void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
+	for (auto coordinate : coordinatesOf(square)) { // TODO document exception
+		setSpace(tile->next(), coordinate);
 	}
+	prev = new pair<int, int>(square); // TODO avoid side effects
 }
 
-vector<GBMap::Node*> GBMap::nodeSet(pair<int, int> square) {
-	pair<int, int> rowLimits = expand(square.first, height());
-	pair<int, int> colLimits = expand(square.second, width());
-	vector<Node*> nodes(HarvestTile::NUM_RESOURCES);
-	for (int i = rowLimits.first; i <= rowLimits.second; i++) {
-		for (int j = colLimits.first; j <= colLimits.second; j++) {
-			nodes.push_back(nodeAt({ i, j }));
-		}
-	}
-	return nodes;
-}
-
-std::pair<int, int> GBMap::expand(int index, int dimension) {
-	if (index < 0 || index >= dimension) {
+void GBMap::calculateResources(GatherFacility* resources) {
+	if (!prev) {
 		throw new std::exception(); // TODO need richer exception type
 	}
-	if (index == 0) {
-		return { 0, 1 };
+	for (auto coordinate : coordinatesOf(*prev)) {
+		int type = typeAt(coordinate);
+		if (!resources->isCalculated(type)) {
+			calculate(resources, coordinate);
+			resources->setCalculated(type);
+		}
 	}
-	pair<int, int> prev = expand(index - 1, dimension);
-	return { prev.first + 2, prev.second + 2 };
 }
 
 int GBMap::height() {
@@ -109,72 +63,43 @@ int GBMap::width() {
 	}
 }
 
-GBMap::Node* GBMap::nodeAt(std::pair<int, int> coordinate) {
-	return nodes->at(coordinate);
-}
-
-// Breadth-first search
-int GBMap::search(Node* s) {
-	int count = 1;
-	resetSearchAttributes(s->resource);
-	*s->color = Node::GRAY;
-	*s->distance = 0;
-	queue<Node*> q = queue<Node*>();
-	q.push(s);
-	while (!q.empty()) {
-		Node* u = q.front();
-		for (auto v : *u->adjacents) {
-			if (*v->color == Node::WHITE) {
-				*v->color = Node::GRAY;
-				*v->distance = *u->distance + 1;
-				v->prev = u;
-				q.push(v);
-				count++;
-			}
+vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square) {
+	validateSquare(square); // TODO document exception
+	vector<pair<int, int>> coordinates(4); // TODO avoid magic constants
+	pair<int, int> rowLimits = expand(square.first);
+	pair<int, int> colLimits = expand(square.second);
+	for (int i = rowLimits.first; i <= rowLimits.second; i++) {
+		for (int j = colLimits.first; j <= colLimits.second; j++) {
+			coordinates.push_back({ i, j });
 		}
-		*u->color = Node::BLACK;
-		u->prev = nullptr;
-		q.pop();
 	}
-	return count;
+	return coordinates;
 }
 
-void GBMap::resetSearchAttributes(Resource* match) {
-	for (auto entry : *nodes) {
-		Node* n = entry.second;
-		n->init(n->resource, match, n->adjacents);
+std::pair<int, int> GBMap::expand(int index) {
+	if (index == 0) {
+		return { 0, 1 };
 	}
+	pair<int, int> prev = expand(index - 1);
+	return { prev.first + 2, prev.second + 1 };
 }
 
-GBMap::Node::Node() {
-	init(nullptr, nullptr, nullptr);
-}
-
-GBMap::Node::Node(Node& other) {
-	resource = new Resource(*other.resource);
-	adjacents = new set<Node*>(*other.adjacents);
-	color = new int(*other.color);
-	distance = new int(*other.distance);
-	prev = nullptr; // TODO can this be copied without infinite recursion
-}
-
-GBMap::Node::~Node() {
-	delete resource;
-	delete adjacents;
-	delete color;
-	delete distance;
-	delete prev;
-}
-
-void GBMap::Node::init(Resource* resource, Resource* match, set<Node*>* adjacents) {
-	this->resource = resource;
-	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
-	if (Resource::equals(match, resource)) {
-		color = new int(WHITE);
+pair<int, int> GBMap::validateSquare(pair<int, int> square) {
+	int row = square.first, col = square.second;
+	switch (*numPlayers) {
+	case 4:
+		if (isOnCorner(row, col)) {
+			throw new std::exception(); // TODO need richer exception type
+		}
+	case 2:
+	case 3:
+		if (row < 0 || row >= width() || col < 0 || col >= height()) {
+			throw new std::exception(); // TODO need richer exception type
+		}
 	}
-	else {
-		color = new int(BLACK);
-	}
-	distance = new int(INT_MAX);
-	prev = nullptr;
+	return square;
+}
+
+bool GBMap::isOnCorner(int row, int col) {
+	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
 }
