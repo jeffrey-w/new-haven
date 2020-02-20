@@ -37,7 +37,7 @@ void AbstractMap::setSpace(AbstractToken* token, pair<int, int> coordinate) {
 	graph->setTokenAt(token, coordinate); // TODO document exception
 }
 
-void AbstractMap::calculate(ScoringFacility* facility, pair<int, int> coordinate) {
+void AbstractMap::calculate(ScoringFacility* facility, pair<int, int> coordinate) { // TODO bring this to GBMap (VGMap has no need for this)
 	int amount = graph->search(coordinate); // TODO document exception
 	AbstractToken* token = graph->tokenAt(coordinate); // TODO document exception
 	facility->incrementBy(token->getType(), amount);
