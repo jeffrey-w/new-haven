@@ -32,6 +32,7 @@ AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
 }
 
 void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
+	token->place(); // TODO avoid side effects
 	nodeAt(coordinate)->token = token; // TODO document exception
 }
 
@@ -56,7 +57,7 @@ int TokenGraph::search(Node* s) {
 	resetSearchAttributes(s->token);
 	*s->color = Node::GRAY;
 	*s->distance = 0;
-	queue<Node*> q = queue<Node*>();
+ 	queue<Node*> q = queue<Node*>();
 	q.push(s);
 	while (!q.empty()) {
 		Node* u = q.front();
@@ -70,7 +71,7 @@ int TokenGraph::search(Node* s) {
 			}
 		}
 		*u->color = Node::BLACK;
-		u->prev = nullptr;
+		u->prev = nullptr; // Otherwise destructor misbehaves.
 		q.pop();
 	}
 	return count;
@@ -99,7 +100,7 @@ TokenGraph::Node::~Node() {
 void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node*>* adjacents) {
 	this->token = token;
 	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
-	if (AbstractToken::areSameType(match, token)) {
+	if (AbstractToken::areSameType(match, token)) { // Switch what get's searched.
 		color = new int(WHITE);
 	}
 	else {
