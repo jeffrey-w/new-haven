@@ -1,6 +1,7 @@
 #include "HarvestTile.h"
 
 using std::array;
+using std::map;
 
 HarvestTile::HarvestTile() {
 	orientation = new Orientation(Orientation::NORTHEAST);
@@ -34,13 +35,5 @@ void HarvestTile::ensureNotPlaced() {
 }
 
 Resource* HarvestTile::next() {
-	array<int, NUM_RESOURCES> indices = ORDER->at(*orientation);
-	for (int i = 0; i < NUM_RESOURCES; i++) {
-		Resource* resource = resources->at(indices[i]);
-		if (!resource->isPlaced()) {
-			return resource;
-		}
-	}
-	throw new std::exception(); // TODO need richer return type;
+	return nullptr; // TODO
 }
-
