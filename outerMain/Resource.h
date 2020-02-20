@@ -1,7 +1,9 @@
 #pragma once
 
+#include "AbstractToken.h"
+
 // Instances of the Resource class inhabit spaces on a GBMap.
-class Resource {
+class Resource : public AbstractToken {
 
 public:
 
@@ -24,14 +26,13 @@ public:
 	Resource(Resource&);
 	// Destructs this Resource object.
 	~Resource();
-	// Returns true iff this Resource inhabits a GBMap, otherwise false,
-	bool isPlaced();
 	// Returns the type of this Resource.
-	ResourceType getType() const;
+	int getType() const;
+	// Writes this Resource to the standard output stream
+	void display() const;
 
 private:
-
-	bool* placed;
+	
 	ResourceType* type;
 
 	Resource::ResourceType randomType();
