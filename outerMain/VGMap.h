@@ -35,7 +35,7 @@ private:
 
         Node();
         Node(Node&);
-        void init(Building*, Building*, std::set<Node*>, int*);
+        void init(Building*, Building*, std::set<Node*>*);
     };
 
     std::map<std::pair<int,int>, Node*>* nodes;
