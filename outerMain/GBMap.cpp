@@ -37,7 +37,8 @@ void GBMap::calculateResources(GatherFacility* resources) {
 	for (auto coordinate : coordinatesOf(*prev)) {
 		int type = typeAt(coordinate);
 		if (!resources->isCalculated(type)) {
-			calculate(resources, coordinate);
+			int amount = search(coordinate); // TODO document exception
+			resources->incrementBy(type, amount); // TODO document exception
 			resources->setCalculated(type);
 		}
 	}
