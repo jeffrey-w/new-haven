@@ -13,7 +13,7 @@ protected:
 	void build(int, int);
 	int typeAt(std::pair<int, int>);
 	void setSpace(AbstractToken*, std::pair<int, int>);
-	void calculate(ScoringFacility*, std::pair<int, int>);
+	int search(std::pair<int, int>);
 
 private:
 
