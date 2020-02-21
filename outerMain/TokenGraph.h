@@ -11,6 +11,9 @@ class TokenGraph {
 
 public:
 
+	// Static factory method.
+	static TokenGraph* gridOf(int, int);
+
 	TokenGraph();
 	TokenGraph(TokenGraph&) = delete; // Supress copy constructor.
 	~TokenGraph();

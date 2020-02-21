@@ -8,6 +8,27 @@ using std::pair;
 using std::queue;
 using std::set;
 
+TokenGraph* TokenGraph::gridOf(int height, int width) {
+	TokenGraph* graph = new TokenGraph();
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			graph->addNode({ i, j });
+		}
+	}
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			pair<int, int> coordinate(i, j);
+			if (i < height - 1) {
+				graph->addEdge(coordinate, { i + 1, j });
+			}
+			if (j < width - 1) {
+				graph->addEdge(coordinate, { i, j + 1 });
+			}
+		}
+	}
+	return graph;
+}
+
 TokenGraph::TokenGraph() {
 	nodes = new map<pair<int, int>, Node*>();
 }
@@ -27,6 +48,7 @@ void TokenGraph::addEdge(pair<int, int> one, pair<int, int> two) {
 	n->adjacents->insert(m);
 }
 
+// TODO need an empty node check/return value
 AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
 	return nodeAt(coordinate)->token; // TODO document exception
 }
