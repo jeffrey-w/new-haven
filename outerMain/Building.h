@@ -6,9 +6,9 @@ and number (1-6) on the other side
 #include <iostream>
 #include <string>
 
-#include "Piece.h"
+#include "AbstractToken.h"
 
-class Building : public Piece
+class Building : public AbstractToken
 {
 public:
 	enum Type { MEADOW, QUARRY, FOREST, WHEATFIELD }; // TODO consider using enum class
