@@ -2,10 +2,11 @@
 
 #include <vector>
 
-#include "AbstractMap.h"
 #include "HarvestTile.h"
+#include "TokenGraph.h"
+#include "ScoringFacilities.h"
 
-class GBMap : public AbstractMap {
+class GBMap {
 
 	static constexpr int DEFAULT_NUM_PLAYERS = 2;
 	static constexpr int DIM_MIN = 10, DIM_MAX = 14;
@@ -22,6 +23,7 @@ public:
 private:
 
 	int* numPlayers;
+	TokenGraph* graph;
 	std::pair<int, int>* prev;
 	
 	void setNumPlayers(int);
