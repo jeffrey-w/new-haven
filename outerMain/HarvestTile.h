@@ -18,6 +18,7 @@ class HarvestTile
 public:
 	enum Resource { WHEAT, STONE, TIMBER, SHEEP };
 	HarvestTile();
+	HarvestTile(const HarvestTile &obj);
 	~HarvestTile();
 	/**
 	prints tile

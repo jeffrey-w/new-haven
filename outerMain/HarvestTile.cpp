@@ -17,6 +17,15 @@ HarvestTile::HarvestTile()
 	buildTile();
 }
 
+HarvestTile::HarvestTile(const HarvestTile& obj)
+{
+	position = new Resource[4];
+	for (int i = 0; i < 4; i++)
+	{
+		position[i] = obj.position[i];
+	}
+}
+
 HarvestTile::~HarvestTile()
 {
 	delete[] position;

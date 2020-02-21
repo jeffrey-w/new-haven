@@ -19,7 +19,7 @@ Building::Building(Type theColour, int theNumber) : Building()
 	number = new int(theNumber);
 }
 
-Building::Building(Building& obj)
+Building::Building(const Building& obj)
 {
 	colour = new Type(*obj.colour);
 	number = new int(*obj.number);
