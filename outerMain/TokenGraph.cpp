@@ -53,6 +53,10 @@ AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
 	return nodeAt(coordinate)->token; // TODO document exception
 }
 
+bool TokenGraph::isBlack(std::pair<int, int> coordinate) {
+	return *nodeAt(coordinate)->color == Node::BLACK; // TODO document exception
+}
+
 bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TODO validate tokenType
 	for (auto& adjacent : *nodeAt(coordinate)->adjacents) { // TODO document exception
 		if (adjacent->token->getType() == tokenType) {
@@ -135,7 +139,7 @@ void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node
 		color = new int(WHITE);
 	}
 	else {
-		color = new int(BLACK);
+		color = new int(RED);
 	}
 	distance = new int(INT_MAX);
 	prev = nullptr;

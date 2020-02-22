@@ -20,6 +20,7 @@ public:
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
 	AbstractToken* tokenAt(std::pair<int, int>);
+	bool isBlack(std::pair<int, int> coordinate);
 	bool adjacentHolds(std::pair<int, int>, int);
 	void setTokenAt(AbstractToken*, std::pair<int, int>);
 	int search(std::pair<int, int>);
@@ -30,7 +31,7 @@ private:
 
 	public:
 
-		static constexpr int WHITE = 0, GRAY = 1, BLACK = 2;
+		static constexpr int WHITE = 0, GRAY = 1, BLACK = 2, RED = 3;
 
 		AbstractToken* token;
 		std::set<Node*>* adjacents;
