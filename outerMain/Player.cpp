@@ -15,5 +15,5 @@ HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
 }
 
 void Player::calculateResources(GBMap* map) {
-	map->calculateResources(gatherFacility);
+	map->calculateResources(gatherFacility); // TODO document exception
 }
