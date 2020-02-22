@@ -34,6 +34,6 @@ void HarvestTile::ensureNotPlaced() {
 	}
 }
 
-ResourceToken* HarvestTile::next() {
+ResourceToken* HarvestTile::tokenize() {
 	return nullptr; // TODO
 }
