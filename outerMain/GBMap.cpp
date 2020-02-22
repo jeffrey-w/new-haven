@@ -24,9 +24,9 @@ GBMap::~GBMap() {
 	delete prev;
 }
 
-void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
+void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) { // TODO check that square is empty
 	for (auto coordinate : coordinatesOf(square)) { // TODO document exception
-		graph->setTokenAt(tile->next(), coordinate);
+		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
 	prev = new pair<int, int>(square); // TODO avoid side effects
 }
@@ -39,7 +39,7 @@ void GBMap::calculateResources(GatherFacility* resources) {
 		int type = graph->tokenAt(coordinate)->getType();
 		if (!resources->isCalculated(type)) {
 			int amount = graph->search(coordinate); // TODO document exception
-			resources->incrementBy(type, amount); // TODO document exception
+			resources->incrementBy(type, amount);
 			resources->setCalculated(type);
 		}
 	}
