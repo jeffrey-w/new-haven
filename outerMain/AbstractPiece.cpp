@@ -11,3 +11,11 @@ AbstractPiece::AbstractPiece(AbstractPiece& other) {
 AbstractPiece::~AbstractPiece() {
 	delete spent;
 }
+
+bool AbstractPiece::isSpent() {
+	return *spent;
+}
+
+void AbstractPiece::spend() {
+	*spent = true;
+}
