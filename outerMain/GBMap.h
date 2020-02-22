@@ -30,6 +30,7 @@ public:
 	// Counts, starting from the specified square, and records on the specified GatherFacility the
 	// number of connected resources of each type on this GBMap.
 	void calculateResources(std::pair<int, int>, GatherFacility*);
+	void display();
 
 private:
 

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "GBMap.h"
 
 using std::vector;
@@ -38,6 +40,22 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	}
 }
 
+void GBMap::display() {
+	for (int i = 0; i < height(); i++) {
+		for (int j = 0; j < width(); j++) {
+			ResourceToken* resource = static_cast<ResourceToken*>(graph->tokenAt({ i, j }));
+			if (resource) {
+				resource->display();
+				std::cout << '\t';
+			}
+			else {
+				std::cout << "-\t";
+			}
+		}
+		std::cout << "\n\n";
+	}
+}
+
 int GBMap::height() {
 	switch (*numPlayers) {
 	case 2:
@@ -60,7 +78,7 @@ int GBMap::width() {
 
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) {
 	validateSquare(square);
-	vector<pair<int, int>> coordinates(HarvestTile::NUM_RESOURCES);
+	vector<pair<int, int>> coordinates;
 	pair<int, int> rowLimits = expand(square.first);
 	pair<int, int> colLimits = expand(square.second);
 	for (int i = rowLimits.first; i <= rowLimits.second; i++) {
