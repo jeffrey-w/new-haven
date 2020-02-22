@@ -1,10 +1,73 @@
+#include "HarvestTile.h"
 #include "ScoringFacilities.h"
+#include "VGMap.h"
 
 using std::map;
+using std::vector;
+
+BuildFacility::BuildFacility() {
+	occupied = new vector<bool>(VGMap::HEIGHT * VGMap::WIDTH);
+}
+
+BuildFacility::BuildFacility(BuildFacility& other) {
+	occupied = new vector<bool>(*other.occupied);
+}
+
+BuildFacility::~BuildFacility() {
+	delete occupied;
+}
+
+int BuildFacility::getScore() {
+	return countRows() + countCols();
+}
+
+int BuildFacility::countRows() {
+	int score = 0;
+	for (uint8_t row = 0; row < VGMap::HEIGHT; row++) {
+		for (uint8_t col = 0; col < VGMap::WIDTH; col++) {
+			if (!(*occupied)[(row * VGMap::HEIGHT) + col]) {
+				break;
+			}
+			if (col == VGMap::WIDTH - 1) {
+				score += VGMap::HEIGHT - row;
+			}
+		}
+	}
+	return score;
+}
+
+int BuildFacility::countCols() { // TODO avoid magic constants
+	int score = 0;
+	for (uint8_t col = 0; col < VGMap::WIDTH; col++) {
+		for (uint8_t row = 0; row < VGMap::HEIGHT; row++) {
+			if (!(*occupied)[(row * VGMap::HEIGHT) + col]) {
+				break;
+			}
+			if (row == VGMap::HEIGHT - 1) {
+				int subtrahend;
+				if (col == 0 || col == 4) {
+					subtrahend = 1;
+				}
+				else if (col == 1 || col == 3) {
+					subtrahend = 2;
+				}
+				else {
+					subtrahend = 3;
+				}
+				score += VGMap::HEIGHT - subtrahend;
+			}
+		}
+	}
+	return score;
+}
+
+void BuildFacility::markOccupied(int index) { // TODO validate index
+	(*occupied)[index] = true;
+}
 
 GatherFacility::GatherFacility() {
 	count = new map<int, int>();
-	for (int i = 0; i < 4; i++) { // TODO avoid magic constants
+	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
 		(*count)[i] = 0;
 	}
 }
@@ -24,30 +87,4 @@ int GatherFacility::countOf(int type) { // TODO validate type
 void GatherFacility::incrementBy(int type, int amount) { // TODO validate type
 	int prior = (*count)[type];
 	(*count)[type] = prior + amount;
-}
-
-int BuildFacility::getScore() { // TODO avoid magic constants
-	int score = 0;
-	for (int i = 0; i < 6; i++) {
-		bool proceed = true;
-		for (int j = 0; j < 5; j++) {
-			if (!(*occupied)[(i * 6) + j]) {
-				break;
-			}
-			if (j == 4) {
-				score++;
-			}
-		}
-	}
-	for (int i = 0; i < 5; i++) {
-		for (int j = 0; i < 6; j++) {
-			if (!(*occupied)[(j * 6) + i]) {
-				break;
-			}
-			if (j == 5) {
-				score++;
-			}
-		}
-	}
-	return score;
 }
