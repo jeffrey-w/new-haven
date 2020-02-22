@@ -24,12 +24,12 @@ public:
 	HarvestTile(HarvestTile&);
 	~HarvestTile();
 	void orient(Orientation);
-	ResourceToken* next();
+	ResourceToken* tokenize();
 
 private:
 
 	Orientation* orientation;
-	std::array<ResourceToken*, NUM_RESOURCES>* resources;
+	std::array<ResourceToken*, NUM_RESOURCES>* resources; // TODO use vector for convenience
 
 	void ensureNotPlaced();
 	
