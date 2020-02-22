@@ -86,7 +86,7 @@ std::pair<int, int> GBMap::expand(int index) {
 	return { prev.first + 2, prev.second + 1 };
 }
 
-pair<int, int> GBMap::validateSquare(pair<int, int> square) {
+void GBMap::validateSquare(pair<int, int> square) {
 	int row = square.first, col = square.second;
 	switch (*numPlayers) {
 	case 4:
@@ -99,7 +99,6 @@ pair<int, int> GBMap::validateSquare(pair<int, int> square) {
 			throw new std::exception(); // TODO need richer exception type
 		}
 	}
-	return square;
 }
 
 bool GBMap::isOnCorner(int row, int col) {
