@@ -1,9 +1,8 @@
 #pragma once
 
-#include "AbstractMap.h"
 #include "Building.h"
 
-class VGMap : public AbstractMap {
+class VGMap {
 
 	static constexpr int HEIGHT = 6, WIDTH = 5;
 
