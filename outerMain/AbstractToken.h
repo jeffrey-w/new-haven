@@ -18,10 +18,10 @@ public:
 	bool isPlaced() const;
 	// Returns the type of this Token.
 	virtual int getType() const = 0;
-	// Writees this Token to the standard output stream.
-	virtual void display() const = 0;
 	// Sets the placement status of this Token to placed.
 	void place();
+	// Writees this Token to the standard output stream.
+	virtual void display() const = 0;
 
 private:
 
