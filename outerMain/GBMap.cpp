@@ -22,10 +22,7 @@ GBMap::~GBMap() {
 	delete graph;
 }
 
-void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
-	if (tile->isSpent()) {
-		throw new std::exception(); // TODO need richer exception type
-	}
+void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) { // TODO need to backtrack if tile is partially placed before call
 	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
@@ -33,11 +30,10 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(from)) {
-		int type = graph->tokenAt(coordinate)->getType();
-		if (!resources->isCalculated(type)) {
+		if (!graph->isBlack(coordinate)) {
 			int amount = graph->search(coordinate);
+			int type = graph->tokenAt(coordinate)->getType();
 			resources->incrementBy(type, amount);
-			resources->setCalculated(type);
 		}
 	}
 }
