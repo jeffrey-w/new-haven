@@ -7,7 +7,7 @@ HarvestTile::HarvestTile() {
 	orientation = new Orientation(Orientation::NORTHEAST);
 	resources = new array<ResourceToken*, NUM_RESOURCES>();
 	for (int i = 0; i < NUM_RESOURCES; i++) {
-		resources->at(i) = new ResourceToken(); // Default constructor returns a random Resource.
+		resources->at(i) = new ResourceToken(); // Default constructor returns a random ResourceToken.
 	}
 }
 
