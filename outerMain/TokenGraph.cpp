@@ -83,7 +83,7 @@ int TokenGraph::search(Node* s) {
 	q.push(s);
 	while (!q.empty()) {
 		Node* u = q.front();
-		for (auto v : *u->adjacents) {
+		for (auto& v : *u->adjacents) {
 			if (*v->color == Node::WHITE) {
 				*v->color = Node::GRAY;
 				*v->distance = *u->distance + 1;
