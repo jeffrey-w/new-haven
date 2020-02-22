@@ -27,15 +27,14 @@ public:
 	// exception if the specified HarvestTile has already been placed; or if the specified square
 	// is not on this GBMap or if it is already occupied.
 	void setSquare(HarvestTile*, std::pair<int, int>);
-	// Counts and records on the specified GatherFacility the number of connected resources of each
-	// type on this GBMap. Throws an exception if this GBMap is empty.
-	void calculateResources(GatherFacility*);
+	// Counts, starting from the specified square, and records on the specified GatherFacility the
+	// number of connected resources of each type on this GBMap from the specified square.
+	void calculateResources(std::pair<int, int>, GatherFacility*);
 
 private:
 
 	int* numPlayers;
 	TokenGraph* graph;
-	std::pair<int, int>* prev;
 	
 	void setNumPlayers(int);
 	int height();
