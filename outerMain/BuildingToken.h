@@ -6,8 +6,8 @@
 Building class creates a building given it's type (MEADOW,QUARRY,FOREST,WHEATFIELD) on one side
 and number (1-6) on the other side
 ****************/
-class BuildingToken : public AbstractToken
-{
+class BuildingToken : public AbstractToken {
+
 public:
 
 	enum class BuildingType { 
