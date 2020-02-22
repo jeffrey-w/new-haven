@@ -30,7 +30,7 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) { // TODO need t
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(from)) {
-		if (!graph->isBlack(coordinate)) {
+		if (!graph->isBlack(coordinate)) { // coordinate has previously been reached by another search.
 			int amount = graph->search(coordinate);
 			int type = graph->tokenAt(coordinate)->getType();
 			resources->incrementBy(type, amount);
