@@ -35,7 +35,7 @@ void GBMap::calculateResources(GatherFacility* resources) {
 	if (!prev) {
 		throw new std::exception(); // TODO need richer exception type
 	}
-	for (auto coordinate : coordinatesOf(*prev)) {
+	for (auto& coordinate : coordinatesOf(*prev)) {
 		int type = graph->tokenAt(coordinate)->getType();
 		if (!resources->isCalculated(type)) {
 			int amount = graph->search(coordinate); // TODO document exception

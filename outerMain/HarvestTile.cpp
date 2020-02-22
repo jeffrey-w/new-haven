@@ -5,15 +5,15 @@ using std::map;
 
 HarvestTile::HarvestTile() {
 	orientation = new Orientation(Orientation::NORTHEAST);
-	resources = new array<Resource*, NUM_RESOURCES>();
+	resources = new array<ResourceToken*, NUM_RESOURCES>();
 	for (int i = 0; i < NUM_RESOURCES; i++) {
-		resources->at(i) = new Resource(); // Default constructor returns a random Resource.
+		resources->at(i) = new ResourceToken(); // Default constructor returns a random Resource.
 	}
 }
 
 HarvestTile::HarvestTile(HarvestTile& other) {
 	orientation = new Orientation(*other.orientation);
-	resources = new array<Resource*, NUM_RESOURCES>(*other.resources);
+	resources = new array<ResourceToken*, NUM_RESOURCES>(*other.resources);
 }
 
 HarvestTile::~HarvestTile() {
@@ -27,13 +27,13 @@ void HarvestTile::orient(Orientation orientation) {
 }
 
 void HarvestTile::ensureNotPlaced() {
-	for (auto resource : *resources) {
+	for (auto& resource : *resources) {
 		if (resource->isPlaced()) {
 			throw new std::exception(); // TODO need richer exception type
 		}
 	}
 }
 
-Resource* HarvestTile::next() {
+ResourceToken* HarvestTile::next() {
 	return nullptr; // TODO
 }
