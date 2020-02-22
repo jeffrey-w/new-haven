@@ -2,12 +2,12 @@
 
 #include "AbstractToken.h"
 
-// Instances of the Resource class inhabit spaces on a GBMap.
+// The token type that inhabits spaces on a GBMap.
 class ResourceToken : public AbstractToken {
 
 public:
 
-	// The types a Resource may have.
+	// The types a Resource may have. (Corresponding BuildingType have corresponding ordinal.)
 	enum class ResourceType {
 		SHEEP,
 		STONE,
@@ -15,17 +15,17 @@ public:
 		WHEAT
 	};
 
-	// Constructs a new Resource object with a random type.
+	// Constructs a new ResourceToken object with a random type.
 	ResourceToken();
-	// Constructs a new Resource object with the specified type.
+	// Constructs a new ResourceToken object with the specified type.
 	ResourceToken(ResourceType);
-	// Constructs a new Resource object with the same type as the specified Resource.
+	// Constructs a new ResourceToken object with the same type as the specified ResourceToken.
 	ResourceToken(ResourceToken&);
-	// Destructs this Resource object.
+	// Destructs this ResourceToken object.
 	~ResourceToken();
-	// Returns the type of this Resource.
+	// Returns the type of this ResourceToken.
 	int getType() const;
-	// Writes this Resource to the standard output stream
+	// Writes this ResourceToken to the standard output stream
 	void display() const;
 
 private:
