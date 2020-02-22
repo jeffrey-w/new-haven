@@ -1,10 +1,19 @@
 #pragma once
 
 #include <map>
+#include <vector>
 
 class BuildFacility {
-	
-	// TODO
+
+	BuildFacility();
+	BuildFacility(BuildFacility&);
+	~BuildFacility();
+	int getScore();
+	void markOccupied(int index);
+
+private:
+
+	std::vector<bool>* occupied;
 
 };
 
