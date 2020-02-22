@@ -78,14 +78,6 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square) {
 	return coordinates;
 }
 
-std::pair<int, int> GBMap::expand(int index) {
-	if (index == 0) {
-		return { 0, 1 };
-	}
-	pair<int, int> prev = expand(index - 1);
-	return { prev.first + 2, prev.second + 1 };
-}
-
 void GBMap::validateSquare(pair<int, int> square) {
 	int row = square.first, col = square.second;
 	switch (*numPlayers) {
@@ -100,6 +92,15 @@ void GBMap::validateSquare(pair<int, int> square) {
 		}
 	}
 }
+
+std::pair<int, int> GBMap::expand(int index) {
+	if (index == 0) {
+		return { 0, 1 };
+	}
+	pair<int, int> prev = expand(index - 1);
+	return { prev.first + 2, prev.second + 1 };
+}
+
 
 bool GBMap::isOnCorner(int row, int col) {
 	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
