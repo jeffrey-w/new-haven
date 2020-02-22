@@ -3,11 +3,11 @@
 #include <array>
 #include <map>
 
-#include "Piece.h"
+#include "AbstractPiece.h"
 #include "ResourceToken.h"
 
 
-class HarvestTile : public Piece {
+class HarvestTile : public AbstractPiece {
 
 public:
 
