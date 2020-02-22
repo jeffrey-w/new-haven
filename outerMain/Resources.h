@@ -15,6 +15,7 @@ public:
 
 protected:
 
+	void insert(AbstractPiece*);
 	virtual AbstractPiece* drawAs() = 0;
 
 private:
@@ -27,6 +28,7 @@ class BuildingDeck : public Deck {
 
 public:
 
+	void add(Building*);
 	Building* drawAs();
 
 };
@@ -35,6 +37,7 @@ class HarvestTileDeck : public Deck {
 
 public:
 
+	void add(HarvestTile*);
 	HarvestTile* drawAs();
 
 };
