@@ -2,24 +2,24 @@
 
 #include <stack>
 
+#include "AbstractPiece.h"
 #include "Building.h"
 #include "HarvestTile.h"
-#include "Piece.h"
 
 class Deck {
 
 public:
 
-	Piece* draw();
+	AbstractPiece* draw();
 	bool empty();
 
 protected:
 
-	virtual Piece* drawAs() = 0;
+	virtual AbstractPiece* drawAs() = 0;
 
 private:
 
-	std::stack<Piece*>* pieces;
+	std::stack<AbstractPiece*>* pieces;
 
 };
 
