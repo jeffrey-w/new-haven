@@ -2,14 +2,12 @@
 
 #include "AbstractToken.h"
 
-/***************
-Building class creates a building given it's type (MEADOW,QUARRY,FOREST,WHEATFIELD) on one side
-and number (1-6) on the other side
-****************/
+// The token type that inhabits spaces on a VGMap.
 class BuildingToken : public AbstractToken {
 
 public:
 
+	// The types a Building may have. (Corresponding ResourceType has corresponding ordinal.)
 	enum class BuildingType { 
 		MEADOW,
 		QUARRY,
@@ -17,28 +15,33 @@ public:
 		WHEATFIELD
 	};
 	
+	// Constructs a new BuildingToken object with a random type.
 	BuildingToken();
-	BuildingToken(BuildingType, int);  //example: Building myBuilding = Building(Building::WHEATFIELD, 1);
+	// Constructs a new BuildingToken object with the specified type and value.
+	BuildingToken(BuildingType, int);
+	// Constructs a new BuildingToken object witht the same type and value as the specified BuildingToken.
 	BuildingToken(BuildingToken&);
+	// Destroys this BuildingToken.
 	~BuildingToken();
-	bool getFaceUp() const;
+	// Returns true iff this BuildingToken is face up.
+	bool isFaceUp() const;
+	// Returns the type of this BuildingToken.
 	int getType() const;
+	// Returns the value of this BuildingToken.
 	int getValue() const;
-	/*
-	flips the building
-	if the building was faceUp, it becomes face down and vice versa
-	*/
+	// Flips this BuildingToken. If it was previously face up, it becomes face down and vice versa.
 	void flip();
+	// Writes this BuildingToken to the standard output stream.
 	void display() const;
 
 private:
 
 	BuildingType* type;
-	int* value;  //1 to 6
-    bool* faceUp; //the building is face up by default in the constructor, unless flip() is called
+	int* value;
+    bool* faceUp;
 
-	int validateValue(int);
 	BuildingType randomType();
 	int randomValue();
+	int validateValue(int);
 
 };
