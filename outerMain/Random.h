@@ -12,6 +12,6 @@ public:
 
 private:
 
-	static std::minstd_rand generator;
+	static std::minstd_rand GENERATOR;
 
 };
