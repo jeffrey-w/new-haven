@@ -116,7 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractToken.cpp" />
-    <ClCompile Include="Building.cpp" />
+    <ClCompile Include="BuildingToken.cpp" />
     <ClCompile Include="GBMap.cpp" />
     <ClCompile Include="GBMapLoader.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
@@ -124,7 +124,7 @@
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Random.cpp" />
-    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceToken.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="ScoringFacilities.cpp" />
     <ClCompile Include="TokenGraph.cpp" />
@@ -132,14 +132,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractToken.h" />
-    <ClInclude Include="Building.h" />
+    <ClInclude Include="BuildingToken.h" />
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="GBMapLoader.h" />
     <ClInclude Include="HarvestTile.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Random.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceToken.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="ScoringFacilities.h" />
     <ClInclude Include="TokenGraph.h" />
