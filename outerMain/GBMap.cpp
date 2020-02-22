@@ -6,7 +6,7 @@ using std::pair;
 GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
 
 GBMap::GBMap(int numPlayers) {
-	setNumPlayers(numPlayers); // TODO document exception
+	setNumPlayers(numPlayers);
 	graph = TokenGraph::gridOf(height(), width());
 	prev = nullptr;
 }
@@ -24,8 +24,8 @@ GBMap::~GBMap() {
 	delete prev;
 }
 
-void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) { // TODO check that square is empty
-	for (auto coordinate : coordinatesOf(square)) { // TODO document exception
+void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
+	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
 	prev = new pair<int, int>(square); // TODO avoid side effects
@@ -38,7 +38,7 @@ void GBMap::calculateResources(GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(*prev)) {
 		int type = graph->tokenAt(coordinate)->getType();
 		if (!resources->isCalculated(type)) {
-			int amount = graph->search(coordinate); // TODO document exception
+			int amount = graph->search(coordinate);
 			resources->incrementBy(type, amount);
 			resources->setCalculated(type);
 		}
@@ -65,14 +65,21 @@ int GBMap::width() {
 	}
 }
 
-vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square) {
-	validateSquare(square); // TODO document exception
-	vector<pair<int, int>> coordinates(4); // TODO avoid magic constants
+vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) {
+	validateSquare(square);
+	vector<pair<int, int>> coordinates(HarvestTile::NUM_RESOURCES);
 	pair<int, int> rowLimits = expand(square.first);
 	pair<int, int> colLimits = expand(square.second);
 	for (int i = rowLimits.first; i <= rowLimits.second; i++) {
 		for (int j = colLimits.first; j <= colLimits.second; j++) {
 			coordinates.push_back({ i, j });
+		}
+	}
+	if (ensureEmpty) {
+		for (auto& coordinate : coordinates) {
+			if (graph->tokenAt(coordinate)) {
+				throw new std::exception(); // TODO need richer exception type
+			}
 		}
 	}
 	return coordinates;
