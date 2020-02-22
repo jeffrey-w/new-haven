@@ -14,18 +14,18 @@ class Player {
 public:
 
     Player();
-    void placeHarvestTile(HarvestTile*, GBMap*, std::pair<int, int>);
     Building* drawBuilding(BuildingDeck*);
     HarvestTile* drawHarvestTile(HarvestTileDeck*);
-    void resourceTracker(); // TODO what is this for?
     void buildVillage();
+    void placeHarvestTile(HarvestTile*, GBMap*, std::pair<int, int>);
+    void resourceTracker(); // TODO what is this for?
     void calculateResources(GBMap*);
 
 private:
     
     VGMap* villageBoard;
-    GatherFacility* gatherFacility;
-    BuildFacility* buildFacility;
+    GatherFacility* gatherFacility; // TODO does this belong here
+    BuildFacility* buildFacility; // TODO does this belong here
 
 };
 
