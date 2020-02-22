@@ -24,14 +24,13 @@ public:
 	~HarvestTile();
 	void orient(Orientation);
 	ResourceToken* tokenize();
+	void display() const;
 
 private:
 
-	Orientation* orientation;
 	int* current;
 	std::vector<ResourceToken*>* resources;
 
 	void ensureNotPlaced();
-	int nextIndex();
 	
 };
