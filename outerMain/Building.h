@@ -1,5 +1,7 @@
 #pragma once
 
+#include <exception>
+
 #include "AbstractPiece.h"
 #include "BuildingToken.h"
 
@@ -11,6 +13,7 @@ public:
 	Building(Building&);
 	~Building();
 	BuildingToken* next();
+	void display() const;
 
 private:
 
