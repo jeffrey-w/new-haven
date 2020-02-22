@@ -25,9 +25,13 @@ GBMap::~GBMap() {
 }
 
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
+	if (tile->isSpent()) {
+		throw new std::exception(); // TODO need richer exception type
+	}
 	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
+	delete prev;
 	prev = new pair<int, int>(square); // TODO avoid side effects
 }
 
