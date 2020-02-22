@@ -12,10 +12,12 @@ Building::~Building() {
 	delete token;
 }
 
-BuildingToken* Building::next() {
-	if (*spent) {
+BuildingToken* Building::tokenize() {
+	if (isSpent()) {
 		throw new std::exception(); // TODO need richer exception type;
 	}
+	spend();
+	return token;
 }
 
 void Building::display() const {
