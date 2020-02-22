@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Random.h"
 #include "ResourceToken.h"
 
@@ -24,5 +26,18 @@ int ResourceToken::getType() const {
 }
 
 void ResourceToken::display() const {
-	// TODO
+	switch (*type) {
+	case ResourceType::SHEEP:
+		std::cout << "SH";
+		break;
+	case ResourceType::STONE:
+		std::cout << "ST";
+		break;
+	case ResourceType::TIMBER:
+		std::cout << "TI";
+		break;
+	case ResourceType::WHEAT:
+		std::cout << "WH";
+		break;
+	}
 }
