@@ -6,7 +6,7 @@ void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, pair<int, int> squa
 	map->setSquare(tile, square);
 }
 
-BuildingToken* Player::drawBuilding(BuildingDeck* deck) {
+Building* Player::drawBuilding(BuildingDeck* deck) {
 	return deck->drawAs(); // TODO document exception
 }
 

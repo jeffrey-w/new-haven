@@ -3,7 +3,6 @@
 #include "Building.h"
 #include "GBMap.h"
 #include "HarvestTile.h"
-#include "Resource.h"
 #include "Resources.h"
 #include "ScoringFacilities.h"
 #include "VGMap.h"
