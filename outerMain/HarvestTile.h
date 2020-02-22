@@ -1,7 +1,6 @@
 #pragma once
 
-#include <array>
-#include <map>
+#include <vector>
 
 #include "AbstractPiece.h"
 #include "ResourceToken.h"
@@ -29,8 +28,10 @@ public:
 private:
 
 	Orientation* orientation;
-	std::array<ResourceToken*, NUM_RESOURCES>* resources; // TODO use vector for convenience
+	int* current;
+	std::vector<ResourceToken*>* resources;
 
 	void ensureNotPlaced();
+	int nextIndex();
 	
 };

@@ -1,19 +1,20 @@
 #include "HarvestTile.h"
 
-using std::array;
-using std::map;
+using std::vector;
 
 HarvestTile::HarvestTile() {
-	orientation = new Orientation(Orientation::NORTHEAST);
-	resources = new array<ResourceToken*, NUM_RESOURCES>();
+	orientation = new Orientation(Orientation::NORTHWEST);
+	int curr = static_cast<int>(*orientation);
+	resources = new vector<ResourceToken*>(NUM_RESOURCES);
 	for (int i = 0; i < NUM_RESOURCES; i++) {
-		resources->at(i) = new ResourceToken(); // Default constructor returns a random ResourceToken.
+		resources->push_back(new ResourceToken()); // Default constructor returns a random ResourceToken.
 	}
 }
 
 HarvestTile::HarvestTile(HarvestTile& other) {
 	orientation = new Orientation(*other.orientation);
-	resources = new array<ResourceToken*, NUM_RESOURCES>(*other.resources);
+	current = new int(*other.current);
+	resources = new vector<ResourceToken*>(*other.resources);
 }
 
 HarvestTile::~HarvestTile() {
@@ -35,5 +36,9 @@ void HarvestTile::ensureNotPlaced() {
 }
 
 ResourceToken* HarvestTile::tokenize() {
-	return nullptr; // TODO
+	if (isSpent()) {
+		throw new std::exception();
+	}
+	ResourceToken* resource = (*resources)[(*current)++];
+	*current = nextIndex();
 }
