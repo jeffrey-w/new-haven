@@ -1,23 +1,25 @@
 #pragma once
 
-class ScoringFacility {
+#include <map>
 
-public:
-
-	virtual void incrementBy(int, int) = 0;
-
-};
-
-class BuildFacility : public ScoringFacility {
+class BuildFacility {
+	
+	// TODO
 
 };
 
-class GatherFacility : public ScoringFacility {
+class GatherFacility {
 
 public:
 
-	bool isCalculated(int);
-	void setCalculated(int);
+	GatherFacility();
+	GatherFacility(GatherFacility&);
+	~GatherFacility();
+	void incrementBy(int type, int amount);
+
+private:
+
+	std::map<int, int>* count;
 
 };
 
