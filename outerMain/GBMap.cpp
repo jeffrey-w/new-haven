@@ -8,7 +8,6 @@ GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
 GBMap::GBMap(int numPlayers) {
 	setNumPlayers(numPlayers);
 	graph = TokenGraph::gridOf(height(), width());
-	prev = nullptr;
 }
 
 void GBMap::setNumPlayers(int numPlayers) {
@@ -21,7 +20,6 @@ void GBMap::setNumPlayers(int numPlayers) {
 GBMap::~GBMap() {
 	delete numPlayers;
 	delete graph;
-	delete prev;
 }
 
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
@@ -31,15 +29,10 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
-	delete prev;
-	prev = new pair<int, int>(square); // TODO avoid side effects
 }
 
-void GBMap::calculateResources(GatherFacility* resources) {
-	if (!prev) {
-		throw new std::exception(); // TODO need richer exception type
-	}
-	for (auto& coordinate : coordinatesOf(*prev)) {
+void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
+	for (auto& coordinate : coordinatesOf(from)) {
 		int type = graph->tokenAt(coordinate)->getType();
 		if (!resources->isCalculated(type)) {
 			int amount = graph->search(coordinate);
