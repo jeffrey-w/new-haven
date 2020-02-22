@@ -67,7 +67,7 @@ bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TO
 }
 
 void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
-	token->place(); // TODO avoid side effects
+	//token->place(); // TODO avoid side effects
 	nodeAt(coordinate)->token = token; // TODO document exception
 }
 
