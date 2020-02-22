@@ -54,8 +54,7 @@ AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
 }
 
 bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TODO validate tokenType
-	Node* n = nodeAt(coordinate); // TODO document exception
-	for (auto& adjacent : *n->adjacents) {
+	for (auto& adjacent : *nodeAt(coordinate)->adjacents) { // TODO document exception
 		if (adjacent->token->getType() == tokenType) {
 			return true;
 		}
