@@ -4,9 +4,9 @@
 
 class VGMap {
 
-	static constexpr int HEIGHT = 6, WIDTH = 5;
-
 public:
+
+	static constexpr int HEIGHT = 6, WIDTH = 5;
 
 	VGMap();
 	VGMap(VGMap&) = delete; // TODO supress copy constructor?
