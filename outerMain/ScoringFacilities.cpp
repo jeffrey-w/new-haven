@@ -17,6 +17,10 @@ GatherFacility::~GatherFacility() {
 	delete count;
 }
 
+int GatherFacility::countOf(int type) { // TODO validate type
+	return (*count)[type];
+}
+
 void GatherFacility::incrementBy(int type, int amount) { // TODO validate type
 	int prior = (*count)[type];
 	(*count)[type] = prior + amount;

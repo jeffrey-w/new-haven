@@ -15,7 +15,8 @@ public:
 	GatherFacility();
 	GatherFacility(GatherFacility&);
 	~GatherFacility();
-	void incrementBy(int type, int amount);
+	int countOf(int type);
+	void incrementBy(int, int);
 
 private:
 
