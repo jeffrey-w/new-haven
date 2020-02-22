@@ -15,6 +15,9 @@ private:
 
 	std::vector<bool>* occupied;
 
+	int countRows();
+	int countCols();
+
 };
 
 class GatherFacility {
