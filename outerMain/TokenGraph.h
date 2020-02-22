@@ -20,6 +20,7 @@ public:
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
 	AbstractToken* tokenAt(std::pair<int, int>);
+	bool adjacentHolds(std::pair<int, int>, int);
 	void setTokenAt(AbstractToken*, std::pair<int, int>);
 	int search(std::pair<int, int>);
 
