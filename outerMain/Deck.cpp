@@ -18,6 +18,50 @@ Deck::Deck()
 	generateAllHarvestTiles();
 }
 
+Deck::Deck(const Deck& obj)
+{
+	buildingVector = new vector<Building*>();
+	harvestTileVector = new vector<HarvestTile*>();
+
+	int j = obj.buildingVector->size();
+	for (int i = 0; i < j; i++)
+	{
+		buildingVector->push_back(new Building(*obj.buildingVector->at(i)));
+	}
+
+	j = obj.harvestTileVector->size();
+	for (int i = 0; i < j; i++)
+	{
+		harvestTileVector->push_back(new HarvestTile(*obj.harvestTileVector->at(i)));
+	}
+}
+
+Deck::~Deck()
+{
+	int j = buildingVector->size();
+	for (int i = 0; i < j; i++)
+	{
+		delete buildingVector->at(i);
+		buildingVector->at(i) = nullptr;
+	}
+
+	j = harvestTileVector->size();
+	for (int i = 0; i < j; i++)
+	{
+		delete harvestTileVector->at(i);
+		harvestTileVector->at(i) = nullptr;
+	}
+
+	buildingVector->clear();
+	delete buildingVector;
+	buildingVector = nullptr;
+
+	harvestTileVector->clear();
+	delete harvestTileVector;
+	harvestTileVector = nullptr;
+
+}
+
 void Deck::generateAllBuildings()
 {
 	for (int i = 1; i <= 6; i++)
