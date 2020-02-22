@@ -1,10 +1,10 @@
 #include "Resources.h"
 
-Piece* Deck::draw() {
+AbstractPiece* Deck::draw() {
 	if (empty()) {
 		throw new std::exception(); // TODO need richer return type
 	}
-	Piece* piece = pieces->top();
+	AbstractPiece* piece = pieces->top();
 	pieces->pop();
 	return piece;
 }
