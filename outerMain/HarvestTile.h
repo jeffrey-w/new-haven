@@ -4,7 +4,7 @@
 #include <map>
 
 #include "Piece.h"
-#include "Resource.h"
+#include "ResourceToken.h"
 
 
 class HarvestTile : public Piece {
@@ -24,12 +24,12 @@ public:
 	HarvestTile(HarvestTile&);
 	~HarvestTile();
 	void orient(Orientation);
-	Resource* next();
+	ResourceToken* next();
 
 private:
 
 	Orientation* orientation;
-	std::array<Resource*, NUM_RESOURCES>* resources;
+	std::array<ResourceToken*, NUM_RESOURCES>* resources;
 
 	void ensureNotPlaced();
 	
