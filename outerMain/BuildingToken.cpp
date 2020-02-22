@@ -14,7 +14,7 @@ int BuildingToken::randomValue() {
 BuildingToken::BuildingToken(BuildingType type, int value) {
 	this->type = new BuildingType(type);
 	this->value = new int(validateValue(value));
-	this->faceUp = new bool(false);
+	this->faceUp = new bool(true);
 }
 
 int BuildingToken::validateValue(int value) {
@@ -42,7 +42,7 @@ void BuildingToken::flip() {
 	*faceUp = !(*faceUp);
 }
 
-bool BuildingToken::getFaceUp() const {
+bool BuildingToken::isFaceUp() const {
     return *faceUp;
 }
 
