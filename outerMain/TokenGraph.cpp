@@ -131,7 +131,7 @@ TokenGraph::Node::~Node() {
 void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node*>* adjacents) {
 	this->token = token;
 	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
-	if (AbstractToken::areSameType(match, token)) { // Switch what get's searched.
+	if (AbstractToken::areSameType(match, token)) { // This node will be searched if it's connected to source of search.
 		color = new int(WHITE);
 	}
 	else {
