@@ -4,7 +4,7 @@ using std::vector;
 
 HarvestTile::HarvestTile() {
 	orientation = new Orientation(Orientation::NORTHWEST);
-	int curr = static_cast<int>(*orientation);
+	current = new int(static_cast<int>(*orientation));
 	resources = new vector<ResourceToken*>(NUM_RESOURCES);
 	for (int i = 0; i < NUM_RESOURCES; i++) {
 		resources->push_back(new ResourceToken()); // Default constructor returns a random ResourceToken.
