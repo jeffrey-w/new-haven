@@ -15,6 +15,7 @@ public:
 	HarvestTile();
 	HarvestTile(HarvestTile&);
 	~HarvestTile();
+	// Rotates ResourceTokens 90 degrees clockwise the specified number of rotations.
 	void rotate(int);
 	ResourceToken* tokenize();
 
