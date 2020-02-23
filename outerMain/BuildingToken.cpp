@@ -1,5 +1,7 @@
 #include "BuildingToken.h"
 #include "Random.h"
+#include <iostream>
+using std::cout;
 
 BuildingToken::BuildingToken() : BuildingToken(randomType(), randomValue()) {}
 
@@ -55,5 +57,18 @@ int BuildingToken::getValue() const {
 }
 
 void BuildingToken::display() const {
-	// TODO
+    switch (*type) {
+        case BuildingType::FOREST:
+            cout << "F";
+            break;
+        case BuildingType::MEADOW:
+            cout << "M";
+            break;
+        case BuildingType::QUARRY:
+            cout << "Q";
+            break;
+        case BuildingType::WHEATFIELD:
+            cout << "W";
+            break;
+    }
 }

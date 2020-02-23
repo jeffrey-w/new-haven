@@ -1,8 +1,11 @@
 #pragma once
 
 #include "Building.h"
+#include "TokenGraph.h"
 
 class VGMap {
+private:
+    TokenGraph* graph;
 
 public:
 
@@ -11,7 +14,7 @@ public:
 	VGMap();
 	VGMap(VGMap&) = delete; // TODO supress copy constructor?
 	~VGMap();
-	int costOf(std::pair<int, int>);
+	//int costOf(std::pair<int, int>);
 	void setCircle(Building*, std::pair<int, int>);
-
+    void display();
 };

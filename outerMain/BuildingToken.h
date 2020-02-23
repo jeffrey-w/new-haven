@@ -8,10 +8,10 @@ class BuildingToken : public AbstractToken {
 public:
 
 	// The types a Building may have. (Corresponding ResourceType has corresponding ordinal.)
-	enum class BuildingType { 
+	enum class BuildingType {
+        FOREST,
 		MEADOW,
 		QUARRY,
-		FOREST,
 		WHEATFIELD
 	};
 	
