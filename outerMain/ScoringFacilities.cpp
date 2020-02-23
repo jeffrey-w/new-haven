@@ -6,7 +6,7 @@ using std::map;
 using std::vector;
 
 BuildFacility::BuildFacility() {
-	occupied = new vector<bool>(VGMap::HEIGHT * VGMap::WIDTH);
+	occupied = new vector<bool>();
 }
 
 BuildFacility::BuildFacility(BuildFacility& other) {
