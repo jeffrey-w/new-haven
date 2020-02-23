@@ -23,6 +23,7 @@ HarvestTile::~HarvestTile() {
 
 //rotates ResourceTokens rotations times 90 degrees clockwise
 void HarvestTile::rotate(int rotations) {
+    //ensureNotPlaced();//TODO uncomment, but for now usefull for testing
 	*current=(*current-rotations+4)%4;
 }
 
