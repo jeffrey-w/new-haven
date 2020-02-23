@@ -41,7 +41,7 @@ private:
 	int height();
 	int width();
 	std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false);
-	std::pair<int, int> expand(int);
+	std::vector<std::pair<int, int>> expand(std::pair<int, int>);
 	void validateSquare(std::pair<int, int>);
 	bool isOnCorner(int, int);
 
