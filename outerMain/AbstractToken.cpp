@@ -13,10 +13,6 @@ AbstractToken::AbstractToken() {
 	placed = new bool(false);
 }
 
-AbstractToken::AbstractToken(AbstractToken& other) {
-	placed = new bool(*other.placed);
-}
-
 AbstractToken::~AbstractToken() {
 	delete placed;
 }
