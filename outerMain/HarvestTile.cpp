@@ -39,7 +39,3 @@ ResourceToken* HarvestTile::tokenize() {
 	}
 	return (*resources)[(*current)++];
 }
-
-void HarvestTile::display() const {
-	std::cout << "0";
-}

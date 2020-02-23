@@ -19,7 +19,6 @@ public:
 	// Returns the BuildingToken that constitutes this Building. Throws an exception if this Building has already been tokenized.
 	BuildingToken* tokenize();
 	// Writes this Building to the standard output stream.
-	void display() const;
 
 private:
 

@@ -20,6 +20,3 @@ BuildingToken* Building::tokenize() {
 	return token;
 }
 
-void Building::display() const {
-	// TODO
-}

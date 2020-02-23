@@ -24,7 +24,6 @@ public:
 	~HarvestTile();
 	void orient(Orientation);
 	ResourceToken* tokenize();
-	void display() const;
 
 private:
 

@@ -20,7 +20,6 @@ public:
 	// Sets the status of this AbstractPiece to spent.
 	void spend();
 	// Writes this Piece to the standard output stream.
-	virtual void display() const = 0;
 
 private:
 
