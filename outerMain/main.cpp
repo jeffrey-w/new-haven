@@ -9,16 +9,19 @@ int main() {
     HarvestTile ht1;
     HarvestTile ht2;
     HarvestTile ht3;
+    HarvestTile ht4(ht1);
+    HarvestTile ht5(ht2);
+    HarvestTile ht6(ht3);
     gmap.setSquare(&ht1, {0,0});
     gmap.setSquare(&ht2, {1,0});
     gmap.setSquare(&ht3, {0,1});
 
-    ht1.rotate(1);
-    ht2.rotate(2);
-    ht3.rotate(3);
-    gmap.setSquare(&ht1, {3,3});
-    gmap.setSquare(&ht2, {4,3});
-    gmap.setSquare(&ht3, {3,4});
+    ht4.rotate(1);
+    ht5.rotate(2);
+    ht6.rotate(3);
+    gmap.setSquare(&ht4, {3,3});
+    gmap.setSquare(&ht5, {4,3});
+    gmap.setSquare(&ht6, {3,4});
     gmap.display();
 
 
