@@ -21,8 +21,9 @@ HarvestTile::~HarvestTile() {
 	delete resources;
 }
 
-void HarvestTile::orient(Orientation orientation) {
-	ensureNotPlaced(); // TODO document exception
+//rotates ResourceTokens rotations times 90 degrees clockwise
+void HarvestTile::rotate(int rotations) {
+	*current=(*current-rotations+4)%4;
 }
 
 void HarvestTile::ensureNotPlaced() {
@@ -37,5 +38,7 @@ ResourceToken* HarvestTile::tokenize() {
 	if (isSpent()) {
 		throw new std::exception();
 	}
-	return (*resources)[(*current)++];
+	ResourceToken* returnToken=(*resources)[*current];
+	*current=(*current+1)%4;
+	return returnToken;
 }

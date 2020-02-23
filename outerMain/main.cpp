@@ -2,7 +2,7 @@
 #include "VGMap.h"
 
 int main() {
-<<<<<<< Updated upstream
+
 
     //TEST PART 1 (GBMap)
     GBMap gmap;
@@ -12,7 +12,16 @@ int main() {
     gmap.setSquare(&ht1, {0,0});
     gmap.setSquare(&ht2, {1,0});
     gmap.setSquare(&ht3, {0,1});
+
+    ht1.rotate(1);
+    ht2.rotate(2);
+    ht3.rotate(3);
+    gmap.setSquare(&ht1, {3,3});
+    gmap.setSquare(&ht2, {4,3});
+    gmap.setSquare(&ht3, {3,4});
     gmap.display();
+
+
 
     //TEST PART 2 (VGmap)
     VGMap vmap;
@@ -44,7 +53,7 @@ int main() {
 
 
 
-=======
+
 	GBMap map;
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
@@ -54,6 +63,6 @@ int main() {
 	map.display();
 	GatherFacility gf;
 	map.calculateResources({ 0, 0 }, &gf);
->>>>>>> Stashed changes
+
 	return 0;
 }

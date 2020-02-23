@@ -79,13 +79,10 @@ int GBMap::width() {
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) {
 	validateSquare(square);
 	vector<pair<int, int>> coordinates;
-	pair<int, int> rowLimits = expand(square.first);
-	pair<int, int> colLimits = expand(square.second);
-	for (int i = rowLimits.first; i <= rowLimits.second; i++) {
-		for (int j = colLimits.first; j <= colLimits.second; j++) {
-			coordinates.push_back({ i, j });
-		}
-	}
+	coordinates.push_back({square.first*2, square.second*2});
+	coordinates.push_back({square.first*2, square.second*2+1});
+    coordinates.push_back({square.first*2+1, square.second*2+1});
+    coordinates.push_back({square.first*2+1, square.second*2});
 	if (ensureEmpty) {
 		for (auto& coordinate : coordinates) {
 			if (graph->tokenAt(coordinate)) {
@@ -110,15 +107,6 @@ void GBMap::validateSquare(pair<int, int> square) {
 		}
 	}
 }
-
-std::pair<int, int> GBMap::expand(int index) {
-	if (index == 0) {
-		return { 0, 1 };
-	}
-	pair<int, int> prev = expand(index - 1);
-	return { prev.first + 2, prev.second + 2 };
-}
-
 
 bool GBMap::isOnCorner(int row, int col) {
 	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);

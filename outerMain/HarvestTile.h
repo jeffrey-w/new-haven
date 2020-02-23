@@ -10,19 +10,12 @@ class HarvestTile : public AbstractPiece {
 
 public:
 
-	enum class Orientation {
-		NORTHWEST,
-		SOUTHWEST,
-		SOUTHEAST,
-		NORTHEAST
-	};
-
 	constexpr static int NUM_RESOURCES = 4;
 	
 	HarvestTile();
 	HarvestTile(HarvestTile&);
 	~HarvestTile();
-	void orient(Orientation);
+	void rotate(int);
 	ResourceToken* tokenize();
 
 private:
