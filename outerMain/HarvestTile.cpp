@@ -14,16 +14,18 @@ HarvestTile::HarvestTile() {
 
 HarvestTile::HarvestTile(HarvestTile& other) {
 	current = new int(*other.current);
-	resources = new vector<ResourceToken*>(*other.resources);
+	resources = new vector<ResourceToken*>();
+	for (auto& resource : *other.resources) {
+		resources->push_back(new ResourceToken(*resource));
+	}
 }
 
 HarvestTile::~HarvestTile() {
 	delete resources;
 }
 
-//rotates ResourceTokens rotations times 90 degrees clockwise
 void HarvestTile::rotate(int rotations) {
-    //ensureNotPlaced();//TODO uncomment, but for now usefull for testing
+    ensureNotPlaced();// Prevent mutaion after this harvest tile has already been placed
 	*current = (*current - rotations + NUM_RESOURCES) % NUM_RESOURCES;
 }
 
@@ -36,10 +38,14 @@ void HarvestTile::ensureNotPlaced() {
 }
 
 ResourceToken* HarvestTile::tokenize() {
+	static int count = 0;
 	if (isSpent()) {
 		throw new std::exception();
 	}
-	ResourceToken* returnToken=(*resources)[*current];
+	if (++count == NUM_RESOURCES) {
+		spend(); // Prevent the same HarvestTile from being tokenized twice.
+	}
+	ResourceToken* returnToken = (*resources)[*current];
 	*current = ++(*current) % NUM_RESOURCES;
 	return returnToken;
 }
