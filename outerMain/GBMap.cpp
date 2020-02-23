@@ -78,11 +78,7 @@ int GBMap::width() {
 
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) {
 	validateSquare(square);
-	vector<pair<int, int>> coordinates;
-	coordinates.push_back({square.first*2, square.second*2});
-	coordinates.push_back({square.first*2, square.second*2+1});
-    coordinates.push_back({square.first*2+1, square.second*2+1});
-    coordinates.push_back({square.first*2+1, square.second*2});
+	vector<pair<int, int>> coordinates = expand(square);
 	if (ensureEmpty) {
 		for (auto& coordinate : coordinates) {
 			if (graph->tokenAt(coordinate)) {
@@ -92,6 +88,7 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEm
 	}
 	return coordinates;
 }
+
 
 void GBMap::validateSquare(pair<int, int> square) {
 	int row = square.first, col = square.second;
@@ -106,6 +103,15 @@ void GBMap::validateSquare(pair<int, int> square) {
 			throw new std::exception(); // TODO need richer exception type
 		}
 	}
+}
+
+vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
+	vector<pair<int, int>> coordinates;
+	coordinates.push_back({ square.first * 2, square.second * 2 });
+	coordinates.push_back({ square.first * 2, square.second * 2 + 1 });
+	coordinates.push_back({ square.first * 2 + 1, square.second * 2 + 1 });
+	coordinates.push_back({ square.first * 2 + 1, square.second * 2 });
+	return coordinates;
 }
 
 bool GBMap::isOnCorner(int row, int col) {
