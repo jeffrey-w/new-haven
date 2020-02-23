@@ -122,6 +122,7 @@
     <ClCompile Include="HarvestTile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AbstractPiece.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceToken.cpp" />
     <ClCompile Include="Resources.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="HarvestTile.h" />
     <ClInclude Include="AbstractPiece.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ResourceToken.h" />
     <ClInclude Include="Resources.h" />

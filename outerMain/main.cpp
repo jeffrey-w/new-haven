@@ -2,6 +2,7 @@
 #include "VGMap.h"
 
 int main() {
+<<<<<<< Updated upstream
 
     //TEST PART 1 (GBMap)
     GBMap gmap;
@@ -43,5 +44,16 @@ int main() {
 
 
 
+=======
+	GBMap map;
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			map.setSquare(new HarvestTile(), { i, j });
+		}
+	}
+	map.display();
+	GatherFacility gf;
+	map.calculateResources({ 0, 0 }, &gf);
+>>>>>>> Stashed changes
 	return 0;
 }
