@@ -6,7 +6,7 @@ bool AbstractToken::areSameType(AbstractToken* a, AbstractToken* b) {
 	if (!a) { // TODO let nullptr mean true?
 		return !b;
 	}
-	return typeid(a) == typeid(b) && a->getType() == b->getType(); // RTTI used for safety (is probably not necessary).
+	return b && typeid(a) == typeid(b) && a->getType() == b->getType(); // RTTI used for safety (is probably not necessary).
 }
 
 AbstractToken::AbstractToken() {
