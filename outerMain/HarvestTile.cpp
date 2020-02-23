@@ -24,7 +24,7 @@ HarvestTile::~HarvestTile() {
 //rotates ResourceTokens rotations times 90 degrees clockwise
 void HarvestTile::rotate(int rotations) {
     //ensureNotPlaced();//TODO uncomment, but for now usefull for testing
-	*current=(*current-rotations+4)%4;
+	*current = (*current - rotations + NUM_RESOURCES) % NUM_RESOURCES;
 }
 
 void HarvestTile::ensureNotPlaced() {
@@ -40,6 +40,6 @@ ResourceToken* HarvestTile::tokenize() {
 		throw new std::exception();
 	}
 	ResourceToken* returnToken=(*resources)[*current];
-	*current=(*current+1)%4;
+	*current = ++(*current) % NUM_RESOURCES;
 	return returnToken;
 }
