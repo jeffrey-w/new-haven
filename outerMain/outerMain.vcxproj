@@ -145,6 +145,9 @@
     <ClInclude Include="TokenGraph.h" />
     <ClInclude Include="VGMap.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="HitList.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
