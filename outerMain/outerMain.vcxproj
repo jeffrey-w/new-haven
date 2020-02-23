@@ -128,6 +128,7 @@
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="ScoringFacilities.cpp" />
     <ClCompile Include="TokenGraph.cpp" />
+    <ClCompile Include="VGMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractToken.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Resources.h" />
     <ClInclude Include="ScoringFacilities.h" />
     <ClInclude Include="TokenGraph.h" />
+    <ClInclude Include="VGMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
