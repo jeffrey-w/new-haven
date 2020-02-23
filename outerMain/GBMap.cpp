@@ -116,7 +116,7 @@ std::pair<int, int> GBMap::expand(int index) {
 		return { 0, 1 };
 	}
 	pair<int, int> prev = expand(index - 1);
-	return { prev.first + 2, prev.second + 1 };
+	return { prev.first + 2, prev.second + 2 };
 }
 
 
