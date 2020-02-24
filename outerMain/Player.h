@@ -16,7 +16,7 @@ public:
     Player();
     Building* drawBuilding(BuildingDeck*);
     HarvestTile* drawHarvestTile(HarvestTileDeck*);
-    void buildVillage();
+    void buildVillage(Building*, std::pair<int, int>   );
     void placeHarvestTile(HarvestTile*, GBMap*, std::pair<int, int>);
     void resourceTracker(); // TODO what is this for?
     void calculateResources(GBMap*, std::pair<int, int>);
