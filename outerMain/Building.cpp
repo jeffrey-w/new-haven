@@ -4,7 +4,7 @@ Building::Building() {
 	token = new BuildingToken(); // Default constructor returns a random BuildingToken.
 }
 
-Building::Building(Building& other) {
+Building::Building(const Building& other) : AbstractPiece(other) {
 	token = new BuildingToken(*other.token);
 }
 

@@ -20,7 +20,7 @@ public:
 	// Constructs a new BuildingToken object with the specified type and value.
 	BuildingToken(BuildingType, int);
 	// Constructs a new BuildingToken object witht the same type and value as the specified BuildingToken.
-	BuildingToken(BuildingToken&);
+	BuildingToken(const BuildingToken&);
 	// Destroys this BuildingToken.
 	~BuildingToken();
 	// Returns true iff this BuildingToken is face up.

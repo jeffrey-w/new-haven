@@ -13,7 +13,7 @@ public:
 	// Constructs a new Building object.
 	Building();
 	// Constructs a new Building object with the same attributes as the specified Building.
-	Building(Building&);
+	Building(const Building&);
 	// Destroys this Building.
 	~Building();
 	// Returns the BuildingToken that constitutes this Building. Throws an exception if this Building has already been tokenized.

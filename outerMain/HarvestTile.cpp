@@ -12,7 +12,7 @@ HarvestTile::HarvestTile() {
 	}
 }
 
-HarvestTile::HarvestTile(const HarvestTile& other) {
+HarvestTile::HarvestTile(const HarvestTile& other) : AbstractPiece(other) {
 	current = new int(*other.current);
 	resources = new vector<ResourceToken*>();
 	for (auto& resource : *other.resources) {

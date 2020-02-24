@@ -27,7 +27,7 @@ int BuildingToken::validateValue(int value) {
 }
 
 
-BuildingToken::BuildingToken(BuildingToken& other) {
+BuildingToken::BuildingToken(const BuildingToken& other) : AbstractToken(other) {
 	type = new BuildingType(*other.type);
 	value = new int(*other.value);
 	faceUp = new bool(*other.faceUp);
