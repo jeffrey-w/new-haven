@@ -19,7 +19,14 @@ Scanner::~Scanner() {
 }
 
 bool Scanner::hasNext() {
-	return !stream->eof();
+	return stream->peek() != EOF;
+}
+
+void Scanner::consume(char expected, string msg) {
+	if (stream->peek() != expected) {
+		throw std::exception(); // TODO pass msg here; need richer exception type
+	}
+	nextChar();
 }
 
 int Scanner::nextInt() {
@@ -32,13 +39,14 @@ int Scanner::nextInt() {
 		advance();
 	} while (isDigit(stream->peek()));
 	length = stream->tellg() - *start;
+	*start = stream->tellg();
 	buffer = new char[length + 1];
+	stream->seekg(-length, std::ios_base::cur);
 	stream->read(buffer, length);
 	buffer[length] = '\0';
 	result = std::stoi(buffer);
 	delete[] buffer;
 	buffer = nullptr;
-	*start = stream->tellg();
 	return result;
 }
 
@@ -55,12 +63,6 @@ char Scanner::nextChar() {
 	return result;
 }
 
-void Scanner::consume(char expected, string msg) {
-	if (stream->peek() != expected) {
-		throw std::exception(); // TODO pass msg here; need richer exception type
-	}
-	advance();
-}
 
 char Scanner::advance() {
 	char c;
