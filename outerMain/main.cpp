@@ -1,4 +1,5 @@
 #include "GBMap.h"
+#include "GBMapLoader.h"
 #include "VGMap.h"
 
 int main() {
@@ -39,8 +40,11 @@ int main() {
 
 
     //TEST PART 3 (Map loaders)
-
-
+    GBMapLoader loader("map.txt");
+    GBMap* loaded = loader.load();
+    loaded->display();
+    delete loaded;
+    loaded = nullptr;
 
 
     //TEST PART 4 (Player)
