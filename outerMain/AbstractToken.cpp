@@ -3,7 +3,7 @@
 #include "AbstractToken.h"
 
 bool AbstractToken::areSameType(AbstractToken* a, AbstractToken* b) {
-	if (!a) { // TODO let nullptr mean true?
+	if (!a) {
 		return !b;
 	}
 	return b && typeid(a) == typeid(b) && a->getType() == b->getType(); // RTTI used for safety (is probably not necessary).
