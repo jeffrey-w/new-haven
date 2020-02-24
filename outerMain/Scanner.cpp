@@ -14,6 +14,7 @@ Scanner::Scanner(string path) {
 }
 
 Scanner::~Scanner() {
+	delete start;
 	delete stream;
 }
 
@@ -27,19 +28,22 @@ int Scanner::nextInt() {
 	}
 	int length, result;
 	char* buffer;
-	advance();
-	while (isDigit(stream->peek())) {
+	do {
 		advance();
-	}
+	} while (isDigit(stream->peek()));
 	length = stream->tellg() - *start;
 	buffer = new char[length + 1];
 	stream->read(buffer, length);
-	buffer[length] = '\0'; // Like good little C programmers.
+	buffer[length] = '\0';
 	result = std::stoi(buffer);
 	delete[] buffer;
 	buffer = nullptr;
 	*start = stream->tellg();
 	return result;
+}
+
+bool Scanner::isDigit(char c) {
+	return c >= '0' && c <= '9';
 }
 
 char Scanner::nextChar() {
@@ -51,12 +55,6 @@ char Scanner::nextChar() {
 	return result;
 }
 
-char Scanner::advance() {
-	char c;
-	stream->read(&c, sizeof(char));
-	return c;
-}
-
 void Scanner::consume(char expected, string msg) {
 	if (stream->peek() != expected) {
 		throw std::exception(); // TODO pass msg here; need richer exception type
@@ -64,6 +62,8 @@ void Scanner::consume(char expected, string msg) {
 	advance();
 }
 
-bool Scanner::isDigit(char c) {
-	return c >= '0' && c <= '9';
+char Scanner::advance() {
+	char c;
+	stream->read(&c, sizeof(char));
+	return c;
 }

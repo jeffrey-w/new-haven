@@ -13,6 +13,7 @@ public:
 	bool hasNext();
 	int nextInt();
 	char nextChar();
+	void consume(char, std::string);
 
 private:
 
@@ -20,7 +21,6 @@ private:
 	std::ifstream* stream;
 
 	char advance();
-	void consume(char, std::string);
 	bool isDigit(char);
 };
 
