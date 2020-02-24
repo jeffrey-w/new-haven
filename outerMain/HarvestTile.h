@@ -13,7 +13,8 @@ public:
 	constexpr static int NUM_RESOURCES = 4;
 	
 	HarvestTile();
-	HarvestTile(HarvestTile&);
+	HarvestTile(ResourceToken, ResourceToken, ResourceToken, ResourceToken);
+	HarvestTile(const HarvestTile&);
 	~HarvestTile();
 	// Rotates ResourceTokens 90 degrees clockwise the specified number of rotations.
 	void rotate(int);
