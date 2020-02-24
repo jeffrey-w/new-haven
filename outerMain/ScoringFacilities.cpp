@@ -66,14 +66,14 @@ int BuildFacility::countCols() { // TODO avoid magic constants
         switch(col){
             case 0:
             case 4:
-                score+=(faceDown)? 5 : 10;
+                score+=(faceDownExists)? 5 : 10;
                 break;
             case 1:
             case 3:
-                score+=(faceDown)? 4 : 8;
+                score+=(faceDownExists)? 4 : 8;
                 break;
             case 2:
-                score+=(faceDown)? 3 : 6;
+                score+=(faceDownExists)? 3 : 6;
         }
 	}
 	return score;

@@ -5,7 +5,7 @@
 #include <array>
 
 class BuildFacility {
-
+public:
 	BuildFacility();
 	BuildFacility(BuildFacility&);
 	~BuildFacility();
