@@ -6,11 +6,11 @@ using std::ifstream;
 using std::string;
 
 Scanner::Scanner(string path) {
+	start = new std::streampos(0);
 	stream = new ifstream(path);
 	if (stream->fail()) {
 		throw new std::exception(); // TODO need richer exception type
 	}
-	start = new std::streampos(0);
 }
 
 Scanner::~Scanner() {
@@ -19,7 +19,7 @@ Scanner::~Scanner() {
 }
 
 bool Scanner::hasNext() {
-	return stream->eof();
+	return !stream->eof();
 }
 
 int Scanner::nextInt() {
