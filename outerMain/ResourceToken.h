@@ -20,7 +20,7 @@ public:
 	// Constructs a new ResourceToken object with the specified type.
 	ResourceToken(ResourceType);
 	// Constructs a new ResourceToken object with the same type as the specified ResourceToken.
-	ResourceToken(ResourceToken&);
+	ResourceToken(const ResourceToken&);
 	// Destructs this ResourceToken object.
 	~ResourceToken();
 	// Returns the type of this ResourceToken.

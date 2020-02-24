@@ -13,7 +13,7 @@ ResourceToken::ResourceToken(ResourceType type) {
 	this->type = new ResourceType(type);
 }
 
-ResourceToken::ResourceToken(ResourceToken& other) {
+ResourceToken::ResourceToken(const ResourceToken& other) {
 	type = new ResourceType(*other.type);
 }
 
