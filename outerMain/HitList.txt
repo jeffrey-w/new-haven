@@ -1,2 +1,2 @@
 Consider passing all object arguments by reference
-Copy constructors for classes with stl containers need to explicitly copy elements
+Copy constructors for classes with stl containers need to explicitly copy elements/or maybe modify signatures with const args
