@@ -14,7 +14,10 @@ GBMapLoader::~GBMapLoader() {
 GBMap* GBMapLoader::load() { // TODO catch exceptions
 	GBMap* map = new GBMap(getNumPlayers());
 	while (scanner->hasNext()) {
-		map->setSquare(nextTile(), nextSquare());
+		scanner->consume('\n', "Expect a new line.");
+		HarvestTile* tile = nextTile();
+		pair<int, int> square = nextSquare();
+		map->setSquare(tile, square);
 	}
 	return map;
 }
@@ -24,24 +27,25 @@ int GBMapLoader::getNumPlayers() {
 	scanner->consume('<', "Expect a '<'.");
 	numPlayers = scanner->nextInt();
 	scanner->consume('>', "Expect a '>'.");
-	scanner->consume('\n', "Expect a new line.");
+	return numPlayers;
 }
 
 HarvestTile* GBMapLoader::nextTile() {
 	HarvestTile* tile = new HarvestTile();
+	tile->resources->clear(); // TODO this is sloppy
 	scanner->consume('<', "Expect a '<'.");
 	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
-		if (!scanner->hasNext()) {
-			throw new std::exception(); // TODO need richer exception type
-		}
 		tile->resources->push_back(nextToken());
 		if (i != HarvestTile::NUM_RESOURCES - 1) {
 			scanner->consume(',', "Expect a ','.");
-			scanner->consume(' ', "Expect a space.");
 		}
-		scanner->consume('>', "Expect a '>'.");
-		scanner->consume(' ', "Expect a space.");
+		else {
+			scanner->consume('>', "Expect a '>'.");
+		}
 	}
+	scanner->consume('<', "Expect a '<'.");
+	*tile->current = scanner->nextInt();
+	scanner->consume('>', "Expect a '>'.");
 	return tile;
 }
 
@@ -51,12 +55,10 @@ ResourceToken* GBMapLoader::nextToken() {
 
 pair<int, int> GBMapLoader::nextSquare() {
 	int one, two;
-	scanner->consume(' ', "Expect a '<'.");
+	scanner->consume('<', "Expect a '<'.");
 	one = scanner->nextInt();
 	scanner->consume(',', "Expect a ','.");
-	scanner->consume(' ', "Expect a space");
 	two = scanner->nextInt();
 	scanner->consume('>', "Expect a '>'.");
-	scanner->consume('\n', "Expect a new line.");
 	return pair<int, int>(one, two);
 }
