@@ -10,6 +10,8 @@ public:
 
 	// Constructs a new AbstractToken object.
 	AbstractToken();
+	// Constructs a new AbstractToken object with the same placed status as the specified Token.
+	AbstractToken(const AbstractToken&);
 	// Destroys this AbstractToken.
 	~AbstractToken();
 	// Returns true iff this Token occupies a TokenGraph.

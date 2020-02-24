@@ -6,11 +6,16 @@ bool AbstractToken::areSameType(AbstractToken* a, AbstractToken* b) {
 	if (!a) {
 		return !b;
 	}
-	return b && typeid(a) == typeid(b) && a->getType() == b->getType(); // RTTI used for safety (is probably not necessary).
+	// RTTI used for safety (is probably not necessary).
+	return b && typeid(a) == typeid(b) && a->getType() == b->getType();
 }
 
 AbstractToken::AbstractToken() {
 	placed = new bool(false);
+}
+
+AbstractToken::AbstractToken(const AbstractToken& other) {
+	placed = new bool(*other.placed);
 }
 
 AbstractToken::~AbstractToken() {
