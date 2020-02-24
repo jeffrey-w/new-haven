@@ -119,6 +119,7 @@
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="BuildingToken.cpp" />
     <ClCompile Include="GBMap.cpp" />
+    <ClCompile Include="GBMapLoader.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AbstractPiece.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceToken.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="Scanner.cpp" />
     <ClCompile Include="ScoringFacilities.cpp" />
     <ClCompile Include="TokenGraph.cpp" />
     <ClCompile Include="VGMap.cpp" />
@@ -135,12 +137,14 @@
     <ClInclude Include="Building.h" />
     <ClInclude Include="BuildingToken.h" />
     <ClInclude Include="GBMap.h" />
+    <ClInclude Include="GBMapLoader.h" />
     <ClInclude Include="HarvestTile.h" />
     <ClInclude Include="AbstractPiece.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ResourceToken.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="Scanner.h" />
     <ClInclude Include="ScoringFacilities.h" />
     <ClInclude Include="TokenGraph.h" />
     <ClInclude Include="VGMap.h" />
