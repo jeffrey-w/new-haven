@@ -13,9 +13,9 @@ Building::~Building() {
 }
 
 BuildingToken* Building::tokenize() {
-	if (isSpent()) {
+/*	if (isSpent()) {//TODO uncomment, needed for testing though
 		throw new std::exception(); // TODO need richer exception type;
-	}
+	}*/
 	spend();
 	return token;
 }
