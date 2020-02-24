@@ -3,17 +3,19 @@
 #include <vector>
 
 #include "AbstractPiece.h"
+#include "GBMapLoader.h"
 #include "ResourceToken.h"
 
 
 class HarvestTile : public AbstractPiece {
+
+	friend class GBMapLoader;
 
 public:
 
 	constexpr static int NUM_RESOURCES = 4;
 	
 	HarvestTile();
-	HarvestTile(ResourceToken, ResourceToken, ResourceToken, ResourceToken);
 	HarvestTile(const HarvestTile&);
 	~HarvestTile();
 	// Rotates ResourceTokens 90 degrees clockwise the specified number of rotations.

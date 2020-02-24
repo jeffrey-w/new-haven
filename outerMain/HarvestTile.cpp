@@ -12,10 +12,6 @@ HarvestTile::HarvestTile() {
 	}
 }
 
-HarvestTile::HarvestTile(ResourceToken, ResourceToken, ResourceToken, ResourceToken) {
-	// TODO
-}
-
 HarvestTile::HarvestTile(const HarvestTile& other) {
 	current = new int(*other.current);
 	resources = new vector<ResourceToken*>();
