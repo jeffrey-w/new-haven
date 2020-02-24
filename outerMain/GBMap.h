@@ -19,7 +19,7 @@ public:
 	// Constructs a new GBMap object for the specified number of players. Throws an exception if
 	// the specified number of players is not between two and four inclusive.
 	GBMap(int);
-	// Supress copy constructor. Recursively defined data structures require identity semantics.
+	// Suppress copy constructor.
 	GBMap(GBMap&) = delete;
 	// Destroys this GBMap.
 	~GBMap();
