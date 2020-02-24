@@ -17,7 +17,9 @@ private:
 
 	Scanner* scanner;
 
-	ResourceToken nextToken();
+	int getNumPlayers();
+	HarvestTile* nextTile();
+	ResourceToken* nextToken();
 	std::pair<int, int> nextSquare();
 
 };
