@@ -45,5 +45,5 @@ void Player::calculateResources(GBMap* map, pair<int, int> square) {
 }
 
 int Player::calculateScore() {
-    buildFacility->getScore();
+    return buildFacility->getScore();
 }
