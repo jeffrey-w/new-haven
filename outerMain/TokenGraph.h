@@ -24,6 +24,7 @@ public:
 	bool adjacentHolds(std::pair<int, int>, int);
 	void setTokenAt(AbstractToken*, std::pair<int, int>);
 	int search(std::pair<int, int>);
+	std::vector<AbstractToken*>& tokens();
 
 private:
 

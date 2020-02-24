@@ -7,6 +7,7 @@ using std::map;
 using std::pair;
 using std::queue;
 using std::set;
+using std::vector;
 
 TokenGraph* TokenGraph::gridOf(int height, int width) {
 	TokenGraph* graph = new TokenGraph();
@@ -71,7 +72,6 @@ void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
 	nodeAt(coordinate)->token = token; // TODO document exception
 }
 
-
 int TokenGraph::search(std::pair<int, int> coordinate) {
 	return search(nodeAt(coordinate)); // TODO document exception
 }
@@ -119,6 +119,13 @@ void TokenGraph::resetSearchAttributes(AbstractToken* match) {
 	}
 }
 
+vector<AbstractToken*>& TokenGraph::tokens() {
+	vector<AbstractToken*>* tokens = new vector<AbstractToken*>();
+	for (auto& entry : *nodes) {
+		tokens->push_back(entry.second->token);
+	}
+	return *tokens;
+}
 
 TokenGraph::Node::Node() {
 	init(nullptr, nullptr, nullptr);
