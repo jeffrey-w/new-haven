@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "AbstractPiece.h"
-#include "GBMapLoader.h"
 #include "ResourceToken.h"
 
 
