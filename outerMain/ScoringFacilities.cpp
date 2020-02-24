@@ -6,15 +6,18 @@ using std::map;
 using std::vector;
 
 BuildFacility::BuildFacility() {
-	occupied = new vector<bool>();
+	occupied = new std::array<bool,30>();
+	faceDown = new std::array<bool,30>();
 }
 
 BuildFacility::BuildFacility(BuildFacility& other) {
-	occupied = new vector<bool>(*other.occupied);
+	occupied = new std::array<bool,30>(*other.occupied);
+	faceDown = new std::array<bool,30>(*other.faceDown);
 }
 
 BuildFacility::~BuildFacility() {
 	delete occupied;
+	delete faceDown;
 }
 
 int BuildFacility::getScore() {
@@ -23,46 +26,65 @@ int BuildFacility::getScore() {
 
 int BuildFacility::countRows() {
 	int score = 0;
+	bool emptyExists;
+	bool faceDownExists;
 	for (uint8_t row = 0; row < VGMap::HEIGHT; row++) {
+        emptyExists=false;
+        faceDownExists=false;
 		for (uint8_t col = 0; col < VGMap::WIDTH; col++) {
-			if (!(*occupied)[(row * VGMap::HEIGHT) + col]) {
+			if (!(*occupied)[(row * VGMap::WIDTH) + col]) {
+			    emptyExists=true;
 				break;
 			}
-			if (col == VGMap::WIDTH - 1) {
-				score += VGMap::HEIGHT - row;
+            if ((*faceDown)[(row * VGMap::WIDTH) + col]) {
+                faceDownExists=true;
 			}
 		}
+		if(emptyExists){continue;}
+		score+=(faceDownExists)? VGMap::HEIGHT - row : 2*(VGMap::HEIGHT - row);
 	}
 	return score;
 }
 
 int BuildFacility::countCols() { // TODO avoid magic constants
 	int score = 0;
+	bool emptyExists;
+	bool faceDownExists;
 	for (uint8_t col = 0; col < VGMap::WIDTH; col++) {
+	    emptyExists=false;
+	    faceDownExists=false;
 		for (uint8_t row = 0; row < VGMap::HEIGHT; row++) {
-			if (!(*occupied)[(row * VGMap::HEIGHT) + col]) {
+			if (!(*occupied)[(row * VGMap::WIDTH) + col]) {
+			    emptyExists=true;
 				break;
 			}
-			if (row == VGMap::HEIGHT - 1) {
-				int subtrahend;
-				if (col == 0 || col == 4) {
-					subtrahend = 1;
-				}
-				else if (col == 1 || col == 3) {
-					subtrahend = 2;
-				}
-				else {
-					subtrahend = 3;
-				}
-				score += VGMap::HEIGHT - subtrahend;
+			if((*faceDown)[(row * VGMap::WIDTH)+col]){
+			    faceDownExists=true;
 			}
 		}
+		if(emptyExists){ continue;}
+        switch(col){
+            case 0:
+            case 4:
+                score+=(faceDownExists)? 5 : 10;
+                break;
+            case 1:
+            case 3:
+                score+=(faceDownExists)? 4 : 8;
+                break;
+            case 2:
+                score+=(faceDownExists)? 3 : 6;
+        }
 	}
 	return score;
 }
 
 void BuildFacility::markOccupied(int index) { // TODO validate index
 	(*occupied)[index] = true;
+}
+
+void BuildFacility::markFaceDown(int index) {//TODO validate index
+    (*faceDown)[index] = true;
 }
 
 GatherFacility::GatherFacility() {
