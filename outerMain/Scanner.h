@@ -11,9 +11,9 @@ public:
 	Scanner(Scanner&) = delete;
 	~Scanner();
 	bool hasNext();
+	void consume(char, std::string);
 	int nextInt();
 	char nextChar();
-	void consume(char, std::string);
 
 private:
 
