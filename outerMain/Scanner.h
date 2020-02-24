@@ -12,8 +12,9 @@ public:
 	~Scanner();
 	bool hasNext();
 	void consume(char, std::string);
-	int nextInt();
 	char nextChar();
+	bool nextBool();
+	int nextInt();
 
 private:
 

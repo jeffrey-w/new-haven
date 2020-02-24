@@ -29,6 +29,22 @@ void Scanner::consume(char expected, string msg) {
 	nextChar();
 }
 
+char Scanner::nextChar() {
+	if (!hasNext()) {
+		throw new std::exception(); // TODO need richer exception type
+	}
+	char result = advance();
+	*start = stream->tellg();
+	return result;
+}
+
+bool Scanner::nextBool() {
+	if (nextChar() == '\0') {
+		return false;
+	}
+	return true;
+}
+
 int Scanner::nextInt() {
 	if (!hasNext() || !isDigit(stream->peek())) {
 		throw new std::exception(); // TODO need richer exception type
@@ -53,16 +69,6 @@ int Scanner::nextInt() {
 bool Scanner::isDigit(char c) {
 	return c >= '0' && c <= '9';
 }
-
-char Scanner::nextChar() {
-	if (!hasNext()) {
-		throw new std::exception(); // TODO need richer exception type
-	}
-	char result = advance();
-	*start = stream->tellg();
-	return result;
-}
-
 
 char Scanner::advance() {
 	char c;
