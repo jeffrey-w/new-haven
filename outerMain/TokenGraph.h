@@ -15,7 +15,7 @@ public:
 	static TokenGraph* gridOf(int, int);
 
 	TokenGraph();
-	TokenGraph(TokenGraph&) = delete; // Supress copy constructor.
+	TokenGraph(TokenGraph&) = delete; // Suppress copy constructor.
 	~TokenGraph();
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
