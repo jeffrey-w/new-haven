@@ -1,43 +1,33 @@
-#include <fstream>
-#include <iostream>
-
 #include "GBMapLoader.h"
 
-using std::ifstream;
-using std::map;
 using std::pair;
 using std::string;
-using std::vector;
 
 GBMapLoader::GBMapLoader(string path) {
-	ifstream file;
-	nodes = new map<pair<int, int>, HarvestTile*>();
-	try {
-		file.open(path);
-		read(&file);
-	} catch (ifstream::failure& e) {
-		std::cerr << "Caught ifstream::failure: ";
-		std::cerr << e.what() << std::endl;
-		std::cerr << "Error code: " << e.code() << std::endl;
-		nodes->clear();
-	}
-	file.close();
+	scanner = new Scanner(path);
 }
 
 GBMapLoader::~GBMapLoader() {
-	delete nodes;
-	nodes = nullptr;
+	delete scanner;
 }
 
-GBMap* GBMapLoader::load() {
-	GBMap* map = new GBMap(*numPlayers);
-	for (auto node : *nodes) {
-		map->setSquare(node.first, node.second);
+GBMap* GBMapLoader::load() { // TODO catch exceptions
+	GBMap* map = new GBMap(scanner->nextInt());
+	while (scanner->hasNext()) {
+		ResourceToken one = nextToken();
+		ResourceToken two = nextToken();
+		ResourceToken three = nextToken();
+		ResourceToken four = nextToken();
+		HarvestTile tile(one, two, three, four);
+		map->setSquare(&tile, nextSquare());
 	}
-	// TODO validate if required, but this is guaranteed to be "valid"
 	return map;
 }
 
-void GBMapLoader::read(ifstream* file) {
-	// TODO
+ResourceToken GBMapLoader::nextToken() {
+	return ResourceToken(static_cast<ResourceToken::ResourceType>(scanner->nextInt()));
+}
+
+pair<int, int> GBMapLoader::nextSquare() {
+	return pair<int, int>(scanner->nextInt(), scanner->nextInt());
 }
