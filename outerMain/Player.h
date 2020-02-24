@@ -24,7 +24,7 @@ public:
     void calculateResources(GBMap*, std::pair<int, int>);
     int calculateScore();
 
-    VGMap* villageBoard;
+    VGMap* villageBoard;//TODO return to private after done testing in main
 private:
     
     //VGMap* villageBoard;
