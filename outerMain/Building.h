@@ -18,6 +18,8 @@ public:
 	~Building();
 	// Returns the type of this Building.
 	BuildingToken::BuildingType getType() const;
+	// Returns true if Building is Face Up
+	bool isFaceUp() const;
 	// Returns the value of this Building.
 	int getValue() const;
 	// Returns true iff this Building has been completely tokenized.

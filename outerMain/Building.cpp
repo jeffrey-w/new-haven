@@ -16,6 +16,10 @@ BuildingToken::BuildingType Building::getType() const {
 	return static_cast<BuildingToken::BuildingType>(token->getType());
 }
 
+bool Building::isFaceUp() const {
+    return token->isFaceUp();
+}
+
 int Building::getValue() const {
 	return token->getValue();
 }
