@@ -21,6 +21,7 @@ HarvestTile::HarvestTile(const HarvestTile& other) : AbstractPiece(other) {
 }
 
 HarvestTile::~HarvestTile() {
+	delete current;
 	delete resources;
 }
 
@@ -38,11 +39,10 @@ void HarvestTile::ensureNotPlaced() {
 }
 
 ResourceToken* HarvestTile::tokenize() {
-	static int count = 0;
 	if (isSpent()) {
 		throw new std::exception();
 	}
-	if (++count == NUM_RESOURCES) {
+	if (false) { // TODO
 		spend(); // Prevent the same HarvestTile from being tokenized twice.
 	}
 	ResourceToken* returnToken = (*resources)[*current];
