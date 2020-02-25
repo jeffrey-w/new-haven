@@ -4,10 +4,12 @@
 #include "Player.h"
 
 #include <iostream>
+#include "VGMapLoader.h"
 
 #define ASSERT_THROWS(exception, expression) { \
     try { \
         (expression); \
+        std::wcout << "false\n"; \
     } catch (exception& e) { \
         std::cout << "true\n"; \
     } catch (...) { \
@@ -66,15 +68,18 @@ int main() {
 
 
     std::cout<<"================================================================================\n";
-/*    //TEST PART 3 (Map loaders)
-    GBMapLoader loader("map.txt");
-    GBMap* loaded = loader.load();
-    loaded->display();
-    delete loaded;
-    loaded = nullptr;
-    GBMapLoader loader2("map_bad.txt");
+    //TEST PART 3 (Map loaders)
+    GBMapLoader gloader1("gmap.txt");
+    GBMap* gloaded = gloader1.load();
+    gloaded->display();
+    delete gloaded;
+    gloaded = nullptr;
+    GBMapLoader gloader2("gmap_bad.txt");
     std::cout << "Invalid number of players caught by GBMapLoader: ";
-    ASSERT_THROWS(std::exception, loader2.load());*/
+    ASSERT_THROWS(std::invalid_argument, gloader2.load());
+
+    VGMapLoader vloader1("vmap.txt");
+    VGMap* vloaded = vloader1.load();
 
     std::cout<<"================================================================================\n";
     //TEST PART 4 (Player)
