@@ -9,7 +9,7 @@ using std::cout;
 
 VGMap::VGMap() {
     graph = TokenGraph::gridOf(HEIGHT, WIDTH);
-    typePlaced=new std::array<bool,4>();
+    typePlaced = new std::array<bool,4>();
 }
 
 VGMap::~VGMap() {
@@ -17,15 +17,15 @@ VGMap::~VGMap() {
 	delete typePlaced;
 }
 
-void VGMap::setCircle( Building* building, bool faceDown, std::pair<int, int> circle) {
+void VGMap::setCircle(Building* building, std::pair<int, int> circle) {
     validateCircle(circle);
     int buildType=static_cast<int>(building->getType());
     if((*typePlaced)[buildType] && !(graph->adjacentHolds(circle, buildType))){
         throw std::logic_error("Building must be placed adjacent to same type");
     }
-    if(!faceDown && building->getValue()!=HEIGHT-circle.first)
+    if(building->isFaceUp() && building->getValue()!=HEIGHT-circle.first)
     {
-        throw std::logic_error("Face Up buildings must be placed in appropriate row");
+        throw std::logic_error("FaceUp buildings must be placed in appropriate row");
     }
 	graph->setTokenAt(building->tokenize(), circle);
 }

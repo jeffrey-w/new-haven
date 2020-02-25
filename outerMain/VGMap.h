@@ -15,7 +15,7 @@ public:
 	VGMap();
 	VGMap(VGMap&) = delete; // TODO supress copy constructor?
 	~VGMap();
-	void setCircle(Building*, bool faceDown, std::pair<int, int>);
+	void setCircle(Building*, std::pair<int, int>);
 	void validateCircle(std::pair<int,int>);
     void display();
 };

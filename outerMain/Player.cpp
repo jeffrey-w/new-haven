@@ -29,11 +29,11 @@ HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
 	return deck->drawAs(); // TODO document exception
 }
 
-void Player::buildVillage(Building* building, bool faceDown, std::pair<int, int> circle) {
-    villageBoard->setCircle(building, faceDown, circle);
+void Player::buildVillage(Building* building, std::pair<int, int> circle) {
+    villageBoard->setCircle(building, circle);
     int index=circle.first * villageBoard->WIDTH + circle.second;//calculates associated index in buildFacility
     buildFacility->markOccupied(index);
-    if(faceDown){buildFacility->markFaceDown(index);}
+    if(!building->isFaceUp()){buildFacility->markFaceDown(index);}
 }
 
 void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, pair<int, int> square) {
