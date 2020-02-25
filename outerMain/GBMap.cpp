@@ -12,11 +12,20 @@ GBMap::GBMap(int numPlayers) {
 	graph = TokenGraph::gridOf(height(), width());
 }
 
+
 void GBMap::setNumPlayers(int numPlayers) {
 	if (!(numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
-		throw std::exception(); // TODO need richer exception type
+		throw std::invalid_argument("Number of players must be between 2 and 4.");
 	}
 	this->numPlayers = new int(numPlayers);
+}
+
+GBMap::GBMap(GBMap& other) : GBMap(*other.numPlayers) {
+	for (auto& entry : other.graph->tokens()) {
+		ResourceToken* orig = static_cast<ResourceToken*>(entry.second);
+		ResourceToken* resource = orig ? new ResourceToken(*orig) : nullptr;
+		graph->setTokenAt(resource, entry.first);
+	}
 }
 
 GBMap::~GBMap() {
@@ -24,7 +33,7 @@ GBMap::~GBMap() {
 	delete graph;
 }
 
-void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) { // TODO need to backtrack if tile is partially placed before call
+void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
@@ -32,7 +41,7 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) { // TODO need t
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(from)) {
-		if (!graph->isBlack(coordinate)) { // coordinate has previously been reached by another search.
+		if (!graph->isSearched(coordinate)) { // coordinate has previously been reached by another search.
 			int amount = graph->search(coordinate);
 			int type = graph->tokenAt(coordinate)->getType();
 			resources->incrementBy(type, amount);
@@ -83,7 +92,7 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEm
 	if (ensureEmpty) {
 		for (auto& coordinate : coordinates) {
 			if (graph->tokenAt(coordinate)) {
-				throw std::exception(); // TODO need richer exception type
+				throw std::invalid_argument("Square is already occupied.");
 			}
 		}
 	}
@@ -96,12 +105,12 @@ void GBMap::validateSquare(pair<int, int> square) {
 	switch (*numPlayers) {
 	case 4:
 		if (isOnCorner(row, col)) {
-			throw std::exception(); // TODO need richer exception type
+			throw std::invalid_argument("Cannot place tiles on corners.");
 		}
 	case 2:
 	case 3:
 		if (row < 0 || row >= width() || col < 0 || col >= height()) {
-			throw std::exception(); // TODO need richer exception type
+			throw std::invalid_argument("Square is not on board.");
 		}
 	}
 }

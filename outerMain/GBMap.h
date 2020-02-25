@@ -19,8 +19,8 @@ public:
 	// Constructs a new GBMap object for the specified number of players. Throws an exception if
 	// the specified number of players is not between two and four inclusive.
 	GBMap(int);
-	// Suppress copy constructor.
-	GBMap(GBMap&) = delete;
+	// Constructs a new GBMap object with the same configuration as the specified GBMap.
+	GBMap(GBMap&);
 	// Destroys this GBMap.
 	~GBMap();
 	// Places the specified HarvestTile onto the specified square of this GBMap. Throws an
@@ -30,6 +30,7 @@ public:
 	// Counts, starting from the specified square, and records on the specified GatherFacility the
 	// number of connected resources of each type on this GBMap.
 	void calculateResources(std::pair<int, int>, GatherFacility*);
+	// Writes this GBMap to the standard output stream.
 	void display();
 
 private:
