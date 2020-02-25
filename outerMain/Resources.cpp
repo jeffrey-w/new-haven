@@ -2,7 +2,7 @@
 
 AbstractPiece* Deck::draw() {
 	if (empty()) {
-		throw new std::exception(); // TODO need richer return type
+		throw std::exception(); // TODO need richer exception type
 	}
 	AbstractPiece* piece = pieces->top();
 	pieces->pop();
