@@ -53,10 +53,6 @@ AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
 	return nodeAt(coordinate)->token; // TODO document exception
 }
 
-bool TokenGraph::isBlack(std::pair<int, int> coordinate) {
-	return *nodeAt(coordinate)->color == Node::BLACK; // TODO document exception
-}
-
 bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TODO validate tokenType
 	for (auto& adjacent : *nodeAt(coordinate)->adjacents) { // TODO document exception
 		if (adjacent->token->getType() == tokenType) {
@@ -71,8 +67,18 @@ void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
 	nodeAt(coordinate)->token = token; // TODO document exception
 }
 
-int TokenGraph::search(std::pair<int, int> coordinate) {
+int TokenGraph::search(pair<int, int> coordinate) {
 	return search(nodeAt(coordinate)); // TODO document exception
+}
+
+bool TokenGraph::isBlack(std::pair<int, int> coordinate) {
+	return *nodeAt(coordinate)->color == Node::BLACK; // TODO document exception
+}
+
+void TokenGraph::cleanupSearch() {
+	for (auto& entry : *nodes) {
+		*entry.second->color = Node::WHITE;
+	}
 }
 
 TokenGraph::Node* TokenGraph::nodeAt(pair<int, int> coordinate) {
@@ -81,7 +87,7 @@ TokenGraph::Node* TokenGraph::nodeAt(pair<int, int> coordinate) {
 
 pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) {
 	if (nodes->find(coordinate) == nodes->end()) {
-		throw new std::exception(); // TODO need richer exception type
+		throw std::exception(); // TODO need richer exception type
 	}
 	return coordinate;
 }
@@ -141,9 +147,11 @@ TokenGraph::Node::~Node() {
 void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node*>* adjacents) {
 	this->token = token;
 	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
-	if (AbstractToken::areSameType(match, token)) { // This node will be searched if it's connected to source of search.
+	// This node will be searched if it's connected to source of search.
+	if (AbstractToken::areSameType(match, token)) {
 		color = new int(WHITE);
 	}
+	else if (*color == BLACK);
 	else {
 		color = new int(RED);
 	}
