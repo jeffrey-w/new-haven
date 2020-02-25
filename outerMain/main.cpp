@@ -73,6 +73,7 @@ int main() {
     delete loaded;
     loaded = nullptr;
     GBMapLoader loader2("map_bad.txt");
+    std::cout << "Invalid number of players caught by GBMapLoader: ";
     ASSERT_THROWS(std::exception, loader2.load());
 
     std::cout<<"================================================================================\n";
