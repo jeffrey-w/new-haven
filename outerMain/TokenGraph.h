@@ -15,7 +15,8 @@ public:
 	static TokenGraph* gridOf(int, int);
 
 	TokenGraph();
-	TokenGraph(TokenGraph&) = delete; // Suppress copy constructor.
+	// Suppress copy constructor.
+	TokenGraph(TokenGraph&) = delete;
 	~TokenGraph();
 	void addNode(std::pair<int, int>);
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
@@ -23,7 +24,9 @@ public:
 	bool adjacentHolds(std::pair<int, int>, int);
 	void setTokenAt(AbstractToken*, std::pair<int, int>);
 	int search(std::pair<int, int>);
-	bool isBlack(std::pair<int, int> coordinate);
+	bool isSearched(std::pair<int, int> coordinate);
+	void markRow(int);
+	void markCol(int);
 	void cleanupSearch();
 	std::map<std::pair<int, int>, AbstractToken*>& tokens();
 
@@ -33,7 +36,7 @@ private:
 
 	public:
 
-		static constexpr int WHITE = 0, GRAY = 1, BLACK = 2, RED = 3;
+		static constexpr int WHITE = 0, GRAY = 1, BLACK = 2, RED = 3, YELLOW = 4;
 
 		AbstractToken* token;
 		std::set<Node*>* adjacents;
@@ -55,7 +58,7 @@ private:
 	Node* nodeAt(std::pair<int, int>);
 	std::pair<int, int> validateCoordinate(std::pair<int, int>);
 	int search(Node*);
-	void resetSearchAttributes(AbstractToken*);
+	void setupSearchAttributes(AbstractToken*);
 
 };
 
