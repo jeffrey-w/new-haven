@@ -6,6 +6,7 @@
 class VGMap {
 private:
     TokenGraph* graph;
+    std::array<bool,4>* typePlaced;
 
 public:
 
@@ -14,7 +15,7 @@ public:
 	VGMap();
 	VGMap(VGMap&) = delete; // TODO supress copy constructor?
 	~VGMap();
-	//int costOf(std::pair<int, int>);
-	void setCircle(Building*, std::pair<int, int>);
+	void setCircle(Building*, bool faceDown, std::pair<int, int>);
+	void validateCircle(std::pair<int,int>);
     void display();
 };
