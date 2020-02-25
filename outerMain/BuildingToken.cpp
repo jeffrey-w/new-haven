@@ -21,7 +21,7 @@ BuildingToken::BuildingToken(BuildingType type, int value) {
 
 int BuildingToken::validateValue(int value) {
 	if (value < 1 || value > 6) { // TODO avoid magic constatns
-		throw new std::exception(); // TODO need richer exception type
+		throw std::exception(); // TODO need richer exception type
 	}
 	return value;
 }
