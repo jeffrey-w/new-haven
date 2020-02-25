@@ -55,6 +55,10 @@ AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
 
 bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TODO validate tokenType
 	for (auto& adjacent : *nodeAt(coordinate)->adjacents) { // TODO document exception
+		// Null check.
+		if (!adjacent->token) {
+			continue;
+		}
 		if (adjacent->token->getType() == tokenType) {
 			return true;
 		}
@@ -63,21 +67,46 @@ bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TO
 }
 
 void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
-	token->place(); // TODO avoid side effects
 	nodeAt(coordinate)->token = token; // TODO document exception
+	if (token) {
+		token->place(); // TODO avoid side effects 
+	}
 }
 
 int TokenGraph::search(pair<int, int> coordinate) {
 	return search(nodeAt(coordinate)); // TODO document exception
 }
 
-bool TokenGraph::isBlack(std::pair<int, int> coordinate) {
+bool TokenGraph::isSearched(std::pair<int, int> coordinate) {
 	return *nodeAt(coordinate)->color == Node::BLACK; // TODO document exception
+}
+
+void TokenGraph::markRow(int row) {
+	for (auto& entry : *nodes) {
+		if (entry.first.first == row) {
+			*entry.second->color = Node::YELLOW;
+		}
+		else {
+			*entry.second->color = Node::BLACK;
+		}
+	}
+}
+
+void TokenGraph::markCol(int col) {
+	for (auto& entry : *nodes) {
+		if (entry.first.second == col) {
+			*entry.second->color = Node::YELLOW;
+		}
+		else {
+			*entry.second->color = Node::BLACK;
+		}
+	}
 }
 
 void TokenGraph::cleanupSearch() {
 	for (auto& entry : *nodes) {
 		*entry.second->color = Node::WHITE;
+		*entry.second->distance = INT_MAX; // For consistency.
 	}
 }
 
@@ -94,7 +123,7 @@ pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) {
 
 int TokenGraph::search(Node* s) {
 	int count = 1;
-	resetSearchAttributes(s->token);
+	setupSearchAttributes(s->token);
 	*s->color = Node::GRAY;
 	*s->distance = 0;
  	queue<Node*> q = queue<Node*>();
@@ -117,9 +146,20 @@ int TokenGraph::search(Node* s) {
 	return count;
 }
 
-void TokenGraph::resetSearchAttributes(AbstractToken* match) {
+void TokenGraph::setupSearchAttributes(AbstractToken* match) {
 	for (auto entry : *nodes) {
 		Node* n = entry.second;
+		// Don't search Nodes more than once
+		if (*n->color == Node::BLACK) {
+			*n->distance = INT_MAX;
+			continue;
+		}
+		// We're searching rows and columns
+		if (*n->color == Node::YELLOW) {
+			*n->color = Node::WHITE;
+			*n->distance = INT_MAX;
+			continue;
+		}
 		n->init(n->token, match, n->adjacents);
 	}
 }
@@ -149,12 +189,21 @@ void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node
 	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
 	// This node will be searched if it's connected to source of search.
 	if (AbstractToken::areSameType(match, token)) {
-		color = new int(WHITE);
+		if (color) {
+			*color = WHITE;
+		}
+		else {
+			color = new int(WHITE);
+		}
 	}
-	else if (*color == BLACK);
 	else {
-		color = new int(RED);
+		*color = RED;
 	}
-	distance = new int(INT_MAX);
+	if (distance) {
+		*distance = INT_MAX;
+	}
+	else {
+		distance = new int(INT_MAX);
+	}
 	prev = nullptr;
 }
