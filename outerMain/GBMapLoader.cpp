@@ -44,7 +44,7 @@ HarvestTile* GBMapLoader::nextTile() {
 		}
 	}
 	scanner->consume('<', "Expect a '<'.");
-	*tile->current = scanner->nextInt();
+	*tile->current = scanner->nextInt(); // TODO need to validate this
 	scanner->consume('>', "Expect a '>'.");
 	return tile;
 }
