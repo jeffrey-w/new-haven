@@ -122,7 +122,6 @@
     <ClCompile Include="GBMapLoader.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="AbstractPiece.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceToken.cpp" />
