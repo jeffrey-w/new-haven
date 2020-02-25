@@ -12,6 +12,14 @@ Building::~Building() {
 	delete token;
 }
 
+BuildingToken::BuildingType Building::getType() const {
+	return static_cast<BuildingToken::BuildingType>(token->getType());
+}
+
+int Building::getValue() const {
+	return token->getValue();
+}
+
 BuildingToken* Building::tokenize() {
 /*	if (isSpent()) {//TODO uncomment, needed for testing though
 		throw new std::exception(); // TODO need richer exception type;

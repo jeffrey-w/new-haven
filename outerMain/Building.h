@@ -16,6 +16,10 @@ public:
 	Building(const Building&);
 	// Destroys this Building.
 	~Building();
+	// Returns the type of this Building.
+	BuildingToken::BuildingType getType() const;
+	// Returns the value of this Building.
+	int getValue() const;
 	// Returns the BuildingToken that constitutes this Building. Throws an exception if this Building has already been tokenized.
 	BuildingToken* tokenize();
 	// Writes this Building to the standard output stream.
