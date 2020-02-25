@@ -2,6 +2,7 @@
 #include "VGMap.h"
 #include <iostream>
 
+using std::array;
 using std::map;
 using std::pair;
 using std::queue;

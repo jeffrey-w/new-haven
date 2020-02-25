@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+
 #include "Building.h"
 #include "TokenGraph.h"
 
