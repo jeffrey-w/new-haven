@@ -27,5 +27,5 @@ private:
 	std::vector<ResourceToken*>* resources;
 
 	void ensureNotPlaced();
-	
+
 };
