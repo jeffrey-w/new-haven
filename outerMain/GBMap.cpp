@@ -32,12 +32,13 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) { // TODO need t
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(from)) {
-		if (!graph->isBlack(coordinate)) { // coordinate has previously been reached by another search. TODO this is not quite right
+		if (!graph->isBlack(coordinate)) { // coordinate has previously been reached by another search.
 			int amount = graph->search(coordinate);
 			int type = graph->tokenAt(coordinate)->getType();
 			resources->incrementBy(type, amount);
 		}
 	}
+	graph->cleanupSearch(); // Clean up graph for next search.
 }
 
 void GBMap::display() {
@@ -82,7 +83,7 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEm
 	if (ensureEmpty) {
 		for (auto& coordinate : coordinates) {
 			if (graph->tokenAt(coordinate)) {
-				throw new std::exception(); // TODO need richer exception type
+				throw std::exception(); // TODO need richer exception type
 			}
 		}
 	}
@@ -95,12 +96,12 @@ void GBMap::validateSquare(pair<int, int> square) {
 	switch (*numPlayers) {
 	case 4:
 		if (isOnCorner(row, col)) {
-			throw new std::exception(); // TODO need richer exception type
+			throw std::exception(); // TODO need richer exception type
 		}
 	case 2:
 	case 3:
 		if (row < 0 || row >= width() || col < 0 || col >= height()) {
-			throw new std::exception(); // TODO need richer exception type
+			throw std::exception(); // TODO need richer exception type
 		}
 	}
 }
