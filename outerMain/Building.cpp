@@ -4,7 +4,7 @@ Building::Building() {
 	token = new BuildingToken(); // Default constructor returns a random BuildingToken.
 }
 
-Building::Building(const Building& other) : AbstractPiece(other) {
+Building::Building(const Building& other) {
 	token = new BuildingToken(*other.token);
 }
 
@@ -20,11 +20,14 @@ int Building::getValue() const {
 	return token->getValue();
 }
 
+bool Building::isSpent() const {
+	return token->isPlaced();
+}
+
 BuildingToken* Building::tokenize() {
-/*	if (isSpent()) {//TODO uncomment, needed for testing though
-		throw new std::exception(); // TODO need richer exception type;
-	}*/
-	spend();
+	//if (isSpent()) {//TODO uncomment, needed for testing though
+	//	throw std::exception(); // TODO need richer exception type;
+	//}
 	return token;
 }
 
