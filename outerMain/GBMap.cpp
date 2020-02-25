@@ -14,7 +14,7 @@ GBMap::GBMap(int numPlayers) {
 
 void GBMap::setNumPlayers(int numPlayers) {
 	if (!(numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
-		throw new std::exception(); // TODO need richer exception type
+		throw std::exception(); // TODO need richer exception type
 	}
 	this->numPlayers = new int(numPlayers);
 }
