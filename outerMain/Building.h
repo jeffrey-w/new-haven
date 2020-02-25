@@ -8,6 +8,8 @@
 // The Piece that belong to BuildingDecks and that occupy VGMaps.
 class Building : public AbstractPiece {
 
+	friend class VGMapLoader;
+
 public:
 
 	// Constructs a new Building object.
