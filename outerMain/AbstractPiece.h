@@ -7,22 +7,9 @@ class AbstractPiece {
 
 public:
 
-	// Constructs a new AbstractPiece object.
-	AbstractPiece();
-	// Constructs a new AbstractPiece object with the same spent status as the specified Piece.
-	AbstractPiece(const AbstractPiece&);
-	// Destroys this AbstractPiece.
-	~AbstractPiece();
+	// Returns true iff this AbstractPiece has been completely tokenized.
+	virtual bool isSpent() const = 0;
 	// Iteratively returns the tokens that constitute this AbstractPiece. Throws an exception if this Piece is spent.
 	virtual AbstractToken* tokenize() = 0;
-	// Returns true iff this AbstractPiece has been completely tokenized.
-	bool isSpent() const;
-	// Sets the status of this AbstractPiece to spent.
-	void spend();
-	// Writes this Piece to the standard output stream.
-
-private:
-
-	bool* spent;
 
 };
