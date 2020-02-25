@@ -5,6 +5,16 @@
 
 #include <iostream>
 
+#define ASSERT_THROWS(exception, expression) { \
+    try { \
+        (expression); \
+    } catch (exception& e) { \
+        std::cout << "true\n"; \
+    } catch (...) { \
+        std::cout << "false\n"; \
+    } \
+}
+
 int main() {
 
 
@@ -62,7 +72,8 @@ int main() {
     loaded->display();
     delete loaded;
     loaded = nullptr;
-
+    GBMapLoader loader2("map_bad.txt");
+    ASSERT_THROWS(std::exception, loader2.load());
 
     std::cout<<"================================================================================\n";
     //TEST PART 4 (Player)
