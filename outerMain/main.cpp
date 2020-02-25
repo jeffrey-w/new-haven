@@ -52,21 +52,21 @@ int main() {
     Building b8;
     Building b9;
     Building b10;
-    vmap.setCircle(&b1, true, {0,0});
-    vmap.setCircle(&b2, true,{0,1});
-    vmap.setCircle(&b3, true,{0,2});
-    vmap.setCircle(&b4, true,{0,3});
-    vmap.setCircle(&b5, true,{0,4});
-    vmap.setCircle(&b6, true,{1,0});
-    vmap.setCircle(&b7, true,{1,1});
-    vmap.setCircle(&b8, true,{1,2});
-    vmap.setCircle(&b9, true,{1,3});
-    vmap.setCircle(&b10,true,{1,4});
+    vmap.setCircle(&b1, {0,0});
+    vmap.setCircle(&b2, {0,1});
+    vmap.setCircle(&b3, {0,2});
+    vmap.setCircle(&b4, {0,3});
+    vmap.setCircle(&b5, {0,4});
+    vmap.setCircle(&b6, {1,0});
+    vmap.setCircle(&b7, {1,1});
+    vmap.setCircle(&b8, {1,2});
+    vmap.setCircle(&b9, {1,3});
+    vmap.setCircle(&b10,{1,4});
     vmap.display();
 
 
     std::cout<<"================================================================================\n";
-    //TEST PART 3 (Map loaders)
+/*    //TEST PART 3 (Map loaders)
     GBMapLoader loader("map.txt");
     GBMap* loaded = loader.load();
     loaded->display();
@@ -74,21 +74,21 @@ int main() {
     loaded = nullptr;
     GBMapLoader loader2("map_bad.txt");
     std::cout << "Invalid number of players caught by GBMapLoader: ";
-    ASSERT_THROWS(std::exception, loader2.load());
+    ASSERT_THROWS(std::exception, loader2.load());*/
 
     std::cout<<"================================================================================\n";
     //TEST PART 4 (Player)
     Player p;
-    p.buildVillage(&b1,true, {0,0});
-    p.buildVillage(&b2,true, {1,0});
-    p.buildVillage(&b3,true, {2,0});
-    p.buildVillage(&b4,true, {3,0});
-    p.buildVillage(&b5,true, {4,0});
-    p.buildVillage(&b6,true, {5,0});
-    p.buildVillage(&b7,true, {0,1});
-    p.buildVillage(&b8,true, {0,2});
-    p.buildVillage(&b9,true, {0,3});
-    p.buildVillage(&b10,true, {0,4});
+    p.buildVillage(&b1, {0,0});
+    p.buildVillage(&b2, {1,0});
+    p.buildVillage(&b3, {2,0});
+    p.buildVillage(&b4, {3,0});
+    p.buildVillage(&b5, {4,0});
+    p.buildVillage(&b6, {5,0});
+    p.buildVillage(&b7, {0,1});
+    p.buildVillage(&b8, {0,2});
+    p.buildVillage(&b9, {0,3});
+    p.buildVillage(&b10, {0,4});
     p.villageBoard->display();
     std::cout<<p.calculateScore()<<std::endl;
 
