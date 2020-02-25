@@ -33,17 +33,23 @@ void HarvestTile::rotate(int rotations) {
 void HarvestTile::ensureNotPlaced() {
 	for (auto& resource : *resources) {
 		if (resource->isPlaced()) {
-			throw new std::exception(); // TODO need richer exception type
+			throw std::exception(); // TODO need richer exception type
 		}
 	}
 }
 
+bool HarvestTile::isSpent() const {
+	for (auto& resource : *resources) {
+		if (!resource->isPlaced()) {
+			return false;
+		}
+	}
+	return true;
+}
+
 ResourceToken* HarvestTile::tokenize() {
 	if (isSpent()) {
-		throw new std::exception();
-	}
-	if (false) { // TODO
-		spend(); // Prevent the same HarvestTile from being tokenized twice.
+		throw std::exception();
 	}
 	ResourceToken* returnToken = (*resources)[*current];
 	*current = ++(*current) % NUM_RESOURCES;

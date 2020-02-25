@@ -19,6 +19,8 @@ public:
 	~HarvestTile();
 	// Rotates ResourceTokens 90 degrees clockwise the specified number of rotations.
 	void rotate(int);
+	// Returns true iff this HarvestTile has been completely tokenized.
+	bool isSpent() const;
 	ResourceToken* tokenize();
 
 private:
