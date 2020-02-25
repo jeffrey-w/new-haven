@@ -60,6 +60,9 @@
     <ClCompile Include="GBMapLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VGMapLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GBMap.h">
@@ -107,8 +110,14 @@
     <ClInclude Include="GBMapLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VGMapLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="HitList.txt" />
+    <Text Include="gmap.txt" />
+    <Text Include="gmap_bad.txt" />
+    <Text Include="vmap.txt" />
   </ItemGroup>
 </Project>
