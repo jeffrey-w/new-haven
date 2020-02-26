@@ -28,7 +28,8 @@ public:
 	// is not on this GBMap or if it is already occupied.
 	void setSquare(HarvestTile*, std::pair<int, int>);
 	// Counts, starting from the specified square, and records on the specified GatherFacility the
-	// number of connected resources of each type on this GBMap.
+	// number of connected resources of each type on this GBMap. Throws an exceotion if the
+	// specified square is not on this GBMap.
 	void calculateResources(std::pair<int, int>, GatherFacility*);
 	// Writes this GBMap to the standard output stream.
 	void display();
