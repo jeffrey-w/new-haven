@@ -4,28 +4,12 @@
 
 using std::vector;
 
-<<<<<<< HEAD
-HarvestTile::HarvestTile(const HarvestTile& obj)
-{
-	position = new Resource[4];
-	for (int i = 0; i < 4; i++)
-	{
-		position[i] = obj.position[i];
-	}
-}
-
-HarvestTile::~HarvestTile()
-{
-	delete[] position;
-	position = nullptr;
-=======
 HarvestTile::HarvestTile() {
 	current = new int(0);
 	resources = new vector<ResourceToken*>();
 	for (int i = 0; i < NUM_RESOURCES; i++) {
 		resources->push_back(new ResourceToken()); // Default constructor returns a random ResourceToken.
 	}
->>>>>>> jeff-working
 }
 
 HarvestTile::HarvestTile(const HarvestTile& other) : AbstractPiece(other) {

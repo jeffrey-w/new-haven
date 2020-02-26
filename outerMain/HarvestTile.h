@@ -15,11 +15,7 @@ public:
 	constexpr static int NUM_RESOURCES = 4;
 	
 	HarvestTile();
-<<<<<<< HEAD
-	HarvestTile(const HarvestTile &obj);
-=======
 	HarvestTile(const HarvestTile&);
->>>>>>> jeff-working
 	~HarvestTile();
 	// Rotates ResourceTokens 90 degrees clockwise the specified number of rotations.
 	void rotate(int);

@@ -10,16 +10,8 @@ Building::Building(const Building& other) {
 	token = new BuildingToken(*other.token);
 }
 
-<<<<<<< HEAD
-Building::Building(const Building& obj)
-{
-	colour = new Type(*obj.colour);
-	number = new int(*obj.number);
-	faceUp = new bool(*obj.faceUp);
-=======
 Building::~Building() {
 	delete token;
->>>>>>> jeff-working
 }
 
 int Building::getType() const {
