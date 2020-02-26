@@ -2,8 +2,8 @@
 
 #include "GBMap.h"
 
-using std::vector;
 using std::pair;
+using std::vector;
 
 GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
 
@@ -23,6 +23,7 @@ void GBMap::setNumPlayers(int numPlayers) {
 GBMap::GBMap(GBMap& other) : GBMap(*other.numPlayers) {
 	for (auto& entry : other.graph->tokens()) {
 		ResourceToken* orig = static_cast<ResourceToken*>(entry.second);
+		AS_TYPE(entry.second, ResourceToken*);
 		ResourceToken* resource = orig ? new ResourceToken(*orig) : nullptr;
 		graph->setTokenAt(resource, entry.first);
 	}
@@ -41,19 +42,21 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(from)) {
-		if (!graph->isSearched(coordinate)) { // coordinate has previously been reached by another search.
+		// coordinate has previously been reached by another search.
+		if (!graph->isSearched(coordinate)) {
 			int amount = graph->search(coordinate);
 			int type = graph->tokenAt(coordinate)->getType();
 			resources->incrementBy(type, amount);
 		}
 	}
-	graph->cleanupSearch(); // Clean up graph for next search.
+	// Clean up graph for next search.
+	graph->cleanupSearch();
 }
 
 void GBMap::display() {
 	for (int i = 0; i < height(); i++) {
 		for (int j = 0; j < width(); j++) {
-			ResourceToken* resource = static_cast<ResourceToken*>(graph->tokenAt({ i, j }));
+			ResourceToken* resource = AS_TYPE(graph->tokenAt({ i,j }), ResourceToken*);
 			if (resource) {
 				resource->display();
 				std::cout << '\t';
@@ -73,6 +76,8 @@ int GBMap::height() {
 	case 3:
 	case 4:
 		return DIM_MAX;
+	default:
+		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
 	}
 }
 
@@ -83,6 +88,8 @@ int GBMap::width() {
 		return DIM_MIN;
 	case 4:
 		return DIM_MAX;
+	default:
+		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
 	}
 }
 
