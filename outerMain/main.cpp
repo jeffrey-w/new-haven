@@ -119,7 +119,7 @@ int main() {
 	}
 	map.display();
 	GatherFacility gf;
-	map.calculateResources({ 0, 0 }, &gf);
+	map.calculateResources({ 0, 0 }, &gf); // insert breakpoint here when pulled
 
 	return 0;
 }
