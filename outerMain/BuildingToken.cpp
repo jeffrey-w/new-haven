@@ -6,7 +6,7 @@ using std::cout;
 BuildingToken::BuildingToken() : BuildingToken(randomType(), randomValue()) {}
 
 BuildingToken::BuildingType BuildingToken::randomType() {
-	return static_cast<BuildingType>(Random::next(0, 3)); // TODO can bound be obtained programmatically?
+	return AS_TYPE(Random::next(0, 3), BuildingType);
 }
 
 int BuildingToken::randomValue() {
