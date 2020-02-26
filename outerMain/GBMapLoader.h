@@ -1,27 +1,25 @@
 #pragma once
 
-#include <fstream>
-
-#include <map>
-#include <string>
-#include <vector>
-
 #include "GBMap.h"
+#include "Scanner.h"
 
 class GBMapLoader {
 
 public:
 
-	GBMapLoader(std::string path);
+	GBMapLoader() = delete;
+	GBMapLoader(std::string);
+	GBMapLoader(GBMapLoader&) = delete;
 	~GBMapLoader();
 	GBMap* load();
 
 private:
 
-	int* numPlayers;
-	std::map<std::pair<int, int>, HarvestTile*>* nodes;
+	Scanner* scanner;
 
-	void read(std::ifstream*);
+	int getNumPlayers();
+	HarvestTile* nextTile();
+	ResourceToken* nextToken();
+	std::pair<int, int> nextSquare();
 
 };
-

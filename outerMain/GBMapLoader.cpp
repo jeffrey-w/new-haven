@@ -1,43 +1,64 @@
-#include <fstream>
-#include <iostream>
-
 #include "GBMapLoader.h"
 
-using std::ifstream;
-using std::map;
 using std::pair;
 using std::string;
-using std::vector;
 
 GBMapLoader::GBMapLoader(string path) {
-	ifstream file;
-	nodes = new map<pair<int, int>, HarvestTile*>();
-	try {
-		file.open(path);
-		read(&file);
-	} catch (ifstream::failure& e) {
-		std::cerr << "Caught ifstream::failure: ";
-		std::cerr << e.what() << std::endl;
-		std::cerr << "Error code: " << e.code() << std::endl;
-		nodes->clear();
-	}
-	file.close();
+	scanner = new Scanner(path);
 }
 
 GBMapLoader::~GBMapLoader() {
-	delete nodes;
-	nodes = nullptr;
+	delete scanner;
 }
 
-GBMap* GBMapLoader::load() {
-	GBMap* map = new GBMap(*numPlayers);
-	for (auto node : *nodes) {
-		map->setTile(node.first, node.second);
+GBMap* GBMapLoader::load() { // TODO catch exceptions
+	GBMap* map = new GBMap(getNumPlayers());
+	while (scanner->hasNext()) {
+		scanner->consume('\n', "Expect a new line.");
+		HarvestTile* tile = nextTile();
+		pair<int, int> square = nextSquare();
+		map->setSquare(tile, square);
 	}
-	// TODO validate if required, but this is guaranteed to be "valid"
 	return map;
 }
 
-void GBMapLoader::read(ifstream* file) {
-	// TODO
+int GBMapLoader::getNumPlayers() {
+	int numPlayers;
+	scanner->consume('<', "Expect a '<'.");
+	numPlayers = scanner->nextInt();
+	scanner->consume('>', "Expect a '>'.");
+	return numPlayers;
+}
+
+HarvestTile* GBMapLoader::nextTile() {
+	HarvestTile* tile = new HarvestTile();
+	tile->resources->clear(); // TODO this is sloppy
+	scanner->consume('<', "Expect a '<'.");
+	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
+		tile->resources->push_back(nextToken());
+		if (i != HarvestTile::NUM_RESOURCES - 1) {
+			scanner->consume(',', "Expect a ','.");
+		}
+		else {
+			scanner->consume('>', "Expect a '>'.");
+		}
+	}
+	scanner->consume('<', "Expect a '<'.");
+	*tile->current = scanner->nextInt(); // TODO need to validate this
+	scanner->consume('>', "Expect a '>'.");
+	return tile;
+}
+
+ResourceToken* GBMapLoader::nextToken() {
+	return new ResourceToken(AS_TYPE(scanner->nextInt(), ResourceToken::ResourceType));
+}
+
+pair<int, int> GBMapLoader::nextSquare() {
+	int one, two;
+	scanner->consume('<', "Expect a '<'.");
+	one = scanner->nextInt();
+	scanner->consume(',', "Expect a ','.");
+	two = scanner->nextInt();
+	scanner->consume('>', "Expect a '>'.");
+	return pair<int, int>(one, two);
 }

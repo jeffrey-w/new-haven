@@ -1,22 +1,10 @@
-/**
-Implements HarvestTile class
-*/
 #include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
+
 #include "HarvestTile.h"
 
-using std::cout;
-using std::cin;
-using std::string;
+using std::vector;
 
-HarvestTile::HarvestTile()
-{
-	position = new Resource[4];
-	buildTile();
-}
-
+<<<<<<< HEAD
 HarvestTile::HarvestTile(const HarvestTile& obj)
 {
 	position = new Resource[4];
@@ -30,80 +18,56 @@ HarvestTile::~HarvestTile()
 {
 	delete[] position;
 	position = nullptr;
-}
-
-void HarvestTile::buildTile()
-{
-	//srand(time(0));
-
-	int arr[3];
-	int randNumber;
-	
-	//storing a max of 3 different Resources in arr and then putting them in the first 3 positions of the tile
-	for (int i = 0; i < 3; i++)
-	{
-		randNumber = randomIntGenerator(3,0);
-		arr[i] = randNumber;
-		assignResourceToPosition(randNumber, i);
+=======
+HarvestTile::HarvestTile() {
+	current = new int(0);
+	resources = new vector<ResourceToken*>();
+	for (int i = 0; i < NUM_RESOURCES; i++) {
+		resources->push_back(new ResourceToken()); // Default constructor returns a random ResourceToken.
 	}
-
-	//the last position will choose a random arr index
-	int randArrayIndex = randomIntGenerator(2, 0);
-	int valueAtIndex = arr[randArrayIndex];
-	assignResourceToPosition(valueAtIndex, 3);
+>>>>>>> jeff-working
 }
 
-int HarvestTile::randomIntGenerator(int max, int min)
-{
-	int randNumber = rand() % (max - min + 1) + min;
-	return randNumber;
-}
-
-void HarvestTile::assignResourceToPosition(int randNumber, int index)
-{
-	switch (randNumber)
-	{
-	case 0:
-		position[index] = Resource::WHEAT;
-		break;
-	case 1:
-		position[index] = Resource::STONE;
-		break;
-	case 2:
-		position[index] = Resource::TIMBER;
-		break;
-	case 3:
-		position[index] = Resource::SHEEP;
-		break;
-	default:
-		break;
+HarvestTile::HarvestTile(const HarvestTile& other) : AbstractPiece(other) {
+	current = new int(*other.current);
+	resources = new vector<ResourceToken*>();
+	for (auto& resource : *other.resources) {
+		resources->push_back(new ResourceToken(*resource));
 	}
 }
 
-void HarvestTile::printTile()
-{
-	string resArr[] = { "WHEAT", "STONE", "TIMBER", "SHEEP" };
-	
-	cout << "-----------------------\n";
-	cout << "|  " << resArr[position[0]] << "  |  " << resArr[position[1]] << "  |\n";
-	cout << "|----------|---------|\n";
-	cout << "|  " << resArr[position[3]] << "  |  " << resArr[position[2]] << "  |\n";
-	cout << "-----------------------\n";
+HarvestTile::~HarvestTile() {
+	delete current;
+	delete resources;
 }
 
-void HarvestTile::changeTileOrientation(int shift)
-{ 
-	if (shift <= 0 || shift > 3)
-	{
-		return;
+void HarvestTile::rotate(int rotations) {
+    ensureNotPlaced();// Prevent mutaion after this harvest tile has already been placed
+	*current = (*current - rotations + NUM_RESOURCES) % NUM_RESOURCES;
+}
+
+void HarvestTile::ensureNotPlaced() {
+	for (auto& resource : *resources) {
+		if (resource->isPlaced()) {
+			throw std::exception(); // TODO need richer exception type
+		}
 	}
+}
 
-	Resource temp1 = position[1];
-	Resource temp2 = position[2];
-	Resource temp3 = position[3];
+bool HarvestTile::isSpent() const {
+	for (auto& resource : *resources) {
+		if (!resource->isPlaced()) {
+			return false;
+		}
+	}
+	return true;
+}
 
-	position[shift % 4] = position[0];
-	position[(shift + 1) % 4] = temp1;
-	position[(shift + 2) % 4] = temp2;
-	position[(shift + 3) % 4] = temp3;
+ResourceToken* HarvestTile::tokenize() {
+	if (isSpent()) {
+		throw std::exception();
+	}
+	ResourceToken* returnToken = (*resources)[*current];
+	*current = ++(*current) % NUM_RESOURCES;
+	return returnToken;
 }

@@ -115,24 +115,46 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractToken.cpp" />
     <ClCompile Include="Building.cpp" />
-    <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="BuildingToken.cpp" />
     <ClCompile Include="GBMap.cpp" />
     <ClCompile Include="GBMapLoader.cpp" />
     <ClCompile Include="HarvestTile.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ResourceToken.cpp" />
+    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="Scanner.cpp" />
+    <ClCompile Include="ScoringFacilities.cpp" />
+    <ClCompile Include="TokenGraph.cpp" />
     <ClCompile Include="VGMap.cpp" />
+    <ClCompile Include="VGMapLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractToken.h" />
     <ClInclude Include="Building.h" />
-    <ClInclude Include="Deck.h" />
+    <ClInclude Include="BuildingToken.h" />
     <ClInclude Include="GBMap.h" />
     <ClInclude Include="GBMapLoader.h" />
     <ClInclude Include="HarvestTile.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="AbstractPiece.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="ResourceToken.h" />
+    <ClInclude Include="Resources.h" />
+    <ClInclude Include="Scanner.h" />
+    <ClInclude Include="ScoringFacilities.h" />
+    <ClInclude Include="TokenGraph.h" />
     <ClInclude Include="VGMap.h" />
+    <ClInclude Include="VGMapLoader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="HitList.txt" />
+    <Text Include="gmap.txt" />
+    <Text Include="gmap_bad.txt" />
+    <Text Include="vmap.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

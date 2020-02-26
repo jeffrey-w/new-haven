@@ -1,35 +1,35 @@
 #pragma once
 
-#include "VGMap.h"
-#include "HarvestTile.h"
 #include "Building.h"
-#include "Resource.h"
+#include "GBMap.h"
+#include "HarvestTile.h"
+#include "Resources.h"
 #include "ScoringFacilities.h"
+#include "VGMap.h"
 
 
 
 class Player {
-private:
-    //VGMap* villageBoard;
-    std::vector<HarvestTile*>* harvestTiles;
-    std::vector<Building*>* buildings;
-    GatherFacility* gatherFacility;
-    BuildFacility* buildFacility;
-    static int resourceMarkers[];
-
 
 public:
+
     Player();
-    bool placeHarvestTile(int,int, HarvestTile*);
-    Building* drawBuilding();
-    HarvestTile* drawHarvestTile();
-    //int* resourceTracker();//TODO find use for it since no needed right now
-    bool buildVillage(int,int, Building*);
-    //ResourceMarkers* calculateResources() TODO
+    Player(const Player&);
+    ~Player();
+    Building* drawBuilding(BuildingDeck*);
+    HarvestTile* drawHarvestTile(HarvestTileDeck*);
+    void buildVillage(Building*, std::pair<int, int>   );
+    void placeHarvestTile(HarvestTile*, GBMap*, std::pair<int, int>);
+    void resourceTracker(); // TODO what is this for?
+    void calculateResources(GBMap*, std::pair<int, int>);
     int calculateScore();
-    VGMap* villageBoard;//TODO make private later, but now needed to print VGMap from main
 
-
+    VGMap* villageBoard;//TODO return to private after done testing in main
+private:
+    
+    //VGMap* villageBoard;
+    GatherFacility* gatherFacility; // TODO does this belong here
+    BuildFacility* buildFacility; // TODO does this belong here
 
 };
 

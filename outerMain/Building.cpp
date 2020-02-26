@@ -1,69 +1,47 @@
-/**
-Implementation of Building class
-*/
-#include <iostream>
-#include <string>
+#include <stdexcept>
+
 #include "Building.h"
 
-using std::cout;
-using std::cin;
-using std::string;
-
-Building::Building(){
-    faceUp = new bool(true);
+Building::Building() {
+	token = new BuildingToken(); // Default constructor returns a random BuildingToken.
 }
 
-Building::Building(Type theColour, int theNumber) : Building()
-{
-	colour = new Type(theColour);
-	number = new int(theNumber);
+Building::Building(const Building& other) {
+	token = new BuildingToken(*other.token);
 }
 
+<<<<<<< HEAD
 Building::Building(const Building& obj)
 {
 	colour = new Type(*obj.colour);
 	number = new int(*obj.number);
 	faceUp = new bool(*obj.faceUp);
+=======
+Building::~Building() {
+	delete token;
+>>>>>>> jeff-working
 }
 
-Building::~Building()
-{
-	delete colour;
-	colour = nullptr;
-	delete number;
-	number = nullptr;
-	delete faceUp;
-	faceUp = nullptr;
+int Building::getType() const {
+	return token->getType();
 }
 
-void Building::printBuilding()
-{
-	string types[] = { "M", "Q", "F", "W" };
+bool Building::isFaceUp() const {
+    return token->isFaceUp();
+}
 
-	if (*faceUp)
-	{
-		cout << types[*colour] << "[U]["<<*number<<"]";
+int Building::getValue() const {
+	return token->getValue();
+}
+
+bool Building::isSpent() const {
+	return token->isPlaced();
+}
+
+BuildingToken* Building::tokenize() {
+	if (isSpent()) {
+		throw std::logic_error("This Building has already been used.");
 	}
-	else
-	{
-        cout << types[*colour] << "[D]["<<*number<<"]";
-	}
-
+	return token;
 }
 
-void Building::flip()
-{
-	*faceUp = !(*faceUp);
-}
-
-int Building::getNumber() {
-    return *number;
-}
-
-bool Building::getFaceUp() {
-    return *faceUp;
-}
-
-enum Building::Type Building::getColour() {
-    return *colour;
-}

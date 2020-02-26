@@ -1,149 +1,65 @@
-#include <climits>
-#include <queue>
+#include <iostream>
 
 #include "GBMap.h"
 
-using std::map;
 using std::pair;
-using std::queue;
-using std::set;
+using std::vector;
 
-constexpr int DIM_MIN = 5, DIM_MAX = 7; // TODO put these elsewhere
+GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
 
 GBMap::GBMap(int numPlayers) {
-	width = new int();
-	height = new int();
-	area = new map<pair<int, int>, Node*>();
-	setDimensions(numPlayers);
-	build();
+	setNumPlayers(numPlayers);
+	graph = TokenGraph::gridOf(height(), width());
 }
 
-void GBMap::setDimensions(int numPlayers) {
-	switch (numPlayers) {
-	case 2:
-		*width = DIM_MIN;
-		*height = DIM_MIN;
-		break;
-	case 3:
-		*width = DIM_MAX;
-		*height = DIM_MIN;
-		break;
-	case 4:
-		*width = DIM_MAX;
-		*height = DIM_MAX;
-		break;
-	default:
-		throw new std::exception(); // TODO need richer exception type
+
+void GBMap::setNumPlayers(int numPlayers) {
+	if (!(numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
+		throw std::invalid_argument("Number of players must be between 2 and 4.");
 	}
+	this->numPlayers = new int(numPlayers);
 }
 
-void GBMap::build() {
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			addNode({ i, j });
-		}
+GBMap::GBMap(GBMap& other) : GBMap(*other.numPlayers) {
+	for (auto& entry : other.graph->tokens()) {
+		ResourceToken* orig = static_cast<ResourceToken*>(entry.second);
+		AS_TYPE(entry.second, ResourceToken*);
+		ResourceToken* resource = orig ? new ResourceToken(*orig) : nullptr;
+		graph->setTokenAt(resource, entry.first);
 	}
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			pair<int, int> coord{ i, j };
-			if (i < *width - 1) {
-				addEdge(coord, { i + 1, j });
-			}
-			if (j < *height - 1) {
-				addEdge(coord, { i, j + 1 });
-			}
-		}
-	}
-}
-
-void GBMap::addNode(pair<int, int> coord) {
-	area->insert({ coord, new Node() });
-}
-
-void GBMap::addEdge(pair<int, int> one, pair<int, int> two) {
-	Node* m = nodeAt(one);
-	Node* n = nodeAt(two);
-	m->adj->insert(n);
-	n->adj->insert(m);
 }
 
 GBMap::~GBMap() {
-	for (auto i : *area) {
-		delete i.second;
+	delete numPlayers;
+	delete graph;
+}
+
+void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
+	for (auto& coordinate : coordinatesOf(square, true)) {
+		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
-	delete area;
-	area = nullptr;
 }
 
-void GBMap::setTile(pair<int, int> coord, HarvestTile* tile) {
-	// TODO tile should already be oriented correctly
-	nodeAt(coord)->tile = tile;
-}
-
-bool GBMap::isTileAvailable(pair<int, int> coord) {
-	return nodeAt(coord)->tile;
-}
-
-
-GBMap::Node* GBMap::getOrigin() {
-	return nodeAt({ 0, 0 });
-}
-
-GBMap::Node* GBMap::nodeAt(pair<int, int> coord) {
-	return area->at(validateCoord(coord));
-}
-
-pair<int, int> GBMap::validateCoord(pair<int, int> coord) { // TODO do not zero-index
-	if (area->find(coord) == area->end()) {
-		throw new std::exception(); // TODO need richer exceotion type
-	}
-	return coord;
-}
-
-int GBMap::search(pair<int, int> coord) {
-	return search(nodeAt(coord)); // TODO firgure out how to use []
-}
-
-// Breadth-first search
-int GBMap::search(Node* s) {
-	int count = 1;
-	resetSearchAttributes();
-	*s->color = Node::GRAY;
-	*s->distance = 0;
-	queue<Node*> q = queue<Node*>();
-	q.push(s);
-	while (!q.empty()) {
-		Node* u = q.front();
-		q.front();
-		for (auto v : *u->adj) {
-			if (*v->color == Node::WHITE) {
-				*v->color = Node::GRAY;
-				*v->distance = *u->distance + 1;
-				v->prev = u;
-				q.push(v);
-				count++;
-			}
+void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
+	for (auto& coordinate : coordinatesOf(from)) {
+		// coordinate has previously been reached by another search.
+		if (!graph->isSearched(coordinate)) {
+			int amount = graph->search(coordinate);
+			int type = graph->tokenAt(coordinate)->getType();
+			resources->incrementBy(type, amount);
 		}
-		*u->color = Node::BLACK;
-		u->prev = nullptr;
-		q.pop();
 	}
-	return count;
-}
-
-void GBMap::resetSearchAttributes() {
-	for (auto entry : *area) {
-		Node* n = entry.second;
-		n->init(n->tile, n->adj);
-	}
+	// Clean up graph for next search.
+	graph->cleanupSearch();
 }
 
 void GBMap::display() {
-	for (int i = 0; i < *width; i++) {
-		for (int j = 0; j < *height; j++) {
-			HarvestTile* tile = nodeAt({ i, j })->tile;
-			if (tile) {
-				std::cout << tile << '\t';
+	for (int i = 0; i < height(); i++) {
+		for (int j = 0; j < width(); j++) {
+			ResourceToken* resource = AS_TYPE(graph->tokenAt({ i,j }), ResourceToken*);
+			if (resource) {
+				resource->display();
+				std::cout << '\t';
 			}
 			else {
 				std::cout << "-\t";
@@ -153,27 +69,68 @@ void GBMap::display() {
 	}
 }
 
-GBMap::Node::Node() {
-	init(nullptr, nullptr);
+int GBMap::height() {
+	switch (*numPlayers) {
+	case 2:
+		return DIM_MIN;
+	case 3:
+	case 4:
+		return DIM_MAX;
+	default:
+		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
+	}
 }
 
-GBMap::Node::~Node() {
-	delete tile;
-	delete adj;
-	delete color;
-	delete distance;
-	delete prev;
-	tile = nullptr;
-	adj = nullptr;
-	color = nullptr;
-	distance = nullptr;
-	prev = nullptr;
+int GBMap::width() {
+	switch (*numPlayers) {
+	case 2:
+	case 3:
+		return DIM_MIN;
+	case 4:
+		return DIM_MAX;
+	default:
+		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
+	}
 }
 
-void GBMap::Node::init(HarvestTile* tile, set<Node*>* adj) {
-	this->tile = tile;
-	this->adj = (adj) ? adj : new set<Node*>();
-	color = new int(WHITE);
-	distance = new int(INT_MAX);
-	prev = nullptr;
+vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) {
+	validateSquare(square);
+	vector<pair<int, int>> coordinates = expand(square);
+	if (ensureEmpty) {
+		for (auto& coordinate : coordinates) {
+			if (graph->tokenAt(coordinate)) {
+				throw std::invalid_argument("Square is already occupied.");
+			}
+		}
+	}
+	return coordinates;
+}
+
+
+void GBMap::validateSquare(pair<int, int> square) {
+	int row = square.first, col = square.second;
+	switch (*numPlayers) {
+	case 4:
+		if (isOnCorner(row, col)) {
+			throw std::invalid_argument("Cannot place tiles on corners.");
+		}
+	case 2:
+	case 3:
+		if (row < 0 || row >= width() || col < 0 || col >= height()) {
+			throw std::invalid_argument("Square is not on board.");
+		}
+	}
+}
+
+vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
+	vector<pair<int, int>> coordinates;
+	coordinates.push_back({ square.first * 2, square.second * 2 });
+	coordinates.push_back({ square.first * 2, square.second * 2 + 1 });
+	coordinates.push_back({ square.first * 2 + 1, square.second * 2 + 1 });
+	coordinates.push_back({ square.first * 2 + 1, square.second * 2 });
+	return coordinates;
+}
+
+bool GBMap::isOnCorner(int row, int col) {
+	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
 }

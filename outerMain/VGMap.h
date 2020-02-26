@@ -1,42 +1,23 @@
 #pragma once
-#include "Building.h"
-#include <vector>
-#include <map>
 
+#include <array>
+
+#include "Building.h"
+#include "TokenGraph.h"
 
 class VGMap {
-    class Circle {
-        friend class VGMap;
-    private:
-        std::pair<int,int>* coordinates;//only usefull for testing, consider removing
-        std::vector<Circle*> *adjCircles;
-        Building *building;
-        bool *visited;
-        int number;
-
-    public:
-        Circle();
-        Circle(std::pair<int,int>*);//remove if getting rid of coordinates member
-        Building* getBuilding();
-        bool setBuilding(Building*);//TODO sure this isn't void?
-    };
-
 private:
-    std::map<std::pair<int,int>, Circle*>* coordinatesMap;
-    std::vector<Circle*>* circles;
+    TokenGraph* graph;
+    std::array<bool,4>* typePlaced;
 
 public:
-    VGMap();
-    Circle* getCircle(int,int);
-    std::vector<Circle*>* getCircles();
-    bool addCircle(int,int);
-    bool addEdge(int,int,int,int);
-    bool placeBuilding(int,int, Building*);
-    void display();
-    bool isConnected();
-    void dfs(Circle*);
-    bool isValid();
 
-    //methods that go in driver later
-    void buildMap();
+	static constexpr int HEIGHT = 6, WIDTH = 5;
+
+	VGMap();
+	VGMap(VGMap&) = delete; // TODO supress copy constructor?
+	~VGMap();
+	void setCircle(Building*, std::pair<int, int>);
+	void validateCircle(std::pair<int,int>);
+    void display();
 };

@@ -1,51 +1,37 @@
-/**
-creates a harvest tile in the form
------------------------
-position0 | position1 |
-----------|-----------|
-position3 | position2 |
------------------------
-where each position represent a resource (enum)
-*/
 #pragma once
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
 
-class HarvestTile
-{
+#include <vector>
+
+#include "AbstractPiece.h"
+#include "ResourceToken.h"
+
+
+class HarvestTile : public AbstractPiece {
+
+	friend class GBMapLoader;
+
 public:
-	enum Resource { WHEAT, STONE, TIMBER, SHEEP };
+
+	constexpr static int NUM_RESOURCES = 4;
+	
 	HarvestTile();
+<<<<<<< HEAD
 	HarvestTile(const HarvestTile &obj);
+=======
+	HarvestTile(const HarvestTile&);
+>>>>>>> jeff-working
 	~HarvestTile();
-	/**
-	prints tile
-	*/
-	void printTile();
-	/**
-	from its current state, all positions are shifted from their current location in a clockwise manner
-	shifts go from 0 to 3, where nothing happens at 0
-	the tile remains shifted until it is shifted again
-	*/
-	void changeTileOrientation(int shift);
+	// Rotates ResourceTokens 90 degrees clockwise the specified number of rotations.
+	void rotate(int);
+	// Returns true iff this HarvestTile has been completely tokenized.
+	bool isSpent() const;
+	ResourceToken* tokenize();
 
 private:
-	Resource* position; //this array contains the Resources (enums) contained in the tile
-	/**
-	helper method
-	called by the constructor to assign each position a ressource randomly
-	*/
-	void buildTile();
-	/**
-	helper method
-	generates a random integer within specified bounds
-	*/
-	int randomIntGenerator(int max, int min);
-	/**
-	helper method
-	uses the random number to assign a ressource to position[index]
-	*/
-	void assignResourceToPosition(int randNumber, int index);
+
+	int* current;
+	std::vector<ResourceToken*>* resources;
+
+	void ensureNotPlaced();
+
 };
