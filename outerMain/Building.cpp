@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include "Building.h"
 
 Building::Building() {
@@ -12,8 +14,8 @@ Building::~Building() {
 	delete token;
 }
 
-BuildingToken::BuildingType Building::getType() const {
-	return static_cast<BuildingToken::BuildingType>(token->getType());
+int Building::getType() const {
+	return token->getType();
 }
 
 bool Building::isFaceUp() const {
@@ -29,9 +31,9 @@ bool Building::isSpent() const {
 }
 
 BuildingToken* Building::tokenize() {
-	//if (isSpent()) {//TODO uncomment, needed for testing though
-	//	throw std::exception(); // TODO need richer exception type;
-	//}
+	if (isSpent()) {
+		throw std::logic_error("This Building has already been used.");
+	}
 	return token;
 }
 

@@ -19,7 +19,7 @@ public:
 	// Destroys this Building.
 	~Building();
 	// Returns the type of this Building.
-	BuildingToken::BuildingType getType() const;
+	int getType() const;
 	// Returns true if Building is Face Up
 	bool isFaceUp() const;
 	// Returns the value of this Building.
