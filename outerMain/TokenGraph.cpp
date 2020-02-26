@@ -1,8 +1,10 @@
 #include <climits> // For INT_MAX.
 #include <queue>
+#include <stdexcept>
 
 #include "TokenGraph.h"
 
+using std::bitset;
 using std::map;
 using std::pair;
 using std::queue;
@@ -12,6 +14,7 @@ TokenGraph* TokenGraph::gridOf(int height, int width) {
 	TokenGraph* graph = new TokenGraph();
 	for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
+			// Add nodes before edges to avoid dereferencing nullptrs
 			graph->addNode({ i, j });
 		}
 	}
@@ -31,10 +34,12 @@ TokenGraph* TokenGraph::gridOf(int height, int width) {
 
 TokenGraph::TokenGraph() {
 	nodes = new map<pair<int, int>, Node*>();
+	types = new bitset<NUM_TYPES>();
 }
 
 TokenGraph::~TokenGraph() {
 	delete nodes;
+	delete types;
 }
 
 void TokenGraph::addNode(pair<int, int> coordinate) {
@@ -48,13 +53,16 @@ void TokenGraph::addEdge(pair<int, int> one, pair<int, int> two) {
 	n->adjacents->insert(m);
 }
 
-// TODO need an empty node check/return value
 AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
-	return nodeAt(coordinate)->token; // TODO document exception
+	return nodeAt(coordinate)->token;
 }
 
-bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TODO validate tokenType
-	for (auto& adjacent : *nodeAt(coordinate)->adjacents) { // TODO document exception
+bool TokenGraph::hasType(int type) {
+	return (*types)[type];
+}
+
+bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) {
+	for (auto& adjacent : *nodeAt(coordinate)->adjacents) {
 		// Null check.
 		if (!adjacent->token) {
 			continue;
@@ -67,40 +75,19 @@ bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) { // TO
 }
 
 void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
-	nodeAt(coordinate)->token = token; // TODO document exception
+	nodeAt(coordinate)->token = token;
 	if (token) {
-		token->place(); // TODO avoid side effects 
+		token->place();
+		(*types)[token->getType()] = true;
 	}
 }
 
 int TokenGraph::search(pair<int, int> coordinate) {
-	return search(nodeAt(coordinate)); // TODO document exception
+	return search(nodeAt(coordinate));
 }
 
 bool TokenGraph::isSearched(std::pair<int, int> coordinate) {
-	return *nodeAt(coordinate)->color == Node::BLACK; // TODO document exception
-}
-
-void TokenGraph::markRow(int row) {
-	for (auto& entry : *nodes) {
-		if (entry.first.first == row) {
-			*entry.second->color = Node::YELLOW;
-		}
-		else {
-			*entry.second->color = Node::BLACK;
-		}
-	}
-}
-
-void TokenGraph::markCol(int col) {
-	for (auto& entry : *nodes) {
-		if (entry.first.second == col) {
-			*entry.second->color = Node::YELLOW;
-		}
-		else {
-			*entry.second->color = Node::BLACK;
-		}
-	}
+	return *nodeAt(coordinate)->color == Node::BLACK;
 }
 
 void TokenGraph::cleanupSearch() {
@@ -116,7 +103,7 @@ TokenGraph::Node* TokenGraph::nodeAt(pair<int, int> coordinate) {
 
 pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) {
 	if (nodes->find(coordinate) == nodes->end()) {
-		throw std::exception(); // TODO need richer exception type
+		throw std::invalid_argument("Coordinate is not on graph.");
 	}
 	return coordinate;
 }
@@ -151,13 +138,6 @@ void TokenGraph::setupSearchAttributes(AbstractToken* match) {
 		Node* n = entry.second;
 		// Don't search Nodes more than once
 		if (*n->color == Node::BLACK) {
-			*n->distance = INT_MAX;
-			continue;
-		}
-		// We're searching rows and columns
-		if (*n->color == Node::YELLOW) {
-			*n->color = Node::WHITE;
-			*n->distance = INT_MAX;
 			continue;
 		}
 		n->init(n->token, match, n->adjacents);
@@ -189,6 +169,7 @@ void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node
 	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
 	// This node will be searched if it's connected to source of search.
 	if (AbstractToken::areSameType(match, token)) {
+		// This Node has already been initialized.
 		if (color) {
 			*color = WHITE;
 		}
@@ -199,6 +180,7 @@ void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node
 	else {
 		*color = RED;
 	}
+	// This Node has already been initialized.
 	if (distance) {
 		*distance = INT_MAX;
 	}
