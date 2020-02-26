@@ -50,7 +50,7 @@ HarvestTile* GBMapLoader::nextTile() {
 }
 
 ResourceToken* GBMapLoader::nextToken() {
-	return new ResourceToken(static_cast<ResourceToken::ResourceType>(scanner->nextInt()));
+	return new ResourceToken(AS_TYPE(scanner->nextInt(), ResourceToken::ResourceType));
 }
 
 pair<int, int> GBMapLoader::nextSquare() {
