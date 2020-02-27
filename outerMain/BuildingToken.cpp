@@ -1,16 +1,18 @@
+#include <iostream>
+#include <string>
+
 #include "BuildingToken.h"
 #include "Random.h"
-#include <iostream>
-using std::cout;
+#include "VGMap.h"
 
 BuildingToken::BuildingToken() : BuildingToken(randomType(), randomValue()) {}
 
 BuildingToken::BuildingType BuildingToken::randomType() {
-	return AS_TYPE(Random::next(0, 3), BuildingType);
+	return static_cast<BuildingType>(Random::next(0, 3));
 }
 
 int BuildingToken::randomValue() {
-	return Random::next(1, 6); // TODO avoid magic constants
+	return Random::next(1, VGMap::HEIGHT);
 }
 
 BuildingToken::BuildingToken(BuildingType type, int value) {
@@ -20,8 +22,9 @@ BuildingToken::BuildingToken(BuildingType type, int value) {
 }
 
 int BuildingToken::validateValue(int value) {
-	if (value < 1 || value > 6) { // TODO avoid magic constatns
-		throw std::exception(); // TODO need richer exception type
+	if (value < 1 || value > VGMap::HEIGHT) {
+		throw std::invalid_argument("Value must be between 1 and "
+			+ std::to_string(VGMap::HEIGHT) + ".");
 	}
 	return value;
 }
@@ -59,16 +62,16 @@ int BuildingToken::getValue() const {
 void BuildingToken::display() const {
     switch (*type) {
         case BuildingType::FOREST:
-            cout << "F";
+            std::cout << "F";
             break;
         case BuildingType::MEADOW:
-            cout << "M";
+            std::cout << "M";
             break;
         case BuildingType::QUARRY:
-            cout << "Q";
+			std::cout << "Q";
             break;
         case BuildingType::WHEATFIELD:
-            cout << "W";
+            std::cout << "W";
             break;
     }
 }
