@@ -34,6 +34,9 @@ public:
 	// Writes this GBMap to the standard output stream.
 	void display() const;
 
+	// Returns the number of connected nodes on the graph underlying the specified GBMap.
+	friend int numberOfNodes(GBMap&);
+
 private:
 
 	int* numPlayers;

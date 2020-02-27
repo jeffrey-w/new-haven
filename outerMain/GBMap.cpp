@@ -134,3 +134,18 @@ vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
 bool GBMap::isOnCorner(int row, int col) {
 	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
 }
+
+int numberOfNodes(GBMap& map) {
+	int nodes;
+	std::map<pair<int, int>, AbstractToken*>& tokens = map.graph->tokens();
+	// Clear map so that all nodes will be counted.
+	for (auto& entry : tokens) {
+		map.graph->setTokenAt(nullptr, entry.first);
+	}
+	nodes = map.graph->search((*tokens.begin()).first);
+	// Put map back into its original state.
+	for (auto& entry : tokens) {
+		map.graph->setTokenAt(entry.second, entry.first);
+	}
+	return nodes / 4;
+}
