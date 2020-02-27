@@ -9,8 +9,7 @@ Player::Player(){
 }
 
 Player::Player(const Player& other){
-    //villageBoard=new VGMap(*other.villageBoard);//TODO consider how must behave with VGmap having no copy constructor
-    villageBoard=other.villageBoard; //TODO for now shallow, consider fixing it
+    villageBoard = new VGMap(*other.villageBoard);
     gatherFacility = new GatherFacility(*other.gatherFacility);
     buildFacility = new BuildFacility(*other.buildFacility);
 }
