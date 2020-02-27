@@ -2,13 +2,18 @@
 
 #include <random>
 
+// A facility for generating random integers.
 class Random {
 
 public:
 
-	Random() = delete;
-	Random(Random&) = delete;
+	// Returns a random integer between the specified origin and bound (inclusive).
 	static int next(int, int);
+
+	// Suppress default constructor.
+	Random() = delete;
+	// Suppress copy constructor.
+	Random(Random&) = delete;
 
 private:
 
