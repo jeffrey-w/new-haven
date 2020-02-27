@@ -6,14 +6,14 @@
 #include <iostream>
 #include "VGMapLoader.h"
 
-#define ASSERT_THROWS(exception, expression) { \
+#define ASSERT_THROWS(exception, expression, msg) { \
     try { \
         (expression); \
-        std::wcout << "false\n"; \
+        std::cout << msg << std::endl; \
     } catch (exception& e) { \
-        std::cout << "true\n"; \
+        std::cout << e.what() << std::endl; \
     } catch (...) { \
-        std::cout << "false\n"; \
+        std::cout << msg << std::endl; \
     } \
 }
 
@@ -44,26 +44,12 @@ int main() {
     std::cout<<"================================================================================\n";
     //TEST PART 2 (VGmap)
     VGMap vmap;
-    Building b1;
-    Building b2;
-    Building b3;
-    Building b4;
-    Building b5;
-    Building b6;
-    Building b7;
-    Building b8;
-    Building b9;
-    Building b10;
-    vmap.setCircle(&b1, {0,0});
-    vmap.setCircle(&b2, {0,1});
-    vmap.setCircle(&b3, {0,2});
-    vmap.setCircle(&b4, {0,3});
-    vmap.setCircle(&b5, {0,4});
-    vmap.setCircle(&b6, {1,0});
-    vmap.setCircle(&b7, {1,1});
-    vmap.setCircle(&b8, {1,2});
-    vmap.setCircle(&b9, {1,3});
-    vmap.setCircle(&b10,{1,4});
+    for (int i = 0; i < VGMap::WIDTH; i++) {
+        vmap.setCircle(new Building(BuildingType::FOREST, 1), { 0, i });
+    }
+    for (int i = 1; i < VGMap::HEIGHT; i++) {
+        vmap.setCircle(new Building(BuildingType::MEADOW, 1), { i, 0 });
+    }
     vmap.display();
 
 
@@ -75,8 +61,7 @@ int main() {
     delete gloaded;
     gloaded = nullptr;
     GBMapLoader gloader2("gmap_bad.txt");
-    std::cout << "Invalid number of players caught by GBMapLoader: ";
-    ASSERT_THROWS(std::invalid_argument, gloader2.load());
+    ASSERT_THROWS(std::invalid_argument, gloader2.load(), "Invalid map read");
 
     VGMapLoader vloader1("vmap.txt");
     VGMap* vloaded = vloader1.load();
@@ -84,18 +69,18 @@ int main() {
     std::cout<<"================================================================================\n";
     // TEST PART 4 (Player)
     Player p;
-    p.buildVillage(&b1, {0,0});
-    p.buildVillage(&b2, {1,0});
-    p.buildVillage(&b3, {2,0});
-    p.buildVillage(&b4, {3,0});
-    p.buildVillage(&b5, {4,0});
-    p.buildVillage(&b6, {5,0});
-    p.buildVillage(&b7, {0,1});
-    p.buildVillage(&b8, {0,2});
-    p.buildVillage(&b9, {0,3});
-    p.buildVillage(&b10, {0,4});
+    for (int i = 0; i < VGMap::WIDTH; i++) {
+        Building* b = new Building(BuildingType::QUARRY, 6);
+        b->flip();
+        p.buildVillage(b, { 0, i });
+    }
+    for (int i = 1; i < VGMap::HEIGHT; i++) {
+        Building* b = new Building(BuildingType::WHEATFIELD, VGMap::HEIGHT - i);
+        b->flip();
+        p.buildVillage(b, { i, 0 });
+    }
     p.villageBoard->display();
-    std::cout<<p.calculateScore()<<std::endl;
+    std::cout << p.calculateScore() << std::endl;
 
 
     std::cout<<"================================================================================\n";
@@ -107,9 +92,6 @@ int main() {
 
     std::cout<<"================================================================================\n";
     //TEST PART 6 (Scoring facilities)
-
-
-
 
 	GBMap map;
 	for (int i = 0; i < 5; i++) {
