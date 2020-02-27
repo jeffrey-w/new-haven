@@ -82,7 +82,7 @@ int main() {
     VGMap* vloaded = vloader1.load();
 
     std::cout<<"================================================================================\n";
-    //TEST PART 4 (Player)
+    // TEST PART 4 (Player)
     Player p;
     p.buildVillage(&b1, {0,0});
     p.buildVillage(&b2, {1,0});
