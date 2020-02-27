@@ -3,7 +3,8 @@
 #include "Building.h"
 
 Building::Building() {
-	token = new BuildingToken(); // Default constructor returns a random BuildingToken.
+	// Default constructor returns a random BuildingToken.
+	token = new BuildingToken();
 }
 
 Building::Building(const Building& other) {
@@ -26,12 +27,12 @@ int Building::getValue() const {
 	return token->getValue();
 }
 
-bool Building::isSpent() const {
+bool Building::isTokenized() const {
 	return token->isPlaced();
 }
 
 BuildingToken* Building::tokenize() {
-	if (isSpent()) {
+	if (isTokenized()) {
 		throw std::logic_error("This Building has already been used.");
 	}
 	return token;

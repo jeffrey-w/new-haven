@@ -25,10 +25,10 @@ public:
 	// Returns the value of this Building.
 	int getValue() const;
 	// Returns true iff this Building has been completely tokenized.
-	bool isSpent() const;
-	// Returns the BuildingToken that constitutes this Building. Throws an exception if this Building has already been tokenized.
+	bool isTokenized() const;
+	// Returns the BuildingToken that constitutes this Building. Throws an exception if this
+	// Building has already been tokenized.
 	BuildingToken* tokenize();
-	// Writes this Building to the standard output stream.
 
 private:
 
