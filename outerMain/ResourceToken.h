@@ -2,12 +2,13 @@
 
 #include "AbstractToken.h"
 
-// The token type that inhabits spaces on a GBMap.
+// The token type that comprises HarvestTiles.
 class ResourceToken : public AbstractToken {
 
 public:
 
-	// The types a Resource may have. (Corresponding BuildingType have corresponding ordinal.)
+	// The types a ResourceToken may have. (Corresponding BuildingTypes have corresponding
+	// ordinals.)
 	enum class ResourceType {
 		SHEEP,
 		STONE,
@@ -21,7 +22,7 @@ public:
 	ResourceToken(ResourceType);
 	// Constructs a new ResourceToken object with the same type as the specified ResourceToken.
 	ResourceToken(const ResourceToken&);
-	// Destructs this ResourceToken object.
+	// Destroys this ResourceToken object.
 	~ResourceToken();
 	// Returns the type of this ResourceToken.
 	int getType() const;
@@ -32,6 +33,6 @@ private:
 	
 	ResourceType* type;
 
-	ResourceToken::ResourceType randomType();
+	static ResourceToken::ResourceType randomType();
 
 };
