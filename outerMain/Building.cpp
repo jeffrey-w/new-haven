@@ -7,6 +7,10 @@ Building::Building() {
 	token = new BuildingToken();
 }
 
+Building::Building(BuildingType type, int value) {
+	token = new BuildingToken(type, value);
+}
+
 Building::Building(const Building& other) {
 	token = new BuildingToken(*other.token);
 }
@@ -36,5 +40,9 @@ BuildingToken* Building::tokenize() {
 		throw std::logic_error("This Building has already been used.");
 	}
 	return token;
+}
+
+void Building::flip() {
+	token->flip();
 }
 
