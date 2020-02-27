@@ -20,10 +20,9 @@ void GBMap::setNumPlayers(int numPlayers) {
 	this->numPlayers = new int(numPlayers);
 }
 
-GBMap::GBMap(GBMap& other) : GBMap(*other.numPlayers) {
+GBMap::GBMap(const GBMap& other) : GBMap(*other.numPlayers) {
 	for (auto& entry : other.graph->tokens()) {
 		ResourceToken* orig = static_cast<ResourceToken*>(entry.second);
-		AS_TYPE(entry.second, ResourceToken*);
 		ResourceToken* resource = orig ? new ResourceToken(*orig) : nullptr;
 		graph->setTokenAt(resource, entry.first);
 	}
@@ -44,8 +43,9 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(from)) {
 		// coordinate has previously been reached by another search.
 		if (!graph->isSearched(coordinate)) {
-			int amount = graph->search(coordinate);
 			int type = graph->tokenAt(coordinate)->getType();
+			// Only search if its possible to locate like resources.
+			int amount = graph->hasType(type) ? graph->search(coordinate) : 1;
 			resources->incrementBy(type, amount);
 		}
 	}
@@ -53,10 +53,10 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	graph->cleanupSearch();
 }
 
-void GBMap::display() {
+void GBMap::display() const {
 	for (int i = 0; i < height(); i++) {
 		for (int j = 0; j < width(); j++) {
-			ResourceToken* resource = AS_TYPE(graph->tokenAt({ i,j }), ResourceToken*);
+			ResourceToken* resource = static_cast<ResourceToken*>(graph->tokenAt({ i, j }));
 			if (resource) {
 				resource->display();
 				std::cout << '\t';
@@ -69,7 +69,7 @@ void GBMap::display() {
 	}
 }
 
-int GBMap::height() {
+int GBMap::height() const {
 	switch (*numPlayers) {
 	case 2:
 		return DIM_MIN;
@@ -81,7 +81,7 @@ int GBMap::height() {
 	}
 }
 
-int GBMap::width() {
+int GBMap::width() const {
 	switch (*numPlayers) {
 	case 2:
 	case 3:

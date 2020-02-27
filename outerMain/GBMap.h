@@ -20,7 +20,7 @@ public:
 	// the specified number of players is not between two and four inclusive.
 	GBMap(int);
 	// Constructs a new GBMap object with the same configuration as the specified GBMap.
-	GBMap(GBMap&);
+	GBMap(const GBMap&);
 	// Destroys this GBMap.
 	~GBMap();
 	// Places the specified HarvestTile onto the specified square of this GBMap. Throws an
@@ -32,7 +32,7 @@ public:
 	// specified square is not on this GBMap.
 	void calculateResources(std::pair<int, int>, GatherFacility*);
 	// Writes this GBMap to the standard output stream.
-	void display();
+	void display() const;
 
 private:
 
@@ -40,8 +40,8 @@ private:
 	TokenGraph* graph;
 	
 	void setNumPlayers(int);
-	int height();
-	int width();
+	int height() const;
+	int width() const;
 	std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false);
 	std::vector<std::pair<int, int>> expand(std::pair<int, int>);
 	void validateSquare(std::pair<int, int>);
