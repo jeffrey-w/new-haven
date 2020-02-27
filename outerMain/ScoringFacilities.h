@@ -35,6 +35,7 @@ public:
 
 private:
 
+	// key: ResourceType value: amount
 	std::map<int, int>* count;
 
 };
