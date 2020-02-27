@@ -8,7 +8,8 @@ HarvestTile::HarvestTile() {
 	current = new int(0);
 	resources = new vector<ResourceToken*>();
 	for (int i = 0; i < NUM_RESOURCES; i++) {
-		resources->push_back(new ResourceToken()); // Default constructor returns a random ResourceToken.
+		// Default constructor returns a random ResourceToken.
+		resources->push_back(new ResourceToken());
 	}
 }
 
@@ -20,25 +21,35 @@ HarvestTile::HarvestTile(const HarvestTile& other) : AbstractPiece(other) {
 	}
 }
 
+HarvestTile::HarvestTile(int orientation) {
+	if (orientation < 0 || orientation >= NUM_RESOURCES) {
+		throw std::invalid_argument("Tile must have an orientation between 0 and 3.");
+	}
+	current = new int(orientation);
+	resources = new vector<ResourceToken*>();
+}
+
 HarvestTile::~HarvestTile() {
 	delete current;
 	delete resources;
 }
 
 void HarvestTile::rotate(int rotations) {
-    ensureNotPlaced();// Prevent mutaion after this harvest tile has already been placed
+	// Prevent mutaion after this harvest tile has already been placed
+	ensureNotPlaced();
 	*current = (*current - rotations + NUM_RESOURCES) % NUM_RESOURCES;
 }
+
 
 void HarvestTile::ensureNotPlaced() {
 	for (auto& resource : *resources) {
 		if (resource->isPlaced()) {
-			throw std::exception(); // TODO need richer exception type
+			throw std::runtime_error("Cannot roate tile after placing it.");
 		}
 	}
 }
 
-bool HarvestTile::isSpent() const {
+bool HarvestTile::isTokenized() const {
 	for (auto& resource : *resources) {
 		if (!resource->isPlaced()) {
 			return false;
@@ -48,8 +59,8 @@ bool HarvestTile::isSpent() const {
 }
 
 ResourceToken* HarvestTile::tokenize() {
-	if (isSpent()) {
-		throw std::exception();
+	if (isTokenized()) {
+		throw std::runtime_error("This tile has already been placed.");
 	}
 	ResourceToken* returnToken = (*resources)[*current];
 	*current = ++(*current) % NUM_RESOURCES;
