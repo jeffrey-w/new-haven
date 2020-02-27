@@ -6,10 +6,12 @@ using std::ifstream;
 using std::string;
 
 Scanner::Scanner(string path) {
+	_line = new int(0);
+	_col = new int(0);
 	start = new std::streampos(0);
 	stream = new ifstream(path);
 	if (stream->fail()) {
-		throw new std::exception(); // TODO need richer exception type
+		throw std::invalid_argument("Unable to open file at " + path + ".");
 	}
 }
 
@@ -18,20 +20,28 @@ Scanner::~Scanner() {
 	delete stream;
 }
 
+int Scanner::line() const {
+	return *_line;
+}
+
+int Scanner::column() const {
+	return *_col;
+}
+
 bool Scanner::hasNext() {
 	return stream->peek() != EOF;
 }
 
 void Scanner::consume(char expected, string msg) {
 	if (stream->peek() != expected) {
-		throw std::exception(); // TODO pass msg here; need richer exception type
+		throw std::runtime_error(msg);
 	}
 	nextChar();
 }
 
 char Scanner::nextChar() {
 	if (!hasNext()) {
-		throw new std::exception(); // TODO need richer exception type
+		throw std::out_of_range("At end of file.");
 	}
 	char result = advance();
 	*start = stream->tellg();
@@ -46,8 +56,11 @@ bool Scanner::nextBool() {
 }
 
 int Scanner::nextInt() {
-	if (!hasNext() || !isDigit(stream->peek())) {
-		throw new std::exception(); // TODO need richer exception type
+	if (!hasNext()) {
+		throw std::out_of_range("At end of file.");
+	}
+	if (!isDigit(stream->peek())) {
+		throw std::runtime_error("Unable to read an integer.");
 	}
 	int length, result;
 	char* buffer;
@@ -73,5 +86,12 @@ bool Scanner::isDigit(char c) {
 char Scanner::advance() {
 	char c;
 	stream->read(&c, sizeof(char));
+	if (c == '\n') {
+		(*_line)++;
+		*_col = 0;
+	}
+	else {
+		(*_col)++;
+	}
 	return c;
 }
