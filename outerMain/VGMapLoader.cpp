@@ -1,3 +1,5 @@
+#include <string>
+
 #include "VGMapLoader.h"
 
 using std::pair;
@@ -18,7 +20,7 @@ VGMap* VGMapLoader::load() {
 		pair<int, int> circle = nextCircle();
 		map->setCircle(building, circle);
 		if (scanner->hasNext()) {
-			scanner->consume('\n', "Expect a new line.");
+			scanner->consume('\n', errorMessage("Expect a new line"));
 		}
 	}
 	return map;
@@ -35,15 +37,15 @@ BuildingToken* VGMapLoader::nextToken() {
 	int value;
 	BuildingToken::BuildingType type;
 	BuildingToken* token;
-	scanner->consume('<', "Expect a '<'.");
+	scanner->consume('<', errorMessage("Expect a '<'"));
 	type = static_cast<BuildingToken::BuildingType>(scanner->nextInt());
-	scanner->consume('>', "Expect a '>'.");
-	scanner->consume('<', "Expect a '<'.");
+	scanner->consume('>', errorMessage("Expect a '>'"));
+	scanner->consume('<', errorMessage("Expect a '<'"));
 	value = scanner->nextInt();
-	scanner->consume('>', "Expect a '>'.");
-	scanner->consume('<', "Expect a '<'.");
+	scanner->consume('>', errorMessage("Expect a '>'"));
+	scanner->consume('<', errorMessage("Expect a '<'"));
 	faceup = scanner->nextBool();
-	scanner->consume('>', "Expect a '>'.");
+	scanner->consume('>', errorMessage("Expect a '>'"));
 	token = new BuildingToken(type, value);
 	if (faceup) {
 		token->flip();
@@ -53,10 +55,15 @@ BuildingToken* VGMapLoader::nextToken() {
 
 pair<int, int> VGMapLoader::nextCircle() {
 	int one, two;
-	scanner->consume('<', "Expect a '<'.");
+	scanner->consume('<', errorMessage("Expect a '<'"));
 	one = scanner->nextInt();
-	scanner->consume(',', "Expect a ','.");
+	scanner->consume(',', errorMessage("Expect a ','"));
 	two = scanner->nextInt();
-	scanner->consume('>', "Expect a '>'.");
+	scanner->consume('>', errorMessage("Expect a '>'"));
 	return pair<int, int>(one, two);
+}
+
+string VGMapLoader::errorMessage(string msg) {
+	return msg + " at " + std::to_string(scanner->line()) + ":"
+		+ std::to_string(scanner->column()) + ".";
 }

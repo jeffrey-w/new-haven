@@ -21,5 +21,7 @@ private:
 	BuildingToken* nextToken();
 	std::pair<int, int> nextCircle();
 
+	std::string errorMessage(std::string);
+
 };
 
