@@ -1,1 +1,2 @@
 Consider passing all object arguments by reference
+References to HarvestTile::NUM_RESOURCES will have to change (not acutally a constant)
