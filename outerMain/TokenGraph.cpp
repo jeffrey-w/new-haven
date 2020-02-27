@@ -1,4 +1,3 @@
-#include <climits> // For INT_MAX.
 #include <queue>
 #include <stdexcept>
 
@@ -93,7 +92,6 @@ bool TokenGraph::isSearched(std::pair<int, int> coordinate) {
 void TokenGraph::cleanupSearch() {
 	for (auto& entry : *nodes) {
 		*entry.second->color = Node::WHITE;
-		*entry.second->distance = INT_MAX; // For consistency.
 	}
 }
 
@@ -112,7 +110,6 @@ int TokenGraph::search(Node* s) {
 	int count = 1;
 	setupSearchAttributes(s->token);
 	*s->color = Node::GRAY;
-	*s->distance = 0;
  	queue<Node*> q = queue<Node*>();
 	q.push(s);
 	while (!q.empty()) {
@@ -120,14 +117,11 @@ int TokenGraph::search(Node* s) {
 		for (auto& v : *u->adjacents) {
 			if (*v->color == Node::WHITE) {
 				*v->color = Node::GRAY;
-				*v->distance = *u->distance + 1;
-				v->prev = u;
 				q.push(v);
 				count++;
 			}
 		}
 		*u->color = Node::BLACK;
-		u->prev = nullptr; // Otherwise destructor misbehaves.
 		q.pop();
 	}
 	return count;
@@ -160,8 +154,6 @@ TokenGraph::Node::~Node() {
 	delete token;
 	delete adjacents;
 	delete color;
-	delete distance;
-	delete prev;
 }
 
 void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node*>* adjacents) {
@@ -180,12 +172,4 @@ void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node
 	else {
 		*color = RED;
 	}
-	// This Node has already been initialized.
-	if (distance) {
-		*distance = INT_MAX;
-	}
-	else {
-		distance = new int(INT_MAX);
-	}
-	prev = nullptr;
 }

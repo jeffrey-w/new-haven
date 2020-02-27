@@ -71,10 +71,8 @@ private:
 		AbstractToken* token;
 		std::set<Node*>* adjacents;
 
-		// Search Attributes.
+		// Search Attribute.
 		int* color;
-		int* distance;
-		Node* prev;
 
 		Node();
 		Node(Node&) = delete;
