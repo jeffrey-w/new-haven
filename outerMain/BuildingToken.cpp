@@ -44,6 +44,9 @@ BuildingToken::~BuildingToken()
 }
 
 void BuildingToken::flip() {
+	if (isPlaced()) {
+		throw std::runtime_error("Cannot flip Building after placing it.");
+	}
 	*faceUp = !(*faceUp);
 }
 
