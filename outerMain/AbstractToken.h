@@ -1,9 +1,5 @@
 #pragma once
 
-// TODO this belongs elsewhare
-#define AS_TYPE(raw, type) \
-	static_cast<type>(raw)
-
 // The base class from which all Tokens (i.e. occupants of TokenGraphs) shall be derived.
 class AbstractToken {
 
