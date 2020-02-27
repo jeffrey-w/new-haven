@@ -6,7 +6,7 @@
 ResourceToken::ResourceToken() : ResourceToken(randomType()) {}
 
 ResourceToken::ResourceType ResourceToken::randomType() {
-	return static_cast<ResourceToken::ResourceType>(Random::next(0, 3)); // TODO can bound be obtained programmatically?
+	return static_cast<ResourceType>(Random::next(0, 3));
 }
 
 ResourceToken::ResourceToken(ResourceType type) {
