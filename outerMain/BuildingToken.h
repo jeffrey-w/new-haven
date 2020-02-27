@@ -7,7 +7,8 @@ class BuildingToken : public AbstractToken {
 
 public:
 
-	// The types a Building may have. (Corresponding ResourceType has corresponding ordinal.)
+	// The types a BuildingToken may have. (Corresponding ResourceTypes has corresponding
+	// ordinals.)
 	enum class BuildingType {
         FOREST,
 		MEADOW,
@@ -17,7 +18,8 @@ public:
 	
 	// Constructs a new BuildingToken object with a random type.
 	BuildingToken();
-	// Constructs a new BuildingToken object with the specified type and value.
+	// Constructs a new BuildingToken object with the specified type and value. Throws an exception
+	// if the specified value is not between one and the height of a VGMap.
 	BuildingToken(BuildingType, int);
 	// Constructs a new BuildingToken object witht the same type and value as the specified BuildingToken.
 	BuildingToken(const BuildingToken&);
@@ -40,8 +42,8 @@ private:
 	int* value;
     bool* faceUp;
 
-	BuildingType randomType();
-	int randomValue();
-	int validateValue(int);
+	static BuildingType randomType();
+	static int randomValue();
+	static int validateValue(int);
 
 };
