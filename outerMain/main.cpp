@@ -1,9 +1,9 @@
+#include <iostream>
+
 #include "GBMap.h"
 #include "GBMapLoader.h"
-#include "VGMap.h"
 #include "Player.h"
-
-#include <iostream>
+#include "VGMap.h"
 #include "VGMapLoader.h"
 
 #define ASSERT_THROWS(exception, expression, msg) { \
@@ -22,6 +22,7 @@ int main() {
 
     //TEST PART 1 (GBMap)
     GBMap gmap;
+    std::cout << numberOfNodes(gmap) << std::endl;
     HarvestTile ht1;
     HarvestTile ht2;
     HarvestTile ht3;
