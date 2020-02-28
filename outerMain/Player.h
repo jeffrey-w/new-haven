@@ -16,6 +16,7 @@ public:
     Player();
     Player(const Player&);
     ~Player();
+    VGMap* getVillageBoard();
     Building* drawBuilding(BuildingDeck*);
     HarvestTile* drawHarvestTile(HarvestTileDeck*);
     void buildVillage(Building*, std::pair<int, int>   );
@@ -24,12 +25,11 @@ public:
     void calculateResources(GBMap*, std::pair<int, int>);
     int calculateScore();
 
-    VGMap* villageBoard;//TODO return to private after done testing in main
 private:
     
-    //VGMap* villageBoard;
-    GatherFacility* gatherFacility; // TODO does this belong here
-    BuildFacility* buildFacility; // TODO does this belong here
+    VGMap* villageBoard;
+    GatherFacility* gatherFacility;
+    BuildFacility* buildFacility;
 
 };
 

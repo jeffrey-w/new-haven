@@ -20,6 +20,10 @@ Player::~Player(){
     delete buildFacility;
 }
 
+VGMap* Player::getVillageBoard() {
+    return villageBoard;
+}
+
 Building* Player::drawBuilding(BuildingDeck* deck) {
 	return deck->drawAs(); // TODO document exception
 }
@@ -28,7 +32,7 @@ HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
 	return deck->drawAs(); // TODO document exception
 }
 
-void Player::buildVillage(Building* building, std::pair<int, int> circle) {
+void Player::buildVillage(Building* building, pair<int, int> circle) {
     villageBoard->setCircle(building, circle);
     int index=circle.first * villageBoard->WIDTH + circle.second;//calculates associated index in buildFacility
     buildFacility->markOccupied(index);
