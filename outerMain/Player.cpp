@@ -25,11 +25,11 @@ VGMap* Player::getVillageBoard() {
 }
 
 Building* Player::drawBuilding(BuildingDeck* deck) {
-	return deck->drawAs(); // TODO document exception
+	return deck->draw(); // TODO document exception
 }
 
 HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
-	return deck->drawAs(); // TODO document exception
+	return deck->draw(); // TODO document exception
 }
 
 void Player::buildVillage(Building* building, pair<int, int> circle) {
