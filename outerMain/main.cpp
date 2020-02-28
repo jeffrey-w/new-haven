@@ -9,11 +9,11 @@
 #define ASSERT_THROWS(exception, expression, msg) { \
     try { \
         (expression); \
-        std::cout << msg << std::endl; \
+        std::cerr << msg << std::endl; \
     } catch (exception& e) { \
-        std::cout << e.what() << std::endl; \
+        std::cerr << e.what() << std::endl; \
     } catch (...) { \
-        std::cout << msg << std::endl; \
+        std::cerr << msg << std::endl; \
     } \
 }
 
@@ -22,6 +22,7 @@ int main() {
 
     //TEST PART 1 (GBMap)
     GBMap gmap;
+    // Connectedness.
     std::cout << numberOfNodes(gmap) << std::endl;
     HarvestTile ht1;
     HarvestTile ht2;
@@ -32,7 +33,6 @@ int main() {
     gmap.setSquare(&ht1, {0,0});
     gmap.setSquare(&ht2, {1,0});
     gmap.setSquare(&ht3, {0,1});
-
     ht4.rotate(1);
     ht5.rotate(2);
     ht6.rotate(3);
@@ -40,6 +40,8 @@ int main() {
     gmap.setSquare(&ht5, {4,3});
     gmap.setSquare(&ht6, {3,4});
     gmap.display();
+    // Invalid map.
+    ASSERT_THROWS(std::invalid_argument, GBMap(5), "ERROR: invalid number of players allowed.");
 
 
     std::cout<<"================================================================================\n";
@@ -62,7 +64,7 @@ int main() {
     delete gloaded;
     gloaded = nullptr;
     GBMapLoader gloader2("gmap_bad.txt");
-    ASSERT_THROWS(std::invalid_argument, gloader2.load(), "Invalid map read");
+    ASSERT_THROWS(std::invalid_argument, gloader2.load(), "ERROR: Invalid map read");
 
     VGMapLoader vloader1("vmap.txt");
     VGMap* vloaded = vloader1.load();
@@ -80,7 +82,7 @@ int main() {
         b->flip();
         p.buildVillage(b, { i, 0 });
     }
-    p.villageBoard->display();
+    p.getVillageBoard()->display();
     std::cout << p.calculateScore() << std::endl;
 
 
@@ -100,9 +102,12 @@ int main() {
 			map.setSquare(new HarvestTile(), { i, j });
 		}
 	}
-	map.display();
 	GatherFacility gf;
+    map.display();
+    std::cout << '\n';
 	map.calculateResources({ 0, 0 }, &gf); // insert breakpoint here when pulled
+	map.display();
+    gf.displayCount();
 
 	return 0;
 }
