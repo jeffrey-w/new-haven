@@ -42,7 +42,7 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 	for (auto& coordinate : coordinatesOf(from)) {
 		// Coordinate is occupied and has not been reached by a previous search.
-		if (graph->tokenAt(coordinate) || !graph->isSearched(coordinate)) {
+		if (graph->tokenAt(coordinate) && !graph->isSearched(coordinate)) {
 			int type = graph->tokenAt(coordinate)->getType();
 			// Only search if it's possible to locate like resources.
 			int amount = graph->hasType(type) ? graph->search(coordinate) : 1;
@@ -65,7 +65,7 @@ void GBMap::display() const {
 				std::cout << "-\t";
 			}
 		}
-		std::cout << "\n\n";
+		std::cout << "\n\n\n";
 	}
 }
 
