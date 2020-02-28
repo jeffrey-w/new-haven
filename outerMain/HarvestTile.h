@@ -39,6 +39,6 @@ private:
 
 	// For GBMapLoader.
 	HarvestTile(int);
-	void ensureNotPlaced();
+	int validateRotation(int);
 
 };

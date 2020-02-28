@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "HarvestTile.h"
 
@@ -35,18 +36,20 @@ HarvestTile::~HarvestTile() {
 }
 
 void HarvestTile::rotate(int rotations) {
-	// Prevent mutaion after this harvest tile has already been placed
-	ensureNotPlaced();
-	*current = (*current - rotations + NUM_RESOURCES) % NUM_RESOURCES;
+	*current = (*current - validateRotation(rotations) + NUM_RESOURCES) % NUM_RESOURCES;
 }
 
-
-void HarvestTile::ensureNotPlaced() {
+int HarvestTile::validateRotation(int rotations) {
+	// Avoid applying remainder operator to a negative number.
+	if (*current + NUM_RESOURCES < rotations) {
+		throw new std::invalid_argument("Cannot rotate " + std::to_string(rotations) + " times.");
+	}
 	for (auto& resource : *resources) {
 		if (resource->isPlaced()) {
 			throw std::runtime_error("Cannot roate tile after placing it.");
 		}
 	}
+	return rotations;
 }
 
 bool HarvestTile::isTokenized() const {
