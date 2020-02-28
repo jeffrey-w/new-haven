@@ -77,6 +77,6 @@ class Hand {
 
 private:
 
-	vector<HarvestTile*>* tiles;
+	std::vector<HarvestTile*>* tiles;
 
 };
