@@ -17,14 +17,13 @@ public:
 	~VGMap();
 	void setCircle(Building*, std::pair<int, int>);
 	void calculateScore(VillageBuildingScoringFacility*);
-	void validateCircle(std::pair<int,int>);
     void display();
 
 private:
 
     TokenGraph* graph;
-    std::array<bool,4>* typePlaced;
 
+	void validatePlacement(Building*, std::pair<int,int>);
 	bool valuesMatch(Building*, int);
 	int countRows();
 	int countCols();

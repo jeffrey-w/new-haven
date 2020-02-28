@@ -11,7 +11,6 @@ using std::cout;
 
 VGMap::VGMap() {
     graph = TokenGraph::gridOf(HEIGHT, WIDTH);
-    typePlaced = new array<bool,4>();
 }
 
 VGMap::VGMap(const VGMap& other) : VGMap() {
@@ -20,34 +19,40 @@ VGMap::VGMap(const VGMap& other) : VGMap() {
         BuildingToken* building = orig ? new BuildingToken(*orig) : nullptr;
         graph->setTokenAt(building, entry.first);
     }
-    for (int i = 0; i < 4; i++) {
-        (*typePlaced)[i] = (*other.typePlaced)[i];
-    }
 }
 
 VGMap::~VGMap() {
 	delete graph;
-	delete typePlaced;
 }
 
 void VGMap::setCircle(Building* building, pair<int, int> circle) {
-    validateCircle(circle);
-    int type = building->getType();
-    if(graph->hasType(type) && !graph->adjacentHolds(circle, type)) {
-        throw std::logic_error("Building must be placed adjacent to same type.");
-    }
-    if(building->isFaceUp() && !valuesMatch(building, circle.first)) {
-        throw std::logic_error("Face up buildings must be placed in appropriate row.");
-    }
-	graph->setTokenAt(building->tokenize(), circle);
-    (*typePlaced)[type] = true;
+    validatePlacement(building, circle);
+    graph->setTokenAt(building->tokenize(), circle);
 }
 
-void VGMap::validateCircle(pair<int, int> circle) {
-    int row = circle.first, col = circle.second;
+void VGMap::validatePlacement(Building* building, pair<int, int> circle) {
+    int row = circle.first, col = circle.second, type;
+    // Null check.
+    if (!building) {
+        throw std::runtime_error("Cannot place the empty building.");
+    }
+    // Bounds check.
 	if(row < 0 || row >= HEIGHT || col < 0 || col >= WIDTH) {
 	    throw std::invalid_argument("Cirlce is not on board.");
 	}
+    // Occupancy check.
+    if (graph->tokenAt(circle)) {
+        throw std::invalid_argument("Circle is already occupied.");
+    }
+    type = building->getType();
+    // Type check.
+    if(graph->hasType(type) && !graph->adjacentHolds(circle, type)) {
+        throw std::logic_error("Building must be placed adjacent to same type.");
+    }
+    // Value check.
+    if(building->isFaceUp() && !valuesMatch(building, circle.first)) {
+        throw std::logic_error("Face up buildings must be placed in appropriate row.");
+    }
 }
 
 bool VGMap::valuesMatch(Building* building, int row) {
