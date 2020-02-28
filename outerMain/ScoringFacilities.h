@@ -30,8 +30,9 @@ public:
 	GatherFacility();
 	GatherFacility(GatherFacility&);
 	~GatherFacility();
-	int countOf(int type);
+	int countOf(int type) const;
 	void incrementBy(int, int);
+	void displayCount() const;
 
 private:
 
