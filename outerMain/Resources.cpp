@@ -25,7 +25,7 @@ void Deck::push(AbstractPiece* piece) {
 }
 
 AbstractPiece* Deck::pop() {
-	if (empty) {
+	if (empty()) {
 		throw std::runtime_error("Cannot draw from an empty deck.");
 	}
 	AbstractPiece* result = pieces->top();
