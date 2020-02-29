@@ -31,17 +31,30 @@ class GatherFacility {
 
 public:
 
+	// Constructs a new GatherFacility object.
 	GatherFacility();
+	// Constructs a new GatherFacility object initialized to the same state as the specified
+	// GatherFacility.
 	GatherFacility(GatherFacility&);
+	// Destroys this GatherFacility.
 	~GatherFacility();
-	int countOf(int type) const;
+	// Returns the amount of the sepcified resource type that has been recorded on this
+	// GatherFacility. Throws an exception if the specified type is not between 0 and the number of
+	// resource types.
+	int countOf(int) const;
+	// Adjusts the amount of the specified resource type recorded on this GatherFacility by the
+	// specified amount. Throws an exception if the specified type is not between 0 and the number
+	// of resource types.
 	void incrementBy(int, int);
+	// Writes this GatherFacility to the statndard output stream.
 	void displayCount() const;
 
 private:
 
 	// key: ResourceType value: amount
 	std::map<int, int>* count;
+
+	int validateType(int) const;
 
 };
 

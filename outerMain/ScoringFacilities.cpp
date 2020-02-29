@@ -42,13 +42,22 @@ GatherFacility::~GatherFacility() {
 	delete count;
 }
 
-int GatherFacility::countOf(int type) const { // TODO validate type
-	return (*count)[type];
+int GatherFacility::countOf(int type) const {
+	return (*count)[validateType(type)];
 }
 
-void GatherFacility::incrementBy(int type, int amount) { // TODO validate type
+void GatherFacility::incrementBy(int type, int amount) {
+	validateType(type);
 	int prior = (*count)[type];
 	(*count)[type] = prior + amount;
+}
+
+int GatherFacility::validateType(int type) const {
+	if (type < 0 || type > TokenGraph::NUM_TYPES - 1) {
+		throw std::runtime_error("Type must be between 0 and "
+			+ std::to_string(TokenGraph::NUM_TYPES - 1));
+	}
+	return type;
 }
 
 void GatherFacility::displayCount() const {
