@@ -1,8 +1,6 @@
 #pragma once
 
 #include <map>
-#include <vector>
-#include <array>
 
 // Records the number of colonists attracted to a Player's village.
 class BuildFacility {
