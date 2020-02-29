@@ -6,8 +6,8 @@ using std::ifstream;
 using std::string;
 
 Scanner::Scanner(string path) {
-	_line = new int(0);
-	_col = new int(0);
+	_line = new int(1);
+	_col = new int(1);
 	start = new std::streampos(0);
 	stream = new ifstream(path);
 	if (stream->fail()) {
