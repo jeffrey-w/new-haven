@@ -58,15 +58,15 @@ int main() {
 
     std::cout<<"================================================================================\n";
     //TEST PART 3 (Map loaders)
-    GBMapLoader gloader1("gmap.txt");
+    GBMapLoader gloader1("res/gmap.txt");
     GBMap* gloaded = gloader1.load();
     gloaded->display();
     delete gloaded;
     gloaded = nullptr;
-    GBMapLoader gloader2("gmap_bad.txt");
+    GBMapLoader gloader2("res/gmap_bad.txt");
     ASSERT_THROWS(std::invalid_argument, gloader2.load(), "ERROR: Invalid map read");
 
-    VGMapLoader vloader1("vmap.txt");
+    VGMapLoader vloader1("res/vmap.txt");
     VGMap* vloaded = vloader1.load();
 
     std::cout<<"================================================================================\n";
@@ -106,7 +106,6 @@ int main() {
     map.display();
     std::cout << '\n';
 	map.calculateResources({ 0, 0 }, &gf); // insert breakpoint here when pulled
-	map.display();
     gf.displayCount();
 
 	return 0;
