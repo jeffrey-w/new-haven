@@ -28,16 +28,16 @@ Building* Player::drawBuilding(BuildingDeck* deck) {
 	return deck->draw(); // TODO document exception
 }
 
-HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
-	return deck->draw(); // TODO document exception
+void Player::drawHarvestTile(HarvestTileDeck* deck) {
+    hand->insert(deck->draw()); // TODO document exception
 }
 
 void Player::buildVillage(Building* building, pair<int, int> circle) {
     villageBoard->setCircle(building, circle); // TODO document exception(s)
 }
 
-void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, pair<int, int> square) {
-    map->setSquare(tile, square); // TODO document exception(s)
+void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) {
+    map->setSquare(hand->exchange(selection), square); // TODO document exception(s)
 }
 
 void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
@@ -51,6 +51,6 @@ void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacilit
 	map->calculateResources(square, resources); // TODO document exception
 }
 
-int Player::calculateScore() {
-    return buildFacility->getScore();
+void Player::calculateScore() {
+    villageBoard->calculateScore(buildFacility); // TODO should only do this once
 }
