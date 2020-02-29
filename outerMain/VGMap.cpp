@@ -47,11 +47,11 @@ void VGMap::validatePlacement(Building* building, pair<int, int> circle) {
     type = building->getType();
     // Type check.
     if(graph->hasType(type) && !graph->adjacentHolds(circle, type)) {
-        throw std::logic_error("Building must be placed adjacent to same type.");
+        throw std::runtime_error("Building must be placed adjacent to same type.");
     }
     // Value check.
     if(building->isFaceUp() && !valuesMatch(building, circle.first)) {
-        throw std::logic_error("Face up buildings must be placed in appropriate row.");
+        throw std::runtime_error("Face up buildings must be placed in appropriate row.");
     }
 }
 

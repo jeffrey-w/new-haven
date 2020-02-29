@@ -37,7 +37,7 @@ bool Building::isTokenized() const {
 
 BuildingToken* Building::tokenize() {
 	if (isTokenized()) {
-		throw std::logic_error("This Building has already been placed.");
+		throw std::runtime_error("This Building has already been placed.");
 	}
 	return token;
 }
