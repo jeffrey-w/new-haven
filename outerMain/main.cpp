@@ -83,7 +83,7 @@ int main() {
         p.buildVillage(b, { i, 0 });
     }
     p.getVillageBoard()->display();
-    std::cout << p.calculateScore() << std::endl;
+    p.calculateScore();
 
 
     std::cout<<"================================================================================\n";
