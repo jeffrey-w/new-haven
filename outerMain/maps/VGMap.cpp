@@ -37,9 +37,9 @@ void VGMap::validatePlacement(Building* building, pair<int, int> circle) {
         throw std::runtime_error("Cannot place the null building.");
     }
     // Bounds check.
-	if(row < 0 || row >= HEIGHT || col < 0 || col >= WIDTH) {
-	    throw std::invalid_argument("Cirlce is not on board.");
-	}
+    if(row < 0 || row >= HEIGHT || col < 0 || col >= WIDTH) {
+        throw std::invalid_argument("Cirlce is not on board.");
+    }
     // Occupancy check.
     if (graph->tokenAt(circle)) {
         throw std::invalid_argument("Circle is already occupied.");
