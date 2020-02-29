@@ -7,8 +7,7 @@
 #include "Resources.h"
 #include "ScoringFacilities.h"
 
-
-
+// The players of New Haven.
 class Player {
 
 public:
