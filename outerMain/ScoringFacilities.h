@@ -27,6 +27,7 @@ private:
 
 };
 
+// Records the number of resources available to Players.
 class GatherFacility {
 
 public:
