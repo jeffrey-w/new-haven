@@ -25,24 +25,24 @@ VGMap* Player::getVillageBoard() {
 }
 
 Building* Player::drawBuilding(BuildingDeck* deck) {
-	return deck->draw(); // TODO document exception
+	return deck->draw();
 }
 
 void Player::drawHarvestTile(HarvestTileDeck* deck) {
-    hand->insert(deck->draw()); // TODO document exception
+    hand->insert(deck->draw());
 }
 
 void Player::buildVillage(Building* building, pair<int, int> circle) {
-    villageBoard->setCircle(building, circle); // TODO document exception(s)
+    villageBoard->setCircle(building, circle);
 }
 
 void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) {
-    map->setSquare(hand->exchange(selection), square); // TODO document exception(s)
+    map->setSquare(hand->exchange(selection), square);
 }
 
 void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
     if (resources->countOf(type) < cost) {
-        throw std::runtime_error("Not enough resoure.");
+        throw std::runtime_error("Not enough resoures.");
     }
     resources->incrementBy(type, -cost);
 }
