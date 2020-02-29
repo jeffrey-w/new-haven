@@ -36,7 +36,7 @@ public:
 	// interpreted as a boolean value. Throws an exception if the file has been consumed.
 	bool nextBool();
 	// Reads the next sequence of bytes of the file specified at the creation of this Scanner that
-	//can be interpreted as an integer, and returns them as such. Throws an exception if the file
+	// can be interpreted as an integer, and returns them as such. Throws an exception if the file
 	// has been consumed or the next character of the file cannot be interpreted as an integer.
 	int nextInt();
 
