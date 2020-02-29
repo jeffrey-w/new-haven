@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stack>
 #include <vector>
 
 #include "AbstractPiece.h"
@@ -32,7 +31,7 @@ protected:
 
 private:
 
-	std::stack<AbstractPiece*>* pieces;
+	std::vector<AbstractPiece*>* pieces;
 
 
 };
