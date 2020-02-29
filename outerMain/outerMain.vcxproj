@@ -154,6 +154,7 @@
     <Text Include="HitList.txt" />
     <Text Include="res\gmap.txt" />
     <Text Include="res\gmap_bad.txt" />
+    <Text Include="res\gmap_bad_format.txt" />
     <Text Include="res\vmap.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
