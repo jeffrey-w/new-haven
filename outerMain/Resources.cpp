@@ -69,3 +69,24 @@ void HarvestTileDeck::add(HarvestTile* tile) {
 HarvestTile* HarvestTileDeck::draw() {
 	return static_cast<HarvestTile*>(pop());
 }
+
+HarvestTile* Hand::exchange(int selection) {
+	HarvestTile* tile;
+	switch (selection) {
+	case 1:
+		tile = one;
+		one = nullptr;
+		break;
+	case 2:
+		tile = two;
+		two = nullptr;
+		break;
+	case 3:
+		tile = shipment;
+		shipment = nullptr;
+		break;
+	default:
+		throw std::runtime_error("Must select [1]st, [2]nd, or [3] shipment tile.");
+	}
+	return tile;
+}
