@@ -68,5 +68,5 @@ pair<int, int> GBMapLoader::nextSquare() {
 
 string GBMapLoader::errorMessage(string msg) {
 	return msg + " at " + std::to_string(scanner->line()) + ":"
-		+ std::to_string(scanner->column()) + ".";
+		+ std::to_string(scanner->column() + 1) + ".";
 }
