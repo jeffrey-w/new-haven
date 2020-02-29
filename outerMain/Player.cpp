@@ -3,20 +3,20 @@
 using std::pair;
 
 Player::Player(){
+    hand = new Hand();
     villageBoard = new VGMap();
-    gatherFacility = new GatherFacility();
     buildFacility = new BuildFacility();
 }
 
 Player::Player(const Player& other){
+    hand = new Hand(*other.hand);
     villageBoard = new VGMap(*other.villageBoard);
-    gatherFacility = new GatherFacility(*other.gatherFacility);
     buildFacility = new BuildFacility(*other.buildFacility);
 }
 
 Player::~Player(){
+    delete hand;
     delete villageBoard;
-    delete gatherFacility;
     delete buildFacility;
 }
 
@@ -33,15 +33,22 @@ HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
 }
 
 void Player::buildVillage(Building* building, pair<int, int> circle) {
-    villageBoard->setCircle(building, circle);
+    villageBoard->setCircle(building, circle); // TODO document exception(s)
 }
 
 void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, pair<int, int> square) {
-    map->setSquare(tile, square);
+    map->setSquare(tile, square); // TODO document exception(s)
 }
 
-void Player::calculateResources(GBMap* map, pair<int, int> square) {
-	map->calculateResources(square, gatherFacility); // TODO document exception
+void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
+    if (resources->countOf(type) < cost) {
+        throw std::runtime_error("Not enough resoure.");
+    }
+    resources->incrementBy(type, -cost);
+}
+
+void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacility* resources) {
+	map->calculateResources(square, resources); // TODO document exception
 }
 
 int Player::calculateScore() {
