@@ -73,13 +73,30 @@ public:
 // The collection of HarvestTiles owned by a Player.
 class Hand {
 
+public:
+
+	// Constructs a new Hand object.
+	Hand();
+	// Contstruts a new Hand object with the specified shipment tile.
+	Hand(HarvestTile*);
+	// Constructs a new Hand object with the same contents as the specified Hand.
+	Hand(const Hand&);
+	// Destroys this Hand.
+	~Hand();
+	// Adds the specified HarvestTile to this Hand.
+	void insert(HarvestTile*);
 	// Returns the HarvestTile selected by a Player.
 	HarvestTile* exchange(int);
+	// Return this Hand's shipment tile.
+	HarvestTile* ship();
 
 private:
 
 	HarvestTile* one;
 	HarvestTile* two;
 	HarvestTile* shipment;
+
+	bool isEmpty();
+	bool isFull();
 
 };

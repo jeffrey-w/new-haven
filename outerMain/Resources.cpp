@@ -70,8 +70,50 @@ HarvestTile* HarvestTileDeck::draw() {
 	return static_cast<HarvestTile*>(pop());
 }
 
+Hand::Hand() : Hand(new HarvestTile()) {}
+
+Hand::Hand(HarvestTile* shipment) {
+	one = nullptr;
+	two = nullptr;
+	this->shipment = shipment;
+}
+
+Hand::Hand(const Hand& other) {
+	one = new HarvestTile(*other.one);
+	two = new HarvestTile(*other.two);
+	shipment = new HarvestTile(*other.shipment);
+}
+
+Hand::~Hand() {
+	delete one;
+	delete two;
+	delete shipment;
+}
+
+void Hand::insert(HarvestTile* tile) {
+	if (isFull()) {
+		throw std::runtime_error("This hand is full.");
+	}
+	else {
+		if (one) {
+			two = tile;
+		}
+		else {
+			one = tile;
+		}
+	}
+}
+
+
+bool Hand::isFull() {
+	return one && two;
+}
+
 HarvestTile* Hand::exchange(int selection) {
 	HarvestTile* tile;
+	if (isEmpty()) {
+		throw std::runtime_error("This hand is empty.");
+	}
 	switch (selection) {
 	case 1:
 		tile = one;
@@ -81,12 +123,20 @@ HarvestTile* Hand::exchange(int selection) {
 		tile = two;
 		two = nullptr;
 		break;
-	case 3:
-		tile = shipment;
-		shipment = nullptr;
-		break;
 	default:
-		throw std::runtime_error("Must select [1]st, [2]nd, or [3] shipment tile.");
+		throw std::runtime_error("Must select [1]st or [2]nd.");
 	}
 	return tile;
 }
+
+bool Hand::isEmpty() {
+	return !(one || two);
+}
+
+HarvestTile* Hand::ship() {
+	if (!shipment) {
+		throw std::runtime_error("Shipment tile already played.");
+	}
+	return shipment;
+}
+
