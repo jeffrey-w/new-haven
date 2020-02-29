@@ -100,7 +100,7 @@ TokenGraph::Node* TokenGraph::nodeAt(pair<int, int> coordinate) {
 }
 
 pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) {
-	if (nodes->find(coordinate) == nodes->end()) {
+	if (!nodes->count(coordinate)) {
 		throw std::invalid_argument("Coordinate is not on graph.");
 	}
 	return coordinate;
