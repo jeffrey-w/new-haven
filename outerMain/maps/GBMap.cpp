@@ -12,7 +12,6 @@ GBMap::GBMap(int numPlayers) {
 	graph = TokenGraph::gridOf(height(), width());
 }
 
-
 void GBMap::setNumPlayers(int numPlayers) {
 	if (!(numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
 		throw std::invalid_argument("Number of players must be between 2 and 4.");
