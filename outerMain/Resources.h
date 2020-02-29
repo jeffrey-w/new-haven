@@ -70,12 +70,16 @@ public:
 
 };
 
+// The collection of HarvestTiles owned by a Player.
 class Hand {
 
-	void exchange();
+	// Returns the HarvestTile selected by a Player.
+	HarvestTile* exchange(int);
 
 private:
 
-	std::vector<HarvestTile*>* tiles;
+	HarvestTile* one;
+	HarvestTile* two;
+	HarvestTile* shipment;
 
 };
