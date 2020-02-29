@@ -34,9 +34,6 @@ HarvestTile* Player::drawHarvestTile(HarvestTileDeck* deck) {
 
 void Player::buildVillage(Building* building, pair<int, int> circle) {
     villageBoard->setCircle(building, circle);
-    int index=circle.first * villageBoard->WIDTH + circle.second;//calculates associated index in buildFacility
-    buildFacility->markOccupied(index);
-    if(!building->isFaceUp()){buildFacility->markFaceDown(index);}
 }
 
 void Player::placeHarvestTile(HarvestTile* tile, GBMap* map, pair<int, int> square) {
