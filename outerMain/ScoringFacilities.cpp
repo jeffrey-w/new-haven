@@ -6,88 +6,25 @@
 #include "VGMap.h"
 
 using std::map;
-using std::vector;
 
 BuildFacility::BuildFacility() {
-	occupied = new std::array<bool,30>();
-	faceDown = new std::array<bool,30>();
+	score = new int(0);
 }
 
-BuildFacility::BuildFacility(BuildFacility& other) {
-	occupied = new std::array<bool,30>(*other.occupied);
-	faceDown = new std::array<bool,30>(*other.faceDown);
+BuildFacility::BuildFacility(const BuildFacility& other) {
+	score = new int(*other.score);
 }
 
 BuildFacility::~BuildFacility() {
-	delete occupied;
-	delete faceDown;
+	delete score;
 }
 
-int BuildFacility::getScore() {
-	return countRows() + countCols();
+int BuildFacility::getScore() const {
+	return *score;
 }
 
-int BuildFacility::countRows() {
-	int score = 0;
-	bool emptyExists;
-	bool faceDownExists;
-	for (uint8_t row = 0; row < VGMap::HEIGHT; row++) {
-        emptyExists=false;
-        faceDownExists=false;
-		for (uint8_t col = 0; col < VGMap::WIDTH; col++) {
-			if (!(*occupied)[(row * VGMap::WIDTH) + col]) {
-			    emptyExists=true;
-				break;
-			}
-            if ((*faceDown)[(row * VGMap::WIDTH) + col]) {
-                faceDownExists=true;
-			}
-		}
-		if(emptyExists){continue;}
-		score+=(faceDownExists)? VGMap::HEIGHT - row : 2*(VGMap::HEIGHT - row);
-	}
-	return score;
-}
-
-int BuildFacility::countCols() { // TODO avoid magic constants
-	int score = 0;
-	bool emptyExists;
-	bool faceDownExists;
-	for (uint8_t col = 0; col < VGMap::WIDTH; col++) {
-	    emptyExists=false;
-	    faceDownExists=false;
-		for (uint8_t row = 0; row < VGMap::HEIGHT; row++) {
-			if (!(*occupied)[(row * VGMap::WIDTH) + col]) {
-			    emptyExists=true;
-				break;
-			}
-			if((*faceDown)[(row * VGMap::WIDTH)+col]){
-			    faceDownExists=true;
-			}
-		}
-		if(emptyExists){ continue;}
-        switch(col){
-            case 0:
-            case 4:
-                score+=(faceDownExists)? 5 : 10;
-                break;
-            case 1:
-            case 3:
-                score+=(faceDownExists)? 4 : 8;
-                break;
-            case 2:
-                score+=(faceDownExists)? 3 : 6;
-        }
-	}
-	return score;
-}
-
-void BuildFacility::markOccupied(int index) { // TODO validate index
-	(*occupied)[index] = true;
-}
-
-void BuildFacility::markFaceDown(int index) {//TODO validate index
-    (*faceDown)[index] = true;
+void BuildFacility::incrementBy(int amount) {
+	*score += amount;
 }
 
 GatherFacility::GatherFacility() {

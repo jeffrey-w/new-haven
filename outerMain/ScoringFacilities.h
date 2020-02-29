@@ -4,22 +4,26 @@
 #include <vector>
 #include <array>
 
+// Records the number of colonists attracted to a Player's village.
 class BuildFacility {
+
 public:
+
+	// Constructs a new VillageBuildingScoringFacility object.
 	BuildFacility();
-	BuildFacility(BuildFacility&);
+	// Constructs a new VillageBuildingScoringFacility obeject with the same score as the specified
+	// VillageBuildingScoringFacility.
+	BuildFacility(const BuildFacility&);
+	// Destrorys this VillageBuildingScoringFacility
 	~BuildFacility();
-	int getScore();
-	void markOccupied(int index);
-    void markFaceDown(int index);
+	// Returns the score recorded by this VillageBuildingScoreFacility.
+	int getScore() const;
+	//Increments the score recorded by this VillageBuildingScoreFacility by the specified amount.
+	void incrementBy(int);
 
 private:
 
-	std::array<bool,30>* occupied;
-    std::array<bool,30>* faceDown;
-
-	int countRows();
-	int countCols();
+	int* score;
 
 };
 
