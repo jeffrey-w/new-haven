@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 
+#include "../maps/VGMap.h"
+#include "../util/Random.h"
 #include "BuildingToken.h"
-#include "Random.h"
-#include "VGMap.h"
 
 BuildingToken::BuildingToken() : BuildingToken(randomType(), randomValue()) {}
 

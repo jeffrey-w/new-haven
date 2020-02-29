@@ -4,7 +4,7 @@
 #include <map>
 #include <set>
 
-#include "AbstractToken.h"
+#include "../pieces/AbstractToken.h"
 
 // A graph that holds AbstractTokens.
 class TokenGraph {

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Building.h"
-#include "GBMap.h"
-#include "HarvestTile.h"
+#include "maps/GBMap.h"
+#include "maps/VGMap.h"
+#include "pieces/Building.h"
+#include "pieces/HarvestTile.h"
 #include "Resources.h"
 #include "ScoringFacilities.h"
-#include "VGMap.h"
 
 
 

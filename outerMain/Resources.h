@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "AbstractPiece.h"
-#include "Building.h"
-#include "HarvestTile.h"
+#include "pieces/AbstractPiece.h"
+#include "pieces/Building.h"
+#include "pieces/HarvestTile.h"
 
 // The base class from which all Decks (i.e. containers for Pieces) shall be derived.
 class Deck {

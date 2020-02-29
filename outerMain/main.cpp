@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "GBMap.h"
-#include "GBMapLoader.h"
+#include "loaders/GBMapLoader.h"
+#include "loaders/VGMapLoader.h"
+#include "maps/GBMap.h"
+#include "maps/VGMap.h"
 #include "Player.h"
-#include "VGMap.h"
-#include "VGMapLoader.h"
 
 #define ASSERT_THROWS(exception, expression, msg) { \
     try { \

@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "HarvestTile.h"
-#include "TokenGraph.h"
-#include "ScoringFacilities.h"
+#include "../maps/TokenGraph.h"
+#include "../pieces/HarvestTile.h"
+#include "../ScoringFacilities.h"
 
 // The common board onto which HarvestTiles are placed.
 class GBMap {
