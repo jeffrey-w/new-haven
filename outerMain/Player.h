@@ -21,14 +21,14 @@ public:
     HarvestTile* drawHarvestTile(HarvestTileDeck*);
     void buildVillage(Building*, std::pair<int, int>   );
     void placeHarvestTile(HarvestTile*, GBMap*, std::pair<int, int>);
-    void resourceTracker(); // TODO what is this for?
-    void calculateResources(GBMap*, std::pair<int, int>);
+    void resourceTracker(GatherFacility*, int, int); // TODO what is this for?
+    void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
     int calculateScore();
 
 private:
     
+    Hand* hand;
     VGMap* villageBoard;
-    GatherFacility* gatherFacility;
     BuildFacility* buildFacility;
 
 };
