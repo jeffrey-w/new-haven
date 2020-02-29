@@ -64,7 +64,9 @@ int main() {
     delete gloaded;
     gloaded = nullptr;
     GBMapLoader gloader2("res/gmap_bad.txt");
-    ASSERT_THROWS(std::invalid_argument, gloader2.load(), "ERROR: Invalid map read");
+    ASSERT_THROWS(std::invalid_argument, gloader2.load(), "ERROR: Invalid map read.");
+    GBMapLoader gloader3("res/gmap_bad_format.txt");
+    ASSERT_THROWS(std::runtime_error, gloader3.load(), "ERROR: Read from badly formatted file.")
 
     VGMapLoader vloader1("res/vmap.txt");
     VGMap* vloaded = vloader1.load();
