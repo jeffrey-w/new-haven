@@ -59,7 +59,7 @@ bool VGMap::valuesMatch(Building* building, int row) {
     return building->getValue() == HEIGHT - row;
 }
 
-void VGMap::calculateScore(VillageBuildingScoringFacility* score) {
+void VGMap::calculateScore(BuildFacility* score) {
     score->incrementBy(countRows() + countCols());
 }
 

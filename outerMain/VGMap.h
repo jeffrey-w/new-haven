@@ -3,7 +3,7 @@
 #include <array>
 
 #include "Building.h"
-#include "BuildFacilityConcept.h"
+#include "ScoringFacilities.h"
 #include "TokenGraph.h"
 
 class VGMap {
@@ -16,7 +16,7 @@ public:
 	VGMap(const VGMap&);
 	~VGMap();
 	void setCircle(Building*, std::pair<int, int>);
-	void calculateScore(VillageBuildingScoringFacility*);
+	void calculateScore(BuildFacility*);
     void display();
 
 private:
