@@ -6,6 +6,7 @@
 #include "../ScoringFacilities.h"
 #include "TokenGraph.h"
 
+// The Board on which Players build their village.
 class VGMap {
 
 public:
