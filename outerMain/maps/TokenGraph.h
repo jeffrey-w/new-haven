@@ -9,9 +9,9 @@
 // A graph that holds AbstractTokens.
 class TokenGraph {
 
-	static constexpr int NUM_TYPES = 4;
-
 public:
+
+	static constexpr int NUM_TYPES = 4;
 
 	// Static factory method: returns a TokenGraph configured as a grid of the specified height
 	// and width.
