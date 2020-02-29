@@ -34,21 +34,21 @@ public:
     // (3) the specified Building is not being placed adjacent to another of the same type, or
     // (4) the specified Building is being played face up on a circle that is not the correct value.
     void buildVillage(Building*, std::pair<int, int>);
-    // Induces this Player to attempt to place the selected HarvestTile onto the specified GBMap at
-    // the specified square. Throws an exception if the specified tile selection is not consistent
-    // with this Player's Hand, or if the specified square is not on the GBMap this Player is playing on.
-    void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, or if the resources available to this Player are insufficiet to
     // cover the specified cost.
     void resourceTracker(GatherFacility*, int, int);
+    // Counts the villagers attracted to this Player's village.
+    void calculateScore();
+    // Induces this Player to attempt to place the selected HarvestTile onto the specified GBMap at
+    // the specified square. Throws an exception if the specified tile selection is not consistent
+    // with this Player's Hand, or if the specified square is not on the GBMap this Player is playing on.
+    void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     // Counts the resources available to this Player ont he specified GBMap, starting from the
     // specified square, and records the results on the specified GatherFacility. Throws an
     // exception if the specified square is not on the GBMap this Player is playing on.
     void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
-    // Counts the villagers attracted to this Player's village.
-    void calculateScore();
 
 private:
     
