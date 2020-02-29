@@ -46,7 +46,7 @@ int HarvestTile::validateRotation(int rotations) {
 	}
 	for (auto& resource : *resources) {
 		if (resource->isPlaced()) {
-			throw std::runtime_error("Cannot roate tile after placing it.");
+			throw std::runtime_error("Cannot rotate tile after placing it.");
 		}
 	}
 	return rotations;
