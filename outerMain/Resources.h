@@ -46,9 +46,11 @@ public:
 	// Constructs a new BuildingDeck object that contains copies of the Buildings contained by the
 	// specified BuildingDeck.
 	BuildingDeck(const BuildingDeck&);
-	// Adds the specified Building to this BuildingDeck.
+	// Adds the specified Building to this BuildingDeck. Throws an exception if the specified
+	// Building is null.
 	void add(Building*);
-	// Removes and returns the Building at the top of this BuildingDeck.
+	// Removes and returns the Building at the top of this BuildingDeck. Throws an exception if
+	// this BuildingDeck is empty.
 	Building* draw();
 
 };
@@ -63,9 +65,11 @@ public:
 	// Constructs a new HarvestTileDeck object that contains copies of the HarvestTiles contained
 	// by the specified HarvestTileDeck.
 	HarvestTileDeck(const HarvestTileDeck&);
-	// Adds the specified HarvestTile to this HarvestTileDeck.
+	// Adds the specified HarvestTile to this HarvestTileDeck. Throws an exception if the specified
+	// HavestTile is null.
 	void add(HarvestTile*);
-	// Removes and returns the HarvestTile at the top of this HarvestTileDeck.
+	// Removes and returns the HarvestTile at the top of this HarvestTileDeck. Throws an exception if
+	// this HarvestTileDeck is empty.
 	HarvestTile* draw();
 
 };
@@ -83,11 +87,13 @@ public:
 	Hand(const Hand&);
 	// Destroys this Hand.
 	~Hand();
-	// Adds the specified HarvestTile to this Hand.
+	// Adds the specified HarvestTile to this Hand. Throws an exception if this Hand is full.
 	void insert(HarvestTile*);
-	// Returns the HarvestTile selected by a Player.
+	// Returns the HarvestTile selected by a Player. Throws an exception if the specified selection
+	// is not between one and two inclusive.
 	HarvestTile* exchange(int);
-	// Return this Hand's shipment tile.
+	// Return this Hand's shipment tile. Throws an exception if this Hand does not contain a
+	// shipment tile.
 	HarvestTile* ship();
 
 private:
