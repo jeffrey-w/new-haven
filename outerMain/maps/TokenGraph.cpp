@@ -128,7 +128,7 @@ int TokenGraph::search(Node* s) {
 }
 
 void TokenGraph::setupSearchAttributes(AbstractToken* match) {
-	for (auto entry : *nodes) {
+	for (auto& entry : *nodes) {
 		Node* n = entry.second;
 		// Don't search Nodes more than once
 		if (*n->color == Node::BLACK) {
