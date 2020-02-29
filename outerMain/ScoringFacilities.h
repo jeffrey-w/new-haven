@@ -18,7 +18,7 @@ public:
 	~BuildFacility();
 	// Returns the score recorded by this VillageBuildingScoreFacility.
 	int getScore() const;
-	//Increments the score recorded by this VillageBuildingScoreFacility by the specified amount.
+	// Increments the score recorded by this VillageBuildingScoreFacility by the specified amount.
 	void incrementBy(int);
 
 private:
