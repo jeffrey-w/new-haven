@@ -62,7 +62,7 @@ int Scanner::nextInt() {
 	if (!isDigit(stream->peek())) {
 		throw std::runtime_error("Unable to read an integer.");
 	}
-	int length, result;
+	size_t length, result;
 	char* buffer;
 	do {
 		advance();
