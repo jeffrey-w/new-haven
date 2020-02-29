@@ -18,12 +18,12 @@ public:
     ~Player();
     VGMap* getVillageBoard();
     Building* drawBuilding(BuildingDeck*);
-    HarvestTile* drawHarvestTile(HarvestTileDeck*);
+    void drawHarvestTile(HarvestTileDeck*);
     void buildVillage(Building*, std::pair<int, int>   );
-    void placeHarvestTile(HarvestTile*, GBMap*, std::pair<int, int>);
+    void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     void resourceTracker(GatherFacility*, int, int); // TODO what is this for?
     void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
-    int calculateScore();
+    void calculateScore();
 
 private:
     
