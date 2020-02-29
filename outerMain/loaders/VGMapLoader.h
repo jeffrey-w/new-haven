@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Scanner.h"
-#include "VGMap.h"
+#include "../maps/VGMap.h"
+#include "../util/Scanner.h"
 
 class VGMapLoader {
 

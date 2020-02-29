@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 
-#include "HarvestTile.h"
+#include "maps/VGMap.h"
+#include "pieces/HarvestTile.h"
 #include "ScoringFacilities.h"
-#include "VGMap.h"
 
 using std::map;
 

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Random.h"
+#include "../util/Random.h"
 #include "ResourceToken.h"
 
 ResourceToken::ResourceToken() : ResourceToken(randomType()) {}

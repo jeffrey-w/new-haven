@@ -2,8 +2,8 @@
 
 #include <array>
 
-#include "Building.h"
-#include "ScoringFacilities.h"
+#include "../pieces/Building.h"
+#include "../ScoringFacilities.h"
 #include "TokenGraph.h"
 
 class VGMap {

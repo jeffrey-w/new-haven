@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GBMap.h"
-#include "Scanner.h"
+#include "../maps/GBMap.h"
+#include "../util/Scanner.h"
 
 // A utility to read a serialized GBMap and return it as an object.
 class GBMapLoader {
