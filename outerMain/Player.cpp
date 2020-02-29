@@ -3,9 +3,9 @@
 using std::pair;
 
 Player::Player(){
-    villageBoard = new VGMap;
-    gatherFacility = new GatherFacility;
-    buildFacility = new BuildFacility;
+    villageBoard = new VGMap();
+    gatherFacility = new GatherFacility();
+    buildFacility = new BuildFacility();
 }
 
 Player::Player(const Player& other){
