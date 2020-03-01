@@ -6,6 +6,8 @@
 #include "maps/VGMap.h"
 #include "Player.h"
 
+
+// TODO delete this
 #define ASSERT_THROWS(exception, expression, msg) { \
     try { \
         (expression); \
