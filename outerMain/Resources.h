@@ -77,24 +77,24 @@ public:
 };
 
 // The collection of HarvestTiles owned by a Player.
-class Hand {
+class HarvestTileHand {
 
 public:
 
-	// Constructs a new Hand object.
-	Hand();
-	// Contstruts a new Hand object with the specified shipment tile.
-	Hand(HarvestTile*);
-	// Constructs a new Hand object with the same contents as the specified Hand.
-	Hand(const Hand&);
-	// Destroys this Hand.
-	~Hand();
-	// Adds the specified HarvestTile to this Hand. Throws an exception if this Hand is full.
+	// Constructs a new HarvestTileHand object.
+	HarvestTileHand();
+	// Contstruts a new HarvestTileHand object with the specified shipment tile.
+	HarvestTileHand(HarvestTile*);
+	// Constructs a new HarvestTileHand object with the same contents as the specified Hand.
+	HarvestTileHand(const HarvestTileHand&);
+	// Destroys this HarvestTileHand.
+	~HarvestTileHand();
+	// Adds the specified HarvestTile to this HarvestTileHand. Throws an exception if this HarvestTileHand is full.
 	void insert(HarvestTile*);
 	// Returns the HarvestTile selected by a Player. Throws an exception if the specified selection
 	// is not between one and two inclusive.
 	HarvestTile* exchange(int);
-	// Return this Hand's shipment tile. Throws an exception if this Hand does not contain a
+	// Return this HarvestTileHand's shipment tile. Throws an exception if this Hand does not contain a
 	// shipment tile.
 	HarvestTile* ship();
 
@@ -107,4 +107,26 @@ private:
 	bool isEmpty();
 	bool isFull();
 
+};
+
+// The collection of Buildings owned by a Player.
+class BuildingHand {
+	
+public:
+	// Constructs a new BuildingHand object.
+	BuildingHand();
+	// Constructs a new BuildingHand object with the same contents as the specified BuildingHand.
+	BuildingHand(const BuildingHand&);
+	// Destroys this BuildingHand.
+	~BuildingHand();
+	// Adds the specified Building to this BuildingHand.
+	void insert(Building*);
+	// Returns the Building selected by a Player. Throws an exception if the specified selection
+	// does not exist.
+	Building* select(int);
+
+private:
+
+	std::vector<Building*>* ownedBuildings;
+	bool isEmpty();
 };

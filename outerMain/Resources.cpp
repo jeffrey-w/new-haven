@@ -91,27 +91,27 @@ HarvestTile* HarvestTileDeck::draw() {
 	return static_cast<HarvestTile*>(pop());
 }
 
-Hand::Hand() : Hand(new HarvestTile()) {}
+HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}
 
-Hand::Hand(HarvestTile* shipment) {
+HarvestTileHand::HarvestTileHand(HarvestTile* shipment) {
 	one = nullptr;
 	two = nullptr;
 	this->shipment = shipment;
 }
 
-Hand::Hand(const Hand& other) {
+HarvestTileHand::HarvestTileHand(const HarvestTileHand& other) {
 	one = new HarvestTile(*other.one);
 	two = new HarvestTile(*other.two);
 	shipment = new HarvestTile(*other.shipment);
 }
 
-Hand::~Hand() {
+HarvestTileHand::~HarvestTileHand() {
 	delete one;
 	delete two;
 	delete shipment;
 }
 
-void Hand::insert(HarvestTile* tile) {
+void HarvestTileHand::insert(HarvestTile* tile) {
 	if (isFull()) {
 		throw std::runtime_error("This hand is full.");
 	}
@@ -125,12 +125,11 @@ void Hand::insert(HarvestTile* tile) {
 	}
 }
 
-
-bool Hand::isFull() {
+bool HarvestTileHand::isFull() {
 	return one && two;
 }
 
-HarvestTile* Hand::exchange(int selection) {
+HarvestTile* HarvestTileHand::exchange(int selection) {
 	HarvestTile* tile;
 	if (isEmpty()) {
 		throw std::runtime_error("This hand is empty.");
@@ -150,14 +149,43 @@ HarvestTile* Hand::exchange(int selection) {
 	return tile;
 }
 
-bool Hand::isEmpty() {
+bool HarvestTileHand::isEmpty() {
 	return !(one || two);
 }
 
-HarvestTile* Hand::ship() {
+HarvestTile* HarvestTileHand::ship() {
 	if (!shipment) {
 		throw std::runtime_error("Shipment tile already played.");
 	}
 	return shipment;
 }
 
+BuildingHand::BuildingHand() {
+	ownedBuildings = new vector<Building*>();
+}
+
+BuildingHand::BuildingHand(const BuildingHand& other) {
+	ownedBuildings = new vector<Building*>();
+	for (auto& building : *other.ownedBuildings) {
+		ownedBuildings->push_back(new Building(*building));
+	}
+}
+
+BuildingHand::~BuildingHand() {
+	delete ownedBuildings;
+	ownedBuildings = nullptr;
+}
+
+void BuildingHand::insert(Building* building) {
+	ownedBuildings->push_back(building);
+}
+
+Building* BuildingHand::select(int selection) {
+	Building* building;
+	if (selection <= 0 || selection > ownedBuildings->size()) {
+		throw std::runtime_error("Selection not in range.");
+	}
+	selection--;
+	building = ownedBuildings->at(selection);
+	return building;
+}
