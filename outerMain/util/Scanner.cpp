@@ -18,6 +18,8 @@ Scanner::Scanner(string path) {
 Scanner::~Scanner() {
 	delete start;
 	delete stream;
+	delete _line;
+	delete _col;
 }
 
 int Scanner::line() const {

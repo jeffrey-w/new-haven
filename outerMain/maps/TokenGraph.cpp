@@ -37,6 +37,9 @@ TokenGraph::TokenGraph() {
 }
 
 TokenGraph::~TokenGraph() {
+    for (auto& node : *nodes){
+        delete node.second;
+    }
 	delete nodes;
 	delete types;
 }
