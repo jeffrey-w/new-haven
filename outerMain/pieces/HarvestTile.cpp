@@ -69,3 +69,14 @@ ResourceToken* HarvestTile::tokenize() {
 	*current = ++(*current) % NUM_RESOURCES;
 	return returnToken;
 }
+
+void HarvestTile::print() {
+	resources->at(0)->display();
+	std::cout << " | ";
+	resources->at(1)->display();
+	std::cout << "\n";
+	resources->at(3)->display();
+	std::cout << " | ";
+	resources->at(2)->display();
+	std::cout << "\n";
+}

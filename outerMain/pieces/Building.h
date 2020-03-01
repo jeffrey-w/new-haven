@@ -37,6 +37,8 @@ public:
 	// Flips this Building. If it was previously face up, it becomes face down and vice versa.
 	// Throws an exception if this BuildingToken has already been placed
 	void flip();
+	// Prints building.
+	void print();
 
 private:
 

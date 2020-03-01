@@ -46,3 +46,7 @@ void Building::flip() {
 	token->flip();
 }
 
+void Building::print() {
+	token->display();
+}
+

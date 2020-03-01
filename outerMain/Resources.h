@@ -96,6 +96,8 @@ public:
 	// Return this HarvestTileHand's shipment tile. Throws an exception if this Hand does not contain a
 	// shipment tile.
 	HarvestTile* ship();
+	// prints all the harvest tiles contained in the hand
+	void display();
 
 private:
 
@@ -123,6 +125,8 @@ public:
 	// Returns the Building selected by a Player. Throws an exception if the specified selection
 	// does not exist.
 	Building* select(int);
+	// prints all the buildings contained in the hand
+	void display();
 
 private:
 
