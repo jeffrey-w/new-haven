@@ -62,13 +62,13 @@ int Scanner::nextInt() {
 	if (!isDigit(stream->peek())) {
 		throw std::runtime_error("Unable to read an integer.");
 	}
-	int length, result;
+	int length = 0, result;
 	char* buffer;
 	do {
 		advance();
+		length++;
 	} while (isDigit(stream->peek()));
-	length = stream->tellg() - *start;
-	*start = stream->tellg();
+	*start = stream->tellg(); // TODO this doesn't work when at EOF after scanning int
 	buffer = new char[length + 1];
 	stream->seekg(-length, std::ios_base::cur);
 	stream->read(buffer, length);
