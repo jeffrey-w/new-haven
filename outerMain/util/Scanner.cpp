@@ -68,7 +68,10 @@ int Scanner::nextInt() {
 		advance();
 		length++;
 	} while (isDigit(stream->peek()));
-	*start = stream->tellg(); // TODO this doesn't work when at EOF after scanning int
+	if (stream->eof()) {
+		stream->seekg(0, stream->end);
+	}
+	*start = stream->tellg();
 	buffer = new char[length + 1];
 	stream->seekg(-length, std::ios_base::cur);
 	stream->read(buffer, length);
