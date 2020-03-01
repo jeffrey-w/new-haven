@@ -115,7 +115,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="maps\GBMapDriver.cpp" />
+    <ClCompile Include="test\GBMapDriver.cpp" />
+    <ClCompile Include="test\MapLoaderDriver.cpp" />
+    <ClCompile Include="test\VGMapDriver.cpp" />
     <ClCompile Include="pieces\AbstractToken.cpp" />
     <ClCompile Include="pieces\Building.cpp" />
     <ClCompile Include="pieces\BuildingToken.cpp" />
@@ -134,6 +136,9 @@
     <ClCompile Include="loaders\VGMapLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="test\GBMapDriver.h" />
+    <ClInclude Include="test\MapLoaderDriver.h" />
+    <ClInclude Include="test\VGMapDriver.h" />
     <ClInclude Include="pieces\AbstractToken.h" />
     <ClInclude Include="pieces\Building.h" />
     <ClInclude Include="pieces\BuildingToken.h" />
@@ -158,6 +163,8 @@
     <Text Include="res\gmap_bad.txt" />
     <Text Include="res\gmap_bad_format.txt" />
     <Text Include="res\vmap.txt" />
+    <Text Include="res\vmap_bad.txt" />
+    <Text Include="res\vmap_bad_syntax.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -63,7 +63,13 @@
     <ClCompile Include="util\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="maps\GBMapDriver.cpp">
+    <ClCompile Include="test\GBMapDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\VGMapDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test\MapLoaderDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,6 +125,15 @@
     <ClInclude Include="util\Assert.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="test\GBMapDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\VGMapDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\MapLoaderDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="HitList.txt" />
@@ -126,5 +141,7 @@
     <Text Include="res\gmap_bad.txt" />
     <Text Include="res\vmap.txt" />
     <Text Include="res\gmap_bad_format.txt" />
+    <Text Include="res\vmap_bad.txt" />
+    <Text Include="res\vmap_bad_syntax.txt" />
   </ItemGroup>
 </Project>
