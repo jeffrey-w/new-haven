@@ -22,7 +22,7 @@ public:
     VGMap* getVillageBoard();
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is empty.
-    Building* drawBuilding(BuildingDeck*);
+    void drawBuilding(BuildingDeck*);
     // Induces this Player to draw a HarvestTile from the specified Deck. Throws an exception if
     // the specified Deck is empty.
     void drawHarvestTile(HarvestTileDeck*);
@@ -48,11 +48,13 @@ public:
     // specified square, and records the results on the specified GatherFacility. Throws an
     // exception if the specified square is not on the GBMap this Player is playing on.
     void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
+    void printHarvestTileHand();
+    void printBuildingHand();
 
 private:
     
-    HarvestTileHand* HThand;
-    BuildingHand* Bhand;
+    HarvestTileHand* hHand;
+    BuildingHand* bHand;
     VGMap* villageBoard;
     BuildFacility* buildFacility;
 

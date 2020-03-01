@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 
 #include "Resources.h"
 
@@ -160,6 +161,30 @@ HarvestTile* HarvestTileHand::ship() {
 	return shipment;
 }
 
+void HarvestTileHand::display() {
+	std::cout << "[1]st:\n";
+	if (one) {
+		one->print();
+	}
+	else {
+		std::cout << "None\n";
+	}
+	std::cout << "[2]nd:\n";
+	if (two) {
+		two->print();
+	}
+	else {
+		std::cout << "None\n";
+	}
+	std::cout << "Shipment:\n";
+	if (shipment) {
+		shipment->print();
+	}
+	else {
+		std::cout << "None\n";
+	}
+}
+
 BuildingHand::BuildingHand() {
 	ownedBuildings = new vector<Building*>();
 }
@@ -188,4 +213,27 @@ Building* BuildingHand::select(int selection) {
 	selection--;
 	building = ownedBuildings->at(selection);
 	return building;
+}
+
+bool BuildingHand::isEmpty() {
+	if (ownedBuildings->size() == 0) {
+		return true;
+	}
+	return false;
+}
+
+void BuildingHand::display() {
+	if (isEmpty()) {
+		std::cout << "Building hand is empty!\n";
+	}
+	for (int i = 0; i < ownedBuildings->size(); i++) {
+		if (i == ownedBuildings->size() - 1) {
+			ownedBuildings->at(i)->print();
+		}
+		else {
+			ownedBuildings->at(i)->print();
+			std::cout << ", ";
+		}
+	}
+	std::cout << "\n";
 }

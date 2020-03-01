@@ -3,23 +3,23 @@
 using std::pair;
 
 Player::Player(){
-    HThand = new HarvestTileHand();
-    Bhand = new BuildingHand();
+    hHand = new HarvestTileHand();
+    bHand = new BuildingHand();
     villageBoard = new VGMap();
     buildFacility = new BuildFacility();
 }
 
 Player::Player(const Player& other){
-    HThand = new HarvestTileHand(*other.HThand);
-    Bhand = new BuildingHand(*other.Bhand);
+    hHand = new HarvestTileHand(*other.hHand);
+    bHand = new BuildingHand(*other.bHand);
 
     villageBoard = new VGMap(*other.villageBoard);
     buildFacility = new BuildFacility(*other.buildFacility);
 }
 
 Player::~Player(){
-    delete HThand;
-    delete Bhand;
+    delete hHand;
+    delete bHand;
     delete villageBoard;
     delete buildFacility;
 }
@@ -28,12 +28,12 @@ VGMap* Player::getVillageBoard() {
     return villageBoard;
 }
 
-Building* Player::drawBuilding(BuildingDeck* deck) {
-	return deck->draw();
+void Player::drawBuilding(BuildingDeck* deck) {
+    bHand->insert(deck->draw());
 }
 
 void Player::drawHarvestTile(HarvestTileDeck* deck) {
-    HThand->insert(deck->draw());
+    hHand->insert(deck->draw());
 }
 
 void Player::buildVillage(Building* building, pair<int, int> circle) {
@@ -52,9 +52,17 @@ void Player::calculateScore() {
 }
 
 void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) {
-    map->setSquare(HThand->exchange(selection), square);
+    map->setSquare(hHand->exchange(selection), square);
 }
 
 void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacility* resources) {
 	map->calculateResources(square, resources);
+}
+
+void Player::printHarvestTileHand() {
+    hHand->display();
+}
+
+void Player::printBuildingHand() {
+    bHand->display();
 }

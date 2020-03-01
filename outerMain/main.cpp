@@ -22,7 +22,7 @@
 int main() {
 
 
-    //TEST PART 1 (GBMap)
+    ////TEST PART 1 (GBMap)
     GBMap gmap;
     // Connectedness.
     std::cout << numberOfNodes(gmap) << std::endl;
@@ -47,7 +47,7 @@ int main() {
 
 
     std::cout<<"================================================================================\n";
-    //TEST PART 2 (VGmap)
+    ////TEST PART 2 (VGmap)
     VGMap vmap;
     for (int i = 0; i < VGMap::WIDTH; i++) {
         vmap.setCircle(new Building(BuildingType::FOREST, 1), { 0, i });
@@ -59,7 +59,7 @@ int main() {
 
 
     std::cout<<"================================================================================\n";
-    //TEST PART 3 (Map loaders)
+    ////TEST PART 3 (Map loaders)
     GBMapLoader gloader1("res/gmap.txt");
     GBMap* gloaded = gloader1.load();
     gloaded->display();
@@ -74,7 +74,7 @@ int main() {
     VGMap* vloaded = vloader1.load();
 
     std::cout<<"================================================================================\n";
-    // TEST PART 4 (Player)
+    //// TEST PART 4 (Player)
     Player p;
     for (int i = 0; i < VGMap::WIDTH; i++) {
         Building* b = new Building(BuildingType::QUARRY, 6);
@@ -92,10 +92,27 @@ int main() {
 
     std::cout<<"================================================================================\n";
     //TEST PART 5 (Deck)
+    
+    BuildingDeck bDeck;
+    std::cout << "size of building Deck is currently: " << bDeck.getSize() << "\n";
+    HarvestTileDeck hDeck;
+    hDeck.add(new HarvestTile());
+    hDeck.add(new HarvestTile());
+    hDeck.add(new HarvestTile());
+    std::cout << "size of harvest tile Deck is currently: " << hDeck.getSize() << "\n";
+    //draw buildings
+    for (int i = 0; i < 5; i++) {
+        p.drawBuilding(&bDeck);
+    }
+    std::cout << "after drawing 5 buildings, the size of building Deck is now: " << bDeck.getSize() << "\n";
+    //draw harvest tile
+    p.drawHarvestTile(&hDeck);
+    std::cout << "after drawing 1 harvest tile, the size of harvest tile Deck is now: " << hDeck.getSize() << "\n";
+    p.printHarvestTileHand();
+    std::cout << "Player currently owns the following Buildings in his hand:\n";
+    p.printBuildingHand();
 
-
-
-
+  
 
     std::cout<<"================================================================================\n";
     //TEST PART 6 (Scoring facilities)
@@ -112,5 +129,6 @@ int main() {
 	map.calculateResources({ 0, 0 }, &gf); // insert breakpoint here when pulled
     gf.displayCount();
 
-	return 0;
+	//return 0;
+
 }
