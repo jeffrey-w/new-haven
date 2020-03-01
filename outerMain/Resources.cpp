@@ -19,7 +19,7 @@ bool Deck::empty() const {
 
 void Deck::push(AbstractPiece* piece) {
 	if (!piece) {
-		throw std::invalid_argument("Cannot add the null Piece to a deck.");
+		throw std::invalid_argument("Cannot add the null piece to a deck.");
 	}
 	pieces->push_back(piece);
 }
@@ -189,8 +189,7 @@ BuildingHand::BuildingHand() {
 	ownedBuildings = new vector<Building*>();
 }
 
-BuildingHand::BuildingHand(const BuildingHand& other) {
-	ownedBuildings = new vector<Building*>();
+BuildingHand::BuildingHand(const BuildingHand& other) : BuildingHand() {
 	for (auto& building : *other.ownedBuildings) {
 		ownedBuildings->push_back(new Building(*building));
 	}
@@ -198,7 +197,6 @@ BuildingHand::BuildingHand(const BuildingHand& other) {
 
 BuildingHand::~BuildingHand() {
 	delete ownedBuildings;
-	ownedBuildings = nullptr;
 }
 
 void BuildingHand::insert(Building* building) {
@@ -216,10 +214,7 @@ Building* BuildingHand::select(int selection) {
 }
 
 bool BuildingHand::isEmpty() {
-	if (ownedBuildings->size() == 0) {
-		return true;
-	}
-	return false;
+	return ownedBuildings->empty();
 }
 
 void BuildingHand::display() {
