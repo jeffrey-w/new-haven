@@ -25,16 +25,34 @@ int main() {
     ////TEST PART 1 (GBMap)
     GBMap gmap;
     // Connectedness.
-    std::cout << numberOfNodes(gmap) << std::endl;
+    //std::cout << numberOfNodes(gmap) << std::endl;
     HarvestTile ht1;
     HarvestTile ht2;
     HarvestTile ht3;
     HarvestTile ht4(ht1);
     HarvestTile ht5(ht2);
     HarvestTile ht6(ht3);
+
+    std::cout << "empty map" << std::endl;
+    gmap.display();
+
+    ht1.rotate(1);
+
+    std::cout << "placing 0,0 " << std::endl;
     gmap.setSquare(&ht1, {0,0});
+    gmap.display();
+
+
+    std::cout << "placing 1,0 " << std::endl;
     gmap.setSquare(&ht2, {1,0});
+    gmap.display();
+
+    std::cout << "placing 0,1 " << std::endl;
     gmap.setSquare(&ht3, {0,1});
+    gmap.display();
+
+
+
     ht4.rotate(1);
     ht5.rotate(2);
     ht6.rotate(3);
