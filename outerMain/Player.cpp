@@ -3,19 +3,23 @@
 using std::pair;
 
 Player::Player(){
-    hand = new Hand();
+    HThand = new HarvestTileHand();
+    Bhand = new BuildingHand();
     villageBoard = new VGMap();
     buildFacility = new BuildFacility();
 }
 
 Player::Player(const Player& other){
-    hand = new Hand(*other.hand);
+    HThand = new HarvestTileHand(*other.HThand);
+    Bhand = new BuildingHand(*other.Bhand);
+
     villageBoard = new VGMap(*other.villageBoard);
     buildFacility = new BuildFacility(*other.buildFacility);
 }
 
 Player::~Player(){
-    delete hand;
+    delete HThand;
+    delete Bhand;
     delete villageBoard;
     delete buildFacility;
 }
@@ -29,7 +33,7 @@ Building* Player::drawBuilding(BuildingDeck* deck) {
 }
 
 void Player::drawHarvestTile(HarvestTileDeck* deck) {
-    hand->insert(deck->draw());
+    HThand->insert(deck->draw());
 }
 
 void Player::buildVillage(Building* building, pair<int, int> circle) {
@@ -48,7 +52,7 @@ void Player::calculateScore() {
 }
 
 void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) {
-    map->setSquare(hand->exchange(selection), square);
+    map->setSquare(HThand->exchange(selection), square);
 }
 
 void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacility* resources) {

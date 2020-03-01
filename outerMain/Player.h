@@ -51,7 +51,8 @@ public:
 
 private:
     
-    Hand* hand;
+    HarvestTileHand* HThand;
+    BuildingHand* Bhand;
     VGMap* villageBoard;
     BuildFacility* buildFacility;
 
