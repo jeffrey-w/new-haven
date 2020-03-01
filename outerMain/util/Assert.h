@@ -2,11 +2,24 @@
 
 #include <iostream>
 
-// Compares the expected expression to the the actual expression, printing the specified message if
-// they are not equal. Note that equality is predicated on identity semantics.
-#define ASSERT_EQUALS(expected, actual, msg) { \
-    if((expected) != (actual)) \
-       std::cerr << msg << std::endl; \
+// Compares the expected expression to the the actual expression, and prints the appropriate
+// message given the result. Note that equality is predicated on identity semantics unless the
+// equality operator is overriden for the type of the expected and actual expressions.
+#define ASSERT_EQUALS(expected, actual, success, failure) { \
+    if((expected) == (actual)) \
+       std::cout << success << std::endl; \
+    else \
+       std::cerr << failure << std::endl; \
+}
+
+// Evaluates the specified expression and prints the specified message if successful.
+#define ASSERT_SUCCESS(expression, msg) { \
+    try { \
+       (expression); \
+       std::cout << "Successfully " << msg << std::endl; \
+    } catch (...) { \
+       std::cerr << "ERROR:: exception thrown"; \
+    } \
 }
 
 // Evaluates the specified expression and attempts to catch the specified exception. Should the
@@ -17,7 +30,8 @@
         (expression); \
         std::cerr << msg << std::endl; \
     } catch (exception& e) { \
-        std::cerr << e.what() << std::endl; \
+        std::cout << "Successfully caught excption: "; \
+        std::cout << e.what() << std::endl; \
     } catch (...) { \
         std::cerr << msg << std::endl; \
     } \
