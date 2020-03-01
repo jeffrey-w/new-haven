@@ -15,12 +15,12 @@ public:
 	Deck();
 	// Destroys this Deck.
 	~Deck();
-	// Removes and returns the Piece at the top of this Deck.
-	virtual AbstractPiece* draw() = 0;
 	// Returns true iff this Deck has no pieces in it.
 	bool empty() const;
 	// Returns the number of elements in this Deck
 	int getSize();
+	// Removes and returns the Piece at the top of this Deck.
+	virtual AbstractPiece* draw() = 0;
 
 protected:
 
@@ -133,4 +133,5 @@ private:
 	std::vector<Building*>* ownedBuildings;
 
 	bool isEmpty();
+
 };
