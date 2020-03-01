@@ -64,6 +64,6 @@ pair<int, int> VGMapLoader::nextCircle() {
 }
 
 string VGMapLoader::errorMessage(string msg) {
-	return msg + " at " + std::to_string(scanner->line()) + ":"
+	return msg + " at line " + std::to_string(scanner->line()) + ":"
 		+ std::to_string(scanner->column() + 1) + ".";
 }
