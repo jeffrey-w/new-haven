@@ -16,7 +16,7 @@
 #define ASSERT_SUCCESS(expression, msg) { \
     try { \
        (expression); \
-       std::cout << "Successfully " << msg << std::endl; \
+       std::cout << msg << std::endl; \
     } catch (...) { \
        std::cerr << "ERROR:: exception thrown"; \
     } \
