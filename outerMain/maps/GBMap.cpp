@@ -34,7 +34,7 @@ GBMap::~GBMap() {
 
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	if (!tile) {
-		throw std::runtime_error("Cannot place the null tile.");
+		throw std::invalid_argument("Cannot place the null tile.");
 	}
 	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
