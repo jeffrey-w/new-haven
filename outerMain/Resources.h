@@ -35,7 +35,6 @@ private:
 
 	std::vector<AbstractPiece*>* pieces;
 
-
 };
 
 // The Deck that contains Buildings.
@@ -128,5 +127,6 @@ public:
 private:
 
 	std::vector<Building*>* ownedBuildings;
+
 	bool isEmpty();
 };
