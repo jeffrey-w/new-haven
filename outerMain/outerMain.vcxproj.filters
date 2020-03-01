@@ -72,6 +72,9 @@
     <ClCompile Include="test\MapLoaderDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test\PlayerDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources.h">
@@ -132,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="test\MapLoaderDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\PlayerDriver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
