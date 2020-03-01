@@ -12,7 +12,6 @@ Player::Player(){
 Player::Player(const Player& other){
     hHand = new HarvestTileHand(*other.hHand);
     bHand = new BuildingHand(*other.bHand);
-
     villageBoard = new VGMap(*other.villageBoard);
     buildFacility = new BuildFacility(*other.buildFacility);
 }
