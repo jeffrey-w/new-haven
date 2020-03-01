@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="maps\GBMapDriver.cpp" />
     <ClCompile Include="pieces\AbstractToken.cpp" />
     <ClCompile Include="pieces\Building.cpp" />
     <ClCompile Include="pieces\BuildingToken.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="pieces\HarvestTile.h" />
     <ClInclude Include="pieces\AbstractPiece.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="util\Assert.h" />
     <ClInclude Include="util\Random.h" />
     <ClInclude Include="pieces\ResourceToken.h" />
     <ClInclude Include="Resources.h" />
