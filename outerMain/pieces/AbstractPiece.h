@@ -12,5 +12,6 @@ public:
 	// Iteratively returns the tokens that constitute this AbstractPiece. Throws an exception if
 	// this Piece has already been tokenized.
 	virtual AbstractToken* tokenize() = 0;
-
+	// Writes this Piece to the standard output stream.
+	virtual void display() const = 0;
 };
