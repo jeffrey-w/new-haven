@@ -31,8 +31,8 @@ public:
 	// Iteratively returns the ResourceTokens that constitute this HarvestTile. Throws an
 	// exception if this HarvestTile has already been tokenized.
 	ResourceToken* tokenize();
-	//prints harvest tile
-	void print();
+	// Writes this HarvestTile to the standard output stream.
+	void display() const;
 
 private:
 

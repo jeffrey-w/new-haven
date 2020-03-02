@@ -70,13 +70,16 @@ ResourceToken* HarvestTile::tokenize() {
 	return returnToken;
 }
 
-void HarvestTile::print() {
-	resources->at(0)->display();
-	std::cout << " | ";
-	resources->at(1)->display();
-	std::cout << "\n";
-	resources->at(3)->display();
-	std::cout << " | ";
-	resources->at(2)->display();
-	std::cout << "\n";
+void HarvestTile::display() const {
+	for (int i = 0; i < NUM_RESOURCES; i++) {
+		(*resources)[i]->display();
+		// i is odd
+		if ((i & 1)) {
+			std::cout << '\n';
+		}
+		else {
+			std::cout << " | ";
+		}
+	}
+	std::cout << '\n';
 }

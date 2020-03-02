@@ -16,9 +16,9 @@ public:
 	// Destroys this Deck.
 	~Deck();
 	// Returns true iff this Deck has no pieces in it.
-	bool empty() const;
-	// Returns the number of elements in this Deck
-	int getSize();
+	bool empty() const; // TOD0 rename this to isEmpty()
+	// Returns the number of elements in this Deck.
+	int getSize(); // TODO make this const
 	// Removes and returns the Piece at the top of this Deck.
 	virtual AbstractPiece* draw() = 0;
 

@@ -164,21 +164,21 @@ HarvestTile* HarvestTileHand::ship() {
 void HarvestTileHand::display() {
 	std::cout << "[1]st:\n";
 	if (one) {
-		one->print();
+		one->display();
 	}
 	else {
 		std::cout << "None\n";
 	}
 	std::cout << "[2]nd:\n";
 	if (two) {
-		two->print();
+		two->display();
 	}
 	else {
 		std::cout << "None\n";
 	}
 	std::cout << "Shipment:\n";
 	if (shipment) {
-		shipment->print();
+		shipment->display();
 	}
 	else {
 		std::cout << "None\n";
@@ -223,10 +223,10 @@ void BuildingHand::display() {
 	}
 	for (int i = 0; i < ownedBuildings->size(); i++) {
 		if (i == ownedBuildings->size() - 1) {
-			ownedBuildings->at(i)->print();
+			ownedBuildings->at(i)->display();
 		}
 		else {
-			ownedBuildings->at(i)->print();
+			ownedBuildings->at(i)->display();
 			std::cout << ", ";
 		}
 	}

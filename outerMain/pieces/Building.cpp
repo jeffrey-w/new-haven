@@ -46,7 +46,7 @@ void Building::flip() {
 	token->flip();
 }
 
-void Building::print() {
+void Building::display() const {
 	token->display();
 }
 
