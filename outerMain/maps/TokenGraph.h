@@ -20,7 +20,7 @@ public:
 	// Constructs a new TokenGraph object.
 	TokenGraph();
 	// Suppress copy constructor.
-	TokenGraph(TokenGraph&) = delete;
+	TokenGraph(const TokenGraph&) = delete;
 	// Destroys this TokenGraph.
 	~TokenGraph();
 	// Adds a node to this TokenGraph at the specified coordinate.
