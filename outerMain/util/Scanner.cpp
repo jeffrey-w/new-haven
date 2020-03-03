@@ -5,7 +5,7 @@
 using std::ifstream;
 using std::string;
 
-Scanner::Scanner(string path) {
+Scanner::Scanner(const string& path) {
 	_line = new int(1);
 	_col = new int(1);
 	start = new std::streampos(0);
@@ -16,10 +16,10 @@ Scanner::Scanner(string path) {
 }
 
 Scanner::~Scanner() {
-	delete start;
-	delete stream;
 	delete _line;
 	delete _col;
+	delete start;
+	delete stream;
 }
 
 int Scanner::line() const {
@@ -34,7 +34,7 @@ bool Scanner::hasNext() {
 	return stream->peek() != EOF;
 }
 
-void Scanner::consume(char expected, string msg) {
+void Scanner::consume(char expected, const string& msg) {
 	if (stream->peek() != expected) {
 		throw std::runtime_error(msg);
 	}

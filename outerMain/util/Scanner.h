@@ -11,7 +11,7 @@ public:
 	Scanner() = delete;
 	// Constructs a new Scanner object from the specified file path. Throws an exception if the
 	// file at the specified path cannot be opened.
-	Scanner(std::string);
+	Scanner(const std::string&);
 	// Suppress copy constructor.
 	Scanner(Scanner&) = delete;
 	// Destroys this Scanner.
@@ -28,7 +28,7 @@ public:
 	// Reads the next character of the file specified at the creation of this Scanner and matches
 	// it against the specified character. Throws an exception initialized with the specified
 	// message if the characters do not match.
-	void consume(char, std::string);
+	void consume(char, const std::string&);
 	// Returns the next character of the file specified at the ceration of this Scanner. Throws an
 	// exception if the file has been consumed.
 	char nextChar();
