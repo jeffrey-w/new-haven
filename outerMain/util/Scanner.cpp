@@ -74,7 +74,7 @@ int Scanner::nextInt() {
 		stream->seekg(0, stream->end);
 	}
 	*start = stream->tellg();
-	buffer = new char[length + 1];
+	buffer = new char[(uint64_t)length + 1];
 	stream->seekg(-length, std::ios_base::cur);
 	stream->read(buffer, length);
 	buffer[length] = '\0';
