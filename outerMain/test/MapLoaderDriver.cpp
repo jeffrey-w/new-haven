@@ -8,7 +8,7 @@ void testGBMapLoader() {
 	try {
 		GBMapLoader valid("./res/gmap.txt");
 		GBMapLoader semantics("./res/gmap_bad.txt");
-		GBMapLoader syntax("./res/gmap_bad_format.txt");
+		GBMapLoader syntax("./res/gmap_bad_syntax.txt");
 		GBMap* loaded = nullptr;
 		ASSERT_SUCCESS((loaded = valid.load()), "Successfully loaded valid GBMap.");
 		ASSERT_THROWS(std::invalid_argument, semantics.load(), "ERROR: loaded invalid GBMap.");
