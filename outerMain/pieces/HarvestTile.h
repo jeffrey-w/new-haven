@@ -14,7 +14,7 @@ class HarvestTile : public AbstractPiece {
 public:
 
 	// The number of resources that a HarvestTile holds.
-	constexpr static int NUM_RESOURCES = 4;
+	constexpr static int NUM_RESOURCES = 4; // TODO this is not actually a constant
 	
 	// Constructs a new HarvestTile object.
 	HarvestTile();
