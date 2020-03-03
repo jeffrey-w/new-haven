@@ -34,7 +34,7 @@ GatherFacility::GatherFacility() {
 	}
 }
 
-GatherFacility::GatherFacility(GatherFacility& other) {
+GatherFacility::GatherFacility(const GatherFacility& other) {
 	count = new map<int, int>(*other.count);
 }
 

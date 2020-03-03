@@ -34,7 +34,7 @@ public:
 	GatherFacility();
 	// Constructs a new GatherFacility object initialized to the same state as the specified
 	// GatherFacility.
-	GatherFacility(GatherFacility&);
+	GatherFacility(const GatherFacility&);
 	// Destroys this GatherFacility.
 	~GatherFacility();
 	// Returns the amount of the sepcified resource type that has been recorded on this
