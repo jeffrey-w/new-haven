@@ -20,7 +20,7 @@ public:
 	BuildingToken();
 	// Constructs a new BuildingToken object with the specified type and value. Throws an exception
 	// if the specified value is not between one and the height of a VGMap.
-	BuildingToken(BuildingType, int);
+	BuildingToken(BuildingType, const int);
 	// Constructs a new BuildingToken object witht the same type and value as the specified BuildingToken.
 	BuildingToken(const BuildingToken&);
 	// Destroys this BuildingToken.
@@ -45,6 +45,6 @@ private:
 
 	static BuildingType randomType();
 	static int randomValue();
-	static int validateValue(int);
+	static int validateValue(const int);
 
 };
