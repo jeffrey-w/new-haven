@@ -30,7 +30,7 @@ void VGMap::setCircle(Building* building, pair<int, int> circle) {
     graph->setTokenAt(building->tokenize(), circle);
 }
 
-void VGMap::validatePlacement(Building* building, pair<int, int> circle) {
+void VGMap::validatePlacement(const Building* building, pair<int, int> circle) {
     int row = circle.first, col = circle.second, type;
     // Null check.
     if (!building) {
@@ -55,11 +55,14 @@ void VGMap::validatePlacement(Building* building, pair<int, int> circle) {
     }
 }
 
-bool VGMap::valuesMatch(Building* building, int row) {
+bool VGMap::valuesMatch(const Building* building, int row) {
     return building->getValue() == HEIGHT - row;
 }
 
 void VGMap::calculateScore(BuildFacility* score) {
+    if (!score) {
+        throw std::invalid_argument("Cannot record score on the null build facility.");
+    }
     score->incrementBy(countRows() + countCols());
 }
 
@@ -113,7 +116,7 @@ int VGMap::countCols() {
     return score;
 }
 
-void VGMap::display() {
+void VGMap::display() const {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             BuildingToken* building = static_cast<BuildingToken*>(graph->tokenAt({ i, j }));

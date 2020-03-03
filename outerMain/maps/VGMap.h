@@ -26,17 +26,19 @@ public:
 	// (3) the specified Building is not being placed adjacent to another of the same type, or
 	// (4) the specified Building is being played face up on a circle that is not the correct value.
 	void setCircle(Building*, std::pair<int, int>);
-	// Counts the villagers that have been attracted to this VGMap.
+	// Counts the villagers that have been attracted to this VGMap. Throws an exeption if the
+	// specified BuildFacility is null.
 	void calculateScore(BuildFacility*);
 	// Writes this VGMap to the standard output stream.
-	void display();
+	void display() const;
 
 private:
 
     TokenGraph* graph;
 
-	void validatePlacement(Building*, std::pair<int,int>);
-	bool valuesMatch(Building*, int);
+	static bool valuesMatch(const Building*, int);
+
+	void validatePlacement(const Building*, std::pair<int,int>);
 	int countRows();
 	int countCols();
 
