@@ -42,11 +42,12 @@ private:
 	int* numPlayers;
 	TokenGraph* graph;
 	
+	static std::vector<std::pair<int, int>> expand(std::pair<int, int>);
+	
 	void setNumPlayers(int);
 	int height() const;
 	int width() const;
 	std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false);
-	std::vector<std::pair<int, int>> expand(std::pair<int, int>);
 	void validateSquare(std::pair<int, int>);
 	bool isOnCorner(int, int);
 
