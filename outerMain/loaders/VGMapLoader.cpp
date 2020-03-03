@@ -5,7 +5,7 @@
 using std::pair;
 using std::string;
 
-VGMapLoader::VGMapLoader(string path) {
+VGMapLoader::VGMapLoader(const string& path) {
 	scanner = new Scanner(path);
 }
 
@@ -63,7 +63,7 @@ pair<int, int> VGMapLoader::nextCircle() {
 	return pair<int, int>(one, two);
 }
 
-string VGMapLoader::errorMessage(string msg) {
+string VGMapLoader::errorMessage(const string& msg) {
 	return msg + " at line " + std::to_string(scanner->line()) + ":"
 		+ std::to_string(scanner->column() + 1) + ".";
 }

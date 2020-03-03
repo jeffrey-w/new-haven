@@ -12,7 +12,7 @@ public:
 	VGMapLoader() = delete;
 	// Constructs a new VGMapLoader from the specified path. Throws an exception if the file at the
 	// specified path cannot be opened.
-	VGMapLoader(std::string);
+	VGMapLoader(const std::string&);
 	// Suppress copy constructor.
 	VGMapLoader(VGMapLoader&) = delete;
 	// Destroys this VGMapLoader.
@@ -29,7 +29,7 @@ private:
 	BuildingToken* nextToken();
 	std::pair<int, int> nextCircle();
 
-	std::string errorMessage(std::string);
+	std::string errorMessage(const std::string&);
 
 };
 
