@@ -57,7 +57,7 @@ public:
 	void cleanupSearch();
 	// Returns a mapping from the coordinates of this TokenGraph to the Tokens at those
 	// coordinates.
-	std::map<std::pair<int, int>, AbstractToken*>& tokens();
+	std::map<std::pair<int, int>, AbstractToken*> tokens();
 
 private:
 
