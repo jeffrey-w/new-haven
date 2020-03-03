@@ -163,7 +163,7 @@
     <Text Include="HitList.txt" />
     <Text Include="res\gmap.txt" />
     <Text Include="res\gmap_bad.txt" />
-    <Text Include="res\gmap_bad_format.txt" />
+    <Text Include="res\gmap_bad_syntax.txt" />
     <Text Include="res\vmap.txt" />
     <Text Include="res\vmap_bad.txt" />
     <Text Include="res\vmap_bad_syntax.txt" />
