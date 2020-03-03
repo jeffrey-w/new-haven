@@ -7,7 +7,7 @@ Building::Building() {
 	token = new BuildingToken();
 }
 
-Building::Building(BuildingType type, int value) {
+Building::Building(BuildingType type, const int value) {
 	token = new BuildingToken(type, value);
 }
 

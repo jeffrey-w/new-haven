@@ -18,7 +18,7 @@ public:
 	Building();
 	// Constructs a new Building object with the specifeid type and value. Throws an exception if
 	// the specified value is not between one and the Height of a VGMap.
-	Building(BuildingType, int);
+	Building(BuildingType, const int);
 	// Constructs a new Building object with the same attributes as the specified Building.
 	Building(const Building&);
 	// Destroys this Building.
