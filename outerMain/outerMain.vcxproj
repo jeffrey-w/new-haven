@@ -160,7 +160,6 @@
     <ClInclude Include="loaders\VGMapLoader.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="HitList.txt" />
     <Text Include="res\gmap.txt" />
     <Text Include="res\gmap_bad.txt" />
     <Text Include="res\gmap_bad_syntax.txt" />
