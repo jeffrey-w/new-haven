@@ -75,7 +75,7 @@ private:
 		int* color;
 
 		Node();
-		Node(Node&) = delete;
+		Node(const Node&) = delete;
 		~Node();
 		// Initializes this Node with the specified Token and adjacency set. Should the type of the
 		// specified Token match that of the other, the Node that carries it will be reachable from
