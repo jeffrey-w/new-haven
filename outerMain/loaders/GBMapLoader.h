@@ -12,7 +12,7 @@ public:
 	GBMapLoader() = delete;
 	// Constructs a new GBMapLoader from the specified path. Throws an exception if the file at the
 	// specified path cannot be opened.
-	GBMapLoader(std::string);
+	GBMapLoader(const std::string&);
 	// Suppress copy constructor.
 	GBMapLoader(const GBMapLoader&) = delete;
 	// Destroys this GBMapLoader.
@@ -30,6 +30,6 @@ private:
 	ResourceToken* nextToken();
 	std::pair<int, int> nextSquare();
 
-	std::string errorMessage(std::string);
+	std::string errorMessage(const std::string&);
 
 };

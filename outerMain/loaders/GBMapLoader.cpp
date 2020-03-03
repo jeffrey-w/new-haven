@@ -7,7 +7,7 @@ using std::string;
 
 using ResourceType = ResourceToken::ResourceType;
 
-GBMapLoader::GBMapLoader(string path) {
+GBMapLoader::GBMapLoader(const string& path) {
 	scanner = new Scanner(path);
 }
 
@@ -66,7 +66,7 @@ pair<int, int> GBMapLoader::nextSquare() {
 	return pair<int, int>(one, two);
 }
 
-string GBMapLoader::errorMessage(string msg) {
+string GBMapLoader::errorMessage(const string& msg) {
 	return msg + " at line " + std::to_string(scanner->line()) + ":"
 		+ std::to_string(scanner->column() + 1) + ".";
 }
