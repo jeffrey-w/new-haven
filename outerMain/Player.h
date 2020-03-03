@@ -19,12 +19,12 @@ public:
     // Destroys this Player.
     ~Player();
     // Returns this Player's village board.
-    VGMap* getVillageBoard();
+    VGMap* getVillageBoard() const;
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
-    // specified Deck is empty.
+    // specified Deck is null or empty.
     void drawBuilding(BuildingDeck*);
     // Induces this Player to draw a HarvestTile from the specified Deck. Throws an exception if
-    // the specified Deck is empty.
+    // the specified Deck is null or empty.
     void drawHarvestTile(HarvestTileDeck*);
     // Induces this Player to build the specified Building on their VGMap at the specified circle.
     // Throws an exception if any of the following conditions hold:
@@ -35,26 +35,29 @@ public:
     void buildVillage(Building*, std::pair<int, int>);
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
-    // GatherFacility's bounds, or if the resources available to this Player are insufficiet to
-    // cover the specified cost.
+    // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
+    // available to this Player are insufficiet to cover the specified cost.
     void resourceTracker(GatherFacility*, int, int);
     // Counts the villagers attracted to this Player's village.
     void calculateScore();
     // Induces this Player to attempt to place the selected HarvestTile onto the specified GBMap at
     // the specified square. Throws an exception if the specified tile selection is not consistent
-    // with this Player's Hand, or if the specified square is not on the GBMap this Player is playing on.
+    // with this Player's Hand, if the specified GBMap is null, or if the specified square is not
+    // on the GBMap this Player is playing on.
     void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     // Counts the resources available to this Player ont he specified GBMap, starting from the
     // specified square, and records the results on the specified GatherFacility. Throws an
-    // exception if the specified square is not on the GBMap this Player is playing on.
+    // exception if the specified GBMap is null, or if the specified square is not on the GBMap
+    // this Player is playing on.
     void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
+    // TODO const, rename, and comment these
     void printHarvestTileHand();
     void printBuildingHand();
 
 private:
     
-    HarvestTileHand* hHand;
-    BuildingHand* bHand;
+    HarvestTileHand* tiles;
+    BuildingHand* buildings;
     VGMap* villageBoard;
     BuildFacility* buildFacility;
 
