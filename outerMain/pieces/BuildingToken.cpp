@@ -15,13 +15,13 @@ int BuildingToken::randomValue() {
 	return Random::next(1, VGMap::HEIGHT);
 }
 
-BuildingToken::BuildingToken(BuildingType type, const int value) {
+BuildingToken::BuildingToken(BuildingType type, int value) {
 	this->type = new BuildingType(type);
 	this->value = new int(validateValue(value));
 	this->faceUp = new bool(false);
 }
 
-int BuildingToken::validateValue(const int value) {
+int BuildingToken::validateValue(int value) {
 	if (value < 1 || value > VGMap::HEIGHT) {
 		throw std::invalid_argument("Value must be between 1 and "
 			+ std::to_string(VGMap::HEIGHT) + ".");
