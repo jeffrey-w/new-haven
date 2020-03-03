@@ -25,7 +25,7 @@ public:
 	~HarvestTile();
 	// Rotates this HarvestTile 90 degrees clockwise the specified number of rotations. Throws an
 	// exception if this HarvestTile has already been tokenized.
-	void rotate(int);
+	void rotate(const int);
 	// Returns true iff this HarvestTile has been completely tokenized.
 	bool isTokenized() const;
 	// Iteratively returns the ResourceTokens that constitute this HarvestTile. Throws an
@@ -40,7 +40,7 @@ private:
 	std::vector<ResourceToken*>* resources;
 
 	// For GBMapLoader.
-	HarvestTile(int);
-	int validateRotation(int);
+	HarvestTile(const int);
+	int validateRotation(const int);
 
 };
