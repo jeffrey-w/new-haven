@@ -138,7 +138,7 @@ bool GBMap::isOnCorner(int row, int col) {
 
 int numberOfNodes(GBMap& map) {
 	int nodes;
-	std::map<pair<int, int>, AbstractToken*>& tokens = map.graph->tokens();
+	auto tokens = map.graph->tokens();
 	// Clear map so that all nodes will be counted.
 	for (auto& entry : tokens) {
 		map.graph->setTokenAt(nullptr, entry.first);
