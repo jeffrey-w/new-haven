@@ -13,7 +13,7 @@ Deck::~Deck() {
 	delete pieces;
 }
 
-bool Deck::empty() const {
+bool Deck::isEmpty() const {
 	return pieces->empty();
 }
 
@@ -25,7 +25,7 @@ void Deck::push(AbstractPiece* piece) {
 }
 
 AbstractPiece* Deck::pop() {
-	if (empty()) {
+	if (isEmpty()) {
 		throw std::runtime_error("Cannot draw from an empty deck.");
 	}
 	AbstractPiece* result = pieces->back();
@@ -33,12 +33,12 @@ AbstractPiece* Deck::pop() {
 	return result;
 }
 
-int Deck::getSize() {
+int Deck::getSize() const {
 	return pieces->size();
 }
 
-std::vector<AbstractPiece*>& Deck::asList() const {
-	return *pieces;
+std::vector<AbstractPiece*>* Deck::asList() const {
+	return pieces;
 }
 
 BuildingDeck::BuildingDeck() : Deck() {
@@ -61,7 +61,7 @@ BuildingDeck::BuildingDeck() : Deck() {
 }
 
 BuildingDeck::BuildingDeck(const BuildingDeck& other) : BuildingDeck() {
-	for (auto& piece : other.asList()) {
+	for (auto& piece : *other.asList()) {
 		Building* building = static_cast<Building*>(piece);
 		push(new Building(*building));
 	}
@@ -78,7 +78,7 @@ Building* BuildingDeck::draw() {
 HarvestTileDeck::HarvestTileDeck() : Deck() {}
 
 HarvestTileDeck::HarvestTileDeck(const HarvestTileDeck& other) : HarvestTileDeck() {
-	for (auto piece : other.asList()) {
+	for (auto piece : *other.asList()) {
 		HarvestTile* tile = static_cast<HarvestTile*>(piece);
 		push(new HarvestTile(*tile));
 	}
