@@ -29,7 +29,6 @@ private:
 	HarvestTile* nextTile();
 	ResourceToken* nextToken();
 	std::pair<int, int> nextSquare();
-
 	std::string errorMessage(const std::string&);
 
 };
