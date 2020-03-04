@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "test/GBMapDriver.h"
 #include "test/MapLoaderDriver.h"
+#include "test/PlayerDriver.h"
 #include "test/VGMapDriver.h"
 
 int main() {
@@ -14,26 +15,9 @@ int main() {
     testVGMap();
     testGBMapLoader();
     testVGMapLoader();
-    std::cout<<"================================================================================\n";
-    //// TEST PART 4 (Player)
-    Player p;
-    for (int i = 0; i < VGMap::WIDTH; i++) {
-        Building* b = new Building(BuildingType::QUARRY, 6);
-        b->flip();
-        p.buildVillage(b, { 0, i });
-    }
-    for (int i = 1; i < VGMap::HEIGHT; i++) {
-        Building* b = new Building(BuildingType::WHEATFIELD, VGMap::HEIGHT - i);
-        b->flip();
-        p.buildVillage(b, { i, 0 });
-    }
-    p.getVillageBoard()->display();
-    p.calculateScore();
-
-
-    std::cout<<"================================================================================\n";
+    runPlayerTests();
     //TEST PART 5 (Deck)
-    
+    Player p;
     BuildingDeck bDeck;
     std::cout << "size of building Deck is currently: " << bDeck.getSize() << "\n";
     HarvestTileDeck hDeck;
