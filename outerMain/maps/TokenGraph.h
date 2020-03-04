@@ -32,13 +32,13 @@ public:
 	// Returns the Token occupying this TokenGraph at the specified coordinate, or null if the Node
 	// is empty. Throws an exceptionif the specified coordinate does not referecnce a Node of this
 	// TokenGraph.
-	AbstractToken* tokenAt(std::pair<int, int>);
+	AbstractToken* tokenAt(std::pair<int, int>) const;
 	// Returns true iff this TokenGraph contains a Token of the specified type.
-	bool hasType(int);
+	bool hasType(int) const;
 	// Returns true iff any of the Nodes of this TokenGraoh that are adjacent to the one at the
 	// specified coordinate contain a Token of the specified type. Throws an exception if the
 	// specified coordinate does not reference a Node of this TokenGraph.
-	bool adjacentHolds(std::pair<int, int>, int);
+	bool adjacentHolds(std::pair<int, int>, int) const;
 	// Places the specified Token into the Node at the specified coordinate of this TokenGraph. The
 	// status of the specified Token will be placed after calls to this method return. Throws an
 	// exception if the specified coordinate does not reference a Node of this TokenGraph.
@@ -87,8 +87,8 @@ private:
 	std::map<std::pair<int, int>, Node*>* nodes;
 	std::bitset<NUM_TYPES>* types;
 
-	Node* nodeAt(std::pair<int, int>);
-	std::pair<int, int> validateCoordinate(std::pair<int, int>);
+	Node* nodeAt(std::pair<int, int>) const;
+	std::pair<int, int> validateCoordinate(std::pair<int, int>) const;
 	int search(Node*);
 	void setupSearchAttributes(AbstractToken*);
 

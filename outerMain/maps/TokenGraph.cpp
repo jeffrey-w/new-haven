@@ -55,15 +55,15 @@ void TokenGraph::addEdge(pair<int, int> one, pair<int, int> two) {
 	n->adjacents->insert(m);
 }
 
-AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) {
+AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) const {
 	return nodeAt(coordinate)->token;
 }
 
-bool TokenGraph::hasType(int type) {
+bool TokenGraph::hasType(int type) const {
 	return (*types)[type];
 }
 
-bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) {
+bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) const {
 	for (auto& adjacent : *nodeAt(coordinate)->adjacents) {
 		// Null check.
 		if (!adjacent->token) {
@@ -98,11 +98,11 @@ void TokenGraph::cleanupSearch() {
 	}
 }
 
-TokenGraph::Node* TokenGraph::nodeAt(pair<int, int> coordinate) {
+TokenGraph::Node* TokenGraph::nodeAt(pair<int, int> coordinate) const {
 	return (*nodes)[validateCoordinate(coordinate)];
 }
 
-pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) {
+pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) const {
 	if (!nodes->count(coordinate)) {
 		throw std::invalid_argument("Coordinate is not on graph.");
 	}
