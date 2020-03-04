@@ -27,7 +27,9 @@ Internally, the setSquare function has assertions and validations to ensure vali
 Similarily, on the Village Game Map (VGMap), a player can set their building tiles (circles) to positions from 0 to 5 for height and 0 to 4 for width, for resources meadow, forest, stone and sheep.
 
 The GBMapLoader can read in the "gmap.txt" and will throw an exception for invalid maps such as "gmap_bad.txt".
+The VGMapLoader provides similar functionality for VGMap.s
 
+Serialized map files are found in the directory outerMain/res/. If you encounter an error when running due to this, thes directory should be moved to the folder containing your compiled binary.
  
 Each player is an object, each player will have a harvest_hand, building_hand and their own village_board.
 
@@ -41,5 +43,11 @@ For programming assignment part 1, the harvest tiles are generated randomly and 
 The scoring_facilities class has a count, that fundamentally counts the number of same resources attached to it. 
 This is accomplished by a depth first search as well as applying a layer on top of the GBMap that color codes the nodes according to whether the node is to be searched (GRAY), 
 the node is in the process of getting searched (BLACK) or if the node is to not be searched (RED). If the node is to be labeled in the future to be searched, it is designated (WHITE).
- This approach was influenced by the way the garbage collector in JAVA works.
+This approach was influenced by the way the garbage collector in JAVA works.
 
+To build from Visual Studio:
+
+Unzip the contents of your download.
+Open Visual Studio, and from the 'File' menu, select open > folder.
+From the file browser popup, navigate to the directory into which you unzipped your download.
+Press Ctrl+Shift+B to build the project.
