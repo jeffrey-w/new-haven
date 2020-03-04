@@ -70,6 +70,9 @@ void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacilit
     if (!map) {
         throw std::invalid_argument("Cannot record resources on the null map.");
     }
+    if (!resources) {
+        throw std::invalid_argument("Cannot record on null resources.");
+    }
 	map->calculateResources(square, resources);
 }
 
