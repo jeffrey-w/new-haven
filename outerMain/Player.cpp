@@ -41,8 +41,8 @@ void Player::drawHarvestTile(HarvestTileDeck* deck) {
     tiles->insert(deck->draw());
 }
 
-void Player::buildVillage(Building* building, pair<int, int> circle) {
-    villageBoard->setCircle(building, circle);
+void Player::buildVillage(int selection, pair<int, int> circle) {
+    villageBoard->setCircle(buildings->select(selection), circle);
 }
 
 void Player::resourceTracker(GatherFacility* resources, int type, int cost) {

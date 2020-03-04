@@ -26,13 +26,13 @@ public:
     // Induces this Player to draw a HarvestTile from the specified Deck. Throws an exception if
     // the specified Deck is null or empty.
     void drawHarvestTile(HarvestTileDeck*);
-    // Induces this Player to build the specified Building on their VGMap at the specified circle.
+    // Induces this Player to build the selected Building on their VGMap at the specified circle.
     // Throws an exception if any of the following conditions hold:
-    // (1) the specified Building is null,
+    // (1) the selected building is not consistent with this Player's hand,
     // (2) the specified circle is not on this Player's VGMap or it is already occupied,
     // (3) the specified Building is not being placed adjacent to another of the same type, or
     // (4) the specified Building is being played face up on a circle that is not the correct value.
-    void buildVillage(Building*, std::pair<int, int>); // TODO select building from BuildingHand
+    void buildVillage(int, std::pair<int, int>);
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
