@@ -41,24 +41,7 @@ std::vector<AbstractPiece*>* Deck::asList() const {
 	return pieces;
 }
 
-BuildingDeck::BuildingDeck() : Deck() {
-	for (int i = 0; i < 6; i++) {
-		for (int number = 1; number <= 6; ++number) {
-			for (int type = 0; type < 4; ++type) {
-				switch (type) {
-				case 0: add(new Building(BuildingType::FOREST, number));
-					break;
-				case 1: add(new Building(BuildingType::MEADOW, number));
-					break;
-				case 2: add(new Building(BuildingType::QUARRY, number));
-					break;
-				case 3: add(new Building(BuildingType::WHEATFIELD, number));
-					break;
-				}
-			}
-		}
-	}
-}
+BuildingDeck::BuildingDeck() : Deck() {}
 
 BuildingDeck::BuildingDeck(const BuildingDeck& other) : BuildingDeck() {
 	for (auto& piece : *other.asList()) {
@@ -145,7 +128,7 @@ HarvestTile* HarvestTileHand::exchange(int selection) {
 		two = nullptr;
 		break;
 	default:
-		throw std::runtime_error("Must select [1]st or [2]nd.");
+		throw std::invalid_argument("Must select [1]st or [2]nd.");
 	}
 	return tile;
 }
