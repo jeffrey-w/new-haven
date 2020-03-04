@@ -32,7 +32,7 @@ public:
     // (2) the specified circle is not on this Player's VGMap or it is already occupied,
     // (3) the specified Building is not being placed adjacent to another of the same type, or
     // (4) the specified Building is being played face up on a circle that is not the correct value.
-    void buildVillage(Building*, std::pair<int, int>);
+    void buildVillage(Building*, std::pair<int, int>); // TODO select building from BuildingHand
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
@@ -47,8 +47,8 @@ public:
     void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     // Counts the resources available to this Player ont he specified GBMap, starting from the
     // specified square, and records the results on the specified GatherFacility. Throws an
-    // exception if the specified GBMap is null, or if the specified square is not on the GBMap
-    // this Player is playing on.
+    // exception if the specified GBMap or GatherFacility is null, or if the specified square is
+    // not on the GBMap this Player is playing on.
     void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
     // TODO const, rename, and comment these
     void printHarvestTileHand();
