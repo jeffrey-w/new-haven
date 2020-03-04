@@ -48,7 +48,7 @@ void testDrawHarvestTile() {
 
 void testBuildVillage() { // TODO update this after modifying Player::buildVillage()
 	setup();
-	ASSERT_SUCCESS(player->buildVillage(new Building(), { 0, 0 }), "Successfully built village.");
+	ASSERT_SUCCESS(player->buildVillage(1, { 0, 0 }), "Successfully built village.");
 	tearDown();
 }
 
