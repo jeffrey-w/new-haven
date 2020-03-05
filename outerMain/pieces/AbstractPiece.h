@@ -14,4 +14,5 @@ public:
 	virtual AbstractToken* tokenize() = 0;
 	// Writes this Piece to the standard output stream.
 	virtual void display() const = 0;
+
 };
