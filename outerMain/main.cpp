@@ -18,9 +18,9 @@ int main() {
     runPlayerTests();
     //TEST PART 5 (Deck)
     Player p;
-    BuildingDeck bDeck;
+    Deck<Building> bDeck;
     std::cout << "size of building Deck is currently: " << bDeck.getSize() << "\n";
-    HarvestTileDeck hDeck;
+    Deck<HarvestTile> hDeck;
     hDeck.add(new HarvestTile());
     hDeck.add(new HarvestTile());
     hDeck.add(new HarvestTile());
