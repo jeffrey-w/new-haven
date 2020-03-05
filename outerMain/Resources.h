@@ -1,77 +1,64 @@
 #pragma once
 
+#include <stdexcept>
 #include <vector>
 
 #include "pieces/AbstractPiece.h"
 #include "pieces/Building.h"
 #include "pieces/HarvestTile.h"
 
-// The base class from which all Decks (i.e. containers for Pieces) shall be derived.
+// A stack of pieces.
+template <class T>
 class Deck {
 
 public:
-	
-	// Constructs a new Deck object.
-	Deck();
-	// Destroys this Deck.
-	~Deck();
-	// Returns true iff this Deck has no pieces in it.
-	bool isEmpty() const;
-	// Returns the number of Pieces in this Deck.
-	int getSize() const;
-	// Removes and returns the Piece at the top of this Deck.
-	virtual AbstractPiece* draw() = 0;
 
-protected:
+	// Constructs a new Deck object.
+	Deck() {
+		pieces = new std::vector<T*>();
+	}
+
+	// Constructs a new Deck object with the same contents as the speciifed Deck.
+	Deck(const Deck& other) : Deck() {
+		for (T* piece : *other.pieces) {
+			pieces->push_back(new T(piece));
+		}
+	}
+
+	// Destroys this Deck.
+	~Deck() {
+		delete pieces;
+	}
+
+	// Returns true iff this Deck has no pieces in it.
+	bool isEmpty() const {
+		return pieces->empty();
+	}
+
+	// Returns the number of Pieces in this Deck.
+	size_t getSize() const {
+		return pieces->size();
+	}
 
 	// Puts the specified Piece on the top of this Deck.
-	void push(AbstractPiece*);
-	// Removes the Piece at the top of this Deck.
-	AbstractPiece* pop();
-	// Returns a list view of this Pieces in this Deck.
-	std::vector<AbstractPiece*>* asList() const;
+	void add(T* piece) {
+		pieces->push_back(piece);
+	}
 
+	// Removes and returns the Piece at the top of this Deck. Throws an exception if this Deck is
+	// empty.
+	T* draw() {
+		if (isEmpty()) {
+			throw std::runtime_error("Cannot draw from the empty deck.");
+		}
+		T* piece = pieces->back();
+		pieces->pop_back();
+		return piece;
+	}
+	
 private:
 
-	std::vector<AbstractPiece*>* pieces;
-
-};
-
-// The Deck that contains Buildings.
-class BuildingDeck : public Deck {
-
-public:
-
-	// Constructs a new BuildingDeck object.
-	BuildingDeck();
-	// Constructs a new BuildingDeck object that contains copies of the Buildings contained by the
-	// specified BuildingDeck.
-	BuildingDeck(const BuildingDeck&);
-	// Adds the specified Building to this BuildingDeck. Throws an exception if the specified
-	// Building is null.
-	void add(Building*);
-	// Removes and returns the Building at the top of this BuildingDeck. Throws an exception if
-	// this BuildingDeck is empty.
-	Building* draw();
-
-};
-
-// The Deck that contains HarvestTiles.
-class HarvestTileDeck : public Deck {
-
-public:
-
-	// Constructs a new HarvestTileDeck object.
-	HarvestTileDeck();
-	// Constructs a new HarvestTileDeck object that contains copies of the HarvestTiles contained
-	// by the specified HarvestTileDeck.
-	HarvestTileDeck(const HarvestTileDeck&);
-	// Adds the specified HarvestTile to this HarvestTileDeck. Throws an exception if the specified
-	// HavestTile is null.
-	void add(HarvestTile*);
-	// Removes and returns the HarvestTile at the top of this HarvestTileDeck. Throws an exception if
-	// this HarvestTileDeck is empty.
-	HarvestTile* draw();
+	std::vector<T*>* pieces;
 
 };
 
