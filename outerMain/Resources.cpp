@@ -125,6 +125,14 @@ Building* BuildingHand::select(int selection) {
 	return building;
 }
 
+int BuildingHand::worth() {
+	int worth = 0;
+	for (auto& building : *owned) {
+		worth += building->getValue();
+	}
+	return worth;
+}
+
 
 void BuildingHand::display() const {
 	if (isEmpty()) {

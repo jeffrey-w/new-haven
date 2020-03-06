@@ -112,6 +112,8 @@ public:
 	// Returns the Building selected by a Player. Throws an exception if the specified selection
 	// does not exist.
 	Building* select(int);
+	// Gives the aggregate value of all of the Buildings in this BuildingHand.
+	int worth();
 	// prints all the buildings contained in the hand
 	void display() const;
 
