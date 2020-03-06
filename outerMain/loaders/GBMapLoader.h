@@ -8,7 +8,7 @@ class GBMapLoader {
 
 public:
 
-	// Supress default constructor.
+	// Suppress default constructor.
 	GBMapLoader() = delete;
 	// Constructs a new GBMapLoader from the specified path. Throws an exception if the file at the
 	// specified path cannot be opened.
