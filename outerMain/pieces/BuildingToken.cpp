@@ -63,18 +63,23 @@ int BuildingToken::getValue() const {
 }
 
 void BuildingToken::display() const {
-    switch (*type) {
+	std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const BuildingToken& token) {
+    switch (*token.type) {
         case BuildingType::FOREST:
-            std::cout << "F";
+            stream << "F";
             break;
         case BuildingType::MEADOW:
-            std::cout << "M";
+            stream << "M";
             break;
         case BuildingType::QUARRY:
-			std::cout << "Q";
+			stream << "Q";
             break;
         case BuildingType::WHEATFIELD:
-            std::cout << "W";
+            stream << "W";
             break;
     }
+	return stream;
 }
