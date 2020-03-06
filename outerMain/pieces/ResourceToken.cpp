@@ -3,6 +3,8 @@
 #include "../util/Random.h"
 #include "ResourceToken.h"
 
+using ResourceType = ResourceToken::ResourceType;
+
 ResourceToken::ResourceToken() : ResourceToken(randomType()) {}
 
 ResourceToken::ResourceType ResourceToken::randomType() {
@@ -26,18 +28,23 @@ int ResourceToken::getType() const {
 }
 
 void ResourceToken::display() const {
-	switch (*type) {
+	std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const ResourceToken& token) {
+	switch (*token.type) {
 	case ResourceType::SHEEP:
-		std::cout << "SH";
+		stream << "SH";
 		break;
 	case ResourceType::STONE:
-		std::cout << "ST";
+		stream << "ST";
 		break;
 	case ResourceType::TIMBER:
-		std::cout << "TI";
+		stream << "TI";
 		break;
 	case ResourceType::WHEAT:
-		std::cout << "WH";
+		stream << "WH";
 		break;
 	}
+	return stream;
 }
