@@ -40,6 +40,8 @@ public:
     void resourceTracker(GatherFacility*, int, int);
     // Counts the villagers attracted to this Player's village.
     void calculateScore();
+    // Adds the values of the Buildings in this Player's hand to their score.
+    void adjustScore();
     // Induces this Player to attempt to place the selected HarvestTile onto the specified GBMap at
     // the specified square. Throws an exception if the specified tile selection is not consistent
     // with this Player's Hand, if the specified GBMap is null, or if the specified square is not

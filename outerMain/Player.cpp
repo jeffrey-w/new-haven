@@ -59,6 +59,10 @@ void Player::calculateScore() {
     villageBoard->calculateScore(buildFacility); // TODO should only do this once
 }
 
+void Player::adjustScore() {
+    buildFacility->incrementBy(buildings->worth()); // TODO should only do this once
+}
+
 void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) {
     if (!map) {
         throw std::invalid_argument("Cannot place on the null map.");
