@@ -7,7 +7,6 @@ using std::array;
 using std::map;
 using std::pair;
 using std::queue;
-using std::cout;
 
 VGMap::VGMap() {
     graph = TokenGraph::gridOf(HEIGHT, WIDTH);
@@ -122,12 +121,12 @@ void VGMap::display() const {
             BuildingToken* building = static_cast<BuildingToken*>(graph->tokenAt({ i, j }));
             if (building) {
                 building->display();
-                cout << '\t';
+                std::cout << '\t';
             }
             else {
-                cout << "-\t";
+                std::cout << "-\t";
             }
         }
-        cout << "\n\n\n";
+        std::cout << "\n\n\n";
     }
 }
