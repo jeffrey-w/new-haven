@@ -40,6 +40,8 @@ public:
 	// Writes this Building to the standard output stream.
 	void display() const;
 
+	friend std::ostream& operator<<(std::ostream&, const Building&);
+
 private:
 
 	BuildingToken* token;
