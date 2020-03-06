@@ -41,6 +41,13 @@ void testBuildFacility() {
 	for (int i = 1; i < VGMap::HEIGHT; i++) {
 		map.setCircle(new Building(BuildingType::MEADOW, 1), { i, 0 });
 	}
+	for (int i = 1; i < VGMap::HEIGHT; i++) {
+		Building* b = (i < 3) ? new Building(BuildingType::MEADOW, 1)
+			: new Building(BuildingType::QUARRY, 1);
+		if (i != 3) {
+			map.setCircle(b, { i, 1 });
+		}
+	}
 	map.display();
 	map.calculateScore(&bf);
 	score = bf.getScore();
