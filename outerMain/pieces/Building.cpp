@@ -49,4 +49,3 @@ void Building::flip() {
 void Building::display() const {
 	token->display();
 }
-
