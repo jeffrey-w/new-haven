@@ -128,6 +128,6 @@ void VGMap::display() const {
                 cout << "-\t";
             }
         }
-        cout << "\n\n";
+        cout << "\n\n\n";
     }
 }
