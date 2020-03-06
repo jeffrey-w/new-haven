@@ -9,7 +9,7 @@
 static void testGatherFacility();
 static void testBuildFacility();
 
-void runScoringFacilitiesTests() {
+void testScoringFacilities() {
 	std::cout << "Running scoring facility tests:\n";
 	testGatherFacility();
 	testBuildFacility();

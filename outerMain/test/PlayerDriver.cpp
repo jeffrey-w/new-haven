@@ -15,7 +15,7 @@ static void testCalculateResources();
 static void setup();
 static void tearDown();
 
-void runPlayerTests() {
+void testPlayer() {
 	std::cout << "Running Player tests:" << std::endl;
 	testDrawBuilding();
 	testDrawHarvestTile();

@@ -7,8 +7,8 @@ int main() {
     testVGMap();
     testGBMapLoader();
     testVGMapLoader();
-    runPlayerTests();
+    testPlayer();
     testResources();
-    runScoringFacilitiesTests();
+    testScoringFacilities();
 	return 0;
 }
