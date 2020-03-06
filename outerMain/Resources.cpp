@@ -38,7 +38,7 @@ void HarvestTileHand::insert(HarvestTile* tile) {
 	}
 }
 
-bool HarvestTileHand::isFull() {
+bool HarvestTileHand::isFull() const {
 	return one && two;
 }
 
@@ -62,7 +62,7 @@ HarvestTile* HarvestTileHand::exchange(int selection) {
 	return tile;
 }
 
-bool HarvestTileHand::isEmpty() {
+bool HarvestTileHand::isEmpty() const {
 	return !(one || two);
 }
 
@@ -73,7 +73,7 @@ HarvestTile* HarvestTileHand::ship() {
 	return shipment;
 }
 
-void HarvestTileHand::display() {
+void HarvestTileHand::display() const {
 	std::cout << "[1]st:\n";
 	if (one) {
 		one->display();
@@ -98,49 +98,50 @@ void HarvestTileHand::display() {
 }
 
 BuildingHand::BuildingHand() {
-	ownedBuildings = new vector<Building*>();
+	owned = new vector<Building*>();
 }
 
 BuildingHand::BuildingHand(const BuildingHand& other) : BuildingHand() {
-	for (auto& building : *other.ownedBuildings) {
-		ownedBuildings->push_back(new Building(*building));
+	for (auto& building : *other.owned) {
+		owned->push_back(new Building(*building));
 	}
 }
 
 BuildingHand::~BuildingHand() {
-	delete ownedBuildings;
+	delete owned;
 }
 
 void BuildingHand::insert(Building* building) {
-	ownedBuildings->push_back(building);
+	owned->push_back(building);
 }
 
 Building* BuildingHand::select(int selection) {
 	Building* building;
-	if (selection <= 0 || selection > ownedBuildings->size()) {
+	if (selection <= 0 || selection > owned->size()) {
 		throw std::runtime_error("Selection not in range.");
 	}
 	selection--;
-	building = ownedBuildings->at(selection);
+	building = owned->at(selection);
 	return building;
 }
 
-bool BuildingHand::isEmpty() {
-	return ownedBuildings->empty();
-}
 
-void BuildingHand::display() {
+void BuildingHand::display() const {
 	if (isEmpty()) {
 		std::cout << "Building hand is empty!\n";
 	}
-	for (int i = 0; i < ownedBuildings->size(); i++) {
-		if (i == ownedBuildings->size() - 1) {
-			ownedBuildings->at(i)->display();
+	for (int i = 0; i < owned->size(); i++) {
+		if (i == owned->size() - 1) {
+			owned->at(i)->display();
 		}
 		else {
-			ownedBuildings->at(i)->display();
+			owned->at(i)->display();
 			std::cout << ", ";
 		}
 	}
 	std::cout << "\n";
+}
+
+bool BuildingHand::isEmpty() const {
+	return owned->empty();
 }

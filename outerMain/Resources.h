@@ -84,7 +84,7 @@ public:
 	// shipment tile.
 	HarvestTile* ship();
 	// prints all the harvest tiles contained in the hand
-	void display();
+	void display() const;
 
 private:
 
@@ -92,8 +92,8 @@ private:
 	HarvestTile* two;
 	HarvestTile* shipment;
 
-	bool isEmpty();
-	bool isFull();
+	bool isEmpty() const;
+	bool isFull() const;
 
 };
 
@@ -113,12 +113,12 @@ public:
 	// does not exist.
 	Building* select(int);
 	// prints all the buildings contained in the hand
-	void display();
+	void display() const;
 
 private:
 
-	std::vector<Building*>* ownedBuildings;
+	std::vector<Building*>* owned;
 
-	bool isEmpty();
+	bool isEmpty() const;
 
 };
