@@ -36,6 +36,7 @@ public:
 
 	// Returns the number of connected nodes on the graph underlying the specified GBMap.
 	friend int numberOfNodes(GBMap&);
+	friend std::ostream& operator<<(std::ostream&, const GBMap&);
 
 private:
 

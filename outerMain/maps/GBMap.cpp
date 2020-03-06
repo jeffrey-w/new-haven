@@ -56,19 +56,7 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 }
 
 void GBMap::display() const {
-	for (int i = 0; i < height(); i++) {
-		for (int j = 0; j < width(); j++) {
-			ResourceToken* resource = static_cast<ResourceToken*>(graph->tokenAt({ i, j }));
-			if (resource) {
-				resource->display();
-				std::cout << '\t';
-			}
-			else {
-				std::cout << "-\t";
-			}
-		}
-		std::cout << "\n\n\n";
-	}
+	std::cout << *this;
 }
 
 int GBMap::height() const {
@@ -149,4 +137,20 @@ int numberOfNodes(GBMap& map) {
 		map.graph->setTokenAt(entry.second, entry.first);
 	}
 	return nodes / 4;
+}
+
+std::ostream& operator<<(std::ostream& stream, const GBMap& map) {
+	for (int i = 0; i < map.height(); i++) {
+		for (int j = 0; j < map.width(); j++) {
+			ResourceToken* resource = static_cast<ResourceToken*>(map.graph->tokenAt({ i, j }));
+			if (resource) {
+				stream << *resource << '\t';
+			}
+			else {
+				stream << "-\t";
+			}
+		}
+		stream << "\n\n\n";
+	}
+	return stream;
 }
