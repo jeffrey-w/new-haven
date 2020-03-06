@@ -71,15 +71,19 @@ ResourceToken* HarvestTile::tokenize() {
 }
 
 void HarvestTile::display() const {
-	for (int i = 0; i < NUM_RESOURCES; i++) {
-		(*resources)[i]->display();
+	std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
+	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
+		stream << (*tile.resources)[i];
 		// i is odd
 		if ((i & 1)) {
-			std::cout << '\n';
+			stream << '\n';
 		}
 		else {
-			std::cout << " | ";
+			stream << " | ";
 		}
 	}
-	std::cout << '\n';
+	return std::cout << '\n';
 }

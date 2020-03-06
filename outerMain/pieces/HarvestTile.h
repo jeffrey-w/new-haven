@@ -34,6 +34,8 @@ public:
 	// Writes this HarvestTile to the standard output stream.
 	void display() const;
 
+	friend std::ostream& operator<<(std::ostream&, const HarvestTile&);
+
 private:
 
 	int* current;
