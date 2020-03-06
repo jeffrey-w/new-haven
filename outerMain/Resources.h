@@ -21,7 +21,7 @@ public:
 	// Constructs a new Deck object with the same contents as the speciifed Deck.
 	Deck(const Deck& other) : Deck() {
 		for (T* piece : *other.pieces) {
-			pieces->push_back(new T(piece));
+			pieces->push_back(new T(*piece));
 		}
 	}
 
