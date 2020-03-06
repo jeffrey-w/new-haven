@@ -86,6 +86,8 @@ public:
 	// prints all the harvest tiles contained in the hand
 	void display() const;
 
+	friend std::ostream& operator<<(std::ostream&, const HarvestTileHand&);
+
 private:
 
 	HarvestTile* one;
@@ -116,6 +118,8 @@ public:
 	int worth();
 	// prints all the buildings contained in the hand
 	void display() const;
+
+	friend std::ostream& operator<<(std::ostream&, const BuildingHand&);
 
 private:
 

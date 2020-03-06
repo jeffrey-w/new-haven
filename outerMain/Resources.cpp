@@ -74,27 +74,32 @@ HarvestTile* HarvestTileHand::ship() {
 }
 
 void HarvestTileHand::display() const {
-	std::cout << "[1]st:\n";
-	if (one) {
-		one->display();
+	std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const HarvestTileHand& hand) {
+	stream << "1st:\n";
+	if (hand.one) {
+		stream << hand.one;
 	}
 	else {
-		std::cout << "None\n";
+		stream << "None\n";
 	}
-	std::cout << "[2]nd:\n";
-	if (two) {
-		two->display();
-	}
-	else {
-		std::cout << "None\n";
-	}
-	std::cout << "Shipment:\n";
-	if (shipment) {
-		shipment->display();
+	stream << "2nd:\n";
+	if (hand.two) {
+		stream << hand.two;
 	}
 	else {
-		std::cout << "None\n";
+		stream << "None\n";
 	}
+	stream << "Shipment:\n";
+	if (hand.shipment) {
+		stream << hand.shipment;
+	}
+	else {
+		stream << "None\n";
+	}	
+	return stream;
 }
 
 BuildingHand::BuildingHand() {
@@ -117,11 +122,10 @@ void BuildingHand::insert(Building* building) {
 
 Building* BuildingHand::select(int selection) {
 	Building* building;
-	if (selection <= 0 || selection > owned->size()) {
-		throw std::runtime_error("Selection not in range.");
+	if (selection < 1 || selection > owned->size()) {
+		throw std::out_of_range("Selection not in range.");
 	}
-	selection--;
-	building = owned->at(selection);
+	building = owned->at(--selection);
 	return building;
 }
 
@@ -135,21 +139,22 @@ int BuildingHand::worth() {
 
 
 void BuildingHand::display() const {
-	if (isEmpty()) {
-		std::cout << "Building hand is empty!\n";
-	}
-	for (int i = 0; i < owned->size(); i++) {
-		if (i == owned->size() - 1) {
-			owned->at(i)->display();
-		}
-		else {
-			owned->at(i)->display();
-			std::cout << ", ";
-		}
-	}
-	std::cout << "\n";
+	std::cout << *this;
 }
 
 bool BuildingHand::isEmpty() const {
 	return owned->empty();
+}
+
+std::ostream& operator<<(std::ostream& stream, const BuildingHand& hand) {
+	if (hand.isEmpty()) {
+		std::cout << "Building hand is empty!\n";
+	}
+	for (int i = 0; i < hand.owned->size(); i++) {
+		stream << (*hand.owned)[i];
+		if (i < hand.owned->size() - 1) {
+			stream << ',';
+		}
+	}
+	return std::cout << '\n';
 }
