@@ -50,9 +50,6 @@ public:
     // exception if the specified GBMap or GatherFacility is null, or if the specified square is
     // not on the GBMap this Player is playing on.
     void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
-    // TODO const, rename, and comment these
-    void printHarvestTileHand();
-    void printBuildingHand();
 
 private:
     

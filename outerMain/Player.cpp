@@ -75,11 +75,3 @@ void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacilit
     }
 	map->calculateResources(square, resources);
 }
-
-void Player::printHarvestTileHand() {
-    tiles->display();
-}
-
-void Player::printBuildingHand() {
-    buildings->display();
-}
