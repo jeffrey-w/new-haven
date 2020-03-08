@@ -33,12 +33,12 @@ GBMap* initGBMap() {
             map = new GBMap(numPlayers);
         } catch (std::invalid_argument & e) {
             std::cerr << e.what() << std::endl;
-            std::cerr << "Accept default number of players? Y/n: ";
+            std::cerr << "Accept default number of players ("
+                << std::to_string(GBMap::DEFAULT_NUM_PLAYERS) << ")? Y/n: ";
             switch (std::cin.get()) {
             case 'Y':
             case 'y':
                 map = new GBMap();
-                std::cout << "Creating two player game.\n";
                 break;
             case 'N':
             case 'n':
