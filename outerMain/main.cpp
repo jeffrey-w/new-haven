@@ -25,11 +25,10 @@ GBMap* initGBMap() {
     int numPlayers = 0;
     GBMap* map = nullptr;
     do {
-    std::cout << "Enter number of players: ";
-    std::string input;
-    std::cin.ignore();
-    std::getline(std::cin, input);
-    std::stringstream(input) >> numPlayers;
+        std::cout << "Enter number of players: ";
+        std::string input;
+        std::getline(std::cin, input);
+        std::stringstream(input) >> numPlayers;
         try {
             map = new GBMap(numPlayers);
         } catch (std::invalid_argument & e) {
@@ -48,6 +47,7 @@ GBMap* initGBMap() {
             default:
                 std::cout << "Did not understantd, try again.\n";
             }
+            std::cin.ignore();
         }
     } while (!map);
     return map;
