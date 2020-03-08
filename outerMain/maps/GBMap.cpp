@@ -98,10 +98,10 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEm
 
 vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
 	vector<pair<int, int>> coordinates;
-	coordinates.push_back({ square.first * 2, square.second * 2 });
-	coordinates.push_back({ square.first * 2, square.second * 2 + 1 });
-	coordinates.push_back({ square.first * 2 + 1, square.second * 2 + 1 });
-	coordinates.push_back({ square.first * 2 + 1, square.second * 2 });
+	coordinates.push_back({ (square.first << 1), (square.second << 1) });
+	coordinates.push_back({ (square.first << 1), (square.second << 1) + 1 });
+	coordinates.push_back({ (square.first << 1) + 1, (square.second << 1) + 1 });
+	coordinates.push_back({ (square.first << 1) + 1, (square.second << 1) });
 	return coordinates;
 }
 
