@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdexcept>
+#include <type_traits>
 #include <vector>
 
 #include "pieces/AbstractPiece.h"
@@ -15,13 +16,13 @@ public:
 
 	// Constructs a new Deck object.
 	Deck() {
-		pieces = new std::vector<T*>();
+		pieces = new std::vector<T>();
 	}
 
 	// Constructs a new Deck object with the same contents as the speciifed Deck.
 	Deck(const Deck& other) : Deck() {
-		for (T* piece : *other.pieces) {
-			pieces->push_back(new T(*piece));
+		for (auto piece : *other.pieces) {
+			pieces->push_back(piece);
 		}
 	}
 
@@ -41,12 +42,59 @@ public:
 	}
 
 	// Puts the specified Piece on the top of this Deck.
-	void add(T* piece) {
+	void add(T piece) {
 		pieces->push_back(piece);
 	}
 
 	// Removes and returns the Piece at the top of this Deck. Throws an exception if this Deck is
 	// empty.
+	T draw() {
+		if (isEmpty()) {
+			throw std::runtime_error("Cannot draw from the empty deck.");
+		}
+		T piece = pieces->back();
+		pieces->pop_back();
+		return piece;
+	}
+	
+private:
+
+	std::vector<T>* pieces;
+
+};
+
+// Partial specialization to handle pointer types.
+template <class T>
+class Deck<T*> {
+
+public:
+
+	Deck() {
+		pieces = new std::vector<T*>();
+	}
+
+	Deck(const Deck& other) : Deck() {
+		for (auto& piece : *other.pieces) {
+			pieces->push_back(new T(*piece));
+		}
+	}
+	
+	~Deck() {
+		delete pieces;
+	}
+	
+	bool isEmpty() const {
+		return pieces->empty();
+	}
+	
+	size_t getSize() const {
+		return pieces->size();
+	}
+
+	void add(T* piece) {
+		pieces->push_back(piece);
+	}
+	
 	T* draw() {
 		if (isEmpty()) {
 			throw std::runtime_error("Cannot draw from the empty deck.");
@@ -55,7 +103,7 @@ public:
 		pieces->pop_back();
 		return piece;
 	}
-	
+
 private:
 
 	std::vector<T*>* pieces;
