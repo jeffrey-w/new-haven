@@ -8,7 +8,6 @@ using std::string;
 Scanner::Scanner(const string& path) {
 	_line = new int(1);
 	_col = new int(1);
-	start = new std::streampos(0);
 	stream = new ifstream(path);
 	if (stream->fail()) {
 		throw std::invalid_argument("Unable to open file at " + path + ".");
@@ -18,7 +17,6 @@ Scanner::Scanner(const string& path) {
 Scanner::~Scanner() {
 	delete _line;
 	delete _col;
-	delete start;
 	delete stream;
 }
 
@@ -46,7 +44,6 @@ char Scanner::nextChar() {
 		throw std::out_of_range("At end of file.");
 	}
 	char result = advance();
-	*start = stream->tellg();
 	return result;
 }
 
@@ -73,7 +70,6 @@ int Scanner::nextInt() {
 	if (stream->eof()) {
 		stream->seekg(0, stream->end);
 	}
-	*start = stream->tellg();
 	buffer = new char[(uint64_t)length + 1];
 	stream->seekg(-length, std::ios_base::cur);
 	stream->read(buffer, length);

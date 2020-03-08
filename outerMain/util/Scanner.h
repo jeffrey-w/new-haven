@@ -44,7 +44,6 @@ private:
 
 	int* _line;
 	int* _col;
-	std::streampos* start;
 	std::ifstream* stream;
 
 	char advance();
