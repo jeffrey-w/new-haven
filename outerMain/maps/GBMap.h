@@ -9,10 +9,11 @@
 // The common board onto which HarvestTiles are placed.
 class GBMap {
 
-	static constexpr int DEFAULT_NUM_PLAYERS = 2;
 	static constexpr int DIM_MIN = 10, DIM_MAX = 14;
 
 public:
+
+	static constexpr int DEFAULT_NUM_PLAYERS = 2; // TODO move to Game
 
 	// Constructs a new GBMap object.
 	GBMap();
