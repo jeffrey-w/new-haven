@@ -116,17 +116,22 @@ int VGMap::countCols() {
 }
 
 void VGMap::display() const {
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            BuildingToken* building = static_cast<BuildingToken*>(graph->tokenAt({ i, j }));
+    std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const VGMap& map) {
+    for (int i = 0; i < VGMap::HEIGHT; i++) {
+        for (int j = 0; j < VGMap::WIDTH; j++) {
+            BuildingToken* building = static_cast<BuildingToken*>(map.graph->tokenAt({ i, j }));
             if (building) {
                 building->display();
-                std::cout << '\t';
+                stream << '\t';
             }
             else {
-                std::cout << "-\t";
+                stream << "-\t";
             }
         }
-        std::cout << "\n\n\n";
+        stream << "\n\n\n";
     }
+    return stream;
 }
