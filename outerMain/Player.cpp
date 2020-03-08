@@ -27,14 +27,14 @@ VGMap* Player::getVillageBoard() const {
     return villageBoard;
 }
 
-void Player::drawBuilding(Deck<Building>* deck) {
+void Player::drawBuilding(Deck<Building*>* deck) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
     }
     buildings->insert(deck->draw());
 }
 
-void Player::drawHarvestTile(Deck<HarvestTile>* deck) {
+void Player::drawHarvestTile(Deck<HarvestTile*>* deck) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
     }

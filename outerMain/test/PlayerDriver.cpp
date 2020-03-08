@@ -27,7 +27,7 @@ void testPlayer() {
 }
 
 void testDrawBuilding() {
-	Deck<Building> deck;
+	Deck<Building*> deck;
 	setup();
 	ASSERT_THROWS(std::runtime_error, player->drawBuilding(&deck),
 		"ERROR: drew from an empty deck.");
@@ -37,7 +37,7 @@ void testDrawBuilding() {
 }
 
 void testDrawHarvestTile() {
-	Deck<HarvestTile> deck;
+	Deck<HarvestTile*> deck;
 	setup();
 	ASSERT_THROWS(std::runtime_error, player->drawHarvestTile(&deck),
 		"ERROR: drew from an empty deck.");
@@ -90,8 +90,8 @@ void testCalculateResources() {
 
 
 void setup() {
-	Deck<Building> buildings;
-	Deck<HarvestTile> tiles;
+	Deck<Building*> buildings;
+	Deck<HarvestTile*> tiles;
 	tiles.add(new HarvestTile());
 	player = new Player();
 	player->drawHarvestTile(&tiles);
