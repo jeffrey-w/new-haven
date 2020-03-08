@@ -45,6 +45,8 @@ public:
 	// specified amount. Throws an exception if the specified type is not between 0 and the number
 	// of resource types.
 	void incrementBy(int, int);
+	// Resets the tallies for each resource type recorded on this GatherFacility to zero.
+	void reset();
 	// Writes this GatherFacility to the statndard output stream.
 	void displayCount() const;
 

@@ -52,12 +52,19 @@ void GatherFacility::incrementBy(int type, int amount) {
 	(*count)[type] = prior + amount;
 }
 
+
 int GatherFacility::validateType(int type) const {
 	if (type < 0 || type > TokenGraph::NUM_TYPES - 1) {
 		throw std::runtime_error("Type must be between 0 and "
 			+ std::to_string(TokenGraph::NUM_TYPES - 1) + ".");
 	}
 	return type;
+}
+
+void GatherFacility::reset() {
+	for (auto& entry : *count) {
+		entry.second = 0;
+	}
 }
 
 void GatherFacility::displayCount() const {
