@@ -47,9 +47,7 @@ int GatherFacility::countOf(int type) const {
 }
 
 void GatherFacility::incrementBy(int type, int amount) {
-	validateType(type);
-	int prior = (*count)[type];
-	(*count)[type] = prior + amount;
+	(*count)[validateType(type)] += amount;
 }
 
 
