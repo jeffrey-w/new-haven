@@ -18,8 +18,6 @@ public:
     Player(const Player&);
     // Destroys this Player.
     ~Player();
-    // Returns this Player's village board.
-    VGMap* getVillageBoard() const;
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is null or empty.
     void drawBuilding(Deck<Building*>*);
