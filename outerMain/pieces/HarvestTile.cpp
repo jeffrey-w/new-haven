@@ -78,7 +78,7 @@ std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
 	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
 		stream << (*tile.resources)[i];
 		// i is odd
-		if ((i & 1)) {
+		if (i & 1) {
 			stream << '\n';
 		}
 		else {
