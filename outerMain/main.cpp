@@ -18,7 +18,7 @@ int main() {
     GBMap* map = initGBMap();
     map->display();
     delete map;
-	return 0;
+    return 0;
 }
 
 GBMap* initGBMap() {
