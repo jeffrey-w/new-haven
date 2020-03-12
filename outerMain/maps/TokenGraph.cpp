@@ -149,7 +149,7 @@ map<pair<int, int>, AbstractToken*> TokenGraph::tokens() {
 	return tokens;
 }
 
-TokenGraph::Node::Node() {
+TokenGraph::Node::Node() : color(new int()) {
 	init(nullptr, nullptr, nullptr);
 }
 
@@ -164,13 +164,7 @@ void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node
 	this->adjacents = (adjacents) ? adjacents : new set<Node*>();
 	// This node will be searched if it's connected to source of search.
 	if (AbstractToken::areSameType(match, token)) {
-		// This Node has already been initialized.
-		if (color) {
-			*color = WHITE;
-		}
-		else {
-			color = new int(WHITE);
-		}
+		*color = WHITE;
 	}
 	else {
 		*color = RED;
