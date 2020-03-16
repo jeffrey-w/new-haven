@@ -13,8 +13,8 @@ HarvestTileHand::HarvestTileHand(HarvestTile* shipment) {
 }
 
 HarvestTileHand::HarvestTileHand(const HarvestTileHand& other) {
-	one = new HarvestTile(*other.one);
-	two = new HarvestTile(*other.two);
+	one = other.one ? new HarvestTile(*other.one) : nullptr;
+	two = other.two ? new HarvestTile(*other.two) : nullptr;
 	shipment = new HarvestTile(*other.shipment);
 }
 
