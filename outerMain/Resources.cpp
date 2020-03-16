@@ -7,19 +7,6 @@
 using std::vector;
 using ResourceType = ResourceToken::ResourceType;
 
-Deck<Building*>* buildingDeck() {
-	Deck<Building*>* buildings = new Deck<Building*>();
-	for (int i = 0; i < VGMap::HEIGHT; i++) {
-		for (int j = 0; j < VGMap::HEIGHT; j++) {
-			for (int k = 0; k < TokenGraph::NUM_TYPES; k++) {
-				BuildingType type = static_cast<BuildingType>(k);
-				buildings->add(new Building(type, i + 1));
-			}
-		}
-	}
-	return buildings;
-}
-
 Deck<HarvestTile*>* harvestTileDeck() {
 	Deck<HarvestTile*>* tiles = new Deck<HarvestTile*>();
 	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
@@ -69,6 +56,19 @@ Deck<HarvestTile*>* harvestTileDeck() {
 		}
 	}
 	return tiles;
+}
+
+Deck<Building*>* buildingDeck() {
+	Deck<Building*>* buildings = new Deck<Building*>();
+	for (int i = 0; i < VGMap::HEIGHT; i++) {
+		for (int j = 0; j < VGMap::HEIGHT; j++) {
+			for (int k = 0; k < TokenGraph::NUM_TYPES; k++) {
+				BuildingType type = static_cast<BuildingType>(k);
+				buildings->add(new Building(type, i + 1));
+			}
+		}
+	}
+	return buildings;
 }
 
 HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}

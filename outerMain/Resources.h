@@ -110,8 +110,10 @@ private:
 
 };
 
-Deck<Building*>* buildingDeck();
+// Returns a Deck of 60 HarvestTiles.
 Deck<HarvestTile*>* harvestTileDeck();
+// Returns a Deck of 144 Buildings.
+Deck<Building*>* buildingDeck();
 
 // The collection of HarvestTiles owned by a Player.
 class HarvestTileHand {
