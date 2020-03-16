@@ -110,6 +110,9 @@ private:
 
 };
 
+Deck<Building*>* buildingDeck();
+Deck<HarvestTile*>* harvestTileDeck();
+
 // The collection of HarvestTiles owned by a Player.
 class HarvestTileHand {
 
@@ -128,10 +131,10 @@ public:
 	// Returns the HarvestTile selected by a Player. Throws an exception if the specified selection
 	// is not between one and two inclusive.
 	HarvestTile* exchange(int);
-	// Return this HarvestTileHand's shipment tile. Throws an exception if this Hand does not contain a
+	// Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not contain a
 	// shipment tile.
 	HarvestTile* ship();
-	// prints all the harvest tiles contained in the hand
+	// Writes this HarvestTileHand to the standard outoput stream.
 	void display() const;
 
 	friend std::ostream& operator<<(std::ostream&, const HarvestTileHand&);
@@ -164,7 +167,7 @@ public:
 	Building* select(int);
 	// Gives the aggregate value of all of the Buildings in this BuildingHand.
 	int worth();
-	// prints all the buildings contained in the hand
+	// Writes this BuildingHand to the standard outoput stream.
 	void display() const;
 
 	friend std::ostream& operator<<(std::ostream&, const BuildingHand&);
