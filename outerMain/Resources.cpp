@@ -1,8 +1,67 @@
 #include <iostream>
 
+#include "maps/TokenGraph.h"
+#include "maps/VGMap.h"
 #include "Resources.h"
 
 using std::vector;
+using ResourceType = ResourceToken::ResourceType;
+
+Deck<Building*>* buildingDeck() {
+	Deck<Building*>* buildings = new Deck<Building*>();
+	for (int i = 0; i < VGMap::HEIGHT; i++) {
+		for (int j = 0; j < VGMap::HEIGHT; j++) {
+			for (int k = 0; k < TokenGraph::NUM_TYPES; k++) {
+				BuildingType type = static_cast<BuildingType>(k);
+				buildings->add(new Building(type, i + 1));
+			}
+		}
+	}
+	return buildings;
+}
+
+Deck<HarvestTile*>* harvestTileDeck() {
+	Deck<HarvestTile*>* tiles = new Deck<HarvestTile*>();
+	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
+		for (int j = 0; j < TokenGraph::NUM_TYPES; j++) {
+			if (i != j) {
+				tiles->add(new HarvestTile(
+					new ResourceToken(static_cast<ResourceType>(i)),
+					new ResourceToken(static_cast<ResourceType>(i)),
+					new ResourceToken(static_cast<ResourceType>(i)),
+					new ResourceToken(static_cast<ResourceType>(j))
+				));
+				tiles->add(new HarvestTile(
+					new ResourceToken(static_cast<ResourceType>(i)),
+					new ResourceToken(static_cast<ResourceType>(j)),
+					new ResourceToken(static_cast<ResourceType>(i)),
+					new ResourceToken(static_cast<ResourceType>(j))
+				));
+			}
+		}
+	}
+	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
+		for (int j = 0; j < TokenGraph::NUM_TYPES; j++) {
+			for (int k = 0; k < TokenGraph::NUM_TYPES; k++) {
+				if (!(i == j || i == k || j == k)) {
+					tiles->add(new HarvestTile(
+						new ResourceToken(static_cast<ResourceType>(i)),
+						new ResourceToken(static_cast<ResourceType>(j)),
+						new ResourceToken(static_cast<ResourceType>(k)),
+						new ResourceToken(static_cast<ResourceType>(i))
+					));
+					tiles->add(new HarvestTile(
+						new ResourceToken(static_cast<ResourceType>(i)),
+						new ResourceToken(static_cast<ResourceType>(j)),
+						new ResourceToken(static_cast<ResourceType>(i)),
+						new ResourceToken(static_cast<ResourceType>(k))
+					));
+				}
+			}
+		}
+	}
+	return tiles;
+}
 
 HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}
 
