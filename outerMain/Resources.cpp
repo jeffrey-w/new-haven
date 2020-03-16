@@ -25,12 +25,14 @@ Deck<HarvestTile*>* harvestTileDeck() {
 	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
 		for (int j = 0; j < TokenGraph::NUM_TYPES; j++) {
 			if (i != j) {
+				// For each resource type i and each type j, add a new tile with three i and one j.
 				tiles->add(new HarvestTile(
 					new ResourceToken(static_cast<ResourceType>(i)),
 					new ResourceToken(static_cast<ResourceType>(i)),
 					new ResourceToken(static_cast<ResourceType>(i)),
 					new ResourceToken(static_cast<ResourceType>(j))
 				));
+				// For each resource type i and each type j, add a new tile with two i and two j.
 				tiles->add(new HarvestTile(
 					new ResourceToken(static_cast<ResourceType>(i)),
 					new ResourceToken(static_cast<ResourceType>(j)),
@@ -45,6 +47,8 @@ Deck<HarvestTile*>* harvestTileDeck() {
 			for (int k = 0; k < TokenGraph::NUM_TYPES; k++) {
 				if (!(i == j || i == k || j == k)) {
 					if (j < k) {
+						// For each resource type i, each type j, and each type k, add a new tile
+						// with two i (on the main diagonal), one j, and one k.
 						tiles->add(new HarvestTile(
 							new ResourceToken(static_cast<ResourceType>(i)),
 							new ResourceToken(static_cast<ResourceType>(j)),
@@ -52,6 +56,8 @@ Deck<HarvestTile*>* harvestTileDeck() {
 							new ResourceToken(static_cast<ResourceType>(i))
 						));
 					}
+					// For each resource type i, each type j, and each type k, add a new tile
+					// with two i (on the first column), one j, and one k.
 					tiles->add(new HarvestTile(
 						new ResourceToken(static_cast<ResourceType>(i)),
 						new ResourceToken(static_cast<ResourceType>(j)),
