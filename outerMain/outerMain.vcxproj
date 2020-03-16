@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Roster.cpp" />
     <ClCompile Include="test\ResourcesDriver.cpp" />
     <ClCompile Include="test\GBMapDriver.cpp" />
     <ClCompile Include="test\MapLoaderDriver.cpp" />
@@ -141,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Roster.h" />
     <ClInclude Include="test\Drivers.h" />
     <ClInclude Include="test\ResourcesDriver.h" />
     <ClInclude Include="test\GBMapDriver.h" />
