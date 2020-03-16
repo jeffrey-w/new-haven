@@ -66,6 +66,10 @@ void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) 
     map->setSquare(tiles->exchange(selection), square);
 }
 
+HarvestTile* Player::getShipmentTile() {
+    return tiles->ship();
+}
+
 void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacility* resources) {
     if (!map) {
         throw std::invalid_argument("Cannot record resources on the null map.");
