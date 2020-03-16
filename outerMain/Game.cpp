@@ -1,32 +1,26 @@
 #include "Game.h"
+#include "Resources.h"
 
-using std::deque;
+using std::pair;
 
-Game::Game() {
-	board = new GBMap();
+Game::Game() : Game(DEFAULT_NUM_PLAYERS) {}
+
+Game::Game(int numPlayers) {
+	current = nullptr;
+	board = new GBMap(numPlayers);
 	resources = new GatherFacility();
-	tiles = makeTiles();
-	buildings = makeBuildings();
-	players = new deque<Player*>();
-	for (int i = 0; i < GBMap::DEFAULT_NUM_PLAYERS; i++) {
-		players->push_back(new Player());
-	}
+	tiles = harvestTileDeck();
+	buildings = buildingDeck();
+	players = new Roster(numPlayers);
 }
 
-Deck<HarvestTile> Game::makeTiles() {
-	Deck<HarvestTile> deck;
-	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
-		for (int j = 0; j < HarvestTile::NUM_RESOURCES; j++) {
-			if (i != j) {
-				for (int k = 0; k < 2; k++) {
-					// TODO add new HarvestTile with two i and two j
-				}
-			}
-		}
+void Game::placeShipmentTile() {
+	if (current) {
+		int type = getInputType();
+		pair<int, int> coordinate = getInputCoordinate();
+		HarvestTile* shipment = current->getShipmentTile();
+		board->calculateResources(coordinate, resources);
+		board->setSquare(shipment, coordinate);
+		resources->incrementBy(type, HarvestTile::NUM_RESOURCES);
 	}
-	return deck;
-}
-
-Deck<Building> Game::makeBuildings() {
-	return Deck<Building>();
 }

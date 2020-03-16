@@ -1,26 +1,31 @@
 #pragma once
 
-#include <deque>
-
 #include "maps/GBMap.h"
 #include "Player.h"
+#include "Roster.h"
 
-// The top-level class of an instance of New Haven.
+// A game of New Haven.
 class Game {
+
+public:
+
+	static constexpr int DEFAULT_NUM_PLAYERS = 2;
 
 	Game();
 	Game(int);
 
 private:
 
-	static Deck<HarvestTile> makeTiles();
-	static Deck<Building> makeBuildings();
-
+	Player* current;
 	GBMap* board;
 	GatherFacility* resources;
-	Deck<HarvestTile> tiles;
-	Deck<Building> buildings;
-	std::deque<Player*>* players; // TODO encapsulate this
+	Deck<HarvestTile*>* tiles;
+	Deck<Building*>* buildings;
+	Roster* players;
+
+	void placeShipmentTile();
+	std::pair<int, int> getInputCoordinate();
+	int getInputType();
 
 };
 
