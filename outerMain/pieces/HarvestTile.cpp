@@ -14,6 +14,14 @@ HarvestTile::HarvestTile() {
 	}
 }
 
+HarvestTile::HarvestTile(ResourceToken* one, ResourceToken* two, ResourceToken* three,
+		ResourceToken* four) : HarvestTile(0) {
+	resources->push_back(one);
+	resources->push_back(two);
+	resources->push_back(three);
+	resources->push_back(four);
+}
+
 HarvestTile::HarvestTile(const HarvestTile& other) : AbstractPiece(other) {
 	current = new int(*other.current);
 	resources = new vector<ResourceToken*>();

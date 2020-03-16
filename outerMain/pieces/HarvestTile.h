@@ -14,10 +14,12 @@ class HarvestTile : public AbstractPiece {
 public:
 
 	// The number of resources that a HarvestTile holds.
-	constexpr static int NUM_RESOURCES = 4; // TODO this is not actually a constant
+	constexpr static int NUM_RESOURCES = 4;
 	
 	// Constructs a new HarvestTile object.
 	HarvestTile();
+	// Constructs a new HarvestTile object containing the specified ResourceTokens.
+	HarvestTile(ResourceToken*, ResourceToken*, ResourceToken*, ResourceToken*);
 	// Constructs a new HarvestTile object with the same resources and configuration as the
 	// specified HarvestTile.
 	HarvestTile(const HarvestTile&);
