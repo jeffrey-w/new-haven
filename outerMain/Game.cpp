@@ -14,22 +14,12 @@ Game::Game(int numPlayers) {
 	players = new Roster(numPlayers);
 }
 
-void Game::placeShipmentTile() {
+void Game::placeShipmentTile(pair<int, int> coordinate, int type) {
 	if (!current) {
 		throw std::runtime_error("No player at the moment.");
 	}
-	int type = getInputType();
-	pair<int, int> coordinate = getInputCoordinate();
 	HarvestTile* shipment = current->getShipmentTile();
 	board->calculateResources(coordinate, resources);
 	board->setSquare(shipment, coordinate);
 	resources->incrementBy(type, HarvestTile::NUM_RESOURCES);
-}
-
-std::pair<int, int> Game::getInputCoordinate() {
-	return std::pair<int, int>();
-}
-
-int Game::getInputType() {
-	return 0;
 }

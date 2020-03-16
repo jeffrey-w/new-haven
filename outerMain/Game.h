@@ -23,9 +23,7 @@ private:
 	Deck<Building*>* buildings;
 	Roster* players;
 
-	void placeShipmentTile();
-	std::pair<int, int> getInputCoordinate();
-	int getInputType();
+	void placeShipmentTile(std::pair<int, int>, int);
 
 };
 
