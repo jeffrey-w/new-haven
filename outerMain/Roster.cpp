@@ -27,6 +27,22 @@ Roster::~Roster() {
 	delete players;
 }
 
+void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>*buildings) {
+	if (!(tiles && buildings)) {
+		throw std::invalid_argument("Cannot deal from null deck(s).");
+	}
+	for (int i = 0; i < 2; i++) {
+		for (auto& player : *players) {
+			player->drawHarvestTile(tiles);
+		}
+	}
+	for (int i = 0; i < VGMap::HEIGHT; i++) {
+		for (auto& player : *players) {
+			player->drawBuilding(buildings);
+		}
+	}
+}
+
 Player* Roster::next() {
 	Player* player = players->front();
 	players->pop_front();
