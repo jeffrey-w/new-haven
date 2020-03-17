@@ -1,7 +1,7 @@
 #pragma once
 
+#include <iostream>
 #include <stdexcept>
-#include <type_traits>
 #include <vector>
 
 #include "pieces/AbstractPiece.h"
@@ -107,7 +107,7 @@ public:
 		pieces->pop_back();
 		return piece;
 	}
-
+	
 	void shuffle(); // TODO
 
 private:
