@@ -53,7 +53,7 @@ public:
     // specified square, and records the results on the specified GatherFacility. Throws an
     // exception if the specified GBMap or GatherFacility is null, or if the specified square is
     // not on the GBMap this Player is playing on.
-    void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*);
+    void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*); // TODO there is not use for this
 
 private:
     
