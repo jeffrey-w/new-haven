@@ -56,6 +56,8 @@ public:
 		pieces->pop_back();
 		return piece;
 	}
+
+	void shuffle(); // TODO
 	
 private:
 
@@ -63,7 +65,6 @@ private:
 
 };
 
-// Partial specialization to handle pointer types.
 template <class T>
 class Deck<T*> {
 
@@ -104,11 +105,13 @@ public:
 		return piece;
 	}
 
+	void shuffle(); // TODO
+
 private:
 
 	std::vector<T*>* pieces;
 
-};
+}; // Partial specialization to handle pointer types.
 
 // Returns a Deck of 60 HarvestTiles.
 Deck<HarvestTile*>* harvestTileDeck();
@@ -122,19 +125,18 @@ public:
 
 	// Constructs a new HarvestTileHand object.
 	HarvestTileHand();
-	// Contstruts a new HarvestTileHand object with the specified shipment tile.
-	HarvestTileHand(HarvestTile*);
 	// Constructs a new HarvestTileHand object with the same contents as the specified Hand.
 	HarvestTileHand(const HarvestTileHand&);
 	// Destroys this HarvestTileHand.
 	~HarvestTileHand();
-	// Adds the specified HarvestTile to this HarvestTileHand. Throws an exception if this HarvestTileHand is full.
-	void insert(HarvestTile*);
+	// Adds the specified HarvestTile to this HarvestTileHand. Throws an exception if this
+	// HarvestTileHand is full.
+	void insert(HarvestTile*, bool);
 	// Returns the HarvestTile selected by a Player. Throws an exception if the specified selection
 	// is not between one and two inclusive.
 	HarvestTile* exchange(int);
-	// Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not contain a
-	// shipment tile.
+	// Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not
+	// contain a shipment tile.
 	HarvestTile* ship();
 	// Writes this HarvestTileHand to the standard outoput stream.
 	void display() const;

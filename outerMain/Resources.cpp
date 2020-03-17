@@ -71,12 +71,10 @@ Deck<Building*>* buildingDeck() {
 	return buildings;
 }
 
-HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}
-
-HarvestTileHand::HarvestTileHand(HarvestTile* shipment) {
+HarvestTileHand::HarvestTileHand() {
 	one = nullptr;
 	two = nullptr;
-	this->shipment = shipment;
+	shipment = nullptr;
 }
 
 HarvestTileHand::HarvestTileHand(const HarvestTileHand& other) {
@@ -91,11 +89,17 @@ HarvestTileHand::~HarvestTileHand() {
 	delete shipment;
 }
 
-void HarvestTileHand::insert(HarvestTile* tile) {
-	if (isFull()) {
-		throw std::runtime_error("This hand is full.");
+void HarvestTileHand::insert(HarvestTile* tile, bool isShipment) {
+	if (isShipment) {
+		if (shipment) {
+			throw std::runtime_error("This hand already has a shipment tile");
+		}
+		shipment = tile;
 	}
 	else {
+		if (isFull()) {
+			throw std::runtime_error("This hand is full.");
+		}
 		if (one) {
 			two = tile;
 		}
