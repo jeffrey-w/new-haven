@@ -20,6 +20,8 @@ public:
 	~Game();
 	// Writes the GBMap that this Game is being played on to the standard output stream.
 	void displayBoard() const;
+	// Writes the face up BuildingPool of this Game to the standard output stream.
+	void displayPool() const;
 
 private:
 
@@ -27,6 +29,7 @@ private:
 	GatherFacility* resources;
 	Deck<HarvestTile*>* tiles;
 	Deck<Building*>* buildings;
+	BuildingPool* pool;
 	Player* current;
 	Roster* players;
 

@@ -11,10 +11,12 @@ Game::Game(int numPlayers) {
 	resources = new GatherFacility();
 	tiles = harvestTileDeck();
 	buildings = buildingDeck();
+	pool = new BuildingPool();
 	current = nullptr;
 	players = new Roster(numPlayers);
 	tiles->shuffle();
 	buildings->shuffle();
+	pool->replenish(buildings);
 	players->deal(tiles, buildings);
 }
 
@@ -28,6 +30,10 @@ Game::~Game() {
 
 void Game::displayBoard() const {
 	board->display();
+}
+
+void Game::displayPool() const {
+	pool->display();
 }
 
 void Game::placeShipmentTile(pair<int, int> coordinate, int type) {
