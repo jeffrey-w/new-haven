@@ -7,6 +7,7 @@
 #include "pieces/AbstractPiece.h"
 #include "pieces/Building.h"
 #include "pieces/HarvestTile.h"
+#include "util/Random.h"
 
 // A stack of pieces.
 template <class T>
@@ -57,7 +58,10 @@ public:
 		return piece;
 	}
 
-	void shuffle(); // TODO
+	// Induces a random ordering on the Pieces in this Deck.
+	void shuffle() {
+		std::shuffle(pieces->begin(), pieces->end(), Random::generator);
+	}
 	
 private:
 
@@ -108,7 +112,9 @@ public:
 		return piece;
 	}
 	
-	void shuffle(); // TODO
+	void shuffle() {
+		std::shuffle(pieces->begin(), pieces->end(), Random::generator);
+	}
 
 private:
 
