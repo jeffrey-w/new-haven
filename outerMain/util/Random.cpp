@@ -5,9 +5,9 @@
 using std::chrono::system_clock;
 using std::minstd_rand;
 
-minstd_rand Random::GENERATOR(system_clock::now().time_since_epoch().count());
+minstd_rand Random::generator(system_clock::now().time_since_epoch().count());
 
 int Random::next(int origin, int bound) {
 	std::uniform_int_distribution<int> dist(origin, bound);
-	return dist(GENERATOR);
+	return dist(generator);
 }
