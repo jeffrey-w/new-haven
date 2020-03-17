@@ -31,9 +31,11 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>*buildings) {
 	if (!(tiles && buildings)) {
 		throw std::invalid_argument("Cannot deal from null deck(s).");
 	}
-	for (int i = 0; i < 2; i++) {
+	bool lastCard = false;
+	for (int i = 0; i < TILE_HAND_SIZE; i++) {
+		lastCard = i + 1 == TILE_HAND_SIZE;
 		for (auto& player : *players) {
-			player->drawHarvestTile(tiles);
+			player->drawHarvestTile(tiles, lastCard);
 		}
 	}
 	for (int i = 0; i < VGMap::HEIGHT; i++) {
