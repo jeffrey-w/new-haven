@@ -3,6 +3,7 @@
 #include <string>
 
 #include "maps/GBMap.h"
+#include "Game.h"
 #include "test/Drivers.h"
 
 static GBMap* initGBMap();
@@ -34,7 +35,7 @@ GBMap* initGBMap() {
         } catch (std::invalid_argument & e) {
             std::cerr << e.what() << std::endl;
             std::cerr << "Accept default number of players ("
-                << std::to_string(GBMap::DEFAULT_NUM_PLAYERS) << ")? Y/n: ";
+                << std::to_string(Game::DEFAULT_NUM_PLAYERS) << ")? Y/n: ";
             switch (std::cin.get()) {
             case 'Y':
             case 'y':
