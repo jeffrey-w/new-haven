@@ -81,6 +81,9 @@ public:
 	}
 	
 	~Deck() {
+		for (auto& piece : *pieces) {
+			delete piece;
+		}
 		delete pieces;
 	}
 	
