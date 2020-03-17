@@ -2,6 +2,7 @@
 #include "Resources.h"
 
 using std::pair;
+using ResourceType = ResourceToken::ResourceType;
 
 Game::Game() : Game(DEFAULT_NUM_PLAYERS) {}
 
@@ -18,8 +19,9 @@ void Game::placeShipmentTile(pair<int, int> coordinate, int type) {
 	if (!current) {
 		throw std::runtime_error("No player at the moment.");
 	}
+	ResourceToken token(static_cast<ResourceType>(type));
 	HarvestTile* shipment = current->getShipmentTile();
-	board->calculateResources(coordinate, resources);
+	board->calculateResources(coordinate, resources, &token);
 	board->setSquare(shipment, coordinate);
 	resources->incrementBy(type, HarvestTile::NUM_RESOURCES);
 }
