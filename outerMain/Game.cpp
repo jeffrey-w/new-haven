@@ -29,7 +29,7 @@ void Game::displayBoard() const {
 
 void Game::placeShipmentTile(pair<int, int> coordinate, int type) {
 	if (!current) {
-		throw std::runtime_error("No player at the moment.");
+		throw std::runtime_error("No player at the moment."); // TODO this belongs in turn()
 	}
 	ResourceToken token(static_cast<ResourceType>(type));
 	HarvestTile* shipment = current->getShipmentTile();
