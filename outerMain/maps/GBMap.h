@@ -13,8 +13,6 @@ class GBMap {
 
 public:
 
-	static constexpr int DEFAULT_NUM_PLAYERS = 2; // TODO move to Game
-
 	// Constructs a new GBMap object.
 	GBMap();
 	// Constructs a new GBMap object for the specified number of players. Throws an exception if

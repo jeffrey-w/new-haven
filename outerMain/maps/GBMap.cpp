@@ -1,11 +1,12 @@
 #include <iostream>
 
+#include "../Game.h"
 #include "GBMap.h"
 
 using std::pair;
 using std::vector;
 
-GBMap::GBMap() : GBMap(DEFAULT_NUM_PLAYERS) {}
+GBMap::GBMap() : GBMap(Game::DEFAULT_NUM_PLAYERS) {}
 
 GBMap::GBMap(int numPlayers) {
 	setNumPlayers(numPlayers);
