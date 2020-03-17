@@ -13,6 +13,9 @@ Game::Game(int numPlayers) {
 	tiles = harvestTileDeck();
 	buildings = buildingDeck();
 	players = new Roster(numPlayers);
+	tiles->shuffle();
+	buildings->shuffle();
+	players->deal(tiles, buildings);
 }
 
 Game::~Game() {
