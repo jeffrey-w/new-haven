@@ -41,7 +41,15 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	}
 }
 
-void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
+void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
+		ResourceToken* shipment) {
+	// Place shipment tile if it has been played.
+	if (shipment) {
+		for (auto& coordinate : coordinatesOf(from)) {
+			graph->setTokenAt(new ResourceToken(*shipment), coordinate);
+		}
+	}
+	// Perform search for conntected resources starting from the four coordinates in from
 	for (auto& coordinate : coordinatesOf(from)) {
 		// Coordinate is occupied and has not been reached by a previous search.
 		if (graph->tokenAt(coordinate) && !graph->isSearched(coordinate)) {
@@ -49,6 +57,12 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources) {
 			// Only search if it's possible to locate like resources.
 			int amount = graph->hasType(type) ? graph->search(coordinate) : 1;
 			resources->incrementBy(type, amount);
+		}
+	}
+	// Remove shipment tile.
+	if (shipment) {
+		for (auto& coordinate : coordinatesOf(from)) {
+			graph->removeTokenAt(coordinate);
 		}
 	}
 	// Clean up graph for next search.
