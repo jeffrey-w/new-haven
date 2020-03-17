@@ -39,10 +39,10 @@ void testDrawBuilding() {
 void testDrawHarvestTile() {
 	Deck<HarvestTile*> deck;
 	setup();
-	ASSERT_THROWS(std::runtime_error, player->drawHarvestTile(&deck),
+	ASSERT_THROWS(std::runtime_error, player->drawHarvestTile(&deck, false),
 		"ERROR: drew from an empty deck.");
 	deck.add(new HarvestTile());
-	ASSERT_SUCCESS(player->drawHarvestTile(&deck), "Successfully drew from valid deck.");
+	ASSERT_SUCCESS(player->drawHarvestTile(&deck, false), "Successfully drew from valid deck.");
 	tearDown();
 }
 
@@ -94,7 +94,7 @@ void setup() {
 	Deck<HarvestTile*> tiles;
 	tiles.add(new HarvestTile());
 	player = new Player();
-	player->drawHarvestTile(&tiles);
+	player->drawHarvestTile(&tiles, false);
 	for (int i = 0; i < SAMPLE_SIZE; i++) {
 		buildings.add(new Building());
 		player->drawBuilding(&buildings);
