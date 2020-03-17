@@ -84,6 +84,12 @@ void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
 	}
 }
 
+void TokenGraph::removeTokenAt(pair<int, int> coordinate) {
+	Node* n = nodeAt(coordinate);
+	delete n->token;
+	n->token = nullptr;
+}
+
 int TokenGraph::search(pair<int, int> coordinate) {
 	return search(nodeAt(coordinate));
 }
