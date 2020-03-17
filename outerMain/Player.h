@@ -21,9 +21,10 @@ public:
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is null or empty.
     void drawBuilding(Deck<Building*>*);
-    // Induces this Player to draw a HarvestTile from the specified Deck. Throws an exception if
-    // the specified Deck is null or empty.
-    void drawHarvestTile(Deck<HarvestTile*>*);
+    // Induces this Player to draw a HarvestTile from the specified Deck. If specified the drawn
+    // tile will serve as this Player's shipment tile Throws an exception if the specified Deck is
+    // null or empty.
+    void drawHarvestTile(Deck<HarvestTile*>*, bool);
     // Induces this Player to build the selected Building on their VGMap at the specified circle.
     // Throws an exception if any of the following conditions hold:
     // (1) the selected building is not consistent with this Player's hand,

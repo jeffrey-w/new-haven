@@ -30,11 +30,11 @@ void Player::drawBuilding(Deck<Building*>* deck) {
     buildings->insert(deck->draw());
 }
 
-void Player::drawHarvestTile(Deck<HarvestTile*>* deck) {
+void Player::drawHarvestTile(Deck<HarvestTile*>* deck, bool isShipment) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
     }
-    tiles->insert(deck->draw());
+    tiles->insert(deck->draw(), isShipment);
 }
 
 void Player::buildVillage(int selection, pair<int, int> circle) {
