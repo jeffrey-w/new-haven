@@ -7,11 +7,11 @@ using ResourceType = ResourceToken::ResourceType;
 Game::Game() : Game(DEFAULT_NUM_PLAYERS) {}
 
 Game::Game(int numPlayers) {
-	current = nullptr;
 	board = new GBMap(numPlayers);
 	resources = new GatherFacility();
 	tiles = harvestTileDeck();
 	buildings = buildingDeck();
+	current = nullptr;
 	players = new Roster(numPlayers);
 	tiles->shuffle();
 	buildings->shuffle();
@@ -19,10 +19,10 @@ Game::Game(int numPlayers) {
 }
 
 Game::~Game() {
-	delete current;
 	delete board;
 	delete tiles;
 	delete buildings;
+	delete current;
 	delete players;
 }
 

@@ -23,11 +23,11 @@ public:
 
 private:
 
-	Player* current;
 	GBMap* board;
 	GatherFacility* resources;
 	Deck<HarvestTile*>* tiles;
 	Deck<Building*>* buildings;
+	Player* current;
 	Roster* players;
 
 	void placeShipmentTile(std::pair<int, int>, int);
