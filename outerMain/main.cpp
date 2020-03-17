@@ -2,11 +2,10 @@
 #include <sstream>
 #include <string>
 
-#include "maps/GBMap.h"
 #include "Game.h"
 #include "test/Drivers.h"
 
-static GBMap* initGBMap();
+static Game* initGame();
 
 int main() {
     testGBMap();
@@ -16,30 +15,30 @@ int main() {
     testPlayer();
     testResources();
     testScoringFacilities();
-    GBMap* map = initGBMap();
-    map->display();
-    delete map;
+    Game* game = initGame();
+    game->displayBoard();
+    delete game;
     return 0;
 }
 
-GBMap* initGBMap() {
+Game* initGame() {
     int numPlayers = 0;
-    GBMap* map = nullptr;
+    Game* game = nullptr;
     do {
         std::cout << "Enter number of players: ";
         std::string input;
         std::getline(std::cin, input);
         std::stringstream(input) >> numPlayers;
         try {
-            map = new GBMap(numPlayers);
-        } catch (std::invalid_argument & e) {
+            game = new Game(numPlayers);
+        } catch (std::invalid_argument& e) {
             std::cerr << e.what() << std::endl;
             std::cerr << "Accept default number of players ("
                 << std::to_string(Game::DEFAULT_NUM_PLAYERS) << ")? Y/n: ";
             switch (std::cin.get()) {
             case 'Y':
             case 'y':
-                map = new GBMap();
+                game = new Game();
                 break;
             case 'N':
             case 'n':
@@ -50,6 +49,6 @@ GBMap* initGBMap() {
             }
             std::cin.ignore();
         }
-    } while (!map);
-    return map;
+    } while (!game);
+    return game;
 }
