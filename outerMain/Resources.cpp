@@ -219,7 +219,7 @@ bool BuildingHand::isEmpty() const {
 
 std::ostream& operator<<(std::ostream& stream, const BuildingHand& hand) {
 	if (hand.isEmpty()) {
-		std::cout << "Building hand is empty!\n";
+		std::cout << "This hand is empty.";
 	}
 	for (int i = 0; i < hand.owned->size(); i++) {
 		stream << (*hand.owned)[i];
@@ -228,4 +228,72 @@ std::ostream& operator<<(std::ostream& stream, const BuildingHand& hand) {
 		}
 	}
 	return std::cout << '\n';
+}
+
+BuildingPool::BuildingPool() {
+	pool = new vector<Building*>();
+	for (int i = 0; i < POOL_SIZE; i++) {
+		pool->push_back(nullptr);
+	}
+}
+
+BuildingPool::BuildingPool(const BuildingPool& other) {
+	pool = new vector<Building*>();
+	for (auto& building : *other.pool) {
+		pool->push_back(new Building(*building));
+	}
+}
+
+BuildingPool::~BuildingPool() {
+	for (auto& building : *pool) {
+		delete building;
+	}
+	delete pool;
+}
+
+size_t BuildingPool::getSize() const {
+	return pool->size();
+}
+
+void BuildingPool::replenish(Deck<Building*>* deck) {
+	for (int i = 0; i < POOL_SIZE; i++) {
+		if (deck->isEmpty()) {
+			break;
+		}
+		if (!((*pool)[i])) {
+			(*pool)[i] = deck->draw();
+		}
+	}
+}
+
+Building* BuildingPool::remove(int selection) {
+	Building* result = nullptr;
+	if (selection < 1 || selection > POOL_SIZE) {
+		throw std::out_of_range("Pool only has five buildings.");
+	}
+	if(!(result = (*pool)[--selection])){
+		throw std::invalid_argument("Building unavailable.");
+	}
+	(*pool)[selection] = nullptr;
+	return result;
+}
+
+void BuildingPool::display() const {
+	std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const BuildingPool& buildings) {
+	for (int i = 0; i < BuildingPool::POOL_SIZE; i++) {
+		stream << i + 1 << '\t';
+	}
+	stream << '\n';
+	for (auto& building : *buildings.pool) {
+		if (building) {
+			stream << *building << '\t';
+		}
+		else {
+			stream << "-\t";
+		}
+	}
+	return stream << '\n';
 }

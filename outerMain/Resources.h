@@ -192,3 +192,25 @@ private:
 	bool isEmpty() const;
 
 };
+
+class BuildingPool {
+
+	static constexpr int POOL_SIZE = 5;
+
+public:
+
+	BuildingPool();
+	BuildingPool(const BuildingPool&);
+	~BuildingPool();
+	size_t getSize() const;
+	void replenish(Deck<Building*>*);
+	Building* remove(int i);
+	void display() const;
+
+	friend std::ostream& operator<<(std::ostream&, const BuildingPool&);
+
+private:
+
+	std::vector<Building*>* pool;
+
+};
