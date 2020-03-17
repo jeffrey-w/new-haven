@@ -7,6 +7,8 @@
 
 class Roster {
 
+	static constexpr int TILE_HAND_SIZE = 3;
+
 public:
 
 	Roster(int);
