@@ -15,6 +15,18 @@ Game::Game(int numPlayers) {
 	players = new Roster(numPlayers);
 }
 
+Game::~Game() {
+	delete current;
+	delete board;
+	delete tiles;
+	delete buildings;
+	delete players;
+}
+
+void Game::displayBoard() const {
+	board->display();
+}
+
 void Game::placeShipmentTile(pair<int, int> coordinate, int type) {
 	if (!current) {
 		throw std::runtime_error("No player at the moment.");

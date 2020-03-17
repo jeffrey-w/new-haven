@@ -13,6 +13,8 @@ public:
 
 	Game();
 	Game(int);
+	~Game();
+	void displayBoard() const;
 
 private:
 
