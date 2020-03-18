@@ -48,7 +48,7 @@ public:
 	// Resets the tallies for each resource type recorded on this GatherFacility to zero.
 	void reset();
 	// Writes this GatherFacility to the statndard output stream.
-	void displayCount() const;
+	void display() const;
 
 private:
 

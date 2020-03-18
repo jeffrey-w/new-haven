@@ -29,7 +29,7 @@ void BuildFacility::incrementBy(int amount) {
 
 GatherFacility::GatherFacility() {
 	count = new map<int, int>();
-	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
+	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
 		(*count)[i] = 0;
 	}
 }
@@ -65,7 +65,7 @@ void GatherFacility::reset() {
 	}
 }
 
-void GatherFacility::displayCount() const {
+void GatherFacility::display() const {
 	for (auto& entry : *count) {
 		int amount = entry.second;
 		switch (entry.first) {
