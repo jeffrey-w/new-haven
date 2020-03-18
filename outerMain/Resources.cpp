@@ -85,23 +85,23 @@ void HarvestTileHand::display() const {
 }
 
 std::ostream& operator<<(std::ostream& stream, const HarvestTileHand& hand) {
-	stream << "1st:\n";
+	stream << "1\n";
 	if (hand.one) {
-		stream << hand.one;
+		stream << *hand.one;
 	}
 	else {
 		stream << "None\n";
 	}
-	stream << "2nd:\n";
+	stream << "2\n";
 	if (hand.two) {
-		stream << hand.two;
+		stream << *hand.two;
 	}
 	else {
 		stream << "None\n";
 	}
-	stream << "Shipment:\n";
+	stream << "Shipment\n";
 	if (hand.shipment) {
-		stream << hand.shipment;
+		stream << *hand.shipment;
 	}
 	else {
 		stream << "None\n";
@@ -149,18 +149,17 @@ void BuildingHand::display() const {
 	std::cout << *this;
 }
 
-bool BuildingHand::isEmpty() const {
-	return owned->empty();
-}
-
 std::ostream& operator<<(std::ostream& stream, const BuildingHand& hand) {
-	if (hand.isEmpty()) {
-		std::cout << "This hand is empty.";
-	}
 	for (int i = 0; i < hand.owned->size(); i++) {
-		stream << (*hand.owned)[i];
-		if (i < hand.owned->size() - 1) {
-			stream << ',';
+		stream << i + 1 << '\t';
+	}
+	stream << '\n';
+	for (int i = 0; i < hand.owned->size(); i++) {
+		if ((*hand.owned)[i]) {
+			stream << *(*hand.owned)[i] << '\t';
+		}
+		else {
+			stream << "-\t";
 		}
 	}
 	return std::cout << '\n';
