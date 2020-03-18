@@ -27,6 +27,10 @@ public:
 	// Inserts the specified Player back into this Roster after having taken a turn. Throws an
 	// exception if the specified Player does not belong to this Roster.
 	void enqueue(Player*);
+	// Writes this Roster to the standard output stream.
+	void display() const;
+
+	friend std::ostream& operator<<(std::ostream&, const Roster&);
 
 
 private:

@@ -19,6 +19,11 @@ Roster::Roster(const Roster& other) : Roster() {
 	}
 }
 
+Roster::Roster() {
+	names = new std::set<Player*>();
+	players = new std::deque<Player*>();
+}
+
 Roster::~Roster() {
 	for (auto& player : *players) {
 		delete player;
@@ -59,7 +64,13 @@ void Roster::enqueue(Player* player) {
 	players->push_back(player);
 }
 
-Roster::Roster() {
-	names = new std::set<Player*>();
-	players = new std::deque<Player*>();
+void Roster::display() const {
+	std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const Roster& roster) {
+	for (auto& player : *roster.players) {
+		stream << *player;
+	}
+	return stream << '\n';
 }
