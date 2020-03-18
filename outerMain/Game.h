@@ -18,12 +18,18 @@ public:
 	Game(int);
 	// Destroys this Game.
 	~Game();
-	// Writes the GBMap that this Game is being played on to the standard output stream.
+	// Returns the number of HarvestTiles remaining in this Game's Deck.
+	int tilesLeft() const;
+	// Returns the number of Buildings remaining in this Game's Deck.
+	int buildingsLeft() const;
+	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
-	// Writes the current status of this Game's resources markers to the statndard output stream.
+	// Writes this Game's resource markers to the standard output stream.
 	void displayCount() const;
-	// Writes the face up BuildingPool of this Game to the standard output stream.
+	// Writes this Game's BuildingPool to the standard output stream.
 	void displayPool() const;
+	// Writes this Game's Players to the standard ouput stream;
+	void displayerPlayers() const;
 
 private:
 

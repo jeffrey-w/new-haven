@@ -28,6 +28,14 @@ Game::~Game() {
 	delete players;
 }
 
+int Game::tilesLeft() const {
+	return tiles->getSize();
+}
+
+int Game::buildingsLeft() const {
+	return buildings->getSize();
+}
+
 void Game::displayBoard() const {
 	board->display();
 }
@@ -38,6 +46,10 @@ void Game::displayCount() const {
 
 void Game::displayPool() const {
 	pool->display();
+}
+
+void Game::displayerPlayers() const {
+	players->display();
 }
 
 void Game::placeShipmentTile(pair<int, int> coordinate, int type) {
