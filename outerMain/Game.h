@@ -20,6 +20,8 @@ public:
 	~Game();
 	// Writes the GBMap that this Game is being played on to the standard output stream.
 	void displayBoard() const;
+	// Writes the current status of this Game's resources markers to the statndard output stream.
+	void displayCount() const;
 	// Writes the face up BuildingPool of this Game to the standard output stream.
 	void displayPool() const;
 

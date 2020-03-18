@@ -32,6 +32,10 @@ void Game::displayBoard() const {
 	board->display();
 }
 
+void Game::displayCount() const {
+	resources->display();
+}
+
 void Game::displayPool() const {
 	pool->display();
 }
