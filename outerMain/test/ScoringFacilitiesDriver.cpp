@@ -27,7 +27,7 @@ void testGatherFacility() {
 	map.display();
 	std::cout << "Counting resources starting from (0, 0):\n";
 	map.calculateResources({ 0, 0 }, &gf);
-	gf.displayCount();
+	gf.display();
 	std::cout << std::endl;
 }
 
