@@ -79,3 +79,14 @@ void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacilit
     }
 	map->calculateResources(square, resources);
 }
+
+void Player::display() const {
+    std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const Player& player) {
+    stream << *player.tiles;
+    stream << *player.buildings;
+    stream << *player.villageBoard;
+    return stream << '\n';
+}

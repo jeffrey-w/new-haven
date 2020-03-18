@@ -53,7 +53,11 @@ public:
     // specified square, and records the results on the specified GatherFacility. Throws an
     // exception if the specified GBMap or GatherFacility is null, or if the specified square is
     // not on the GBMap this Player is playing on.
-    void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*); // TODO there is not use for this
+    void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*); // TODO there is no use for this
+    // Writes this Player to the standard output stream.
+    void display() const;
+
+    friend std::ostream& operator<<(std::ostream&, const Player&);
 
 private:
     
