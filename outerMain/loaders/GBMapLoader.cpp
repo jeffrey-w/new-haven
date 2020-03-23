@@ -21,9 +21,7 @@ GBMap* GBMapLoader::load() {
 	while (scanner->hasNext()) {
 		try {
 			scanner->consume('\n', errorMessage("Expect a new line"));
-			HarvestTile* tile = nextTile();
-			pair<int, int> square = nextSquare();
-			map->setSquare(tile, square);
+			map->setSquare(nextTile(), nextSquare());
 		} catch (const std::exception& e) {
 			delete map;
 			throw e;
