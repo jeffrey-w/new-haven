@@ -116,7 +116,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="pieces\AbstractPiece.cpp" />
     <ClCompile Include="Roster.cpp" />
     <ClCompile Include="test\GameStartDriver.cpp" />
     <ClCompile Include="test\ResourcesDriver.cpp" />
