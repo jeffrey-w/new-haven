@@ -43,9 +43,9 @@ void testBuildFacility() {
 		map.setCircle(new Building(BuildingType::MEADOW, 1), { i, 0 });
 	}
 	for (int i = 1; i < VGMap::HEIGHT; i++) {
-		Building* b = (i < 3) ? new Building(BuildingType::MEADOW, 1)
-			: new Building(BuildingType::QUARRY, 1);
 		if (i != 3) {
+			Building* b = (i < 3) ? new Building(BuildingType::MEADOW, 1)
+				: new Building(BuildingType::QUARRY, 1);
 			map.setCircle(b, { i, 1 });
 		}
 	}
