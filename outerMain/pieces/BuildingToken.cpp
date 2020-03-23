@@ -37,8 +37,7 @@ BuildingToken::BuildingToken(const BuildingToken& other) : AbstractToken(other) 
 	faceUp = new bool(*other.faceUp);
 }
 
-BuildingToken::~BuildingToken()
-{
+BuildingToken::~BuildingToken() {
 	delete type;
 	delete value;
 	delete faceUp;
