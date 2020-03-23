@@ -26,7 +26,6 @@ private:
 	Scanner* scanner;
 
 	Building* nextBuilding();
-	BuildingToken* nextToken();
 	std::pair<int, int> nextCircle();
 
 	std::string errorMessage(const std::string&);
