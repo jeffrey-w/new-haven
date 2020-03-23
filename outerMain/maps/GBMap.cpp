@@ -41,6 +41,8 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
+	delete tile;
+	tile = nullptr;
 }
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
