@@ -188,9 +188,7 @@ public:
 private:
 
 	std::vector<Building*>* owned;
-
-	bool isEmpty() const;
-
+	
 };
 
 class BuildingPool {
