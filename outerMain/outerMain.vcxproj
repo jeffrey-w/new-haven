@@ -161,6 +161,7 @@
     <ClInclude Include="pieces\AbstractPiece.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="util\Assert.h" />
+    <ClInclude Include="util\Debug.h" />
     <ClInclude Include="util\Random.h" />
     <ClInclude Include="pieces\ResourceToken.h" />
     <ClInclude Include="Resources.h" />
