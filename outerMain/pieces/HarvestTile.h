@@ -28,8 +28,6 @@ public:
 	// Rotates this HarvestTile 90 degrees clockwise the specified number of rotations. Throws an
 	// exception if this HarvestTile has already been tokenized.
 	void rotate(int);
-	// Returns true iff this HarvestTile has been completely tokenized.
-	bool isTokenized() const;
 	// Iteratively returns the ResourceTokens that constitute this HarvestTile. Throws an
 	// exception if this HarvestTile has already been tokenized.
 	ResourceToken* tokenize();

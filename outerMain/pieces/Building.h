@@ -29,8 +29,6 @@ public:
 	bool isFaceUp() const;
 	// Returns the value of this Building.
 	int getValue() const;
-	// Returns true iff this Building has been completely tokenized.
-	bool isTokenized() const;
 	// Returns the BuildingToken that constitutes this Building. Throws an exception if this
 	// Building has already been tokenized.
 	BuildingToken* tokenize();
