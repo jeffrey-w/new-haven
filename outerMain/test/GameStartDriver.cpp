@@ -3,6 +3,7 @@
 #include <string>
 
 #include "../Game.h"
+#include "../util/Debug.h"
 #include "GameStartDriver.h"
 
 static Game* initGame();

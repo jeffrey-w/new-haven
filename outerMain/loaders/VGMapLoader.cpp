@@ -1,5 +1,6 @@
 #include <string>
 
+#include "../util/Debug.h"
 #include "VGMapLoader.h"
 
 using std::pair;

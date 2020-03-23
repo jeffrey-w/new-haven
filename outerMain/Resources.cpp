@@ -3,6 +3,7 @@
 #include "maps/TokenGraph.h"
 #include "maps/VGMap.h"
 #include "Resources.h"
+#include "util/Debug.h"
 
 using std::vector;
 using ResourceType = ResourceToken::ResourceType;

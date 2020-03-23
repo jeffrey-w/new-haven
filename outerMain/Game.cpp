@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Resources.h"
+#include "util/Debug.h"
 
 using std::pair;
 using ResourceType = ResourceToken::ResourceType;

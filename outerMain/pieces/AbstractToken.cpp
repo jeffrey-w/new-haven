@@ -1,5 +1,6 @@
 #include <typeinfo>
 
+#include "../util/Debug.h"
 #include "AbstractToken.h"
 
 bool AbstractToken::areSameType(AbstractToken* a, AbstractToken* b) {

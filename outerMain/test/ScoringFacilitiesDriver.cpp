@@ -4,6 +4,7 @@
 #include "../maps/GBMap.h"
 #include "../maps/VGMap.h"
 #include "../util/Assert.h"
+#include "../util/Debug.h"
 #include "ScoringFacilitiesDriver.h"
 
 static void testGatherFacility();

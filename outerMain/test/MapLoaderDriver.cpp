@@ -1,6 +1,7 @@
 #include "../loaders/GBMapLoader.h"
 #include "../loaders/VGMapLoader.h"
 #include "../util/Assert.h"
+#include "../util/Debug.h"
 #include "MapLoaderDriver.h"
 
 void testGBMapLoader() {

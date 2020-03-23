@@ -1,5 +1,6 @@
 #include <string>
 
+#include "Debug.h"
 #include "Scanner.h"
 
 using std::ifstream;

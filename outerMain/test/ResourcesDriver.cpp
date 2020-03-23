@@ -2,6 +2,7 @@
 #include <string>
 
 #include "../Resources.h"
+#include "../util/Debug.h"
 #include "ResourcesDriver.h"
 
 void testResources() {

@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Roster.h"
+#include "util/Debug.h"
 
 Roster::Roster(int numPlayers) : Roster() {
 	if (numPlayers < Game::DEFAULT_NUM_PLAYERS) {

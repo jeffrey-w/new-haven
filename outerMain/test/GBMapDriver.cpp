@@ -2,6 +2,7 @@
 
 #include "../maps/GBMap.h"
 #include "../util/Assert.h"
+#include "../util/Debug.h"
 #include "GBMapDriver.h"
 
 using std::string;

@@ -1,6 +1,7 @@
 #include "../Resources.h"
 #include "../Player.h"
 #include "../util/Assert.h"
+#include "../util/Debug.h"
 #include "PlayerDriver.h"
 
 static constexpr int SAMPLE_SIZE = 10;

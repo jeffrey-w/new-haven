@@ -2,6 +2,7 @@
 #include <string>
 
 #include "../maps/VGMap.h"
+#include "../util/Debug.h"
 #include "../util/Random.h"
 #include "BuildingToken.h"
 

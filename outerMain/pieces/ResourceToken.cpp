@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "../util/Debug.h"
 #include "../util/Random.h"
 #include "ResourceToken.h"
 

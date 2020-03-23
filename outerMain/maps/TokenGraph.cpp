@@ -1,6 +1,7 @@
 #include <queue>
 #include <stdexcept>
 
+#include "../util/Debug.h"
 #include "TokenGraph.h"
 
 using std::bitset;

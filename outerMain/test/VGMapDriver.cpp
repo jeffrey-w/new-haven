@@ -1,5 +1,6 @@
 #include "../maps/VGMap.h"
 #include "../util/Assert.h"
+#include "../util/Debug.h"
 #include "VGMapDriver.h"
 
 void testVGMap() {

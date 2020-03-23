@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 
+#include "../util/Debug.h"
 #include "VGMap.h"
 
 using std::array;
