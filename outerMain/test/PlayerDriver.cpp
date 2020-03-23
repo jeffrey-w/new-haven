@@ -87,6 +87,7 @@ void testCalculateResources() {
 		"ERROR: recorded to the null gather facility.");
 	ASSERT_SUCCESS(player->calculateResources(&GBMap(), { 0, 0 }, &GatherFacility()),
 		"Successfully counted resource.");
+	tearDown();
 }
 
 
