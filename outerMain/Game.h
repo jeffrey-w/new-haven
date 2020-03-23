@@ -19,9 +19,9 @@ public:
 	// Destroys this Game.
 	~Game();
 	// Returns the number of HarvestTiles remaining in this Game's Deck.
-	int tilesLeft() const;
+	size_t tilesLeft() const;
 	// Returns the number of Buildings remaining in this Game's Deck.
-	int buildingsLeft() const;
+	size_t buildingsLeft() const;
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
 	// Writes this Game's resource markers to the standard output stream.

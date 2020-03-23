@@ -31,11 +31,11 @@ Game::~Game() {
 	delete players;
 }
 
-int Game::tilesLeft() const {
+size_t Game::tilesLeft() const {
 	return tiles->getSize();
 }
 
-int Game::buildingsLeft() const {
+size_t Game::buildingsLeft() const {
 	return buildings->getSize();
 }
 
