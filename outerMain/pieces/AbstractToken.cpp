@@ -10,3 +10,5 @@ bool AbstractToken::areSameType(AbstractToken* a, AbstractToken* b) {
 	// RTTI used for safety (is probably not necessary).
 	return b && typeid(a) == typeid(b) && a->getType() == b->getType();
 }
+
+AbstractToken::~AbstractToken() {}

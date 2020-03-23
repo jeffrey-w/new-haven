@@ -7,6 +7,7 @@ class AbstractPiece {
 
 public:
 	
+	virtual ~AbstractPiece();
 	// Iteratively returns the tokens that constitute this AbstractPiece. Throws an exception if
 	// this Piece has already been tokenized.
 	virtual AbstractToken* tokenize() = 0;
