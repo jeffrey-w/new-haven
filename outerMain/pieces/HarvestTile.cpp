@@ -53,28 +53,12 @@ int HarvestTile::validateRotation(int rotations) {
 	if (*current + NUM_RESOURCES < rotations) {
 		throw new std::invalid_argument("Cannot rotate " + std::to_string(rotations) + " times.");
 	}
-	for (auto& resource : *resources) {
-		if (resource->isPlaced()) {
-			throw std::runtime_error("Cannot rotate tile after placing it.");
-		}
-	}
 	return rotations;
 }
 
-bool HarvestTile::isTokenized() const {
-	for (auto& resource : *resources) {
-		if (!resource->isPlaced()) {
-			return false;
-		}
-	}
-	return true;
-}
-
 ResourceToken* HarvestTile::tokenize() {
-	if (isTokenized()) {
-		throw std::runtime_error("This tile has already been placed.");
-	}
 	ResourceToken* returnToken = (*resources)[*current];
+	(*resources)[*current] = nullptr;
 	*current = ++(*current) % NUM_RESOURCES;
 	return returnToken;
 }

@@ -32,14 +32,9 @@ int Building::getValue() const {
 	return token->getValue();
 }
 
-bool Building::isTokenized() const {
-	return token->isPlaced();
-}
-
 BuildingToken* Building::tokenize() {
-	if (isTokenized()) {
-		throw std::runtime_error("This Building has already been placed.");
-	}
+	BuildingToken* token = this->token;
+	this->token = nullptr;
 	return token;
 }
 
