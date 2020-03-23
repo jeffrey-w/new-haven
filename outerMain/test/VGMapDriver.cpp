@@ -13,14 +13,14 @@ void testVGMap() {
 	std::cout << "Running VGMap tests:" << std::endl;
 	ASSERT_THROWS(std::invalid_argument, map.setCircle(nullptr, { 1, 1 }),
 		"ERROR: null building placed.");
-	ASSERT_THROWS(std::invalid_argument, map.setCircle(new Building(), { 0, 0 }),
+	ASSERT_THROWS(std::invalid_argument, map.setCircle(c, { 0, 0 }),
 		"ERROR: double placement allowed.");
-	ASSERT_THROWS(std::out_of_range, map.setCircle(new Building(), { VGMap::HEIGHT, VGMap::WIDTH }),
+	ASSERT_THROWS(std::out_of_range, map.setCircle(c, { VGMap::HEIGHT, VGMap::WIDTH }),
 		"ERROR: invalid placement allowed.");
 	ASSERT_THROWS(std::runtime_error, map.setCircle(c, { 0, 2 }),
 		"ERROR invalid placement allowed.");
 	ASSERT_THROWS(std::runtime_error, map.setCircle(d, { 0, 1 }),
 		"ERROR: invalid placement allowed.");
 	std::cout << std::endl;
-	delete c, d;
+	delete c, delete d;
 }
