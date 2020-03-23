@@ -12,8 +12,8 @@ void testGBMapLoader() {
 		GBMapLoader syntax("./res/gmap_bad_syntax.txt");
 		GBMap* loaded = nullptr;
 		ASSERT_SUCCESS((loaded = valid.load()), "Successfully loaded valid GBMap.");
-		ASSERT_THROWS(std::invalid_argument, semantics.load(), "ERROR: loaded invalid GBMap.");
-		ASSERT_THROWS(std::runtime_error, syntax.load(), "ERROR: read invalid file.");
+		ASSERT_THROWS(std::exception, semantics.load(), "ERROR: loaded invalid GBMap.");
+		ASSERT_THROWS(std::exception, syntax.load(), "ERROR: read invalid file.");
 		std::cout << std::endl;
 		delete loaded;
 	} catch (const std::invalid_argument& e) {
