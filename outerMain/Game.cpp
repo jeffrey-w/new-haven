@@ -23,6 +23,7 @@ Game::Game(int numPlayers) {
 
 Game::~Game() {
 	delete board;
+	delete resources;
 	delete tiles;
 	delete buildings;
 	delete pool;
