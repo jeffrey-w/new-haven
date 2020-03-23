@@ -15,6 +15,7 @@ static string failure(const string&);
 
 void testGBMap() {
 	GBMap one, two(3), three(4);
+	HarvestTile* tile = new HarvestTile();
 	one.setSquare(new HarvestTile(), { 0, 0 });
 	std::cout << "Running GBMap tests:" << std::endl;
 	std::cout << intro(MIN_NODES, "two");
@@ -27,11 +28,12 @@ void testGBMap() {
 		"ERROR: five player map constructed.");
 	ASSERT_THROWS(std::invalid_argument, one.setSquare(nullptr, { 0, 1 }),
 		"ERROR: null tile placed.");
-	ASSERT_THROWS(std::invalid_argument, one.setSquare(new HarvestTile(), { 0, 0 }),
+	ASSERT_THROWS(std::invalid_argument, one.setSquare(tile, { 0, 0 }),
 		"ERROR: double placement allowed");
-	ASSERT_THROWS(std::invalid_argument, three.setSquare(new HarvestTile(), { 0, 0 }),
+	ASSERT_THROWS(std::invalid_argument, three.setSquare(tile, { 0, 0 }),
 		"ERROR: invalid placement allowed.");
 	std::cout << std::endl;
+	delete tile;
 }
 
 string intro(const int nodes, const string& players) {
