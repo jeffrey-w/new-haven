@@ -25,6 +25,7 @@ Game::~Game() {
 	delete board;
 	delete tiles;
 	delete buildings;
+	delete pool;
 	delete current;
 	delete players;
 }
