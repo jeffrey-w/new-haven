@@ -40,6 +40,9 @@ HarvestTile::HarvestTile(int orientation) {
 }
 
 HarvestTile::~HarvestTile() {
+	for (auto& resource : *resources) {
+		delete resource;
+	}
 	delete current;
 	delete resources;
 }
