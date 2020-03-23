@@ -14,5 +14,5 @@ void testResources() {
 	std::cout << "Successfully created deck of " + std::to_string(buildings->getSize())
 		+ " buildings.\n";
 	std::cout << std::endl;
-	delete tiles, buildings;
+	delete tiles, delete buildings;
 }
