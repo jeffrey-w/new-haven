@@ -17,41 +17,43 @@ VGMapLoader::~VGMapLoader() {
 VGMap* VGMapLoader::load() {
 	VGMap* map = new VGMap();
 	while (scanner->hasNext()) {
-		Building* building = nextBuilding();
-		pair<int, int> circle = nextCircle();
-		map->setCircle(building, circle);
-		if (scanner->hasNext()) {
-			scanner->consume('\n', errorMessage("Expect a new line"));
+		try {
+			map->setCircle(nextBuilding(), nextCircle());
+			if (scanner->hasNext()) {
+				scanner->consume('\n', errorMessage("Expect a new line"));
+			}
+		} catch (const std::exception& e) {
+			delete map;
+			throw e;
 		}
 	}
 	return map;
 }
 
 Building* VGMapLoader::nextBuilding() {
-	Building* building = new Building();
-	building->token = nextToken();
-	return building;
-}
-
-BuildingToken* VGMapLoader::nextToken() {
 	bool faceup;
 	int value;
-	BuildingToken::BuildingType type;
-	BuildingToken* token;
-	scanner->consume('<', errorMessage("Expect a '<'"));
-	type = static_cast<BuildingToken::BuildingType>(scanner->nextInt());
-	scanner->consume('>', errorMessage("Expect a '>'"));
-	scanner->consume('<', errorMessage("Expect a '<'"));
-	value = scanner->nextInt();
-	scanner->consume('>', errorMessage("Expect a '>'"));
-	scanner->consume('<', errorMessage("Expect a '<'"));
-	faceup = scanner->nextBool();
-	scanner->consume('>', errorMessage("Expect a '>'"));
-	token = new BuildingToken(type, value);
-	if (faceup) {
-		token->flip();
+	BuildingType type;
+	Building* building = nullptr;
+	try {
+		scanner->consume('<', errorMessage("Expect a '<'"));
+		type = static_cast<BuildingType>(scanner->nextInt());
+		scanner->consume('>', errorMessage("Expect a '>'"));
+		scanner->consume('<', errorMessage("Expect a '<'"));
+		value = scanner->nextInt();
+		scanner->consume('>', errorMessage("Expect a '>'"));
+		scanner->consume('<', errorMessage("Expect a '<'"));
+		faceup = scanner->nextBool();
+		scanner->consume('>', errorMessage("Expect a '>'"));
+		building = new Building(type, value);
+		if (faceup) {
+			building->flip();
+		}
+	} catch (const std::exception& e) {
+		delete building;
+		throw e;
 	}
-	return token;
+	return building;
 }
 
 pair<int, int> VGMapLoader::nextCircle() {
