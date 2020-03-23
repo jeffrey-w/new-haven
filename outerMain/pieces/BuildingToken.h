@@ -32,7 +32,6 @@ public:
 	// Returns the value of this BuildingToken.
 	int getValue() const;
 	// Flips this BuildingToken. If it was previously face up, it becomes face down and vice versa.
-	// Throws an exception if this BuildingToken has already been placed
 	void flip();
 	// Writes this BuildingToken to the standard output stream.
 	void display() const;

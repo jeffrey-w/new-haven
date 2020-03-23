@@ -19,8 +19,8 @@ public:
 	VGMap(const VGMap&);
 	// Destroys this VGMap.
 	~VGMap();
-	// Places the specified Building onto the specified circle of this VGMap. Throws an exception
-	// if any of the following conditions hold:
+	// Places the specified Building onto the specified circle of this VGMap. The specified
+	// Building is destroyed. Throws an exception if any of the following conditions hold:
 	// (1) the specified Building is null,
 	// (2) the specified circle is not on this VGMap or it is already occupied,
 	// (3) the specified Building is not being placed adjacent to another of the same type, or

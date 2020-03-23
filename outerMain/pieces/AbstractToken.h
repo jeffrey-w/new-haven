@@ -8,6 +8,7 @@ public:
 	// Returns true iff the specified Tokens have the same type.
 	static bool areSameType(AbstractToken*, AbstractToken*);
 	
+	// Destroys this AbstractToken.
 	virtual ~AbstractToken();
 	// Returns the type of this Token.
 	virtual int getType() const = 0;

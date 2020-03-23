@@ -41,18 +41,18 @@ public:
     void calculateScore();
     // Adds the values of the Buildings in this Player's hand to their score.
     void adjustScore();
-    // Induces this Player to attempt to place the selected HarvestTile onto the specified GBMap at
-    // the specified square. Throws an exception if the specified tile selection is not consistent
-    // with this Player's Hand, if the specified GBMap is null, or if the specified square is not
-    // on the GBMap this Player is playing on.
+    // Induces this Player to place the selected HarvestTile onto the specified GBMap at the 
+    // specified square. Throws an exception if the specified tile selection is not consistent with
+    // this Player's Hand, if the specified GBMap is null, or if the specified square is not on the
+    // GBMap this Player is playing on.
     void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     // Returns this Player's shipment tile. Throws an exception if this Player has already played
     // thier shipment tile.
     HarvestTile* getShipmentTile();
-    // Counts the resources available to this Player ont he specified GBMap, starting from the
+    // Counts the resources available to this Player on the specified GBMap, starting from the
     // specified square, and records the results on the specified GatherFacility. Throws an
     // exception if the specified GBMap or GatherFacility is null, or if the specified square is
-    // not on the GBMap this Player is playing on.
+    // not on the specified GBMap.
     void calculateResources(GBMap*, std::pair<int, int>, GatherFacility*); // TODO there is no use for this
     // Writes this Player to the standard output stream.
     void display() const;

@@ -29,11 +29,9 @@ public:
 	bool isFaceUp() const;
 	// Returns the value of this Building.
 	int getValue() const;
-	// Returns the BuildingToken that constitutes this Building. Throws an exception if this
-	// Building has already been tokenized.
+	// Returns the BuildingToken that constitutes this Building.
 	BuildingToken* tokenize();
 	// Flips this Building. If it was previously face up, it becomes face down and vice versa.
-	// Throws an exception if this BuildingToken has already been placed
 	void flip();
 	// Writes this Building to the standard output stream.
 	void display() const;

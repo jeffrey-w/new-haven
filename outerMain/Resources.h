@@ -191,18 +191,26 @@ private:
 	
 };
 
+// A common collection of Buildings.
 class BuildingPool {
 
 	static constexpr int POOL_SIZE = 5;
 
 public:
 
+	// Constructs a new BuildingPool object.
 	BuildingPool();
+	// Constructs a new BuildingPool object with the same contents as the specified BuildingPool.
 	BuildingPool(const BuildingPool&);
+	// Destroys this BuildingPool.
 	~BuildingPool();
+	// Returns the number of Buildings in this BuildingPool.
 	size_t getSize() const;
+	// Fills this BuildingPool to capacity with Buildings from the specified Deck.
 	void replenish(Deck<Building*>*);
-	Building* remove(int i);
+	// Removes the selected Building from this BuildingPool.
+	Building* remove(int);
+	// Writes this BuildingPool to the standard output stream.
 	void display() const;
 
 	friend std::ostream& operator<<(std::ostream&, const BuildingPool&);

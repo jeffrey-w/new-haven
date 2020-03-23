@@ -22,9 +22,9 @@ public:
 	GBMap(const GBMap&);
 	// Destroys this GBMap.
 	~GBMap();
-	// Places the specified HarvestTile onto the specified square of this GBMap. Throws an
-	// exception if the specified HarvestTile is null or has already been placed; or if the
-	// specified square is not on this GBMap or if it is already occupied.
+	// Places the specified HarvestTile onto the specified square of this GBMap. The specified
+	// HarvestTile is destroyed. Throws an exception if the specified HarvestTile is null; or if
+	// the specified square is not on this GBMap or if it is already occupied.
 	void setSquare(HarvestTile*, std::pair<int, int>);
 	// Counts, starting from the specified square, and records on the specified GatherFacility the
 	// number of connected resources of each type on this GBMap. If the specified ResourceToken is

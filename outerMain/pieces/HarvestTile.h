@@ -25,11 +25,9 @@ public:
 	HarvestTile(const HarvestTile&);
 	// Destroys this HarvestTile.
 	~HarvestTile();
-	// Rotates this HarvestTile 90 degrees clockwise the specified number of rotations. Throws an
-	// exception if this HarvestTile has already been tokenized.
+	// Rotates this HarvestTile 90 degrees clockwise the specified number of rotations.
 	void rotate(int);
-	// Iteratively returns the ResourceTokens that constitute this HarvestTile. Throws an
-	// exception if this HarvestTile has already been tokenized.
+	// Iteratively returns the ResourceTokens that constitute this HarvestTile.
 	ResourceToken* tokenize();
 	// Writes this HarvestTile to the standard output stream.
 	void display() const;
