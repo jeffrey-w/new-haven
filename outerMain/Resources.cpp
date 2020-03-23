@@ -121,6 +121,9 @@ BuildingHand::BuildingHand(const BuildingHand& other) : BuildingHand() {
 }
 
 BuildingHand::~BuildingHand() {
+	for (auto& building : *owned) {
+		delete building;
+	}
 	delete owned;
 }
 
@@ -133,7 +136,8 @@ Building* BuildingHand::select(int selection) {
 	if (selection < 1 || selection > owned->size()) {
 		throw std::out_of_range("Selection not in range.");
 	}
-	building = owned->at(--selection);
+	building = (*owned)[--selection];
+	owned->erase(owned->begin() + selection);
 	return building;
 }
 
