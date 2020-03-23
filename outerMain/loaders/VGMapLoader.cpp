@@ -15,14 +15,18 @@ VGMapLoader::~VGMapLoader() {
 }
 
 VGMap* VGMapLoader::load() {
+	Building* building = nullptr;
 	VGMap* map = new VGMap();
 	while (scanner->hasNext()) {
 		try {
-			map->setCircle(nextBuilding(), nextCircle());
+			building = nextBuilding();
+			pair<int, int> circle = nextCircle();
+			map->setCircle(building, circle);
 			if (scanner->hasNext()) {
 				scanner->consume('\n', errorMessage("Expect a new line"));
 			}
 		} catch (const std::exception& e) {
+			delete building;
 			delete map;
 			throw e;
 		}

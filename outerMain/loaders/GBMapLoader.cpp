@@ -17,12 +17,16 @@ GBMapLoader::~GBMapLoader() {
 }
 
 GBMap* GBMapLoader::load() {
+	HarvestTile* tile = nullptr;
 	GBMap* map = new GBMap(getNumPlayers());
 	while (scanner->hasNext()) {
 		try {
 			scanner->consume('\n', errorMessage("Expect a new line"));
-			map->setSquare(nextTile(), nextSquare());
+			tile = nextTile();
+			pair<int, int> square = nextSquare();
+			map->setSquare(tile, square);
 		} catch (const std::exception& e) {
+			delete tile;
 			delete map;
 			throw e;
 		}
