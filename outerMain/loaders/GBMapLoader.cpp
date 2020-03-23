@@ -19,10 +19,15 @@ GBMapLoader::~GBMapLoader() {
 GBMap* GBMapLoader::load() {
 	GBMap* map = new GBMap(getNumPlayers());
 	while (scanner->hasNext()) {
-		scanner->consume('\n', errorMessage("Expect a new line"));
-		HarvestTile* tile = nextTile();
-		pair<int, int> square = nextSquare();
-		map->setSquare(tile, square);
+		try {
+			scanner->consume('\n', errorMessage("Expect a new line"));
+			HarvestTile* tile = nextTile();
+			pair<int, int> square = nextSquare();
+			map->setSquare(tile, square);
+		} catch (const std::exception& e) {
+			delete map;
+			throw e;
+		}
 	}
 	return map;
 }
@@ -36,19 +41,24 @@ int GBMapLoader::getNumPlayers() {
 }
 
 HarvestTile* GBMapLoader::nextTile() {
-	HarvestTile* tile;
-	scanner->consume('<', errorMessage("Expect a '<'"));
-	tile = new HarvestTile(scanner->nextInt());
-	scanner->consume('>', errorMessage("Expect a '>'"));
-	scanner->consume('<', errorMessage("Expect a '<'"));
-	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
-		tile->resources->push_back(nextToken());
-		if (i != HarvestTile::NUM_RESOURCES - 1) {
-			scanner->consume(',', errorMessage("Expect a ','"));
+	HarvestTile* tile = nullptr;
+	try {
+		scanner->consume('<', errorMessage("Expect a '<'"));
+		tile = new HarvestTile(scanner->nextInt());
+		scanner->consume('>', errorMessage("Expect a '>'"));
+		scanner->consume('<', errorMessage("Expect a '<'"));
+		for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
+			tile->resources->push_back(nextToken());
+			if (i != HarvestTile::NUM_RESOURCES - 1) {
+				scanner->consume(',', errorMessage("Expect a ','"));
+			}
+			else {
+				scanner->consume('>', errorMessage("Expect a '>'"));
+			}
 		}
-		else {
-			scanner->consume('>', errorMessage("Expect a '>'"));
-		}
+	} catch (const std::exception& e) {
+		delete tile;
+		throw e;
 	}
 	return tile;
 }
