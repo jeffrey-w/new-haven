@@ -22,7 +22,7 @@ public:
 	GBMap* load();
 
 private:
-
+	
 	Scanner* scanner;
 
 	int getNumPlayers();
