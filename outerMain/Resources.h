@@ -186,7 +186,7 @@ public:
 	friend std::ostream& operator<<(std::ostream&, const BuildingHand&);
 
 private:
-
+	
 	std::vector<Building*>* owned;
 	
 };
