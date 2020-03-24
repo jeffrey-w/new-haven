@@ -13,8 +13,7 @@ Game::Game(int numPlayers) {
 	tiles = harvestTileDeck();
 	buildings = buildingDeck();
 	pool = new BuildingPool();
-	current = nullptr;
-	players = new Roster(numPlayers);
+	players = new Roster();
 	tiles->shuffle();
 	buildings->shuffle();
 	pool->replenish(buildings);
@@ -27,7 +26,6 @@ Game::~Game() {
 	delete tiles;
 	delete buildings;
 	delete pool;
-	delete current;
 	delete players;
 }
 
@@ -51,17 +49,20 @@ void Game::displayPool() const {
 	pool->display();
 }
 
-void Game::displayerPlayers() const {
-	players->display();
+void Game::playTile(int selection, pair<int, int> square) {
+	Player* current = players->next();
+	current->placeHarvestTile(selection, board, square);
+	current->calculateResources(board, square, resources);
 }
 
-void Game::placeShipmentTile(pair<int, int> coordinate, int type) {
-	if (!current) {
-		throw std::runtime_error("No player at the moment."); // TODO this belongs in turn()
-	}
+void Game::playShipment(pair<int, int> coordinate, int type) {
+	Player* current = players->next();
 	ResourceToken token(static_cast<ResourceType>(type));
 	HarvestTile* shipment = current->getShipmentTile();
 	board->calculateResources(coordinate, resources, &token);
 	board->setSquare(shipment, coordinate);
-	resources->incrementBy(type, HarvestTile::NUM_RESOURCES);
+}
+
+void Game::displayerPlayers() const {
+	players->display();
 }
