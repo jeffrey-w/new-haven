@@ -90,7 +90,7 @@ char Scanner::advance() {
 	stream->read(&c, sizeof(char));
 	if (c == '\n') {
 		(*_line)++;
-		*_col = 0;
+		*_col = 1;
 	}
 	else {
 		(*_col)++;
