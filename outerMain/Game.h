@@ -28,6 +28,7 @@ public:
 	void displayCount() const;
 	// Writes this Game's BuildingPool to the standard output stream.
 	void displayPool() const;
+	void playTile(int, std::pair<int, int>);
 	// Writes this Game's Players to the standard ouput stream;
 	void displayerPlayers() const;
 
@@ -38,10 +39,9 @@ private:
 	Deck<HarvestTile*>* tiles;
 	Deck<Building*>* buildings;
 	BuildingPool* pool;
-	Player* current;
 	Roster* players;
 
-	void placeShipmentTile(std::pair<int, int>, int);
+	void playShipment(std::pair<int, int>, int);
 
 };
 
