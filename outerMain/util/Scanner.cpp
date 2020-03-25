@@ -37,15 +37,14 @@ void Scanner::consume(char expected, const string& msg) {
 	if (stream->peek() != expected) {
 		throw std::runtime_error(msg);
 	}
-	nextChar();
+	advance();
 }
 
 char Scanner::nextChar() {
 	if (!hasNext()) {
 		throw std::out_of_range("At end of file.");
 	}
-	char result = advance();
-	return result;
+	return advance();
 }
 
 bool Scanner::nextBool() {
@@ -56,14 +55,18 @@ bool Scanner::nextBool() {
 }
 
 int Scanner::nextInt() {
+	int length = 0, result;
+	char* buffer;
 	if (!hasNext()) {
 		throw std::out_of_range("At end of file.");
+	}
+	if (stream->peek() == '-') {
+		advance();
+		length++;
 	}
 	if (!isDigit(stream->peek())) {
 		throw std::runtime_error("Unable to read an integer.");
 	}
-	int length = 0, result;
-	char* buffer;
 	do {
 		advance();
 		length++;
@@ -86,8 +89,7 @@ bool Scanner::isDigit(char c) {
 }
 
 char Scanner::advance() {
-	char c;
-	stream->read(&c, sizeof(char));
+	char c = stream->get();
 	if (c == '\n') {
 		(*_line)++;
 		*_col = 1;
