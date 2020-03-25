@@ -29,6 +29,10 @@ Game::~Game() {
 	delete players;
 }
 
+int Game::numPlayers() const {
+	return board->getNumPlayers();
+}
+
 size_t Game::tilesLeft() const {
 	return tiles->getSize();
 }
@@ -37,16 +41,26 @@ size_t Game::buildingsLeft() const {
 	return buildings->getSize();
 }
 
-void Game::displayBoard() const {
-	board->display();
+void Game::addPlayer(uint64_t id) {
+	if (atCapacity()) {
+		throw std::runtime_error("Too many players.");
+	}
+	players->add(id, new Player());
 }
 
-void Game::displayCount() const {
-	resources->display();
+void Game::startGame() {
+	if (!atCapacity()) {
+		throw std::runtime_error("Too few players.");
+	}
+	tiles->shuffle();
+	buildings->shuffle();
+	players->sort();
+	pool->replenish(buildings);
+	players->deal(tiles, buildings);
 }
 
-void Game::displayPool() const {
-	pool->display();
+bool Game::atCapacity() const {
+	return players->getSize() == board->getNumPlayers();
 }
 
 void Game::playTile(int selection, pair<int, int> square) {
@@ -61,6 +75,18 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 	HarvestTile* shipment = current->getShipmentTile();
 	board->calculateResources(coordinate, resources, &token);
 	board->setSquare(shipment, coordinate);
+}
+
+void Game::displayBoard() const {
+	board->display();
+}
+
+void Game::displayCount() const {
+	resources->display();
+}
+
+void Game::displayPool() const {
+	pool->display();
 }
 
 void Game::displayerPlayers() const {
