@@ -14,10 +14,6 @@ Game::Game(int numPlayers) {
 	buildings = buildingDeck();
 	pool = new BuildingPool();
 	players = new Roster();
-	tiles->shuffle();
-	buildings->shuffle();
-	pool->replenish(buildings);
-	players->deal(tiles, buildings);
 }
 
 Game::~Game() {
