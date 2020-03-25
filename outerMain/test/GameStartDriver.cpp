@@ -39,7 +39,7 @@ Game* initGame() {
         std::stringstream(input) >> numPlayers;
         try {
             game = new Game(numPlayers);
-        } catch (std::invalid_argument& e) {
+        } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << std::endl;
             std::cerr << "Accept default number of players ("
                 << std::to_string(Game::DEFAULT_NUM_PLAYERS) << ")? Y/n: ";
@@ -53,7 +53,7 @@ Game* initGame() {
                 std::cout << "Okay, try again.\n";
                 break;
             default:
-                std::cout << "Did not understantd, try again.\n";
+                std::cout << "Did not understantd. Try again.\n";
             }
             std::cin.ignore();
         }
@@ -62,20 +62,24 @@ Game* initGame() {
 }
 
 void inputPlayerIDs(Game* game) {
-    uint64_t id;
-    bool invalid = true;
     for (int i = 0; i < game->numPlayers(); i++) {
+        uint64_t id;
+        bool invalid = true;
         do {
             std::string input;
             std::cout << "Enter ID for player " + std::to_string(i + 1) + ": ";
             std::getline(std::cin, input);
             if ((std::stringstream(input) >> id).fail()) {
-                std::cerr << "Invalid ID, try again.\n";
+                std::cerr << "Invalid ID. Try again.\n";
             }
             else {
-                invalid = false;
+                try {
+                    game->addPlayer(id);
+                    invalid = false;
+                } catch (const std::invalid_argument& e) {
+                    std::cerr << e.what() << " Try again.\n";
+                }
             }
         } while (invalid);
-        game->addPlayer(id);
     }
 }
