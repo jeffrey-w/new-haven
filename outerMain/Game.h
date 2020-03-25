@@ -18,17 +18,22 @@ public:
 	Game(int);
 	// Destroys this Game.
 	~Game();
+	// Returns the number of Players playing this Game.
+	int numPlayers() const;
 	// Returns the number of HarvestTiles remaining in this Game's Deck.
 	size_t tilesLeft() const;
 	// Returns the number of Buildings remaining in this Game's Deck.
 	size_t buildingsLeft() const;
+	void addPlayer(uint64_t);
+	void startGame(); // TODO rename this
+	void playTile(int, std::pair<int, int>);
+	void playShipment(std::pair<int, int>, int);
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
 	// Writes this Game's resource markers to the standard output stream.
 	void displayCount() const;
 	// Writes this Game's BuildingPool to the standard output stream.
 	void displayPool() const;
-	void playTile(int, std::pair<int, int>);
 	// Writes this Game's Players to the standard ouput stream;
 	void displayerPlayers() const;
 
@@ -41,7 +46,7 @@ private:
 	BuildingPool* pool;
 	Roster* players;
 
-	void playShipment(std::pair<int, int>, int);
+	bool atCapacity() const;
 
 };
 
