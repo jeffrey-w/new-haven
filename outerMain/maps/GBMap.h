@@ -22,6 +22,8 @@ public:
 	GBMap(const GBMap&);
 	// Destroys this GBMap.
 	~GBMap();
+	// Returns the number of Playrs playing on this GBMap.
+	int getNumPlayers() const;
 	// Places the specified HarvestTile onto the specified square of this GBMap. The specified
 	// HarvestTile is destroyed. Throws an exception if the specified HarvestTile is null; or if
 	// the specified square is not on this GBMap or if it is already occupied.

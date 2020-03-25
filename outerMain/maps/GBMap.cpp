@@ -34,6 +34,10 @@ GBMap::~GBMap() {
 	delete graph;
 }
 
+int GBMap::getNumPlayers() const {
+	return *numPlayers;
+}
+
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	if (!tile) {
 		throw std::invalid_argument("Cannot place the null tile.");
