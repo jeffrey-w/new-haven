@@ -65,6 +65,9 @@ int Scanner::nextInt() {
 		length++;
 	}
 	if (!isDigit(stream->peek())) {
+		if (length) {
+			stream->seekg(-length, std::ios_base::cur);
+		}
 		throw std::runtime_error("Unable to read an integer.");
 	}
 	do {
