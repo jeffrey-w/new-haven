@@ -7,10 +7,13 @@
 #include "GameStartDriver.h"
 
 static Game* initGame();
+static void inputPlayerIDs(Game*);
 
 void testGameStart() {
     std::cout << "Running Game start tests:\n";
     Game* game = initGame();
+    inputPlayerIDs(game);
+    game->startGame();
     std::cout << "Initializing game board...\n";
     game->displayBoard();
     std::cout << "Initializing resource markers...\n";
@@ -56,4 +59,23 @@ Game* initGame() {
         }
     } while (!game);
     return game;
+}
+
+void inputPlayerIDs(Game* game) {
+    uint64_t id;
+    bool invalid = true;
+    for (int i = 0; i < game->numPlayers(); i++) {
+        do {
+            std::string input;
+            std::cout << "Enter ID for player " + std::to_string(i + 1) + ": ";
+            std::getline(std::cin, input);
+            if ((std::stringstream(input) >> id).fail()) {
+                std::cerr << "Invalid ID, try again.\n";
+            }
+            else {
+                invalid = false;
+            }
+        } while (invalid);
+        game->addPlayer(id);
+    }
 }
