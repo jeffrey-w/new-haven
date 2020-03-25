@@ -14,6 +14,7 @@ public:
 	Roster();
 	Roster(const Roster&);
 	~Roster();
+	size_t getSize() const;
 	void add(uint64_t, Player*);
 	Player* next();
 	void requeue();

@@ -29,6 +29,10 @@ Roster::~Roster() {
 	delete players;
 }
 
+size_t Roster::getSize() const {
+	return players->size();
+}
+
 void Roster::add(uint64_t id, Player* player) {
 	if (players->count(id)) {
 		throw std::invalid_argument("ID already exists.");
