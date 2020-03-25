@@ -45,7 +45,14 @@ void Game::addPlayer(uint64_t id) {
 	if (atCapacity()) {
 		throw std::runtime_error("Too many players.");
 	}
-	players->add(id, new Player());
+	Player* player = nullptr;
+	try {
+		player = new Player();
+		players->add(id, player);
+	} catch (const std::invalid_argument& e) {
+		delete player;
+		throw e;
+	}
 }
 
 void Game::startGame() {
