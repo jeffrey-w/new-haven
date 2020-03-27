@@ -57,7 +57,7 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
 			graph->setTokenAt(new ResourceToken(*shipment), coordinate);
 		}
 	}
-	// Perform search for conntected resources starting from the four coordinates in from
+	// Perform search for conntected resources starting from the four coordinates in from.
 	for (auto& coordinate : coordinatesOf(from)) {
 		// Coordinate is occupied and has not been reached by a previous search.
 		if (graph->tokenAt(coordinate) && !graph->isSearched(coordinate)) {
@@ -139,6 +139,9 @@ void GBMap::validateSquare(pair<int, int> square) {
 		if (row < 0 || row >= width() || col < 0 || col >= height()) {
 			throw std::invalid_argument("Square is not on board.");
 		}
+		break;
+	default:
+		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
 	}
 }
 
