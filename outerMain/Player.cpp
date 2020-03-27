@@ -85,9 +85,23 @@ void Player::display() const {
     std::cout << *this;
 }
 
+void Player::displayTiles() const {
+    std::cout << *tiles;
+}
+
+void Player::displayBuildings() const {
+    std::cout << *buildings;
+}
+
+void Player::displayVillageBoard() const {
+    std::cout << *villageBoard;
+}
+
 std::ostream& operator<<(std::ostream& stream, const Player& player) {
     stream << *player.tiles;
+    stream << '\n';
     stream << *player.buildings;
+    stream << '\n';
     stream << *player.villageBoard;
     return stream << '\n';
 }
