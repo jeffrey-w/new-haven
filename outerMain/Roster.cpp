@@ -91,7 +91,8 @@ void Roster::display() const {
 
 std::ostream& operator<<(std::ostream& stream, const Roster& roster) {
 	for (auto& entry : *roster.players) {
-		stream << entry.first << '\n';
+		stream << "Player ";
+		stream << entry.first << "\n\n";
 		stream << *entry.second;
 	}
 	return stream << '\n';
