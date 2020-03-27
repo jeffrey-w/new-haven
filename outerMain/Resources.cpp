@@ -86,28 +86,8 @@ void HarvestTileHand::display() const {
 }
 
 std::ostream& operator<<(std::ostream& stream, const HarvestTileHand& hand) {
-	stream << "1\n";
-	if (hand.one) {
-		stream << *hand.one;
-	}
-	else {
-		stream << "None\n";
-	}
-	stream << "2\n";
-	if (hand.two) {
-		stream << *hand.two;
-	}
-	else {
-		stream << "None\n";
-	}
-	stream << "Shipment\n";
-	if (hand.shipment) {
-		stream << *hand.shipment;
-	}
-	else {
-		stream << "None\n";
-	}	
-	return stream;
+	stream << "1\t\t2\t\tShipment\n";
+	return HarvestTile::printHand(stream, *hand.one, *hand.two, *hand.shipment);
 }
 
 BuildingHand::BuildingHand() {
