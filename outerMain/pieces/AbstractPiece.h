@@ -8,7 +8,7 @@ class AbstractPiece {
 public:
 
 	// Destroys this AbstractPiece.
-	virtual ~AbstractPiece();
+	virtual ~AbstractPiece() = default;
 	// Iteratively returns the tokens that constitute this AbstractPiece.
 	virtual AbstractToken* tokenize() = 0;
 	// Writes this Piece to the standard output stream.
