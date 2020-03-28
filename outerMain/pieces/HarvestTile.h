@@ -5,8 +5,9 @@
 #include "AbstractPiece.h"
 #include "ResourceToken.h"
 
+using ResourceType = ResourceToken::ResourceType;
 
-// The Piece that occupies HarvestTileDecks and GBMaps.
+// The Piece that occupies HarvestTileDecks and HarvesTileHands.
 class HarvestTile : public AbstractPiece {
 
 	friend class GBMapLoader;
