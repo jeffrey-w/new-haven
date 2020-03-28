@@ -23,7 +23,7 @@ HarvestTile::HarvestTile(ResourceToken* one, ResourceToken* two, ResourceToken* 
 	resources->push_back(four);
 }
 
-HarvestTile::HarvestTile(const HarvestTile& other) : AbstractPiece(other) {
+HarvestTile::HarvestTile(const HarvestTile& other) {
 	current = new int(*other.current);
 	resources = new vector<ResourceToken*>();
 	for (auto& resource : *other.resources) {
@@ -69,9 +69,9 @@ void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one,
 	printHalf(stream, two, *two.current);
 	printHalf(stream, shipment, *shipment.current);
 	stream << '\n';
-	printHalf(stream, one, *one.current + NUM_RESOURCES >> 1);
-	printHalf(stream, two, *two.current + NUM_RESOURCES >> 1);
-	printHalf(stream, shipment, *shipment.current + NUM_RESOURCES >> 1);
+	printHalf(stream, one, *one.current + (NUM_RESOURCES >> 1));
+	printHalf(stream, two, *two.current + (NUM_RESOURCES >> 1));
+	printHalf(stream, shipment, *shipment.current + (NUM_RESOURCES >> 1));
 	stream << '\n';
 }
 
