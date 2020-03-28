@@ -6,8 +6,6 @@
 using std::pair;
 using std::string;
 
-using ResourceType = ResourceToken::ResourceType;
-
 GBMapLoader::GBMapLoader(const string& path) {
 	scanner = new Scanner(path);
 }
