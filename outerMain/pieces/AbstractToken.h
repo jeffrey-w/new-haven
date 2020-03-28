@@ -9,7 +9,7 @@ public:
 	static bool areSameType(AbstractToken*, AbstractToken*);
 	
 	// Destroys this AbstractToken.
-	virtual ~AbstractToken();
+	virtual ~AbstractToken() = default;
 	// Returns the type of this Token.
 	virtual int getType() const = 0;
 	// Writes this Token to the standard output stream.
