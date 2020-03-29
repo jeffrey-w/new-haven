@@ -42,6 +42,10 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
     villageBoard->setCircle(buildings->select(selection), circle);
 }
 
+int Player::selectionType(int selection) const {
+    return buildings->typeOf(selection);
+}
+
 void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
     if (!resources) {
         throw std::invalid_argument("Cannot draw from null resources.");

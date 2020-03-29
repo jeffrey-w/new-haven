@@ -32,6 +32,9 @@ public:
     // (3) the specified Building is not being placed adjacent to another of the same type, or
     // (4) the specified Building is being played face up on a circle that is not the correct value.
     void buildVillage(int, std::pair<int, int>);
+    // Returns the type of the selected Building. Throws an exception if the selected building is
+    // not consistent with this Player's hand.
+    int selectionType(int) const;
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
