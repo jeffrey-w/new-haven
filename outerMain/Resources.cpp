@@ -113,16 +113,24 @@ void BuildingHand::insert(Building* building) {
 }
 
 Building* BuildingHand::select(int selection) {
-	Building* building;
-	if (selection < 1 || selection > owned->size()) {
-		throw std::out_of_range("Selection not in range.");
-	}
-	building = (*owned)[--selection];
-	owned->erase(owned->begin() + selection);
+	int index = validateSelection(selection);
+	Building* building = (*owned)[index];
+	owned->erase(owned->begin() + index);
 	return building;
 }
 
-int BuildingHand::worth() {
+int BuildingHand::typeOf(int selection) const {
+	return (*owned)[validateSelection(selection)]->getType();
+}
+
+int BuildingHand::validateSelection(int selection) const {
+	if (selection < 1 || selection > owned->size()) {
+		throw std::out_of_range("Selection not in range.");
+	}
+	return selection;
+}
+
+int BuildingHand::worth() const {
 	int worth = 0;
 	for (auto& building : *owned) {
 		worth += building->getValue();
@@ -134,6 +142,7 @@ int BuildingHand::worth() {
 void BuildingHand::display() const {
 	std::cout << *this;
 }
+
 
 std::ostream& operator<<(std::ostream& stream, const BuildingHand& hand) {
 	for (int i = 0; i < hand.owned->size(); i++) {
