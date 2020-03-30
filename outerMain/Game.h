@@ -11,6 +11,8 @@ public:
 
 	static constexpr int DEFAULT_NUM_PLAYERS = 2;
 
+	static int valueOfRow(std::pair<int, int>);
+
 	// Constructs a new Game object.
 	Game();
 	// Constructs a new Game object with the specified number of Players. Throws an exception if
@@ -28,6 +30,10 @@ public:
 	void startGame(); // TODO rename this
 	void playTile(int, std::pair<int, int>);
 	void playShipment(std::pair<int, int>, int);
+	void playBuilding(int, std::pair<int, int>);
+	void drawBuildingFromDeck();
+	void drawBuildingFromPool(int);
+	void endTurn();
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
 	// Writes this Game's resource markers to the standard output stream.
