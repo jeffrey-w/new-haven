@@ -17,7 +17,8 @@ public:
 	size_t getSize() const;
 	void add(uint64_t, Player*);
 	Player* next();
-	void requeue();
+	void stackCurrent(); // TODO rename this
+	void queueCurrent(); // TODO rename this
 	void sort();
 	void deal(Deck<HarvestTile*>*, Deck<Building*>*);
 	void display() const;
