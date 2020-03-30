@@ -37,7 +37,7 @@ public:
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
 	// Writes this Game's resource markers to the standard output stream.
-	void displayCount() const;
+	void displayResources() const;
 	// Writes this Game's BuildingPool to the standard output stream.
 	void displayPool() const;
 	// Writes this Game's Players to the standard ouput stream;
