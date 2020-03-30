@@ -31,6 +31,10 @@ void Player::drawBuilding(Deck<Building*>* deck) {
     buildings->insert(deck->draw());
 }
 
+void Player::drawBuilding(BuildingPool* pool, int selection) {
+    pool->remove(selection);
+}
+
 void Player::drawHarvestTile(Deck<HarvestTile*>* deck, bool isShipment) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");

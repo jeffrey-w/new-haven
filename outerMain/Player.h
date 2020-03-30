@@ -21,6 +21,10 @@ public:
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is null or empty.
     void drawBuilding(Deck<Building*>*);
+    // Induces this Player to select a Building from the specified BuildingPool. Throws an
+    // exception if the specified BuildingPool is null, if the specified selection is out of ranger,
+    // or if it specifies a non-existant building
+    void drawBuilding(BuildingPool*, int);
     // Induces this Player to draw a HarvestTile from the specified Deck. If specified the drawn
     // tile will serve as this Player's shipment tile Throws an exception if the specified Deck is
     // null or empty.
@@ -34,12 +38,12 @@ public:
     void buildVillage(int, std::pair<int, int>);
     // Returns the type of the selected Building. Throws an exception if the selected building is
     // not consistent with this Player's hand.
-    int selectionType(int) const;
+    int selectionType(int) const; // TODO rename this
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
     // available to this Player are insufficiet to cover the specified cost.
-    void resourceTracker(GatherFacility*, int, int);
+    void resourceTracker(GatherFacility*, int, int); // TODO this belongs in GatherFacility
     // Counts the villagers attracted to this Player's village.
     void calculateScore();
     // Adds the values of the Buildings in this Player's hand to their score.
