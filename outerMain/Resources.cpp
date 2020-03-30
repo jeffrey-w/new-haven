@@ -87,7 +87,7 @@ void HarvestTileHand::display() const {
 
 std::ostream& operator<<(std::ostream& stream, const HarvestTileHand& hand) {
 	stream << "1\t\t2\t\tShipment\n";
-	HarvestTile::printHand(stream, *hand.one, *hand.two, *hand.shipment);
+	HarvestTile::printHand(stream, *hand.one, *hand.two);
 	return stream;
 }
 
