@@ -45,19 +45,22 @@ void Roster::add(uint64_t id, Player* player) {
 }
 
 Player* Roster::next() {
-	uint64_t id = ids->front();
-	Player* player = (*players)[id];
 	if (current) {
-		ids->push_back(id);
+		throw std::runtime_error("There is already a current player.");
 	}
-	else {
-		current = &id;
-	}
+	current = &ids->front();
 	ids->pop_front();
-	return player;
+	return (*players)[*current];
 }
 
-void Roster::requeue() {
+void Roster::stackCurrent() {
+	if (current) {
+		ids->push_front(*current);
+		current = nullptr;
+	}
+}
+
+void Roster::queueCurrent() {
 	if (current) {
 		ids->push_back(*current);
 		current = nullptr;
