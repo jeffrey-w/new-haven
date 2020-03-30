@@ -63,16 +63,15 @@ void HarvestTile::display() const {
 	std::cout << *this;
 }
 
-void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, 
-		const HarvestTile& two, const HarvestTile& shipment) {
+void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, const HarvestTile& two) {
 	printHalf(stream, one, *one.current);
 	printHalf(stream, two, *two.current);
-	printHalf(stream, shipment, *shipment.current);
-	stream << '\n';
+	// Shipment tile.
+	stream << "-- | --\n";
 	printHalf(stream, one, *one.current + (NUM_RESOURCES >> 1));
 	printHalf(stream, two, *two.current + (NUM_RESOURCES >> 1));
-	printHalf(stream, shipment, *shipment.current + (NUM_RESOURCES >> 1));
-	stream << '\n';
+	// Shipment tile.
+	stream << "-- | --\n";
 }
 
 void HarvestTile::printHalf(std::ostream& stream, const HarvestTile& tile, int from) {

@@ -17,8 +17,7 @@ public:
 	// The number of resources that a HarvestTile holds.
 	constexpr static int NUM_RESOURCES = 4;
 
-	static void printHand(std::ostream&, const HarvestTile&, const HarvestTile&, 
-		const HarvestTile&);
+	static void printHand(std::ostream&, const HarvestTile&, const HarvestTile&);
 	
 	// Constructs a new HarvestTile object.
 	HarvestTile();
