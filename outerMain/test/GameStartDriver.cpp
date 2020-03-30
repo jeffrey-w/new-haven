@@ -17,7 +17,7 @@ void testGameStart() {
     std::cout << "Initializing game board...\n";
     game->displayBoard();
     std::cout << "Initializing resource markers...\n";
-    game->displayCount();
+    game->displayResources();
     std::cout << "Initializing players...\n";
     game->displayerPlayers();
     std::cout << "Initializing face up pool...\n";
