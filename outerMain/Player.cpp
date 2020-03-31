@@ -72,7 +72,7 @@ void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) 
     if (!map) {
         throw std::invalid_argument("Cannot place on the null map.");
     }
-    map->setSquare(tiles->exchange(selection), square);
+    map->setSquare(tiles->select(selection), square);
 }
 
 HarvestTile* Player::getShipmentTile() {
