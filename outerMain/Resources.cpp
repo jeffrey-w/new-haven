@@ -50,7 +50,7 @@ bool HarvestTileHand::isFull() const {
 	return one && two;
 }
 
-HarvestTile* HarvestTileHand::exchange(int selection) {
+HarvestTile* HarvestTileHand::select(int selection) {
 	HarvestTile* tile;
 	if (isEmpty()) {
 		throw std::runtime_error("This hand is empty.");

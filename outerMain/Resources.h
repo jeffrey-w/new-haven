@@ -143,7 +143,7 @@ public:
 	void insert(HarvestTile*, bool);
 	// Returns the HarvestTile selected by a Player. Throws an exception if the specified selection
 	// is not between one and two inclusive.
-	HarvestTile* exchange(int);
+	HarvestTile* select(int);
 	// Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not
 	// contain a shipment tile.
 	HarvestTile* ship();
