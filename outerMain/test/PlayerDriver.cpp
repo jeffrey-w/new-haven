@@ -8,7 +8,7 @@ static constexpr int SAMPLE_SIZE = 10;
 static Player* player;
 
 static void testDrawBuilding();
-static void testDrawHarvestTile();
+static void testDrawTile();
 static void testBuildVillage();
 static void testResourceTracker();
 static void testPlaceHarvestTile();
@@ -18,7 +18,7 @@ static void tearDown();
 void testPlayer() {
 	std::cout << "Running Player tests:" << std::endl;
 	testDrawBuilding();
-	testDrawHarvestTile();
+	testDrawTile();
 	testBuildVillage();
 	testResourceTracker();
 	testPlaceHarvestTile();
@@ -35,13 +35,13 @@ void testDrawBuilding() {
 	tearDown();
 }
 
-void testDrawHarvestTile() {
+void testDrawTile() {
 	Deck<HarvestTile*> deck;
 	setup();
-	ASSERT_THROWS(std::runtime_error, player->drawHarvestTile(&deck, false),
+	ASSERT_THROWS(std::runtime_error, player->drawTile(&deck),
 		"ERROR: drew from an empty deck.");
 	deck.add(new HarvestTile());
-	ASSERT_SUCCESS(player->drawHarvestTile(&deck, false), "Successfully drew from valid deck.");
+	ASSERT_SUCCESS(player->drawTile(&deck), "Successfully drew from valid deck.");
 	tearDown();
 }
 
@@ -83,7 +83,7 @@ void setup() {
 	Deck<HarvestTile*> tiles;
 	tiles.add(new HarvestTile());
 	player = new Player();
-	player->drawHarvestTile(&tiles, false);
+	player->drawTile(&tiles);
 	for (int i = 0; i < SAMPLE_SIZE; i++) {
 		buildings.add(new Building());
 		player->drawBuilding(&buildings);
