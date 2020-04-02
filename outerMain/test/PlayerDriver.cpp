@@ -12,7 +12,6 @@ static void testDrawHarvestTile();
 static void testBuildVillage();
 static void testResourceTracker();
 static void testPlaceHarvestTile();
-static void testCalculateResources();
 static void setup();
 static void tearDown();
 
@@ -23,7 +22,6 @@ void testPlayer() {
 	testBuildVillage();
 	testResourceTracker();
 	testPlaceHarvestTile();
-	testCalculateResources();
 	std::cout << std::endl;
 }
 
@@ -76,17 +74,6 @@ void testPlaceHarvestTile() {
 	ASSERT_THROWS(std::invalid_argument, player->placeHarvestTile(3, &map, { 0, 0 }),
 		"ERROR: invalid tile selection allowed.");
 	ASSERT_SUCCESS(player->placeHarvestTile(1, &map, { 0, 0 }), "Successfully placed harvest tile.");
-	tearDown();
-}
-
-void testCalculateResources() {
-	setup();
-	ASSERT_THROWS(std::invalid_argument, player->calculateResources(nullptr, { 0, 0 },
-		&GatherFacility()), "ERROR: counted resources on the null map.");
-	ASSERT_THROWS(std::invalid_argument, player->calculateResources(&GBMap(), { 0, 0 }, nullptr),
-		"ERROR: recorded to the null gather facility.");
-	ASSERT_SUCCESS(player->calculateResources(&GBMap(), { 0, 0 }, &GatherFacility()),
-		"Successfully counted resource.");
 	tearDown();
 }
 
