@@ -82,7 +82,7 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 
 void Game::playBuilding(int selection, pair<int, int> coordinate) { // TODO need to flip building
 	Player* current = players->next();
-	current->resourceTracker(resources, current->selectionType(selection),
+	current->resourceTracker(resources, current->buildingType(selection),
 		valueOfRow(coordinate));
 	current->buildVillage(selection, coordinate);
 	players->requeue();
