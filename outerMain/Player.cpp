@@ -83,7 +83,7 @@ void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) 
     map->setSquare(tiles->select(selection), square);
 }
 
-HarvestTile* Player::getShipmentTile() {
+HarvestTile* Player::receiveShipment() {
     return tiles->ship();
 }
 

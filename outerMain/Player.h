@@ -61,7 +61,7 @@ public:
     void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     // Returns this Player's shipment tile. Throws an exception if this Player has already played
     // thier shipment tile.
-    HarvestTile* getShipmentTile();
+    HarvestTile* receiveShipment();
     // Writes this Player to the standard output stream.
     void display() const;
     // Writes this Player's HarvestTileHand to the standard output stream.
