@@ -29,6 +29,12 @@ public:
     // tile will serve as this Player's shipment tile Throws an exception if the specified Deck is
     // null or empty.
     void drawHarvestTile(Deck<HarvestTile*>*, bool);
+    // Returns the type of the selected Building. Throws an exception if the selected building is
+    // not consistent with this Player's hand.
+    int buildingType(int) const;
+    // Returns the value of the selected Building. Throws an exception if the selected building is
+    // not consistent with this Player's hand.
+    int buildingValue(int) const;
     // Induces this Player to build the selected Building on their VGMap at the specified circle.
     // Throws an exception if any of the following conditions hold:
     // (1) the selected building is not consistent with this Player's hand,
@@ -36,9 +42,6 @@ public:
     // (3) the specified Building is not being placed adjacent to another of the same type, or
     // (4) the specified Building is being played face up on a circle that is not the correct value.
     void buildVillage(int, std::pair<int, int>);
-    // Returns the type of the selected Building. Throws an exception if the selected building is
-    // not consistent with this Player's hand.
-    int selectionType(int) const; // TODO rename this
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
@@ -48,6 +51,9 @@ public:
     void calculateScore();
     // Adds the values of the Buildings in this Player's hand to their score.
     void adjustScore();
+    // Rotates the selected HarvestTile 90 degrees clockwise. Throws an exception if the specified
+    // slection is not consistent with this Player's hand.
+    void rotateTile(int);
     // Induces this Player to place the selected HarvestTile onto the specified GBMap at the 
     // specified square. Throws an exception if the specified tile selection is not consistent with
     // this Player's Hand, if the specified GBMap is null, or if the specified square is not on the

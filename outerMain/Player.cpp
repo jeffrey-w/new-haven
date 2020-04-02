@@ -46,8 +46,12 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
     villageBoard->setCircle(buildings->select(selection), circle);
 }
 
-int Player::selectionType(int selection) const {
+int Player::buildingType(int selection) const {
     return buildings->typeOf(selection);
+}
+
+int Player::buildingValue(int selection) const {
+    return buildings->valueOf(selection);
 }
 
 void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
@@ -66,6 +70,10 @@ void Player::calculateScore() {
 
 void Player::adjustScore() {
     buildFacility->incrementBy(buildings->worth()); // TODO should only do this once
+}
+
+void Player::rotateTile(int selection) {
+    tiles->rotate(selection);
 }
 
 void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) {
