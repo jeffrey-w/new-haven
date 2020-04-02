@@ -69,7 +69,7 @@ bool Game::atCapacity() const {
 void Game::playTile(int selection, pair<int, int> square) { // TODO need to rotate tile
 	players->next()->placeHarvestTile(selection, board, square);
 	board->calculateResources(square, resources);
-	players->stackCurrent();
+	players->jumpQueue();
 }
 
 void Game::playShipment(pair<int, int> coordinate, int type) {
@@ -77,7 +77,7 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 	HarvestTile* shipment = players->next()->getShipmentTile();
 	board->calculateResources(coordinate, resources, &token);
 	board->setSquare(shipment, coordinate);
-	players->stackCurrent();
+	players->jumpQueue();
 }
 
 void Game::playBuilding(int selection, pair<int, int> coordinate) { // TODO need to flip building
@@ -85,7 +85,7 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) { // TODO need
 	current->resourceTracker(resources, current->selectionType(selection),
 		valueOfRow(coordinate));
 	current->buildVillage(selection, coordinate);
-	players->queueCurrent();
+	players->requeue();
 }
 
 int Game::valueOfRow(pair<int, int> coordinate) {
@@ -94,12 +94,12 @@ int Game::valueOfRow(pair<int, int> coordinate) {
 
 void Game::drawBuildingFromDeck() {
 	players->next()->drawBuilding(buildings);
-	players->stackCurrent();
+	players->jumpQueue();
 }
 
 void Game::drawBuildingFromPool(int selection) {
 	players->next()->drawBuilding(pool, selection);
-	players->stackCurrent();
+	players->jumpQueue();
 }
 
 void Game::endTurn() {
@@ -107,7 +107,7 @@ void Game::endTurn() {
 	pool->replenish(buildings);
 	// TODO if not shipment
 	players->next()->drawHarvestTile(tiles, false);
-	players->queueCurrent();
+	players->requeue();
 }
 
 void Game::displayBoard() const {
