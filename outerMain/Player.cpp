@@ -3,8 +3,10 @@
 
 using std::pair;
 
-Player::Player(){
-    tiles = new HarvestTileHand();
+Player::Player() : Player(new HarvestTile()) {}
+
+Player::Player(HarvestTile* shipment) {
+    tiles = new HarvestTileHand(shipment);
     buildings = new BuildingHand();
     villageBoard = new VGMap();
     buildFacility = new BuildFacility();
@@ -35,11 +37,11 @@ void Player::drawBuilding(BuildingPool* pool, int selection) {
     pool->remove(selection);
 }
 
-void Player::drawHarvestTile(Deck<HarvestTile*>* deck, bool isShipment) {
+void Player::drawTile(Deck<HarvestTile*>* deck) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
     }
-    tiles->insert(deck->draw(), isShipment);
+    tiles->insert(deck->draw());
 }
 
 void Player::buildVillage(int selection, pair<int, int> circle) {
