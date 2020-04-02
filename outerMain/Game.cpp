@@ -62,6 +62,10 @@ void Game::startGame() {
 	players->deal(tiles, buildings);
 }
 
+void Game::rotateTile(int selection) {
+	players->next()->rotateTile(selection);
+}
+
 bool Game::atCapacity() const {
 	return players->getSize() == board->getNumPlayers();
 }
@@ -74,7 +78,7 @@ void Game::playTile(int selection, pair<int, int> square) { // TODO need to rota
 
 void Game::playShipment(pair<int, int> coordinate, int type) {
 	ResourceToken token(static_cast<ResourceType>(type));
-	HarvestTile* shipment = players->next()->getShipmentTile();
+	HarvestTile* shipment = players->next()->receiveShipment();
 	board->calculateResources(coordinate, resources, &token);
 	board->setSquare(shipment, coordinate);
 	players->jumpQueue();
