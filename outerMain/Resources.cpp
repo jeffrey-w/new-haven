@@ -290,6 +290,7 @@ Deck<HarvestTile*>* harvestTileDeck() {
 			}
 		}
 	}
+	tiles->shuffle();
 	return tiles;
 }
 
@@ -303,5 +304,6 @@ Deck<Building*>* buildingDeck() {
 			}
 		}
 	}
+	buildings->shuffle();
 	return buildings;
 }
