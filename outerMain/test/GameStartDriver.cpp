@@ -13,7 +13,7 @@ void testGameStart() {
     std::cout << "Running Game start tests:\n";
     Game* game = initGame();
     inputPlayerIDs(game);
-    game->startGame();
+    game->setup();
     std::cout << "Initializing game board...\n";
     game->displayBoard();
     std::cout << "Initializing resource markers...\n";
