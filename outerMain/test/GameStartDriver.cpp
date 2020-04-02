@@ -63,7 +63,7 @@ Game* initGame() {
 
 void inputPlayerIDs(Game* game) {
     for (int i = 0; i < game->numPlayers(); i++) {
-        uint64_t id;
+        long id;
         bool invalid = true;
         do {
             std::string input;
