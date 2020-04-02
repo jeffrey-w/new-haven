@@ -43,15 +43,17 @@ void Player::drawHarvestTile(Deck<HarvestTile*>* deck, bool isShipment) {
 }
 
 void Player::buildVillage(int selection, pair<int, int> circle) {
+    Building* building = buildings->select(selection);
+    if (building->getValue() == VGMap::HEIGHT - circle.first) {
+        if (!building->isFaceUp()) {
+            building->flip();
+        }
+    }
     villageBoard->setCircle(buildings->select(selection), circle);
 }
 
 int Player::buildingType(int selection) const {
     return buildings->typeOf(selection);
-}
-
-int Player::buildingValue(int selection) const {
-    return buildings->valueOf(selection);
 }
 
 void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
