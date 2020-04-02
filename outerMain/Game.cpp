@@ -70,7 +70,7 @@ bool Game::atCapacity() const {
 	return players->getSize() == board->getNumPlayers();
 }
 
-void Game::playTile(int selection, pair<int, int> square) { // TODO need to rotate tile
+void Game::playTile(int selection, pair<int, int> square) {
 	players->next()->placeHarvestTile(selection, board, square);
 	board->calculateResources(square, resources);
 	players->jumpQueue();
