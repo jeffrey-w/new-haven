@@ -32,9 +32,6 @@ public:
     // Returns the type of the selected Building. Throws an exception if the selected building is
     // not consistent with this Player's hand.
     int buildingType(int) const;
-    // Returns the value of the selected Building. Throws an exception if the selected building is
-    // not consistent with this Player's hand.
-    int buildingValue(int) const;
     // Induces this Player to build the selected Building on their VGMap at the specified circle.
     // Throws an exception if any of the following conditions hold:
     // (1) the selected building is not consistent with this Player's hand,
