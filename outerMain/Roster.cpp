@@ -53,14 +53,14 @@ Player* Roster::next() {
 	return (*players)[*current];
 }
 
-void Roster::stackCurrent() {
+void Roster::jumpQueue() {
 	if (current) {
 		ids->push_front(*current);
 		current = nullptr;
 	}
 }
 
-void Roster::queueCurrent() {
+void Roster::requeue() {
 	if (current) {
 		ids->push_back(*current);
 		current = nullptr;
