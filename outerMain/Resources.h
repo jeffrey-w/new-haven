@@ -142,8 +142,11 @@ public:
 	// HarvestTileHand is full.
 	void insert(HarvestTile*, bool);
 	// Returns the HarvestTile selected by a Player. Throws an exception if the specified selection
-	// is not between one and two inclusive.
+	// is not between one and two inclusive, or the specified selection does not exit.
 	HarvestTile* select(int);
+	// Rotates the selected HarvestTile 90 degrees clockwise. Throws an exception if the specified
+	// slection is not betwewn one and two inclusive, or the specified seleciton does not exist.
+	void rotateSelection(int);
 	// Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not
 	// contain a shipment tile.
 	HarvestTile* ship();
@@ -160,6 +163,7 @@ private:
 
 	bool isEmpty() const;
 	bool isFull() const;
+	HarvestTile* validateSelection(int, bool);
 
 };
 
@@ -180,7 +184,10 @@ public:
 	Building* select(int);
 	// Returns the type of the selected Building. Throws an exception if the specified selection
 	// does not exist.
-	int typeOf(int ) const;
+	int typeOf(int) const;
+	// Returns the value of the selected Building. Throws an exception if the specified selection
+	// does not exist.
+	int valueOf(int) const;
 	// Gives the aggregate value of all of the Buildings in this BuildingHand.
 	int worth() const;
 	// Writes this BuildingHand to the standard outoput stream.
