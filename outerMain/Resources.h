@@ -146,7 +146,7 @@ public:
 	HarvestTile* select(int);
 	// Rotates the selected HarvestTile 90 degrees clockwise. Throws an exception if the specified
 	// slection is not betwewn one and two inclusive, or the specified seleciton does not exist.
-	void rotateSelection(int);
+	void rotate(int);
 	// Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not
 	// contain a shipment tile.
 	HarvestTile* ship();
