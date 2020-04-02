@@ -15,8 +15,6 @@ Game::Game(int numPlayers) {
 	buildings = buildingDeck();
 	pool = new BuildingPool();
 	players = new Roster();
-	tiles->shuffle();
-	buildings->shuffle();
 }
 
 Game::~Game() {
@@ -76,6 +74,7 @@ void Game::playTile(int selection, pair<int, int> square) {
 }
 
 void Game::playShipment(pair<int, int> coordinate, int type) {
+	// TODO validate type
 	ResourceToken token(static_cast<ResourceType>(type));
 	HarvestTile* shipment = players->peek()->receiveShipment();
 	board->calculateResources(coordinate, resources, &token);
