@@ -28,6 +28,7 @@ public:
 	size_t buildingsLeft() const;
 	void addPlayer(uint64_t);
 	void startGame(); // TODO rename this
+	void rotateTile(int);
 	void playTile(int, std::pair<int, int>);
 	void playShipment(std::pair<int, int>, int);
 	void playBuilding(int, std::pair<int, int>);
