@@ -15,6 +15,8 @@ Game::Game(int numPlayers) {
 	buildings = buildingDeck();
 	pool = new BuildingPool();
 	players = new Roster();
+	tiles->shuffle();
+	buildings->shuffle();
 }
 
 Game::~Game() {
@@ -38,11 +40,11 @@ size_t Game::buildingsLeft() const {
 	return buildings->getSize();
 }
 
-void Game::addPlayer(uint64_t id) {
+void Game::addPlayer(long id) {
 	if (atCapacity()) {
 		throw std::runtime_error("Too many players.");
 	}
-	Player* player = new Player();
+	Player* player = new Player(tiles->draw());
 	try {
 		players->add(id, player);
 	} catch (const std::invalid_argument& e) {
@@ -55,8 +57,6 @@ void Game::setup() {
 	if (!atCapacity()) {
 		throw std::runtime_error("Too few players.");
 	}
-	tiles->shuffle();
-	buildings->shuffle();
 	players->sort();
 	pool->replenish(buildings);
 	players->deal(tiles, buildings);
@@ -101,11 +101,15 @@ void Game::drawFromPool(int selection) {
 	players->peek()->drawBuilding(pool, selection);
 }
 
-void Game::endTurn() {
+void Game::endTurn(bool shipped) {
 	resources->reset();
 	pool->replenish(buildings);
-	// TODO if not shipment
-	players->next()->drawHarvestTile(tiles, false);
+	if (!shipped) {
+		players->next()->drawTile(tiles);
+	}
+	else {
+		players->next();
+	}
 }
 
 void Game::displayBoard() const {
