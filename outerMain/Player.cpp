@@ -51,7 +51,7 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
             building->flip();
         }
     }
-    villageBoard->setCircle(buildings->select(selection), circle);
+    villageBoard->setCircle(building, circle);
 }
 
 int Player::buildingType(int selection) const {
