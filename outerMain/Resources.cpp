@@ -142,10 +142,6 @@ int BuildingHand::typeOf(int selection) const {
 	return (*owned)[validateSelection(selection)]->getType();
 }
 
-int BuildingHand::valueOf(int selection) const {
-	return (*owned)[validateSelection(selection)]->getValue();
-}
-
 int BuildingHand::validateSelection(int selection) const {
 	if (selection < 1 || selection > owned->size()) {
 		throw std::out_of_range("Selection not in range.");
