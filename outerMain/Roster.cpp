@@ -69,7 +69,7 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>* buildings) {
 	if (!(tiles && buildings)) {
 		throw std::invalid_argument("Cannot deal from null deck(s).");
 	}
-	for (int i = 0; i < TILE_HAND_SIZE;) {
+	for (int i = 0; i < TILE_HAND_SIZE; i++) {
 		for (auto& entry : *players) {
 			entry.second->drawTile(tiles);
 		}
