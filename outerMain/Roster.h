@@ -16,9 +16,8 @@ public:
 	~Roster();
 	size_t getSize() const;
 	void add(uint64_t, Player*);
+	Player* peek();
 	Player* next();
-	void jumpQueue();
-	void requeue();
 	void sort();
 	void deal(Deck<HarvestTile*>*, Deck<Building*>*);
 	void display() const;
@@ -26,8 +25,7 @@ public:
 	friend std::ostream& operator<<(std::ostream&, const Roster&);
 
 private:
-
-	uint64_t* current;
+	
 	std::deque<uint64_t>* ids;
 	std::map<uint64_t, Player*>* players;
 

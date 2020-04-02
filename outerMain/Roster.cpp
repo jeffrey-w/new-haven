@@ -5,13 +5,11 @@ using std::deque;
 using std::map;
 
 Roster::Roster() {
-	current = nullptr;
 	ids = new deque<uint64_t>();
 	players = new map<uint64_t, Player*>();
 }
 
 Roster::Roster(const Roster& other) : Roster() {
-	current = other.current ? new uint64_t(*other.current) : nullptr;
 	for (auto& id : *other.ids) {
 		ids->push_back(id);
 	}
@@ -24,7 +22,6 @@ Roster::~Roster() {
 	for (auto& entry : *players) {
 		delete entry.second;
 	}
-	delete current;
 	delete ids;
 	delete players;
 }
@@ -44,27 +41,15 @@ void Roster::add(uint64_t id, Player* player) {
 	(*players)[id] = player;
 }
 
+Player* Roster::peek() {
+	return (*players)[ids->front()];
+}
+
 Player* Roster::next() {
-	if (current) {
-		throw std::runtime_error("There is already a current player.");
-	}
-	current = &ids->front();
+	uint64_t id = ids->front();
 	ids->pop_front();
-	return (*players)[*current];
-}
-
-void Roster::jumpQueue() {
-	if (current) {
-		ids->push_front(*current);
-		current = nullptr;
-	}
-}
-
-void Roster::requeue() {
-	if (current) {
-		ids->push_back(*current);
-		current = nullptr;
-	}
+	ids->push_back(id);
+	return (*players)[id];
 }
 
 void Roster::sort() {
