@@ -22,8 +22,8 @@ public:
     // specified Deck is null or empty.
     void drawBuilding(Deck<Building*>*);
     // Induces this Player to select a Building from the specified BuildingPool. Throws an
-    // exception if the specified BuildingPool is null, if the specified selection is out of ranger,
-    // or if it specifies a non-existant building
+    // exception if the specified BuildingPool is null, if the specified selection is out of range,
+    // or if it specifies a non-existant building.
     void drawBuilding(BuildingPool*, int);
     // Induces this Player to draw a HarvestTile from the specified Deck. If specified the drawn
     // tile will serve as this Player's shipment tile Throws an exception if the specified Deck is
@@ -37,7 +37,6 @@ public:
     // (1) the selected building is not consistent with this Player's hand,
     // (2) the specified circle is not on this Player's VGMap or it is already occupied,
     // (3) the specified Building is not being placed adjacent to another of the same type, or
-    // (4) the specified Building is being played face up on a circle that is not the correct value.
     void buildVillage(int, std::pair<int, int>);
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
@@ -53,8 +52,8 @@ public:
     void rotateTile(int);
     // Induces this Player to place the selected HarvestTile onto the specified GBMap at the 
     // specified square. Throws an exception if the specified tile selection is not consistent with
-    // this Player's Hand, if the specified GBMap is null, or if the specified square is not on the
-    // GBMap this Player is playing on.
+    // this Player's Hand, if the specified GBMap is null; or if the specified square is not on the
+    // GBMap this Player is playing on or it is already occupied.
     void placeHarvestTile(int, GBMap*, std::pair<int, int>);
     // Returns this Player's shipment tile. Throws an exception if this Player has already played
     // thier shipment tile.
