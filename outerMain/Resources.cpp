@@ -54,7 +54,7 @@ HarvestTile* HarvestTileHand::select(int selection) {
 	return validateSelection(selection, true);
 }
 
-void HarvestTileHand::rotateSelection(int selection) {
+void HarvestTileHand::rotate(int selection) {
 	validateSelection(selection, false)->rotate();
 }
 
