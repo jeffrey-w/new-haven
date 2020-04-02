@@ -67,6 +67,7 @@ HarvestTile* HarvestTileHand::validateSelection(int selection, bool remove) {
 			if (remove) {
 				one = nullptr;
 			}
+			break;
 		}
 		else {
 			throw std::runtime_error("Tile unavailable.");
@@ -77,6 +78,7 @@ HarvestTile* HarvestTileHand::validateSelection(int selection, bool remove) {
 			if (remove) {
 				two = nullptr;
 			}
+			break;
 		}
 		else {
 			throw std::runtime_error("Tile unavailable.");
