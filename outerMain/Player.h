@@ -14,6 +14,8 @@ public:
 
     // Constructs a new Player object.
     Player();
+    // Constructs a new Player object with the specified shipment tile;
+    Player(HarvestTile*);
     // Constructs a new Player object with the same attributes as the specified Player.
     Player(const Player&);
     // Destroys this Player.
@@ -25,10 +27,9 @@ public:
     // exception if the specified BuildingPool is null, if the specified selection is out of range,
     // or if it specifies a non-existant building.
     void drawBuilding(BuildingPool*, int);
-    // Induces this Player to draw a HarvestTile from the specified Deck. If specified the drawn
-    // tile will serve as this Player's shipment tile Throws an exception if the specified Deck is
-    // null or empty.
-    void drawHarvestTile(Deck<HarvestTile*>*, bool);
+    // Induces this Player to draw a HarvestTile from the specified Deck. Throws an exception if
+    // the specified Deck is null or empty.
+    void drawTile(Deck<HarvestTile*>*);
     // Returns the type of the selected Building. Throws an exception if the selected building is
     // not consistent with this Player's hand.
     int buildingType(int) const;
