@@ -51,7 +51,7 @@ void Game::addPlayer(uint64_t id) {
 	}
 }
 
-void Game::startGame() {
+void Game::setup() {
 	if (!atCapacity()) {
 		throw std::runtime_error("Too few players.");
 	}
@@ -62,48 +62,43 @@ void Game::startGame() {
 	players->deal(tiles, buildings);
 }
 
-void Game::rotateTile(int selection) {
-	players->next()->rotateTile(selection);
-}
-
 bool Game::atCapacity() const {
 	return players->getSize() == board->getNumPlayers();
 }
 
+void Game::rotateTile(int selection) {
+	players->peek()->rotateTile(selection);
+}
+
 void Game::playTile(int selection, pair<int, int> square) {
-	players->next()->placeHarvestTile(selection, board, square);
+	players->peek()->placeHarvestTile(selection, board, square);
 	board->calculateResources(square, resources);
-	players->jumpQueue();
 }
 
 void Game::playShipment(pair<int, int> coordinate, int type) {
 	ResourceToken token(static_cast<ResourceType>(type));
-	HarvestTile* shipment = players->next()->receiveShipment();
+	HarvestTile* shipment = players->peek()->receiveShipment();
 	board->calculateResources(coordinate, resources, &token);
 	board->setSquare(shipment, coordinate);
-	players->jumpQueue();
 }
 
-void Game::playBuilding(int selection, pair<int, int> coordinate) { // TODO need to flip building
-	Player* current = players->next();
+void Game::playBuilding(int selection, pair<int, int> coordinate) {
+	Player* current = players->peek();
 	current->resourceTracker(resources, current->buildingType(selection),
-		valueOfRow(coordinate));
+		VGMap::HEIGHT - coordinate.first);
 	current->buildVillage(selection, coordinate);
-	players->requeue();
 }
 
-int Game::valueOfRow(pair<int, int> coordinate) {
-	return VGMap::HEIGHT - coordinate.first;
+void Game::yield() {
+	players->next();
 }
 
-void Game::drawBuildingFromDeck() {
-	players->next()->drawBuilding(buildings);
-	players->jumpQueue();
+void Game::drawFromDeck() {
+	players->peek()->drawBuilding(buildings);
 }
 
-void Game::drawBuildingFromPool(int selection) {
-	players->next()->drawBuilding(pool, selection);
-	players->jumpQueue();
+void Game::drawFromPool(int selection) {
+	players->peek()->drawBuilding(pool, selection);
 }
 
 void Game::endTurn() {
@@ -111,7 +106,6 @@ void Game::endTurn() {
 	pool->replenish(buildings);
 	// TODO if not shipment
 	players->next()->drawHarvestTile(tiles, false);
-	players->requeue();
 }
 
 void Game::displayBoard() const {
