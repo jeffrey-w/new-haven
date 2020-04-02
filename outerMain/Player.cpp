@@ -79,16 +79,6 @@ HarvestTile* Player::getShipmentTile() {
     return tiles->ship();
 }
 
-void Player::calculateResources(GBMap* map, pair<int, int> square, GatherFacility* resources) {
-    if (!map) {
-        throw std::invalid_argument("Cannot record resources on the null map.");
-    }
-    if (!resources) {
-        throw std::invalid_argument("Cannot record on null resources.");
-    }
-	map->calculateResources(square, resources);
-}
-
 void Player::display() const {
     std::cout << *this;
 }
