@@ -8,16 +8,18 @@
 using std::vector;
 using ResourceType = ResourceToken::ResourceType;
 
-HarvestTileHand::HarvestTileHand() {
+HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}
+
+HarvestTileHand::HarvestTileHand(HarvestTile* shipment) {
 	one = nullptr;
 	two = nullptr;
-	shipment = nullptr;
+	this->shipment = shipment;
 }
 
 HarvestTileHand::HarvestTileHand(const HarvestTileHand& other) {
 	one = other.one ? new HarvestTile(*other.one) : nullptr;
 	two = other.two ? new HarvestTile(*other.two) : nullptr;
-	shipment = new HarvestTile(*other.shipment);
+	shipment = other.shipment ? new HarvestTile(*other.shipment) : nullptr;
 }
 
 HarvestTileHand::~HarvestTileHand() {
@@ -26,23 +28,15 @@ HarvestTileHand::~HarvestTileHand() {
 	delete shipment;
 }
 
-void HarvestTileHand::insert(HarvestTile* tile, bool isShipment) {
-	if (isShipment) {
-		if (shipment) {
-			throw std::runtime_error("This hand already has a shipment tile");
-		}
-		shipment = tile;
+void HarvestTileHand::insert(HarvestTile* tile) {
+	if (isFull()) {
+		throw std::runtime_error("This hand is full.");
+	}
+	if (one) {
+		two = tile;
 	}
 	else {
-		if (isFull()) {
-			throw std::runtime_error("This hand is full.");
-		}
-		if (one) {
-			two = tile;
-		}
-		else {
-			one = tile;
-		}
+		one = tile;
 	}
 }
 
