@@ -7,7 +7,7 @@
 
 class Roster {
 	
-	static constexpr int TILE_HAND_SIZE = 3;
+	static constexpr int TILE_HAND_SIZE = 2;
 
 public:
 
@@ -15,7 +15,7 @@ public:
 	Roster(const Roster&);
 	~Roster();
 	size_t getSize() const;
-	void add(uint64_t, Player*);
+	void add(long, Player*);
 	Player* peek();
 	Player* next();
 	void sort();
@@ -26,9 +26,10 @@ public:
 
 private:
 	
-	std::deque<uint64_t>* ids;
-	std::map<uint64_t, Player*>* players;
+	std::deque<long>* ids;
+	std::map<long, Player*>* players;
 
+	Player* front(bool);
 
 };
 
