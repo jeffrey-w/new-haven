@@ -5,8 +5,8 @@ using std::deque;
 using std::map;
 
 Roster::Roster() {
-	ids = new deque<uint64_t>();
-	players = new map<uint64_t, Player*>();
+	ids = new deque<long>();
+	players = new map<long, Player*>();
 }
 
 Roster::Roster(const Roster& other) : Roster() {
@@ -30,7 +30,7 @@ size_t Roster::getSize() const {
 	return players->size();
 }
 
-void Roster::add(uint64_t id, Player* player) {
+void Roster::add(long id, Player* player) {
 	if (players->count(id)) {
 		throw std::invalid_argument("ID already exists.");
 	}
@@ -42,13 +42,22 @@ void Roster::add(uint64_t id, Player* player) {
 }
 
 Player* Roster::peek() {
-	return (*players)[ids->front()];
+	return front(false);
 }
 
 Player* Roster::next() {
-	uint64_t id = ids->front();
-	ids->pop_front();
-	ids->push_back(id);
+	return front(true);
+}
+
+Player* Roster::front(bool rotate) {
+	if (ids->empty()) {
+		throw std::runtime_error("No players.");
+	}
+	long id = ids->front();
+	if (rotate) {
+		ids->pop_front();
+		ids->push_back(id);
+	}
 	return (*players)[id];
 }
 
@@ -61,9 +70,8 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>* buildings) {
 		throw std::invalid_argument("Cannot deal from null deck(s).");
 	}
 	for (int i = 0; i < TILE_HAND_SIZE;) {
-		bool lastCard = ++i == TILE_HAND_SIZE;
 		for (auto& entry : *players) {
-			entry.second->drawHarvestTile(tiles, lastCard);
+			entry.second->drawTile(tiles);
 		}
 	}
 	for (int i = 0; i < VGMap::HEIGHT; i++) {
