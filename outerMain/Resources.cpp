@@ -51,19 +51,36 @@ bool HarvestTileHand::isFull() const {
 }
 
 HarvestTile* HarvestTileHand::select(int selection) {
+	return validateSelection(selection, true);
+}
+
+void HarvestTileHand::rotateSelection(int selection) {
+	validateSelection(selection, false)->rotate();
+}
+
+HarvestTile* HarvestTileHand::validateSelection(int selection, bool remove) {
 	HarvestTile* tile;
-	if (isEmpty()) {
-		throw std::runtime_error("This hand is empty.");
-	}
 	switch (selection) {
 	case 1:
-		tile = one;
-		one = nullptr;
-		break;
+		if (one) {
+			tile = one;
+			if (remove) {
+				one = nullptr;
+			}
+		}
+		else {
+			throw std::runtime_error("Tile unavailable.");
+		}
 	case 2:
-		tile = two;
-		two = nullptr;
-		break;
+		if (two) {
+			tile = two;
+			if (remove) {
+				two = nullptr;
+			}
+		}
+		else {
+			throw std::runtime_error("Tile unavailable.");
+		}
 	default:
 		throw std::invalid_argument("Must select [1]st or [2]nd.");
 	}
@@ -123,11 +140,15 @@ int BuildingHand::typeOf(int selection) const {
 	return (*owned)[validateSelection(selection)]->getType();
 }
 
+int BuildingHand::valueOf(int selection) const {
+	return (*owned)[validateSelection(selection)]->getValue();
+}
+
 int BuildingHand::validateSelection(int selection) const {
 	if (selection < 1 || selection > owned->size()) {
 		throw std::out_of_range("Selection not in range.");
 	}
-	return selection;
+	return selection--;
 }
 
 int BuildingHand::worth() const {
