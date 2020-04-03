@@ -15,6 +15,7 @@ public:
 	Roster(const Roster&);
 	~Roster();
 	size_t getSize() const;
+	long nextID() const;
 	void add(long, Player*);
 	Player* peek();
 	Player* next();

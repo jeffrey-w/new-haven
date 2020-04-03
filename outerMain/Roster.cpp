@@ -30,6 +30,10 @@ size_t Roster::getSize() const {
 	return players->size();
 }
 
+long Roster::nextID() const {
+	return ids->front();
+}
+
 void Roster::add(long id, Player* player) {
 	if (players->count(id)) {
 		throw std::invalid_argument("ID already exists.");
