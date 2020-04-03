@@ -29,6 +29,8 @@ public:
 	// an exception if either of the specified coordinates does not reference a Node of this
 	// TokenGraph.
 	void addEdge(std::pair<int, int>, std::pair<int, int>);
+	// Returns the number of empty nodes on this TokenGraph.
+	int emptyNodes() const;
 	// Returns the Token occupying this TokenGraph at the specified coordinate, or null if the Node
 	// is empty. Throws an exceptionif the specified coordinate does not referecnce a Node of this
 	// TokenGraph.
@@ -87,6 +89,7 @@ private:
 
 	};
 
+	int* occupied;
 	std::map<std::pair<int, int>, Node*>* nodes;
 	std::bitset<NUM_TYPES>* types;
 
