@@ -20,6 +20,8 @@ public:
     Player(const Player&);
     // Destroys this Player.
     ~Player();
+    // TODO
+    bool canPlay(GatherFacility*);
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is null or empty.
     void drawBuilding(Deck<Building*>*);
@@ -55,7 +57,7 @@ public:
     // specified square. Throws an exception if the specified tile selection is not consistent with
     // this Player's Hand, if the specified GBMap is null; or if the specified square is not on the
     // GBMap this Player is playing on or it is already occupied.
-    void placeHarvestTile(int, GBMap*, std::pair<int, int>);
+    void placeTile(int, GBMap*, std::pair<int, int>);
     // Returns this Player's shipment tile. Throws an exception if this Player has already played
     // thier shipment tile.
     HarvestTile* receiveShipment();
@@ -66,7 +68,7 @@ public:
     // Writes this Player's BuildingHand to the standard output stream.
     void displayBuildings() const;
     // Writes this Player's VGMap to the standard output stream.
-    void displayVillageBoard() const;
+    void displayVillage() const;
 
     friend std::ostream& operator<<(std::ostream&, const Player&);
 
