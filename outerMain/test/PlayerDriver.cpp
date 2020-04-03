@@ -11,7 +11,7 @@ static void testDrawBuilding();
 static void testDrawTile();
 static void testBuildVillage();
 static void testResourceTracker();
-static void testPlaceHarvestTile();
+static void testPlaceTile();
 static void setup();
 static void tearDown();
 
@@ -21,7 +21,7 @@ void testPlayer() {
 	testDrawTile();
 	testBuildVillage();
 	testResourceTracker();
-	testPlaceHarvestTile();
+	testPlaceTile();
 	std::cout << std::endl;
 }
 
@@ -66,14 +66,14 @@ void testResourceTracker() {
 	tearDown();
 }
 
-void testPlaceHarvestTile() {
+void testPlaceTile() {
 	GBMap map;
 	setup();
-	ASSERT_THROWS(std::invalid_argument, player->placeHarvestTile(1, nullptr, { 0, 0 }),
+	ASSERT_THROWS(std::invalid_argument, player->placeTile(1, nullptr, { 0, 0 }),
 		"ERROR: placed tile onto the null GBMap.");
-	ASSERT_THROWS(std::invalid_argument, player->placeHarvestTile(3, &map, { 0, 0 }),
+	ASSERT_THROWS(std::invalid_argument, player->placeTile(3, &map, { 0, 0 }),
 		"ERROR: invalid tile selection allowed.");
-	ASSERT_SUCCESS(player->placeHarvestTile(1, &map, { 0, 0 }), "Successfully placed harvest tile.");
+	ASSERT_SUCCESS(player->placeTile(1, &map, { 0, 0 }), "Successfully placed harvest tile.");
 	tearDown();
 }
 
