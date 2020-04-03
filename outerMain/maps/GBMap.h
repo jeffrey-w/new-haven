@@ -24,6 +24,8 @@ public:
 	~GBMap();
 	// Returns the number of Playrs playing on this GBMap.
 	int getNumPlayers() const;
+	// Returns the number of unoccupied spaces on this GBMap.
+	int squaresLeft() const;
 	// Places the specified HarvestTile onto the specified square of this GBMap. The specified
 	// HarvestTile is destroyed. Throws an exception if the specified HarvestTile is null; or if
 	// the specified square is not on this GBMap or if it is already occupied.
@@ -38,7 +40,7 @@ public:
 	void display() const;
 
 	// Returns the number of connected nodes on the graph underlying the specified GBMap.
-	friend int numberOfNodes(GBMap&);
+	friend int numberOfSpaces(GBMap&);
 	friend std::ostream& operator<<(std::ostream&, const GBMap&);
 
 private:
