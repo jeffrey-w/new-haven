@@ -26,6 +26,10 @@ Player::~Player(){
     delete buildFacility;
 }
 
+bool Player::canPlay(GatherFacility*) {
+	return true; // TODO
+}
+
 void Player::drawBuilding(Deck<Building*>* deck) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
@@ -51,7 +55,12 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
             building->flip();
         }
     }
-    villageBoard->setCircle(building, circle);
+    try {
+        villageBoard->setCircle(building, circle);
+    } catch (const std::exception& e) {
+        buildings->insert(building);
+        throw e;
+    }
 }
 
 int Player::buildingType(int selection) const {
@@ -80,11 +89,17 @@ void Player::rotateTile(int selection) {
     tiles->rotate(selection);
 }
 
-void Player::placeHarvestTile(int selection, GBMap* map, pair<int, int> square) {
+void Player::placeTile(int selection, GBMap* map, pair<int, int> square) {
     if (!map) {
         throw std::invalid_argument("Cannot place on the null map.");
     }
-    map->setSquare(tiles->select(selection), square);
+    HarvestTile* tile = tiles->select(selection);
+    try {
+        map->setSquare(tile, square);
+    } catch (const std::exception& e) {
+        tiles->insert(tile);
+        throw e;
+    }
 }
 
 HarvestTile* Player::receiveShipment() {
@@ -103,7 +118,7 @@ void Player::displayBuildings() const {
     std::cout << *buildings;
 }
 
-void Player::displayVillageBoard() const {
+void Player::displayVillage() const {
     std::cout << *villageBoard;
 }
 
