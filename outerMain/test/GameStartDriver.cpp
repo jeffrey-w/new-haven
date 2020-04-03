@@ -22,10 +22,6 @@ void testGameStart() {
     game->displayerPlayers();
     std::cout << "Initializing face up pool...\n";
     game->displayPool();
-    std::cout << "Harvest tiles left after dealing to players...\n";
-    std::cout << game->tilesLeft() << '\n';
-    std::cout << "Buildings left after dealing to players and face up pool...\n";
-    std::cout << game->buildingsLeft() << '\n';
     delete game;
 }
 
