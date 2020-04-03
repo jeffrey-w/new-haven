@@ -115,7 +115,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="util\Input.cpp" />
     <ClCompile Include="Roster.cpp" />
     <ClCompile Include="test\GameStartDriver.cpp" />
     <ClCompile Include="test\ResourcesDriver.cpp" />
@@ -142,7 +144,9 @@
     <ClCompile Include="loaders\VGMapLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="util\Input.h" />
     <ClInclude Include="Roster.h" />
     <ClInclude Include="test\Drivers.h" />
     <ClInclude Include="test\GameStartDriver.h" />
