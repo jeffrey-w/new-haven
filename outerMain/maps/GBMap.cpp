@@ -38,6 +38,10 @@ int GBMap::getNumPlayers() const {
 	return *numPlayers;
 }
 
+int GBMap::squaresLeft() const {
+	return graph->emptyNodes() >> 2;
+}
+
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	if (!tile) {
 		throw std::invalid_argument("Cannot place the null tile.");
@@ -148,7 +152,7 @@ bool GBMap::isOnCorner(int row, int col) {
 	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
 }
 
-int numberOfNodes(GBMap& map) {
+int numberOfSpaces(GBMap& map) {
 	int nodes;
 	auto tokens = map.graph->tokens();
 	// Clear map so that all nodes will be counted.
@@ -160,7 +164,7 @@ int numberOfNodes(GBMap& map) {
 	for (auto& entry : tokens) {
 		map.graph->setTokenAt(entry.second, entry.first);
 	}
-	return nodes / 4;
+	return nodes >> 2;
 }
 
 std::ostream& operator<<(std::ostream& stream, const GBMap& map) {
