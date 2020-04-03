@@ -30,12 +30,26 @@ int Game::numPlayers() const {
 	return board->getNumPlayers();
 }
 
-size_t Game::tilesLeft() const {
-	return tiles->getSize();
+long Game::nextID() const {
+	return players->nextID();
 }
 
-size_t Game::buildingsLeft() const {
-	return buildings->getSize();
+bool Game::canPlay() const {
+	return players->peek()->canPlay(resources);
+}
+
+int Game::exhausted() const {
+	int exhausted = 0;
+	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
+		if (!resources->countOf(i)) {
+			exhausted++;
+		}
+	}
+	return exhausted;
+}
+
+int Game::gameOver() const {
+	return board->squaresLeft() == 1;
 }
 
 void Game::addPlayer(long id) {
@@ -69,7 +83,7 @@ void Game::rotateTile(int selection) {
 }
 
 void Game::playTile(int selection, pair<int, int> square) {
-	players->peek()->placeHarvestTile(selection, board, square);
+	players->peek()->placeTile(selection, board, square);
 	board->calculateResources(square, resources);
 }
 
@@ -115,8 +129,20 @@ void Game::displayBoard() const {
 	board->display();
 }
 
+void Game::displayTiles() const {
+	players->peek()->displayTiles();
+}
+
+void Game::displayVillage() const {
+	players->peek()->displayVillage();
+}
+
 void Game::displayResources() const {
 	resources->display();
+}
+
+void Game::displayBuildings() const {
+	players->peek()->displayBuildings();
 }
 
 void Game::displayPool() const {
