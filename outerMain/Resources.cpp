@@ -140,7 +140,7 @@ int BuildingHand::validateSelection(int selection) const {
 	if (selection < 1 || selection > owned->size()) {
 		throw std::out_of_range("Selection not in range.");
 	}
-	return selection--;
+	return --selection;
 }
 
 int BuildingHand::worth() const {
