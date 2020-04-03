@@ -19,11 +19,11 @@ void testGBMap() {
 	one.setSquare(new HarvestTile(), { 0, 0 });
 	std::cout << "Running GBMap tests:" << std::endl;
 	std::cout << intro(MIN_NODES, "two");
-	ASSERT_EQUALS(numberOfNodes(one), MIN_NODES, success(MIN_NODES), failure("two"));
+	ASSERT_EQUALS(numberOfSpaces(one), MIN_NODES, success(MIN_NODES), failure("two"));
 	std::cout << intro(MID_NODES, "three");
-	ASSERT_EQUALS(numberOfNodes(two), MID_NODES, success(MID_NODES), failure("three"));
+	ASSERT_EQUALS(numberOfSpaces(two), MID_NODES, success(MID_NODES), failure("three"));
 	std::cout << intro(MAX_NODES, "four");
-	ASSERT_EQUALS(numberOfNodes(three), MAX_NODES, success(MAX_NODES), failure("four"));
+	ASSERT_EQUALS(numberOfSpaces(three), MAX_NODES, success(MAX_NODES), failure("four"));
 	ASSERT_THROWS(std::invalid_argument, GBMap(5),
 		"ERROR: five player map constructed.");
 	ASSERT_THROWS(std::invalid_argument, one.setSquare(nullptr, { 0, 1 }),
