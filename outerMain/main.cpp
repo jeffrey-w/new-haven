@@ -7,14 +7,14 @@
 #include "test/Drivers.h"
 
 int main() {
-    //testGBMap();
-    //testVGMap();
-    //testGBMapLoader();
-    //testVGMapLoader();
-    //testPlayer();
-    //testResources();
-    //testScoringFacilities();
-    //testGameStart();
+    testGBMap();
+    testVGMap();
+    testGBMapLoader();
+    testVGMapLoader();
+    testPlayer();
+    testResources();
+    testScoringFacilities();
+    testGameStart();
     Controller c;
     c.initGame();
     c.inputIDs();
