@@ -20,10 +20,14 @@ public:
 	~Game();
 	// Returns the number of Players playing this Game.
 	int numPlayers() const;
-	// Returns the number of HarvestTiles remaining in this Game's Deck.
-	size_t tilesLeft() const;
-	// Returns the number of Buildings remaining in this Game's Deck.
-	size_t buildingsLeft() const;
+	// TODO
+	long nextID() const;
+	// TODO
+	bool canPlay() const;
+	// TODO
+	int exhausted() const;
+	// Returns true iff this Game's GBMap has only one unoccupied square.
+	int gameOver() const;
 	// Adds a new Player with the specified id to this Game's Roster. Throws an exception if this
 	// Game's Roster is already full.
 	void addPlayer(long);
@@ -69,8 +73,14 @@ public:
 	void endTurn(bool);
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
+	// Writes the current Player's HarvestTileHand to the standard output stream.
+	void displayTiles() const;
+	// Writes the current Player's VGMap to the standard output stream.
+	void displayVillage() const;
 	// Writes this Game's resource markers to the standard output stream.
 	void displayResources() const;
+	// Writes the current Player's BuildingHand to the standard output stream.
+	void displayBuildings() const;
 	// Writes this Game's BuildingPool to the standard output stream.
 	void displayPool() const;
 	// Writes this Game's Players to the standard ouput stream;
