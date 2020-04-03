@@ -33,6 +33,7 @@ TokenGraph* TokenGraph::gridOf(int height, int width) {
 }
 
 TokenGraph::TokenGraph() {
+	occupied = new int(0);
 	nodes = new map<pair<int, int>, Node*>();
 	types = new bitset<NUM_TYPES>();
 }
@@ -41,6 +42,7 @@ TokenGraph::~TokenGraph() {
     for (auto& node : *nodes){
         delete node.second;
     }
+	delete occupied;
 	delete nodes;
 	delete types;
 }
@@ -54,6 +56,10 @@ void TokenGraph::addEdge(pair<int, int> one, pair<int, int> two) {
 	Node* n = nodeAt(two);
 	m->adjacents->insert(n);
 	n->adjacents->insert(m);
+}
+
+int TokenGraph::emptyNodes() const {
+	return nodes->size() - *(occupied);
 }
 
 AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) const {
@@ -80,6 +86,7 @@ bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) const {
 void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
 	nodeAt(coordinate)->token = token;
 	if (token) {
+		(*occupied)++;
 		(*types)[token->getType()] = true;
 	}
 }
