@@ -21,9 +21,6 @@ public:
 	Player* next();
 	void sort();
 	void deal(Deck<HarvestTile*>*, Deck<Building*>*);
-	void display() const;
-
-	friend std::ostream& operator<<(std::ostream&, const Roster&);
 
 private:
 	

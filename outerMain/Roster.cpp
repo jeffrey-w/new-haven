@@ -84,16 +84,3 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>* buildings) {
 		}
 	}
 }
-
-void Roster::display() const {
-	std::cout << *this;
-}
-
-std::ostream& operator<<(std::ostream& stream, const Roster& roster) {
-	for (auto& entry : *roster.players) {
-		stream << "Player ";
-		stream << entry.first << "\n\n";
-		stream << *entry.second;
-	}
-	return stream << '\n';
-}
