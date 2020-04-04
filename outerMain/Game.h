@@ -20,11 +20,12 @@ public:
 	~Game();
 	// Returns the number of Players playing this Game.
 	int numPlayers() const;
-	// TODO
+	// Returns the ID of the current Player.
 	long nextID() const;
-	// TODO
+	// Returns true iff the current Player is able to build on their VGMap with the resources
+	// available.
 	bool canPlay() const;
-	// TODO
+	// Returns the number of ResourceTypes that were completely spent during a turn of this Game.
 	int exhausted() const;
 	// Returns true iff this Game's GBMap has only one unoccupied square.
 	int gameOver() const;
