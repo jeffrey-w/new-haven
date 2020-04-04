@@ -110,10 +110,6 @@ void Player::store(HarvestTile* tile) {
     tiles->receive(tile);
 }
 
-void Player::display() const {
-    std::cout << *this;
-}
-
 void Player::displayTiles() const {
     std::cout << *tiles;
 }
@@ -124,13 +120,4 @@ void Player::displayBuildings() const {
 
 void Player::displayVillage() const {
     std::cout << *villageBoard;
-}
-
-std::ostream& operator<<(std::ostream& stream, const Player& player) {
-    stream << *player.tiles;
-    stream << '\n';
-    stream << *player.buildings;
-    stream << '\n';
-    stream << *player.villageBoard;
-    return stream << '\n';
 }

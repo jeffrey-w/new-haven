@@ -64,16 +64,12 @@ public:
     // Adds the specified HarvestTile to this Player's Hand as its shipment tile. Throws an
     // exception if this Player already has a shipment tile.
     void store(HarvestTile*);
-    // Writes this Player to the standard output stream.
-    void display() const;
     // Writes this Player's HarvestTileHand to the standard output stream.
     void displayTiles() const;
     // Writes this Player's BuildingHand to the standard output stream.
     void displayBuildings() const;
     // Writes this Player's VGMap to the standard output stream.
     void displayVillage() const;
-
-    friend std::ostream& operator<<(std::ostream&, const Player&);
 
 private:
     
