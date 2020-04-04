@@ -109,7 +109,7 @@ bool Controller::placeSelection() {
 		selection = in->get<int>("Select a tile", "Invalid selection.");
 		row = in->get<int>("Select a row", "Invalid row.");
 		col = in->get<int>("Select a column", "Invalid column");
-		if (selection == 's' || selection == 'S') {
+		if (selection == SHIPMENT) {
 			int type = in->get<int>("Select resouce - 0: SH, 1: ST, 2: TI, 3: WH",
 				"Invalid type.", true);
 			if (in->cancelled()) {
