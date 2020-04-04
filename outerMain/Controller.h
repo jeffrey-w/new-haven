@@ -5,7 +5,7 @@
 
 class Controller {
 
-	static constexpr unsigned int SHIP_MASK = 'S' | 's';
+	static constexpr int SHIPMENT = 3;
 
 public:
 
