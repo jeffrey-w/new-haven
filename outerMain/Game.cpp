@@ -90,9 +90,14 @@ void Game::playTile(int selection, pair<int, int> square) {
 void Game::playShipment(pair<int, int> coordinate, int type) {
 	// TODO validate type
 	ResourceToken token(static_cast<ResourceType>(type));
-	HarvestTile* shipment = players->peek()->receiveShipment();
-	board->calculateResources(coordinate, resources, &token);
-	board->setSquare(shipment, coordinate);
+	HarvestTile* shipment = players->peek()->reap();
+	try {
+		board->calculateResources(coordinate, resources, &token);
+		board->setSquare(shipment, coordinate);
+	} catch (const std::exception& e) {
+		players->peek()->store(shipment);
+		throw e;
+	}
 }
 
 void Game::playBuilding(int selection, pair<int, int> coordinate) {
