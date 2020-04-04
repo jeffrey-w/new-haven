@@ -21,13 +21,13 @@ public:
         do {
             std::cout << prompt;
             if (canCancel) {
-                std::cout << " (or press 'c' to cancel)";
+                std::cout << " (or press 'C' to cancel)";
             }
             std::cout << ": ";
             std::getline(std::cin, input);
             if (canCancel) {
                 char c = std::stringstream(input).get();
-                if (c == 'c' || c == 'c') {
+                if (c == 'c' || c == 'C') {
                     *_cancelled = true;
                     break;
                 }
