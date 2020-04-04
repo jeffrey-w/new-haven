@@ -168,7 +168,25 @@ int numberOfSpaces(GBMap& map) {
 }
 
 std::ostream& operator<<(std::ostream& stream, const GBMap& map) {
+	int coordinate = 0;
+	stream << '\t';
+	for (int i = 0; i < map.width(); i++) {
+		if (i & 1) {
+			stream << '\t';
+		}
+		else {
+			stream << coordinate++ << '\t';
+		}
+	}
+	coordinate = 0;
+	stream << "\n\n\n";
 	for (int i = 0; i < map.height(); i++) {
+		if (i & 1) {
+			stream << '\t';
+		}
+		else {
+			stream << coordinate++ << '\t';
+		}
 		for (int j = 0; j < map.width(); j++) {
 			ResourceToken* resource = static_cast<ResourceToken*>(map.graph->tokenAt({ i, j }));
 			if (resource) {

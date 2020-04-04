@@ -122,7 +122,13 @@ void VGMap::display() const {
 }
 
 std::ostream& operator<<(std::ostream& stream, const VGMap& map) {
+    stream << '\t';
+    for (int i = 0; i < VGMap::WIDTH; i++) {
+        stream << i << '\t';
+    }
+    stream << "\n\n\n";
     for (int i = 0; i < VGMap::HEIGHT; i++) {
+        stream << i << '\t';
         for (int j = 0; j < VGMap::WIDTH; j++) {
             BuildingToken* building = static_cast<BuildingToken*>(map.graph->tokenAt({ i, j }));
             if (building) {
