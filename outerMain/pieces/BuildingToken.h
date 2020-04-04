@@ -10,9 +10,9 @@ public:
 	// The types a BuildingToken may have. (Corresponding ResourceTypes has corresponding
 	// ordinals.)
 	enum class BuildingType {
-        FOREST,
 		MEADOW,
 		QUARRY,
+        FOREST,
 		WHEATFIELD
 	};
 	
