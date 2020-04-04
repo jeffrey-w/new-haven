@@ -146,12 +146,16 @@ public:
 	// Returns the HarvestTile selected by a Player. Throws an exception if the specified selection
 	// is not between one and two inclusive, or the specified selection does not exit.
 	HarvestTile* select(int);
-	// Rotates the selected HarvestTile 90 degrees clockwise. Throws an exception if the specified
-	// slection is not betwewn one and two inclusive, or the specified seleciton does not exist.
+	// Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the
+	// specified slection is not betwewn one and two inclusive, or the specified seleciton does not
+	// exist.
 	void rotate(int);
 	// Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not
 	// contain a shipment tile.
 	HarvestTile* ship();
+	// Adds the specified HarvestTile to this Hand as its shipment tile. Throws an exception if
+	// this Hand already has a shipment tile.
+	void receive(HarvestTile*);
 	// Writes this HarvestTileHand to the standard outoput stream.
 	void display() const;
 
