@@ -1,3 +1,5 @@
+#include <string>
+
 #include "Game.h"
 #include "Resources.h"
 #include "util/Debug.h"
@@ -88,7 +90,10 @@ void Game::playTile(int selection, pair<int, int> square) {
 }
 
 void Game::playShipment(pair<int, int> coordinate, int type) {
-	// TODO validate type
+	if (type < 0 || type > TokenGraph::NUM_TYPES - 1) { // TODO refactor this to somewhere else
+		throw std::runtime_error("Type must be between 0 and "
+			+ std::to_string(TokenGraph::NUM_TYPES - 1) + ".");
+	}
 	ResourceToken token(static_cast<ResourceType>(type));
 	HarvestTile* shipment = players->peek()->reap();
 	try {
@@ -152,8 +157,4 @@ void Game::displayBuildings() const {
 
 void Game::displayPool() const {
 	pool->display();
-}
-
-void Game::displayerPlayers() const {
-	players->display();
 }
