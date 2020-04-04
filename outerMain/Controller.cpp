@@ -38,7 +38,7 @@ void Controller::inputIDs() {
 	}
 }
 
-void Controller::loop() {
+void Controller::run() {
 	int exhausted;
 	bool shipment;
 	game->setup();
