@@ -34,9 +34,9 @@ public:
 	// Deals HarvestTiles and Buildings to each Player in this Game's Roster, and intitializes this
 	// Game's BuildingPool.
 	void setup();
-	// Rotates the selected HarvestTile in the current Player's HarvestTileHand. Throws an
-	// exception if the specified selection is not consistent with the current Player's hand, or if
-	// this Game has not been setup.
+	// Rotates the selected HarvestTile in the current Player's HarvestTileHand 90 degrees
+	// counterclockwise. Throws an exception if the specified selection is not consistent with the
+	// current Player's hand, or if this Game has not been setup.
 	void rotateTile(int);
 	// Induces the current Player to place the selected HarvestTile onto this Game's GBMap at the
 	// specified square. Throws an exception if the specified tile selection is not consistent with
