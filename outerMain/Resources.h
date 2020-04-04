@@ -183,6 +183,8 @@ public:
 	BuildingHand(const BuildingHand&);
 	// Destroys this BuildingHand.
 	~BuildingHand();
+	// Returns the number of Buildings in this BuildingHand.
+	size_t getSize() const;
 	// Adds the specified Building to this BuildingHand.
 	void insert(Building*);
 	// Returns the Building selected by a Player. Throws an exception if the specified selection

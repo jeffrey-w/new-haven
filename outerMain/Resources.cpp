@@ -134,6 +134,10 @@ BuildingHand::~BuildingHand() {
 	delete owned;
 }
 
+size_t BuildingHand::getSize() const {
+	return owned->size();
+}
+
 void BuildingHand::insert(Building* building) {
 	owned->push_back(building);
 }
