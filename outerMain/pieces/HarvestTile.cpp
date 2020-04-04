@@ -63,20 +63,32 @@ void HarvestTile::display() const {
 	std::cout << *this;
 }
 
-void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, const HarvestTile& two) {
+void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, const HarvestTile& two,
+		bool shipment) {
 	printHalf(stream, one, *one.current);
 	printHalf(stream, two, *two.current);
-	// Shipment tile.
-	stream << "-- | --\n";
-	printHalf(stream, one, *one.current + (NUM_RESOURCES >> 1));
-	printHalf(stream, two, *two.current + (NUM_RESOURCES >> 1));
-	// Shipment tile.
-	stream << "-- | --\n";
+	if (shipment) {
+		stream << "-- | --";
+	}
+	stream << '\n';
+	printHalf(stream, one, *one.current + NUM_RESOURCES - 1, true);
+	printHalf(stream, two, *two.current + NUM_RESOURCES - 1, true);
+	if (shipment) {
+		stream << "-- | --";
+	}
+	stream << '\n';
 }
 
-void HarvestTile::printHalf(std::ostream& stream, const HarvestTile& tile, int from) {
+void HarvestTile::printHalf(std::ostream& stream, const HarvestTile& tile, int from,
+		bool countdown) {
 	for (int i = 0; i < NUM_RESOURCES >> 1; i++) {
-		stream << *(*tile.resources)[from++];
+		stream << *(*tile.resources)[from];
+		if (countdown) {
+			from--;
+		}
+		else {
+			from++;
+		}
 		from &= NUM_RESOURCES - 1;
 		if (i & 1) {
 			stream << "\t\t";

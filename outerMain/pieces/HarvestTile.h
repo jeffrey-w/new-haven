@@ -17,7 +17,7 @@ public:
 	// The number of resources that a HarvestTile holds.
 	constexpr static int NUM_RESOURCES = 4;
 
-	static void printHand(std::ostream&, const HarvestTile&, const HarvestTile&);
+	static void printHand(std::ostream&, const HarvestTile&, const HarvestTile&, bool);
 	
 	// Constructs a new HarvestTile object.
 	HarvestTile();
@@ -28,7 +28,7 @@ public:
 	HarvestTile(const HarvestTile&);
 	// Destroys this HarvestTile.
 	~HarvestTile();
-	// Rotates this HarvestTile 90 degrees clockwise.
+	// Rotates this HarvestTile 90 degrees counterclockwise.
 	void rotate();
 	// Iteratively returns the ResourceTokens that constitute this HarvestTile.
 	ResourceToken* tokenize();
@@ -42,7 +42,7 @@ private:
 	int* current;
 	std::vector<ResourceToken*>* resources;
 
-	static void printHalf(std::ostream&, const HarvestTile&, int);
+	static void printHalf(std::ostream&, const HarvestTile&, int, bool = false);
 
 	// For GBMapLoader.
 	HarvestTile(int);
