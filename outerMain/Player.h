@@ -75,8 +75,8 @@ private:
     
     HarvestTileHand* tiles;
     BuildingHand* buildings;
-    VGMap* villageBoard;
-    BuildFacility* buildFacility;
+    VGMap* village;
+    BuildFacility* score;
 
 
 };

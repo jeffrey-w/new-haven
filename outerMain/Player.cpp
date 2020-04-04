@@ -8,26 +8,52 @@ Player::Player() : Player(new HarvestTile()) {}
 Player::Player(HarvestTile* shipment) {
     tiles = new HarvestTileHand(shipment);
     buildings = new BuildingHand();
-    villageBoard = new VGMap();
-    buildFacility = new BuildFacility();
+    village = new VGMap();
+    score = new BuildFacility();
 }
 
 Player::Player(const Player& other){
     tiles = new HarvestTileHand(*other.tiles);
     buildings = new BuildingHand(*other.buildings);
-    villageBoard = new VGMap(*other.villageBoard);
-    buildFacility = new BuildFacility(*other.buildFacility);
+    village = new VGMap(*other.village);
+    score = new BuildFacility(*other.score);
 }
 
 Player::~Player(){
     delete tiles;
     delete buildings;
-    delete villageBoard;
-    delete buildFacility;
+    delete village;
+    delete score;
 }
 
-bool Player::canPlay(GatherFacility*) {
-	return true; // TODO
+bool Player::canPlay(GatherFacility* resources) {
+    for (int i = 0; i < VGMap::HEIGHT; i++) {
+        for (int j = 0; j < VGMap::WIDTH; j++) {
+            if (village->emptyAt({ i, j })) {
+                for (int k = 0; k < buildings->getSize(); k++) {
+                    for (int l = 0; l < TokenGraph::NUM_TYPES; l++) {
+                        if (buildings->typeOf(k + 1) == l) {
+                            if (VGMap::HEIGHT - i == resources->countOf(l)) {
+                                if (village->hasType(l)) {
+                                    return village->adjacentHolds({ i, j }, l);
+                                }
+                                else {
+                                    return true;
+                                }
+                            }
+                        }
+                        else {
+                            continue;
+                        }
+                    }
+                }
+            }
+            else {
+                continue;
+            }
+        }
+    }
+    return false;
 }
 
 void Player::drawBuilding(Deck<Building*>* deck) {
@@ -56,7 +82,7 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
         }
     }
     try {
-        villageBoard->setCircle(building, circle);
+        village->setCircle(building, circle);
     } catch (const std::exception& e) {
         buildings->insert(building);
         throw e;
@@ -78,11 +104,11 @@ void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
 }
 
 void Player::calculateScore() {
-    villageBoard->calculateScore(buildFacility); // TODO should only do this once
+    village->calculateScore(score); // TODO should only do this once
 }
 
 void Player::adjustScore() {
-    buildFacility->incrementBy(buildings->worth()); // TODO should only do this once
+    score->incrementBy(buildings->worth()); // TODO should only do this once
 }
 
 void Player::rotateTile(int selection) {
@@ -119,5 +145,5 @@ void Player::displayBuildings() const {
 }
 
 void Player::displayVillage() const {
-    std::cout << *villageBoard;
+    std::cout << *village;
 }
