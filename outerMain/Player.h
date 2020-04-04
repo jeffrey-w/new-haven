@@ -20,7 +20,8 @@ public:
     Player(const Player&);
     // Destroys this Player.
     ~Player();
-    // TODO
+    // Returns true iff the this Player is able to build on their VGMap with the resources
+    // available in the specified GatherFacility.
     bool canPlay(GatherFacility*);
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is null or empty.
