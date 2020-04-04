@@ -58,6 +58,10 @@ void TokenGraph::addEdge(pair<int, int> one, pair<int, int> two) {
 	n->adjacents->insert(m);
 }
 
+bool TokenGraph::emptyAt(pair<int, int> coordinate) {
+	return !nodeAt(coordinate)->token;
+}
+
 int TokenGraph::emptyNodes() const {
 	return nodes->size() - *(occupied);
 }
