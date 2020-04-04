@@ -83,8 +83,6 @@ public:
 	void displayBuildings() const;
 	// Writes this Game's BuildingPool to the standard output stream.
 	void displayPool() const;
-	// Writes this Game's Players to the standard ouput stream;
-	void displayerPlayers() const;
 
 private:
 
