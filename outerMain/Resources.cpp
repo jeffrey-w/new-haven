@@ -91,7 +91,16 @@ HarvestTile* HarvestTileHand::ship() {
 	if (!shipment) {
 		throw std::runtime_error("Shipment tile already played.");
 	}
-	return shipment;
+	HarvestTile* tile = shipment;
+	shipment = nullptr;
+	return tile;
+}
+
+void HarvestTileHand::receive(HarvestTile* tile) {
+	if (shipment) {
+		throw std::runtime_error("Shipment already exists.");
+	}
+	shipment = tile;
 }
 
 void HarvestTileHand::display() const {
@@ -99,8 +108,12 @@ void HarvestTileHand::display() const {
 }
 
 std::ostream& operator<<(std::ostream& stream, const HarvestTileHand& hand) {
-	stream << "1\t\t2\t\tShipment\n";
-	HarvestTile::printHand(stream, *hand.one, *hand.two);
+	stream << "1\t\t2\t\t";
+	if (hand.shipment) {
+		stream << "3 - Shipment";
+	}
+	stream << '\n';
+	HarvestTile::printHand(stream, *hand.one, *hand.two, hand.shipment);
 	return stream;
 }
 
@@ -251,15 +264,15 @@ Deck<HarvestTile*>* harvestTileDeck() {
 				tiles->add(new HarvestTile(
 					new ResourceToken(static_cast<ResourceType>(i)),
 					new ResourceToken(static_cast<ResourceType>(i)),
-					new ResourceToken(static_cast<ResourceType>(i)),
-					new ResourceToken(static_cast<ResourceType>(j))
+					new ResourceToken(static_cast<ResourceType>(j)),
+					new ResourceToken(static_cast<ResourceType>(i))
 				));
 				// For each resource type i and each type j, add a new tile with two i and two j.
 				tiles->add(new HarvestTile(
 					new ResourceToken(static_cast<ResourceType>(i)),
 					new ResourceToken(static_cast<ResourceType>(j)),
-					new ResourceToken(static_cast<ResourceType>(i)),
-					new ResourceToken(static_cast<ResourceType>(j))
+					new ResourceToken(static_cast<ResourceType>(j)),
+					new ResourceToken(static_cast<ResourceType>(i))
 				));
 			}
 		}
@@ -273,8 +286,8 @@ Deck<HarvestTile*>* harvestTileDeck() {
 					tiles->add(new HarvestTile(
 						new ResourceToken(static_cast<ResourceType>(i)),
 						new ResourceToken(static_cast<ResourceType>(j)),
-						new ResourceToken(static_cast<ResourceType>(i)),
-						new ResourceToken(static_cast<ResourceType>(k))
+						new ResourceToken(static_cast<ResourceType>(k)),
+						new ResourceToken(static_cast<ResourceType>(i))
 					));
 					if (j < k) {
 						// For each resource type i, each type j, and each type k, add a new tile
@@ -282,8 +295,8 @@ Deck<HarvestTile*>* harvestTileDeck() {
 						tiles->add(new HarvestTile(
 							new ResourceToken(static_cast<ResourceType>(i)),
 							new ResourceToken(static_cast<ResourceType>(j)),
-							new ResourceToken(static_cast<ResourceType>(k)),
-							new ResourceToken(static_cast<ResourceType>(i))
+							new ResourceToken(static_cast<ResourceType>(i)),
+							new ResourceToken(static_cast<ResourceType>(k))
 						));
 					}
 				}
