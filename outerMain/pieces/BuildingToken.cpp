@@ -66,7 +66,7 @@ void BuildingToken::display() const {
 std::ostream& operator<<(std::ostream& stream, const BuildingToken& token) {
     switch (*token.type) {
         case BuildingType::FOREST:
-            stream << "F";
+			stream << "F";
             break;
         case BuildingType::MEADOW:
             stream << "M";
@@ -78,5 +78,5 @@ std::ostream& operator<<(std::ostream& stream, const BuildingToken& token) {
             stream << "W";
             break;
     }
-	return stream;
+	return stream << *token.value;
 }
