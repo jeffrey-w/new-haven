@@ -102,8 +102,12 @@ void Player::placeTile(int selection, GBMap* map, pair<int, int> square) {
     }
 }
 
-HarvestTile* Player::receiveShipment() {
+HarvestTile* Player::reap() {
     return tiles->ship();
+}
+
+void Player::store(HarvestTile* tile) {
+    tiles->receive(tile);
 }
 
 void Player::display() const {

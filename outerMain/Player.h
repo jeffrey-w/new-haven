@@ -50,8 +50,8 @@ public:
     void calculateScore();
     // Adds the values of the Buildings in this Player's hand to their score.
     void adjustScore();
-    // Rotates the selected HarvestTile 90 degrees clockwise. Throws an exception if the specified
-    // slection is not consistent with this Player's hand.
+    // Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the
+    // specified slection is not consistent with this Player's hand.
     void rotateTile(int);
     // Induces this Player to place the selected HarvestTile onto the specified GBMap at the 
     // specified square. Throws an exception if the specified tile selection is not consistent with
@@ -60,7 +60,10 @@ public:
     void placeTile(int, GBMap*, std::pair<int, int>);
     // Returns this Player's shipment tile. Throws an exception if this Player has already played
     // thier shipment tile.
-    HarvestTile* receiveShipment();
+    HarvestTile* reap();
+    // Adds the specified HarvestTile to this Player's Hand as its shipment tile. Throws an
+    // exception if this Player already has a shipment tile.
+    void store(HarvestTile*);
     // Writes this Player to the standard output stream.
     void display() const;
     // Writes this Player's HarvestTileHand to the standard output stream.
@@ -78,5 +81,6 @@ private:
     BuildingHand* buildings;
     VGMap* villageBoard;
     BuildFacility* buildFacility;
+
 
 };
