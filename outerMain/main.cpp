@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
         Controller c;
         c.initGame();
         c.inputIDs();
-        c.loop();
+        c.run();
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
         return 0;
     }
