@@ -19,6 +19,15 @@ public:
 	VGMap(const VGMap&);
 	// Destroys this VGMap.
 	~VGMap();
+	// Returns true iff no Building occupies this VGMap at the specified circle. Throws an Exception
+	// if the specified circle does not reference a circle of this VGMap.
+	bool emptyAt(std::pair<int, int>);
+	// Returns true iff this VGMap contains a Building of the specified type.
+	bool hasType(int) const;
+	// Returns true iff any of the circles of this VGMap that are adjacent to the one at the
+	// specified coordinate contain a Building of the specified type. Throws an exception if the
+	// specified coordinate does not reference a circle of this VGMap.
+	bool adjacentHolds(std::pair<int, int>, int) const;
 	// Places the specified Building onto the specified circle of this VGMap. The specified
 	// Building is destroyed. Throws an exception if any of the following conditions hold:
 	// (1) the specified Building is null,

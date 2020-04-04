@@ -25,6 +25,18 @@ VGMap::~VGMap() {
 	delete graph;
 }
 
+bool VGMap::emptyAt(pair<int, int> circle) {
+    return graph->emptyAt(circle);
+}
+
+bool VGMap::hasType(int type) const {
+    return graph->hasType(type);
+}
+
+bool VGMap::adjacentHolds(pair<int, int> circle, int type) const {
+    return graph->adjacentHolds(circle, type);
+}
+
 void VGMap::setCircle(Building* building, pair<int, int> circle) {
     validatePlacement(building, circle);
     graph->setTokenAt(building->tokenize(), circle);
