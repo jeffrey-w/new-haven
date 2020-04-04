@@ -130,7 +130,7 @@ std::ostream& operator<<(std::ostream& stream, const VGMap& map) {
                 stream << '\t';
             }
             else {
-                stream << "-\t";
+                stream << VGMap::HEIGHT - i << "\t";
             }
         }
         stream << "\n\n\n";
