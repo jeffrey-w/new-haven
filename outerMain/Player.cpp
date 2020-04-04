@@ -64,7 +64,7 @@ void Player::drawBuilding(Deck<Building*>* deck) {
 }
 
 void Player::drawBuilding(BuildingPool* pool, int selection) {
-    pool->remove(selection);
+    buildings->insert(pool->remove(selection));
 }
 
 void Player::drawTile(Deck<HarvestTile*>* deck) {
