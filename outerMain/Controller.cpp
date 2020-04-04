@@ -61,8 +61,7 @@ void Controller::loop() {
 			}
 			game->yield();
 		}
-		exhausted = game->exhausted();
-		if (exhausted) {
+		if ((exhausted = game->exhausted()) && !game->gameOver()) {
 			std::cout << "Player " << game->nextID() << ", you must draw " << exhausted
 				<< " buildings.\n";
 			selectBuilding(false);
