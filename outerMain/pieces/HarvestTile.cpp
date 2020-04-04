@@ -71,8 +71,8 @@ void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, const 
 		stream << "-- | --";
 	}
 	stream << '\n';
-	printHalf(stream, one, *one.current + NUM_RESOURCES - 1, true);
-	printHalf(stream, two, *two.current + NUM_RESOURCES - 1, true);
+	printHalf(stream, one, (*one.current + NUM_RESOURCES - 1) & NUM_RESOURCES - 1, true);
+	printHalf(stream, two, (*two.current + NUM_RESOURCES - 1) & NUM_RESOURCES - 1, true);
 	if (shipment) {
 		stream << "-- | --";
 	}
@@ -99,7 +99,7 @@ void HarvestTile::printHalf(std::ostream& stream, const HarvestTile& tile, int f
 	}
 }
 
-std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
+std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) { // TODO this likely has a bug
 	int index = *tile.current;
 	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
 		stream << *(*tile.resources)[index++];
