@@ -56,7 +56,7 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
 		ResourceToken* shipment) {
 	// Place shipment tile if it has been played.
 	if (shipment) {
-		for (auto& coordinate : coordinatesOf(from)) {
+		for (auto& coordinate : coordinatesOf(from, true)) {
 			graph->setTokenAt(new ResourceToken(*shipment), coordinate);
 		}
 	}
