@@ -68,9 +68,8 @@ public:
 	// building.
 	void drawFromPool(int);
 	// Resets this Game's resource markers to zero, replenishes its BuildingPool, and induces the
-	// current Player to draw a new HarvestTile provided they did not just play their shipment tile.
-	// Throws an exception if the current Player did not just play their shipment tile despite
-	// being indicated otherwise, or if this Game has not been setup.
+	// current Player to draw a new HarvestTile if specified.Throws an exception if the current
+	// Player cannot hold another HarvestTile in their Hand.
 	void endTurn(bool);
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
