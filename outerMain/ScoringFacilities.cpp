@@ -10,7 +10,7 @@ using std::map;
 
 GatherFacility::GatherFacility() {
 	count = new map<int, int>();
-	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
+	for (int i = 0; i < AbstractToken::NUM_TYPES; i++) {
 		(*count)[i] = 0;
 	}
 }
@@ -24,20 +24,11 @@ GatherFacility::~GatherFacility() {
 }
 
 int GatherFacility::countOf(int type) const {
-	return (*count)[validateType(type)];
+	return (*count)[AbstractToken::validateType(type)];
 }
 
 void GatherFacility::incrementBy(int type, int amount) {
-	(*count)[validateType(type)] += amount;
-}
-
-
-int GatherFacility::validateType(int type) const {
-	if (type < 0 || type > TokenGraph::NUM_TYPES - 1) { // TODO refactor this to somewhere else
-		throw std::runtime_error("Type must be between 0 and "
-			+ std::to_string(TokenGraph::NUM_TYPES - 1) + ".");
-	}
-	return type;
+	(*count)[AbstractToken::validateType(type)] += amount;
 }
 
 void GatherFacility::reset() {
