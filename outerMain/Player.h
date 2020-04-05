@@ -48,7 +48,7 @@ public:
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
     // available to this Player are insufficiet to cover the specified cost.
-    void resourceTracker(GatherFacility*, int, int); // TODO this belongs in GatherFacility
+    void resourceTracker(GatherFacility*, int, int);
     // Counts the villagers attracted to this Player's village.
     void calculateScore();
     // Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the
@@ -71,9 +71,8 @@ public:
     void displayBuildings() const;
     // Writes this Player's VGMap to the standard output stream.
     void displayVillage() const;
-
-    friend bool operator<(const Player&, const Player&);
-    friend bool operator==(const Player&, const Player&);
+    bool operator<(const Player&) const;
+    bool operator==(const Player&) const;
 
 private:
     
@@ -83,6 +82,6 @@ private:
     VGMap* village;
 
     int villagers() const;
-    int leftOvers() const; // TODO rename this
+    int buildingsLeft() const;
 
 };
