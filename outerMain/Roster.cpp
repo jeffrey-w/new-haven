@@ -2,6 +2,7 @@
 #include "util/Debug.h"
 
 using std::deque;
+using std::list;
 using std::map;
 
 Roster::Roster() {
@@ -34,19 +35,22 @@ long Roster::nextID() const {
 	return ids->front();
 }
 
-Player* Roster::winner() {
-	bool tied = false;
+list<long> Roster::winners() const {
 	Player* winner = nullptr;
+	list<long> winners;
+	// Get winner prototype
 	for (auto& entry : *players) {
 		if (!winner || winner < entry.second) {
 			winner = entry.second;
-			tied = false;
-		}
-		else if (winner == entry.second) {
-			tied = true;
 		}
 	}
-	return tied ? nullptr : winner;
+	// Add all Player IDs that match prototype to list
+	for (auto& entry : *players) {
+		if (entry.second == winner) {
+			winners.push_back(entry.first);
+		}
+	}
+	return winners;
 }
 
 void Roster::add(long id, Player* player) {
