@@ -31,7 +31,7 @@ bool Player::canPlay(GatherFacility* resources) const {
         for (int j = 0; j < VGMap::WIDTH; j++) {
             if (village->emptyAt({ i, j })) {
                 for (int k = 0; k < buildings->getSize(); k++) {
-                    for (int l = 0; l < TokenGraph::NUM_TYPES; l++) {
+                    for (int l = 0; l < AbstractToken::NUM_TYPES; l++) {
                         if (buildings->typeOf(k + 1) == l) {
                             if (VGMap::HEIGHT - i == resources->countOf(l)) {
                                 if (village->hasType(l)) {
