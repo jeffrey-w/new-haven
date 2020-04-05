@@ -40,6 +40,7 @@ list<long> Roster::winners() const {
 	list<long> winners;
 	// Get winner prototype
 	for (auto& entry : *players) {
+		entry.second->calculateScore();
 		if (!winner || winner < entry.second) {
 			winner = entry.second;
 		}
