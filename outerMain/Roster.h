@@ -25,6 +25,8 @@ public:
 	// Returns the ID of the Player at the front of this Roster.
 	long nextID() const;
 	// Returns a list of the winning Player(s) IDs.
+	// Returns the Player in this Roster with the highest score.
+	Player max() const;
 	std::list<long> winners() const;
 	// Adds the specified Player to this Roster with the specified id. Throws an exception if the
 	// specified id already belongs to another member of this Roster, or if the specified Player is
