@@ -91,8 +91,11 @@ bool Game::atCapacity() const {
 }
 
 void Game::setup() {
-	players->sort();
+	for (auto& square : board->corners()) {
+		board->setSquare(tiles->draw(), square);
+	}
 	pool->replenish(buildings);
+	players->sort();
 	players->deal(tiles, buildings);
 }
 
