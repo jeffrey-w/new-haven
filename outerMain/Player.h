@@ -77,10 +77,12 @@ public:
 
 private:
     
+    int* score;
     HarvestTileHand* tiles;
     BuildingHand* buildings;
     VGMap* village;
-    BuildFacility* score;
 
+    int villagers() const;
+    int leftOvers() const; // TODO rename this
 
 };
