@@ -1,5 +1,7 @@
 #pragma once
 
+#include <list>
+
 #include "maps/GBMap.h"
 #include "Player.h"
 #include "Roster.h"
@@ -29,6 +31,8 @@ public:
 	int exhausted() const;
 	// Returns true iff this Game's GBMap has only one unoccupied square.
 	int gameOver() const;
+	// Returns a list of the winning Player(s) IDs.
+	std::list<long> winners() const;
 	// Adds a new Player with the specified id to this Game's Roster. Throws an exception if this
 	// Game's Roster is already full.
 	void addPlayer(long);

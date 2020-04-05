@@ -54,6 +54,10 @@ int Game::gameOver() const {
 	return board->squaresLeft() == 1;
 }
 
+std::list<long> Game::winners() const {
+	return players->winners();
+}
+
 void Game::addPlayer(long id) {
 	if (atCapacity()) {
 		throw std::runtime_error("Too many players.");
