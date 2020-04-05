@@ -7,9 +7,9 @@
 void testGBMapLoader() {
 		std::cout << "Running GBMapLoader tests:" << std::endl;
 	try {
-		GBMapLoader valid("./res/gmap.txt");
-		GBMapLoader semantics("./res/gmap_bad.txt");
-		GBMapLoader syntax("./res/gmap_bad_syntax.txt");
+		GBMapLoader valid("../../res/gmap.txt");
+		GBMapLoader semantics("../../res/gmap_bad.txt");
+		GBMapLoader syntax("../../res/gmap_bad_syntax.txt");
 		GBMap* loaded = nullptr;
 		ASSERT_SUCCESS((loaded = valid.load()), "Successfully loaded valid GBMap.");
 		ASSERT_THROWS(std::exception, semantics.load(), "ERROR: loaded invalid GBMap.");
@@ -24,9 +24,9 @@ void testGBMapLoader() {
 void testVGMapLoader() {
 		std::cout << "Running VGMapLoader tests:" << std::endl;
 	try {
-		VGMapLoader valid("./res/vmap.txt");
-		VGMapLoader semantics("./res/vmap_bad.txt");
-		VGMapLoader syntax("./res/vmap_bad_syntax.txt");
+		VGMapLoader valid("../../res/vmap.txt");
+		VGMapLoader semantics("../../res/vmap_bad.txt");
+		VGMapLoader syntax("../../res/vmap_bad_syntax.txt");
 		VGMap* loaded = nullptr;
 		ASSERT_SUCCESS((loaded = valid.load()), "Successfully loaded valid VGMap.");
 		ASSERT_THROWS(std::exception, semantics.load(), "ERROR: loaded invalid VGMap.");
