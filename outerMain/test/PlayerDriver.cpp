@@ -56,7 +56,7 @@ void testResourceTracker() {
 	ASSERT_THROWS(std::invalid_argument, player->resourceTracker(nullptr, 0, 0),
 		"ERROR: recorded to the null GatherFacility.");
 	GatherFacility resources;
-	ASSERT_THROWS(std::runtime_error, player->resourceTracker(&resources, TokenGraph::NUM_TYPES, 1),
+	ASSERT_THROWS(std::runtime_error, player->resourceTracker(&resources, AbstractToken::NUM_TYPES, 1),
 		"ERROR: recorded to a non-existant resource.");
 	ASSERT_THROWS(std::runtime_error, player->resourceTracker(&resources, 0, 1),
 		"ERROR: made an invalid adjustment to resources.");
