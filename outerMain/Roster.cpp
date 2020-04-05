@@ -34,6 +34,21 @@ long Roster::nextID() const {
 	return ids->front();
 }
 
+Player* Roster::winner() {
+	bool tied = false;
+	Player* winner = nullptr;
+	for (auto& entry : *players) {
+		if (!winner || winner < entry.second) {
+			winner = entry.second;
+			tied = false;
+		}
+		else if (winner == entry.second) {
+			tied = true;
+		}
+	}
+	return tied ? nullptr : winner;
+}
+
 void Roster::add(long id, Player* player) {
 	if (id < 1) {
 		throw std::invalid_argument("ID must be positive.");
