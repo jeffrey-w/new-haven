@@ -41,6 +41,10 @@ public:
 	void calculateResources(std::pair<int, int>, GatherFacility*, ResourceToken* = nullptr);;
 	// Writes this GBMap to the standard output stream.
 	void display() const;
+	// Writes this GBMap to the standard output stream with four of the specified ResourceTypes
+	// occupying the specified square. Throws an exception if the specified type is invalid or if
+	// the specified square is not on this GBMap.
+	void display(int, std::pair<int, int>);
 
 	// Returns the number of connected nodes on the graph underlying the specified GBMap.
 	friend int numberOfSpaces(GBMap&);

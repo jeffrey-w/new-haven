@@ -98,6 +98,21 @@ void GBMap::display() const {
 	std::cout << *this;
 }
 
+void GBMap::display(int type, pair<int, int> square) {
+	int index = 0;
+	ResourceToken resource(static_cast<ResourceType>(AbstractToken::validateType(type)));
+	ResourceToken* temp[HarvestTile::NUM_RESOURCES];
+	for (auto& coordinate : coordinatesOf(square)) {
+		temp[index++] = static_cast<ResourceToken*>(graph->tokenAt(coordinate));
+		graph->setTokenAt(&resource, coordinate);
+	}
+	index = 0;
+	std::cout << *this;
+	for (auto& coordinate : coordinatesOf(square)) {
+		graph->setTokenAt(temp[index++], coordinate);
+	}
+}
+
 int GBMap::height() const {
 	switch (*numPlayers) {
 	case 2:
