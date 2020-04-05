@@ -76,6 +76,7 @@ void VGMap::calculateScore(BuildFacility* score) {
     if (!score) {
         throw std::invalid_argument("Cannot record score on the null build facility.");
     }
+    score->reset();
     score->incrementBy(countRows() + countCols());
 }
 
