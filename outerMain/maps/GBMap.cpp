@@ -15,7 +15,7 @@ GBMap::GBMap(int numPlayers) {
 }
 
 void GBMap::setNumPlayers(int numPlayers) {
-	if (!(numPlayers == 2 || numPlayers == 3 || numPlayers == 4)) {
+	if (numPlayers < PLAYERS_MIN || numPlayers > PLAYERS_MAX) {
 		throw std::invalid_argument("Number of players must be between 2 and 4.");
 	}
 	this->numPlayers = new int(numPlayers);
@@ -39,7 +39,10 @@ int GBMap::getNumPlayers() const {
 }
 
 int GBMap::squaresLeft() const {
-	return graph->emptyNodes() >> 2;
+	if (*numPlayers == PLAYERS_MAX) {
+		return (graph->emptyNodes() - (PLAYERS_MAX << PLAYERS_MIN)) >> PLAYERS_MIN;
+	}
+	return graph->emptyNodes() >> PLAYERS_MIN;
 }
 
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
