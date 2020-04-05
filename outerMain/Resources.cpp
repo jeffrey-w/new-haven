@@ -250,7 +250,7 @@ std::ostream& operator<<(std::ostream& stream, const BuildingPool& buildings) {
 }
 
 Deck<HarvestTile*>* harvestTileDeck() {
-	int numTypes = TokenGraph::NUM_TYPES;
+	int numTypes = AbstractToken::NUM_TYPES;
 	Deck<HarvestTile*>* tiles = new Deck<HarvestTile*>();
 	for (int i = 0; i < numTypes; i++) {
 		for (int j = 0; j < numTypes; j++) {
@@ -306,7 +306,7 @@ Deck<Building*>* buildingDeck() {
 	Deck<Building*>* buildings = new Deck<Building*>();
 	for (int i = 0; i < VGMap::HEIGHT; i++) {
 		for (int j = 0; j < VGMap::HEIGHT; j++) {
-			for (int k = 0; k < TokenGraph::NUM_TYPES; k++) {
+			for (int k = 0; k < AbstractToken::NUM_TYPES; k++) {
 				BuildingType type = static_cast<BuildingType>(k);
 				buildings->add(new Building(type, i + 1));
 			}
