@@ -35,6 +35,9 @@ long Roster::nextID() const {
 }
 
 void Roster::add(long id, Player* player) {
+	if (id < 1) {
+		throw std::invalid_argument("ID must be positive.");
+	}
 	if (players->count(id)) {
 		throw std::invalid_argument("ID already exists.");
 	}
