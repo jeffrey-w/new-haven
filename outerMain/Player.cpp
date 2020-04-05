@@ -56,6 +56,10 @@ bool Player::canPlay(GatherFacility* resources) {
     return false;
 }
 
+int Player::getScore() {
+    return score->getScore();
+}
+
 void Player::drawBuilding(Deck<Building*>* deck) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
@@ -104,7 +108,7 @@ void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
 }
 
 void Player::calculateScore() {
-    village->calculateScore(score); // TODO should only do this once
+    village->calculateScore(score);
 }
 
 void Player::rotateTile(int selection) {
