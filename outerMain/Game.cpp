@@ -154,6 +154,10 @@ void Game::displayBoard() const {
 	board->display();
 }
 
+void Game::displayBoard(int type, pair<int, int> square) const {
+	board->display(type, square);
+}
+
 void Game::displayTiles() const {
 	players->peek()->displayTiles();
 }
