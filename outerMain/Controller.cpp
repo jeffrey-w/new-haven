@@ -41,7 +41,6 @@ void Controller::inputIDs() {
 void Controller::run() {
 	int exhausted;
 	bool shipment;
-	game->setup();
 	while (!game->gameOver()) {
 		game->displayBoard();
 		game->displayTiles();
@@ -79,10 +78,12 @@ void Controller::run() {
 		}
 		game->endTurn(shipment);
 	}
-	std::cout << "And our winners are:\n";
+	std::cout << "And our winner(s) is:\n";
 	for (auto& id : game->winners()) {
 		std::cout << "Player " << id << std::endl;
 	}
+	std::cout << "with " << game->highscore() << " villagers, " << game->buildingsPlayed()
+		<< " buildings erected, and " << game->buidlingsLeft() << " buildings left.";
 }
 
 bool Controller::rotateSelection() {
