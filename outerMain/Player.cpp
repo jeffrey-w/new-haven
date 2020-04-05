@@ -107,10 +107,6 @@ void Player::calculateScore() {
     village->calculateScore(score); // TODO should only do this once
 }
 
-void Player::adjustScore() {
-    score->incrementBy(buildings->worth()); // TODO should only do this once
-}
-
 void Player::rotateTile(int selection) {
     tiles->rotate(selection);
 }

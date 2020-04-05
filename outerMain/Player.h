@@ -49,8 +49,6 @@ public:
     void resourceTracker(GatherFacility*, int, int); // TODO this belongs in GatherFacility
     // Counts the villagers attracted to this Player's village.
     void calculateScore();
-    // Adds the values of the Buildings in this Player's hand to their score.
-    void adjustScore();
     // Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the
     // specified slection is not consistent with this Player's hand.
     void rotateTile(int);
