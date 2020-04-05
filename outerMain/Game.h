@@ -33,12 +33,15 @@ public:
 	int gameOver() const;
 	// Returns a list of the winning Player(s) IDs.
 	std::list<long> winners() const;
+	// Returns the score of the winner of this Game.
+	int highscore() const;
+	// Returns the number of Buildings that the winner of this Game failed to play.
+	int buidlingsLeft() const;
+	// Returns the number of Buildings the the winner of this Game played.
+	int buildingsPlayed() const;
 	// Adds a new Player with the specified id to this Game's Roster. Throws an exception if this
 	// Game's Roster is already full.
 	void addPlayer(long);
-	// Deals HarvestTiles and Buildings to each Player in this Game's Roster, and intitializes this
-	// Game's BuildingPool.
-	void setup();
 	// Rotates the selected HarvestTile in the current Player's HarvestTileHand 90 degrees
 	// counterclockwise. Throws an exception if the specified selection is not consistent with the
 	// current Player's hand, or if this Game has not been setup.
@@ -98,6 +101,7 @@ private:
 	Roster* players;
 
 	bool atCapacity() const;
+	void setup();
 
 };
 

@@ -58,6 +58,18 @@ std::list<long> Game::winners() const {
 	return players->winners();
 }
 
+int Game::highscore() const {
+	return players->max().getScore();
+}
+
+int Game::buidlingsLeft() const {
+	return players->max().unbuilt();
+}
+
+int Game::buildingsPlayed() const {
+	return players->max().built();
+}
+
 void Game::addPlayer(long id) {
 	if (atCapacity()) {
 		throw std::runtime_error("Too many players.");
@@ -69,19 +81,19 @@ void Game::addPlayer(long id) {
 		delete player;
 		throw e;
 	}
-}
-
-void Game::setup() {
-	if (!atCapacity()) {
-		throw std::runtime_error("Too few players.");
+	if (atCapacity()) {
+		setup();
 	}
-	players->sort();
-	pool->replenish(buildings);
-	players->deal(tiles, buildings);
 }
 
 bool Game::atCapacity() const {
 	return players->getSize() == board->getNumPlayers();
+}
+
+void Game::setup() {
+	players->sort();
+	pool->replenish(buildings);
+	players->deal(tiles, buildings);
 }
 
 void Game::rotateTile(int selection) {
