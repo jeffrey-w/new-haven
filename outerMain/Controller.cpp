@@ -79,9 +79,10 @@ void Controller::run() {
 		}
 		game->endTurn(shipment);
 	}
-	// Check for end game state
-	// Calculate scores
-	// If tie...
+	std::cout << "And our winners are:\n";
+	for (auto& id : game->winners()) {
+		std::cout << "Player " << id << std::endl;
+	}
 }
 
 bool Controller::rotateSelection() {
