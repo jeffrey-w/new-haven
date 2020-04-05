@@ -41,10 +41,10 @@ public:
 	void calculateResources(std::pair<int, int>, GatherFacility*, ResourceToken* = nullptr);;
 	// Writes this GBMap to the standard output stream.
 	void display() const;
-	// Writes this GBMap to the standard output stream with four of the specified ResourceTypes
+	// Writes this GBMap to the standard output stream with four of the specified resource types
 	// occupying the specified square. Throws an exception if the specified type is invalid or if
 	// the specified square is not on this GBMap.
-	void display(int, std::pair<int, int>);
+	void display(int, std::pair<int, int>) const;
 
 	// Returns the number of connected nodes on the graph underlying the specified GBMap.
 	friend int numberOfSpaces(GBMap&);
@@ -60,8 +60,8 @@ private:
 	void setNumPlayers(int);
 	int height() const;
 	int width() const;
-	std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false);
-	void validateSquare(std::pair<int, int>);
-	bool isOnCorner(int, int);
+	std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false) const;
+	void validateSquare(std::pair<int, int>) const;
+	bool isOnCorner(int, int) const;
 
 };
