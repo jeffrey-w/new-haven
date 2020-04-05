@@ -160,15 +160,6 @@ int BuildingHand::validateSelection(int selection) const {
 	return --selection;
 }
 
-int BuildingHand::worth() const {
-	int worth = 0;
-	for (auto& building : *owned) {
-		worth += building->getValue();
-	}
-	return worth;
-}
-
-
 void BuildingHand::display() const {
 	std::cout << *this;
 }

@@ -193,8 +193,6 @@ public:
 	// Returns the type of the selected Building. Throws an exception if the specified selection
 	// does not exist.
 	int typeOf(int) const;
-	// Gives the aggregate value of all of the Buildings in this BuildingHand.
-	int worth() const;
 	// Writes this BuildingHand to the standard outoput stream.
 	void display() const;
 
