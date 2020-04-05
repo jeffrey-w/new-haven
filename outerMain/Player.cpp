@@ -33,7 +33,7 @@ Player::~Player(){
     delete village;
 }
 
-bool Player::canPlay(GatherFacility* resources) {
+bool Player::canPlay(GatherFacility* resources) const {
     for (int i = 0; i < VGMap::HEIGHT; i++) {
         for (int j = 0; j < VGMap::WIDTH; j++) {
             if (village->emptyAt({ i, j })) {
@@ -63,7 +63,15 @@ bool Player::canPlay(GatherFacility* resources) {
     return false;
 }
 
-int Player::getScore() {
+int Player::built() const {
+    return village->buildingCount();
+}
+
+int Player::unbuilt() const {
+    return buildings->getSize();
+}
+
+int Player::getScore() const {
     return *score;
 }
 
@@ -159,21 +167,13 @@ bool Player::operator<(const Player& other) const {
     if (*score != *other.score) {
         return *score < *other.score;
     }
-    if (villagers() != other.villagers()) {
-        return villagers() < other.villagers();
+    if (built() != other.built()) {
+        return built() < other.built();
     }
-    return other.buildingsLeft() < buildingsLeft();
+    return other.unbuilt() < unbuilt();
 }
 
 bool Player::operator==(const Player& other) const {
-    return *score == *other.score && villagers() == other.villagers()
-        && buildingsLeft() == other.buildingsLeft();
-}
-
-int Player::villagers() const {
-    return village->buildingCount();
-}
-
-int Player::buildingsLeft() const {
-    return buildings->getSize();
+    return *score == *other.score && built() == other.built()
+        && unbuilt() == other.unbuilt();
 }
