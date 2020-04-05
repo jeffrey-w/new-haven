@@ -47,7 +47,7 @@ list<long> Roster::winners() const {
 	}
 	// Add IDs of all Players that equal max
 	for (auto& entry : *players) {
-		if (*entry.second == *winner) {
+		if (Player::equals(winner, entry.second)) {
 			winners.push_back(entry.first);
 		}
 	}
