@@ -10,6 +10,7 @@
 class GBMap {
 
 	static constexpr int DIM_MIN = 10, DIM_MAX = 14;
+	static constexpr int PLAYERS_MIN = 2, PLAYERS_MAX = 4;
 
 public:
 
