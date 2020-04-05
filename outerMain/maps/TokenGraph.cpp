@@ -35,7 +35,7 @@ TokenGraph* TokenGraph::gridOf(int height, int width) {
 TokenGraph::TokenGraph() {
 	occupied = new int(0);
 	nodes = new map<pair<int, int>, Node*>();
-	types = new bitset<NUM_TYPES>();
+	types = new bitset<AbstractToken::NUM_TYPES>();
 }
 
 TokenGraph::~TokenGraph() {
