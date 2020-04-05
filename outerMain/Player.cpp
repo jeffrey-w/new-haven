@@ -20,6 +20,7 @@ Player::Player(const Player& other){
 }
 
 Player::~Player(){
+    delete score;
     delete tiles;
     delete buildings;
     delete village;
