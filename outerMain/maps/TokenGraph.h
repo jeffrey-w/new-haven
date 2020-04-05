@@ -11,8 +11,6 @@ class TokenGraph {
 
 public:
 
-	static constexpr int NUM_TYPES = 4;
-
 	// Static factory method: returns a TokenGraph configured as a grid of the specified height
 	// and width.
 	static TokenGraph* gridOf(int, int);
@@ -94,7 +92,7 @@ private:
 
 	int* occupied;
 	std::map<std::pair<int, int>, Node*>* nodes;
-	std::bitset<NUM_TYPES>* types;
+	std::bitset<AbstractToken::NUM_TYPES>* types;
 
 	Node* nodeAt(std::pair<int, int>) const;
 	std::pair<int, int> validateCoordinate(std::pair<int, int>) const;
