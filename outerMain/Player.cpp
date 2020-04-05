@@ -147,3 +147,11 @@ void Player::displayBuildings() const {
 void Player::displayVillage() const {
     std::cout << *village;
 }
+
+bool operator<(const Player& one, const Player& two) {
+    return one.score->getScore() < two.score->getScore();
+}
+
+bool operator==(const Player& one, const Player& two) {
+    return one.score->getScore() == two.score->getScore();
+}

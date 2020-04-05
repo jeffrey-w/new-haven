@@ -72,6 +72,9 @@ public:
     // Writes this Player's VGMap to the standard output stream.
     void displayVillage() const;
 
+    friend bool operator<(const Player&, const Player&);
+    friend bool operator==(const Player&, const Player&);
+
 private:
     
     HarvestTileHand* tiles;
