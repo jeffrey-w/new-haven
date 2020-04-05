@@ -2,31 +2,6 @@
 
 #include <map>
 
-// Records the number of colonists attracted to a Player's village.
-class BuildFacility {
-
-public:
-
-	// Constructs a new VillageBuildingScoringFacility object.
-	BuildFacility();
-	// Constructs a new VillageBuildingScoringFacility obeject with the same score as the specified
-	// VillageBuildingScoringFacility.
-	BuildFacility(const BuildFacility&);
-	// Destrorys this VillageBuildingScoringFacility
-	~BuildFacility();
-	// Returns the score recorded by this VillageBuildingScoreFacility.
-	int getScore() const;
-	// Increments the score recorded by this VillageBuildingScoreFacility by the specified amount.
-	void incrementBy(int);
-	// Resets this BuildFacility to zero.
-	void reset();
-
-private:
-
-	int* score;
-
-};
-
 // Records the number of resources available to Players.
 class GatherFacility {
 

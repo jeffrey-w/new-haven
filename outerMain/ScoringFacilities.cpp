@@ -8,30 +8,6 @@
 
 using std::map;
 
-BuildFacility::BuildFacility() {
-	score = new int(0);
-}
-
-BuildFacility::BuildFacility(const BuildFacility& other) {
-	score = new int(*other.score);
-}
-
-BuildFacility::~BuildFacility() {
-	delete score;
-}
-
-int BuildFacility::getScore() const {
-	return *score;
-}
-
-void BuildFacility::incrementBy(int amount) {
-	*score += amount;
-}
-
-void BuildFacility::reset() {
-	*score = 0;
-}
-
 GatherFacility::GatherFacility() {
 	count = new map<int, int>();
 	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
