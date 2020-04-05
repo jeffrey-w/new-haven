@@ -6,24 +6,23 @@ using std::pair;
 Player::Player() : Player(new HarvestTile()) {}
 
 Player::Player(HarvestTile* shipment) {
+    score = new int(0);
     tiles = new HarvestTileHand(shipment);
     buildings = new BuildingHand();
     village = new VGMap();
-    score = new BuildFacility();
 }
 
 Player::Player(const Player& other){
+    score = new int(*other.score);
     tiles = new HarvestTileHand(*other.tiles);
     buildings = new BuildingHand(*other.buildings);
     village = new VGMap(*other.village);
-    score = new BuildFacility(*other.score);
 }
 
 Player::~Player(){
     delete tiles;
     delete buildings;
     delete village;
-    delete score;
 }
 
 bool Player::canPlay(GatherFacility* resources) {
@@ -57,7 +56,7 @@ bool Player::canPlay(GatherFacility* resources) {
 }
 
 int Player::getScore() {
-    return score->getScore();
+    return *score;
 }
 
 void Player::drawBuilding(Deck<Building*>* deck) {
@@ -108,7 +107,7 @@ void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
 }
 
 void Player::calculateScore() {
-    village->calculateScore(score);
+    *score = village->calculateScore();
 }
 
 void Player::rotateTile(int selection) {
@@ -148,10 +147,25 @@ void Player::displayVillage() const {
     std::cout << *village;
 }
 
+int Player::villagers() const {
+    return village->buildingCount();
+}
+
+int Player::leftOvers() const {
+    return buildings->getSize();
+}
+
 bool operator<(const Player& one, const Player& two) {
-    return one.score->getScore() < two.score->getScore();
+    if (*one.score != *two.score) {
+        return *one.score < *two.score;
+    }
+    if (one.villagers() != two.villagers()) {
+        return one.villagers() < two.villagers();
+    }
+    return two.leftOvers() < one.leftOvers();
 }
 
 bool operator==(const Player& one, const Player& two) {
-    return one.score->getScore() == two.score->getScore();
+    return *one.score == *two.score && one.villagers() == two.villagers() 
+        && one.leftOvers() == two.leftOvers();
 }
