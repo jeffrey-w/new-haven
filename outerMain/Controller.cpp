@@ -118,7 +118,7 @@ bool Controller::placeSelection() {
 			}
 			try {
 				game->playShipment({ row, col }, type);
-				// TODO display fake board
+				game->displayBoard(type, { row, col });
 				shipment = true;
 				break;
 			} catch (const std::exception& e) {
