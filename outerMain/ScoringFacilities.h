@@ -50,6 +50,8 @@ public:
 	// Writes this GatherFacility to the statndard output stream.
 	void display() const;
 
+	friend std::ostream& operator<<(std::ostream&, const GatherFacility&);
+
 private:
 
 	// key: ResourceType value: amount

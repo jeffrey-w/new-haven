@@ -67,23 +67,27 @@ void GatherFacility::reset() {
 }
 
 void GatherFacility::display() const {
-	for (auto& entry : *count) {
+	std::cout << *this;
+}
+
+std::ostream& operator<<(std::ostream& stream, const GatherFacility& gather) {
+	for (auto& entry : *gather.count) {
 		int amount = entry.second;
 		switch (entry.first) {
 		case 0:
-			std::cout << "Sheep: ";
+			stream << "Sheep: ";
 			break;
 		case 1:
-			std::cout << "Stone: ";
+			stream << "Stone: ";
 			break;
 		case 2:
-			std::cout << "Timber: ";
+			stream << "Timber: ";
 			break;
 		case 3:
-			std::cout << "Wheat: ";
+			stream << "Wheat: ";
 			break;
 		}
-		std::cout << std::to_string(entry.second) + " ";
+		stream << std::to_string(entry.second) + " ";
 	}
-	std::cout << '\n';
+	return stream << '\n';
 }
