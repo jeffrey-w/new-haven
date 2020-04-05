@@ -38,16 +38,16 @@ long Roster::nextID() const {
 list<long> Roster::winners() const {
 	Player* winner = nullptr;
 	list<long> winners;
-	// Get winner prototype
+	// Get max Player
 	for (auto& entry : *players) {
 		entry.second->calculateScore();
-		if (!winner || winner < entry.second) {
+		if (!winner || *winner < *entry.second) {
 			winner = entry.second;
 		}
 	}
-	// Add all Player IDs that match prototype to list
+	// Add IDs of all Players that equal max
 	for (auto& entry : *players) {
-		if (entry.second == winner) {
+		if (*entry.second == *winner) {
 			winners.push_back(entry.first);
 		}
 	}
