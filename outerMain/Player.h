@@ -12,6 +12,10 @@ class Player {
 
 public:
 
+    // Returns true iff both Players have the same score, built the same number of Buildings, and
+    // have the same number of Buildings in their Hands.
+    static bool equals(Player*, Player*);
+
     // Constructs a new Player object.
     Player();
     // Constructs a new Player object with the specified shipment tile;
