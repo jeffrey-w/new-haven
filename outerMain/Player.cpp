@@ -3,13 +3,6 @@
 
 using std::pair;
 
-bool Player::equals(Player* one, Player* two) {
-    if (!one) {
-        return !two;
-    }
-    return two && *one == *two;
-}
-
 Player::Player() : Player(new HarvestTile()) {}
 
 Player::Player(HarvestTile* shipment) {
