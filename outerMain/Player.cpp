@@ -148,25 +148,25 @@ void Player::displayVillage() const {
     std::cout << *village;
 }
 
+bool Player::operator<(const Player& other) const {
+    if (*score != *other.score) {
+        return *score < *other.score;
+    }
+    if (villagers() != other.villagers()) {
+        return villagers() < other.villagers();
+    }
+    return other.buildingsLeft() < buildingsLeft();
+}
+
+bool Player::operator==(const Player& other) const {
+    return *score == *other.score && villagers() == other.villagers()
+        && buildingsLeft() == other.buildingsLeft();
+}
+
 int Player::villagers() const {
     return village->buildingCount();
 }
 
-int Player::leftOvers() const {
+int Player::buildingsLeft() const {
     return buildings->getSize();
-}
-
-bool operator<(const Player& one, const Player& two) {
-    if (*one.score != *two.score) {
-        return *one.score < *two.score;
-    }
-    if (one.villagers() != two.villagers()) {
-        return one.villagers() < two.villagers();
-    }
-    return two.leftOvers() < one.leftOvers();
-}
-
-bool operator==(const Player& one, const Player& two) {
-    return *one.score == *two.score && one.villagers() == two.villagers() 
-        && one.leftOvers() == two.leftOvers();
 }
