@@ -18,6 +18,8 @@ public:
 	int getScore() const;
 	// Increments the score recorded by this VillageBuildingScoreFacility by the specified amount.
 	void incrementBy(int);
+	// Resets this BuildFacility to zero.
+	void reset();
 
 private:
 

@@ -28,6 +28,10 @@ void BuildFacility::incrementBy(int amount) {
 	*score += amount;
 }
 
+void BuildFacility::reset() {
+	*score = 0;
+}
+
 GatherFacility::GatherFacility() {
 	count = new map<int, int>();
 	for (int i = 0; i < TokenGraph::NUM_TYPES; i++) {
