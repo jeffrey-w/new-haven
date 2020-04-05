@@ -29,6 +29,10 @@ bool VGMap::emptyAt(pair<int, int> circle) {
     return graph->emptyAt(circle);
 }
 
+int VGMap::buildingCount() const {
+    return HEIGHT * WIDTH - graph->emptyNodes();
+}
+
 bool VGMap::hasType(int type) const {
     return graph->hasType(type);
 }

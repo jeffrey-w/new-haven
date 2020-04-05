@@ -22,6 +22,8 @@ public:
 	// Returns true iff no Building occupies this VGMap at the specified circle. Throws an Exception
 	// if the specified circle does not reference a circle of this VGMap.
 	bool emptyAt(std::pair<int, int>);
+	// Returns the number of Buildings on this VGMap.
+	int buildingCount() const;
 	// Returns true iff this VGMap contains a Building of the specified type.
 	bool hasType(int) const;
 	// Returns true iff any of the circles of this VGMap that are adjacent to the one at the
