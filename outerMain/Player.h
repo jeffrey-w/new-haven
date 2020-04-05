@@ -23,6 +23,8 @@ public:
     // Returns true iff the this Player is able to build on their VGMap with the resources
     // available in the specified GatherFacility.
     bool canPlay(GatherFacility*);
+    // Returns this Player's score.
+    int getScore();
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is null or empty.
     void drawBuilding(Deck<Building*>*);
