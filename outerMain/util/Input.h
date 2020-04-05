@@ -4,16 +4,22 @@
 #include <sstream>
 #include <string>
 
+// A facility for getting user input.
 class Input {
 
 public:
 
+    // Constructs a new Input object.
     Input();
+    // Suppres copy constructor.
     Input(const Input&) = delete;
+    // Destroys this Input.
     ~Input();
+    // Returns true iff the previously polled input was cancelled.
     bool cancelled() const;
+    // Prompts the user for and collects their input to a yes or no question.
     bool decide(const std::string&, bool = true);
-
+    // Gets user input and interprets it as the specified type.
 	template <typename t>
 	t get(const std::string& prompt, const std::string& fail, bool canCancel = false) {
         t result = t();
