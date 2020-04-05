@@ -37,9 +37,8 @@ public:
 	// (3) the specified Building is not being placed adjacent to another of the same type, or
 	// (4) the specified Building is being played face up on a circle that is not the correct value.
 	void setCircle(Building*, std::pair<int, int>);
-	// Counts the villagers that have been attracted to this VGMap. Throws an exeption if the
-	// specified BuildFacility is null.
-	void calculateScore(BuildFacility*);
+	// Counts the villagers that have been attracted to this VGMap.
+	int calculateScore();
 	// Writes this VGMap to the standard output stream.
 	void display() const;
 
