@@ -27,20 +27,20 @@ Player::~Player(){
 }
 
 bool Player::canPlay(GatherFacility* resources) const {
+    int type;
     for (int i = 0; i < VGMap::HEIGHT; i++) {
         for (int j = 0; j < VGMap::WIDTH; j++) {
             if (village->emptyAt({ i, j })) {
                 for (int k = 0; k < buildings->getSize(); k++) {
-                    for (int l = 0; l < AbstractToken::NUM_TYPES; l++) {
-                        if (buildings->typeOf(k + 1) == l) {
-                            if (VGMap::HEIGHT - i <= resources->countOf(l)) {
-                                if (village->hasType(l)) {
-                                    return village->adjacentHolds({ i, j }, l);
-                                }
-                                else {
-                                    return true;
-                                }
+                    type = buildings->typeOf(k + 1);
+                    if (VGMap::HEIGHT - i <= resources->countOf(type)) {
+                        if (village->hasType(type)) {
+                            if (village->adjacentHolds({ i, j }, type)) {
+                                return true;
                             }
+                        }
+                        else {
+                            return true;
                         }
                     }
                 }
