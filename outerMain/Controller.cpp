@@ -55,6 +55,10 @@ void Controller::run() {
 		for (int i = 0; i < game->numPlayers(); i++) {
 			while (in->decide("Player " + std::to_string(game->nextID())
 				+ ", do you want to play a building?")) {
+				if (!game->canPlay()) {
+					std::cout << "You have no more valid moves.\n";
+					break;
+				}
 				if (!buildSelection()) {
 					break;
 				}
