@@ -14,28 +14,25 @@ bool Input::cancelled() const {
 	return cancelled;
 }
 
-bool Input::decide(const std::string& prompt, bool predicate) {
-    if (predicate) {
-        bool decision, undecided = true;
-        do {
-            std::cout << prompt << " Y/n: ";
-            switch (std::cin.get()) {
-            case 'Y':
-            case 'y':
-                decision = true;
-                undecided = false;
-                break;
-            case 'N':
-            case 'n':
-                decision = false;
-                undecided = false;
-                break;
-            default:
-                std::cerr << "Did not understand. Try again.\n";
-            }
-            std::cin.ignore();
-        } while (undecided);
-        return decision;
-    }
-    return false;
+bool Input::decide(const std::string& prompt) {
+    bool decision, undecided = true;
+    do {
+        std::cout << prompt << " Y/n: ";
+        switch (std::cin.get()) {
+        case 'Y':
+        case 'y':
+            decision = true;
+            undecided = false;
+            break;
+        case 'N':
+        case 'n':
+            decision = false;
+            undecided = false;
+            break;
+        default:
+            std::cout << "Did not understand. Try again.\n";
+        }
+        std::cin.ignore();
+    } while (undecided);
+    return decision;
 }
