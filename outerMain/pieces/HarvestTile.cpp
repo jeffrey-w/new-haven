@@ -99,18 +99,9 @@ void HarvestTile::printHalf(std::ostream& stream, const HarvestTile& tile, int f
 	}
 }
 
-std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) { // TODO this likely has a bug
-	int index = *tile.current;
-	for (int i = 0; i < HarvestTile::NUM_RESOURCES; i++) {
-		stream << *(*tile.resources)[index++];
-		index &= HarvestTile::NUM_RESOURCES - 1;
-		// i is odd
-		if (i & 1) {
-			stream << '\n';
-		}
-		else {
-			stream << " | ";
-		}
-	}
+std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
+	HarvestTile::printHalf(stream, tile, *tile.current);
+	HarvestTile::printHalf(stream, tile, (*tile.current + HarvestTile::NUM_RESOURCES - 1)
+		& HarvestTile::NUM_RESOURCES - 1, true);
 	return std::cout << '\n';
 }
