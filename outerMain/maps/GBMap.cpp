@@ -101,7 +101,7 @@ void GBMap::display() const {
 void GBMap::display(int type, pair<int, int> square) const {
 	int index = 0;
 	ResourceToken resource(static_cast<ResourceType>(AbstractToken::validateType(type)));
-	ResourceToken* temp[HarvestTile::NUM_RESOURCES];
+	ResourceToken* temp[HarvestTile::NUM_RESOURCES] = {};
 	for (auto& coordinate : coordinatesOf(square)) {
 		temp[index++] = static_cast<ResourceToken*>(graph->tokenAt(coordinate));
 		graph->setTokenAt(&resource, coordinate);
