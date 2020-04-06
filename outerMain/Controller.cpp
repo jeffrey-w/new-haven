@@ -44,6 +44,7 @@ void Controller::run() {
 	while (!game->gameOver()) {
 		game->displayBoard();
 		game->displayTiles();
+		game->displayVillage();
 		while (in->decide("Player " + std::to_string(game->nextID())
 			+ ", do you want to rotate any of your tiles?")) {
 			if (!rotateSelection()) {
@@ -53,7 +54,7 @@ void Controller::run() {
 		shipment = placeSelection();
 		for (int i = 0; i < game->numPlayers(); i++) {
 			while (in->decide("Player " + std::to_string(game->nextID())
-				+ ", do you want to play a building?", game->canPlay())) {
+				+ ", do you want to play a building?")) {
 				if (!buildSelection()) {
 					break;
 				}
