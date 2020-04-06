@@ -31,7 +31,7 @@ bool Input::decide(const std::string& prompt, bool predicate) {
                 undecided = false;
                 break;
             default:
-                std::cout << "Did not understand. Try again.\n";
+                std::cerr << "Did not understand. Try again.\n";
             }
             std::cin.ignore();
         } while (undecided);

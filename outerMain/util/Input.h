@@ -39,7 +39,7 @@ public:
                 }
             }
             if ((std::stringstream(input) >> result).fail()) {
-                std::cout << fail << " try again.\n";
+                std::cerr << fail << " try again.\n";
             }
             else {
                 break;
