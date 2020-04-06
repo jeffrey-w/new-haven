@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
         c.initGame();
         c.inputIDs();
         c.run();
-        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-        return 0;
     }
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    return 0;
 }
