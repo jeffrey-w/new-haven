@@ -88,9 +88,12 @@ bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) const {
 }
 
 void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
-	nodeAt(coordinate)->token = token;
-	if (token) {
+	Node* n = nodeAt(coordinate);
+	if (!n->token && token) {
 		(*occupied)++;
+	}
+	n->token = token;
+	if (token) {
 		(*types)[token->getType()] = true;
 	}
 }
@@ -99,6 +102,7 @@ void TokenGraph::removeTokenAt(pair<int, int> coordinate) {
 	Node* n = nodeAt(coordinate);
 	delete n->token;
 	n->token = nullptr;
+	(*occupied)--;
 }
 
 int TokenGraph::search(pair<int, int> coordinate) {
