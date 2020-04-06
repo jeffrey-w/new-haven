@@ -42,14 +42,8 @@ bool Player::canPlay(GatherFacility* resources) const {
                                 }
                             }
                         }
-                        else {
-                            continue;
-                        }
                     }
                 }
-            }
-            else {
-                continue;
             }
         }
     }
