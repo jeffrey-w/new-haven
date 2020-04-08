@@ -121,10 +121,16 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 }
 
 void Game::playBuilding(int selection, pair<int, int> coordinate) {
+	int type, cost = VGMap::HEIGHT - coordinate.first;
 	Player* current = players->peek();
-	current->resourceTracker(resources, current->buildingType(selection),
-		VGMap::HEIGHT - coordinate.first);
-	current->buildVillage(selection, coordinate);
+	type = current->buildingType(selection);
+	current->resourceTracker(resources, type, cost);
+	try {
+		current->buildVillage(selection, coordinate);
+	} catch (const std::exception& e) {
+		resources->incrementBy(type, cost);
+		throw e;
+	}
 }
 
 void Game::yield() {
