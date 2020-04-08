@@ -28,6 +28,7 @@ private:
 	Game* game;
 	Input* in;
 
+	void displayPossessions() const;
 	bool rotateSelection();
 	bool placeSelection();
 	bool buildSelection();
