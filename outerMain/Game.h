@@ -27,7 +27,8 @@ public:
 	// Returns true iff the current Player is able to build on their VGMap with the resources
 	// available.
 	bool canPlay() const;
-	// Returns the number of ResourceTypes that were completely spent during a turn of this Game.
+	// Returns the number of resource types that were completely spent during the previous turn of
+	// this Game.
 	int exhausted() const;
 	// Returns true iff this Game's GBMap has only one unoccupied square.
 	int gameOver() const;
@@ -76,7 +77,7 @@ public:
 	void drawFromPool(int);
 	// Resets this Game's resource markers to zero, replenishes its BuildingPool, and induces the
 	// current Player to draw a new HarvestTile if specified.Throws an exception if the current
-	// Player cannot hold another HarvestTile in their Hand.
+	// Player draws another HarvestTile but cannot hold it in their Hand.
 	void endTurn(bool);
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
