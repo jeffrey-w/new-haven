@@ -1,9 +1,9 @@
 #pragma once
 
-#include <iostream>
 #include <stdexcept>
 #include <vector>
 
+#include "observer/Observable.h"
 #include "pieces/AbstractPiece.h"
 #include "pieces/Building.h"
 #include "pieces/HarvestTile.h"
@@ -128,7 +128,7 @@ Deck<HarvestTile*>* harvestTileDeck();
 Deck<Building*>* buildingDeck();
 
 // The collection of HarvestTiles owned by a Player.
-class HarvestTileHand {
+class HarvestTileHand : public Observable {
 
 public:
 
@@ -174,7 +174,7 @@ private:
 };
 
 // The collection of Buildings owned by a Player.
-class BuildingHand {
+class BuildingHand : public Observable {
 	
 public:
 	// Constructs a new BuildingHand object.
@@ -207,7 +207,7 @@ private:
 };
 
 // A common collection of Buildings.
-class BuildingPool {
+class BuildingPool : public Observable {
 
 	static constexpr int POOL_SIZE = 5;
 
