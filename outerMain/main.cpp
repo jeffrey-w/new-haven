@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
         }
         else {
             std::cerr << "Usage: outerMain <-t>\n";
-            std::cerr << "t: use this flag to run tests.";
+            std::cerr << "t: run tests.";
             return 1;
         }
     }
