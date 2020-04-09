@@ -1,4 +1,4 @@
-#include "../Resources.h"
+#include "../components/Resources.h"
 #include "../players/Player.h"
 #include "../util/Assert.h"
 #include "../util/Debug.h"
