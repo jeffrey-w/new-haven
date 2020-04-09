@@ -137,9 +137,9 @@
     <ClCompile Include="players\Player.cpp" />
     <ClCompile Include="util\Random.cpp" />
     <ClCompile Include="pieces\ResourceToken.cpp" />
-    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="components\Resources.cpp" />
     <ClCompile Include="util\Scanner.cpp" />
-    <ClCompile Include="ScoringFacilities.cpp" />
+    <ClCompile Include="components\ScoringFacilities.cpp" />
     <ClCompile Include="maps\TokenGraph.cpp" />
     <ClCompile Include="maps\VGMap.cpp" />
     <ClCompile Include="loaders\VGMapLoader.cpp" />
@@ -171,9 +171,9 @@
     <ClInclude Include="util\Debug.h" />
     <ClInclude Include="util\Random.h" />
     <ClInclude Include="pieces\ResourceToken.h" />
-    <ClInclude Include="Resources.h" />
+    <ClInclude Include="components\Resources.h" />
     <ClInclude Include="util\Scanner.h" />
-    <ClInclude Include="ScoringFacilities.h" />
+    <ClInclude Include="components\ScoringFacilities.h" />
     <ClInclude Include="maps\TokenGraph.h" />
     <ClInclude Include="maps\VGMap.h" />
     <ClInclude Include="loaders\VGMapLoader.h" />

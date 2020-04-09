@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Resources.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoringFacilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,14 +93,14 @@
     <ClCompile Include="players\Roster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="components\Resources.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="components\ScoringFacilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Resources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoringFacilities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pieces\AbstractPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -195,6 +189,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="players\Roster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="components\ScoringFacilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
