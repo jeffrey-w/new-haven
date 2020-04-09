@@ -1,11 +1,11 @@
 #pragma once
 
+#include "../components/Resources.h"
+#include "../components/ScoringFacilities.h"
 #include "../maps/GBMap.h"
 #include "../maps/VGMap.h"
 #include "../pieces/Building.h"
 #include "../pieces/HarvestTile.h"
-#include "../Resources.h"
-#include "../ScoringFacilities.h"
 
 // The players of New Haven.
 class Player {

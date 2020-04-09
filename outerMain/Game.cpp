@@ -1,7 +1,7 @@
 #include <string>
 
+#include "components/Resources.h"
 #include "Game.h"
-#include "Resources.h"
 #include "util/Debug.h"
 
 using std::pair;

@@ -2,10 +2,10 @@
 
 #include <ostream>
 
-#include "TokenGraph.h"
+#include "../components/ScoringFacilities.h"
 #include "../observer/Observable.h"
 #include "../pieces/Building.h"
-#include "../ScoringFacilities.h"
+#include "TokenGraph.h"
 
 // The Board on which Players build their village.
 class VGMap : public Observable {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "../Resources.h"
+#include "../components/Resources.h"
 #include "../util/Debug.h"
 #include "ResourcesDriver.h"
 

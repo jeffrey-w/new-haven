@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
+#include "../components/ScoringFacilities.h"
 #include "../observer/Observable.h"
 #include "../pieces/HarvestTile.h"
-#include "../ScoringFacilities.h"
 #include "TokenGraph.h"
 
 // The common board onto which HarvestTiles are placed.
