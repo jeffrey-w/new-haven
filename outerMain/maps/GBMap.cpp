@@ -7,6 +7,10 @@
 using std::pair;
 using std::vector;
 
+// Statically initialize error messages that are frequently encountered and/or expensive to create.
+std::string GBMap::INVALID_NUM_PLAYERS = "Number of players must be between "
+	+ std::to_string(PLAYERS_MIN) + " and " + std::to_string(PLAYERS_MAX) + ".";
+
 GBMap::GBMap() : GBMap(Game::DEFAULT_NUM_PLAYERS) {}
 
 GBMap::GBMap(int numPlayers) {
@@ -16,7 +20,7 @@ GBMap::GBMap(int numPlayers) {
 
 void GBMap::setNumPlayers(int numPlayers) {
 	if (numPlayers < PLAYERS_MIN || numPlayers > PLAYERS_MAX) {
-		throw std::invalid_argument("Number of players must be between 2 and 4.");
+		throw std::invalid_argument(INVALID_NUM_PLAYERS);
 	}
 	this->numPlayers = new int(numPlayers);
 }
