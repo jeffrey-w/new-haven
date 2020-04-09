@@ -1,5 +1,5 @@
 #include "../Resources.h"
-#include "../Player.h"
+#include "../players/Player.h"
 #include "../util/Assert.h"
 #include "../util/Debug.h"
 #include "PlayerDriver.h"

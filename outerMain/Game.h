@@ -3,8 +3,8 @@
 #include <list>
 
 #include "maps/GBMap.h"
-#include "Player.h"
-#include "Roster.h"
+#include "players/Player.h"
+#include "players/Roster.h"
 
 // A game of New Haven.
 class Game {
