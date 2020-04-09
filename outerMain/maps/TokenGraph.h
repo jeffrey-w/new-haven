@@ -1,6 +1,5 @@
 #pragma once
 
-#include <bitset>
 #include <map>
 #include <set>
 
@@ -90,9 +89,8 @@ private:
 
 	};
 
-	int* occupied;
+	int* types;
 	std::map<std::pair<int, int>, Node*>* nodes;
-	std::bitset<AbstractToken::NUM_TYPES>* types;
 
 	Node* nodeAt(std::pair<int, int>) const;
 	std::pair<int, int> validateCoordinate(std::pair<int, int>) const;
