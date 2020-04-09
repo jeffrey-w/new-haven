@@ -117,6 +117,8 @@
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="observer\Event.cpp" />
+    <ClCompile Include="observer\Observable.cpp" />
     <ClCompile Include="util\Input.cpp" />
     <ClCompile Include="Roster.cpp" />
     <ClCompile Include="test\ResourcesDriver.cpp" />
@@ -145,6 +147,9 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="observer\Event.h" />
+    <ClInclude Include="observer\Observable.h" />
+    <ClInclude Include="observer\Observer.h" />
     <ClInclude Include="util\Input.h" />
     <ClInclude Include="Roster.h" />
     <ClInclude Include="test\Drivers.h" />
