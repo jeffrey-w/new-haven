@@ -6,9 +6,7 @@
 
 using std::vector;
 
-HarvestTile::HarvestTile() {
-	current = new int(0);
-	resources = new vector<ResourceToken*>();
+HarvestTile::HarvestTile() : HarvestTile(0) {
 	for (int i = 0; i < NUM_RESOURCES; i++) {
 		// Default constructor returns a random ResourceToken.
 		resources->push_back(new ResourceToken());
@@ -32,7 +30,7 @@ HarvestTile::HarvestTile(const HarvestTile& other) {
 }
 
 HarvestTile::HarvestTile(int orientation) {
-	if (orientation < 0 || orientation >= NUM_RESOURCES) {
+	if (orientation < 0 || orientation > NUM_RESOURCES - 1) {
 		throw std::invalid_argument("Tile must have an orientation between 0 and 3.");
 	}
 	current = new int(orientation);
