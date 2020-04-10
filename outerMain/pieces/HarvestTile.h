@@ -12,6 +12,8 @@ class HarvestTile : public AbstractPiece {
 
 	friend class GBMapLoader;
 
+	static std::string INVALID_ORIENTATION;
+
 public:
 
 	// The number of resources that a HarvestTile holds.
