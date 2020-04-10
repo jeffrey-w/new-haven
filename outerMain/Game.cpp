@@ -5,7 +5,6 @@
 #include "util/Debug.h"
 
 using std::pair;
-using ResourceType = ResourceToken::ResourceType;
 
 
 Game::Game() : Game(DEFAULT_NUM_PLAYERS) {}
