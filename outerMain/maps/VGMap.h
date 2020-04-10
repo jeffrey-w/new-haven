@@ -47,7 +47,7 @@ public:
 
 private:
 
-    TokenGraph* graph;
+	TokenGraph* graph;
 
 	static bool valuesMatch(const Building*, int);
 

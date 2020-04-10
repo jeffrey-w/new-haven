@@ -25,7 +25,7 @@ int Building::getType() const {
 }
 
 bool Building::isFaceUp() const {
-    return token->isFaceUp();
+	return token->isFaceUp();
 }
 
 int Building::getValue() const {

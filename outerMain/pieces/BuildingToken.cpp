@@ -48,7 +48,7 @@ void BuildingToken::flip() {
 }
 
 bool BuildingToken::isFaceUp() const {
-    return *faceUp;
+	return *faceUp;
 }
 
 int BuildingToken::getType() const {
@@ -56,7 +56,7 @@ int BuildingToken::getType() const {
 }
 
 int BuildingToken::getValue() const {
-    return *value;
+	return *value;
 }
 
 void BuildingToken::display() const {
@@ -64,19 +64,19 @@ void BuildingToken::display() const {
 }
 
 std::ostream& operator<<(std::ostream& stream, const BuildingToken& token) {
-    switch (*token.type) {
-        case BuildingType::FOREST:
+	switch (*token.type) {
+		case BuildingType::FOREST:
 			stream << "F";
-            break;
-        case BuildingType::MEADOW:
-            stream << "M";
-            break;
-        case BuildingType::QUARRY:
+			break;
+		case BuildingType::MEADOW:
+			stream << "M";
+			break;
+		case BuildingType::QUARRY:
 			stream << "Q";
-            break;
-        case BuildingType::WHEATFIELD:
-            stream << "W";
-            break;
-    }
+			break;
+		case BuildingType::WHEATFIELD:
+			stream << "W";
+			break;
+	}
 	return stream << *token.value;
 }

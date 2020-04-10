@@ -40,9 +40,9 @@ TokenGraph::TokenGraph() {
 }
 
 TokenGraph::~TokenGraph() {
-    for (auto& node : *nodes){
-        delete node.second;
-    }
+	for (auto& node : *nodes){
+		delete node.second;
+	}
 	delete[] types;
 	delete nodes;
 }
@@ -138,7 +138,7 @@ int TokenGraph::search(Node* s) {
 	int count = 1;
 	setupSearchAttributes(s->token);
 	*s->color = Node::GRAY;
- 	queue<Node*> q = queue<Node*>();
+	queue<Node*> q = queue<Node*>();
 	q.push(s);
 	while (!q.empty()) {
 		Node* u = q.front();

@@ -12,7 +12,7 @@ public:
 	enum class BuildingType {
 		MEADOW,
 		QUARRY,
-        FOREST,
+		FOREST,
 		WHEATFIELD
 	};
 	
@@ -42,7 +42,7 @@ private:
 
 	BuildingType* type;
 	int* value;
-    bool* faceUp;
+	bool* faceUp;
 
 	static BuildingType randomType();
 	static int randomValue();
