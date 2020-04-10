@@ -6,7 +6,6 @@
 #include "Resources.h"
 
 using std::vector;
-using ResourceType = ResourceToken::ResourceType;
 
 HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}
 
