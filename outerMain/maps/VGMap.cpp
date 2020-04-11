@@ -44,7 +44,6 @@ bool VGMap::adjacentHolds(pair<int, int> circle, int type) const {
 void VGMap::setCircle(Building* building, pair<int, int> circle) {
 	validatePlacement(building, circle);
 	graph->setTokenAt(building->tokenize(), circle);
-	notify();
 	delete building;
 }
 
