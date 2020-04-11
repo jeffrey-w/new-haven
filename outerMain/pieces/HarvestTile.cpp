@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 #include "../util/Debug.h"
 #include "HarvestTile.h"
