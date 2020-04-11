@@ -99,15 +99,18 @@ void Game::setup() {
 }
 
 void Game::rotateTile(int selection) {
+	ensureSetup();
 	players->peek()->rotateTile(selection);
 }
 
 void Game::playTile(int selection, pair<int, int> square) {
+	ensureSetup();
 	players->peek()->placeTile(selection, board, square);
 	board->calculateResources(square, resources);
 }
 
 void Game::playShipment(pair<int, int> coordinate, int type) {
+	ensureSetup();
 	ResourceToken token(static_cast<ResourceType>(AbstractToken::validateType(type)));
 	HarvestTile* shipment = players->peek()->reap();
 	try {
@@ -120,6 +123,7 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 }
 
 void Game::playBuilding(int selection, pair<int, int> coordinate) {
+	ensureSetup();
 	int type, cost = VGMap::HEIGHT - coordinate.first;
 	Player* current = players->peek();
 	type = current->buildingType(selection);
@@ -133,18 +137,22 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) {
 }
 
 void Game::yield() {
+	ensureSetup();
 	players->next();
 }
 
 void Game::drawFromDeck() {
+	ensureSetup();
 	players->peek()->drawBuilding(buildings);
 }
 
 void Game::drawFromPool(int selection) {
+	ensureSetup();
 	players->peek()->drawBuilding(pool, selection);
 }
 
 void Game::endTurn(bool shipped) {
+	ensureSetup();
 	resources->reset();
 	pool->replenish(buildings);
 	if (!shipped) {
@@ -152,6 +160,12 @@ void Game::endTurn(bool shipped) {
 	}
 	else {
 		players->next();
+	}
+}
+
+void Game::ensureSetup() {
+	if (!atCapacity()) {
+		throw std::runtime_error("Game is not ready.");
 	}
 }
 
