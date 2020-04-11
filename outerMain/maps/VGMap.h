@@ -3,7 +3,7 @@
 #include <ostream>
 
 #include "../components/ScoringFacilities.h"
-#include "../observer/Observable.h"
+#include "../observers/Observable.h"
 #include "../pieces/Building.h"
 #include "TokenGraph.h"
 

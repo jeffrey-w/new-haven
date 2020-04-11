@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "../components/ScoringFacilities.h"
-#include "../observer/Observable.h"
+#include "../observers/Observable.h"
 #include "../pieces/HarvestTile.h"
 #include "TokenGraph.h"
 

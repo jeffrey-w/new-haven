@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include "../observer/Observable.h"
+#include "../observers/Observable.h"
 #include "../pieces/AbstractPiece.h"
 #include "../pieces/Building.h"
 #include "../pieces/HarvestTile.h"
