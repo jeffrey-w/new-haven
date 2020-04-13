@@ -64,7 +64,7 @@ private:
 	int height() const;
 	int width() const;
 	std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false) const;
-	void validateSquare(std::pair<int, int>) const;
+	std::pair<int, int> validateSquare(std::pair<int, int>) const;
 	bool isOnCorner(int, int) const;
 
 };
