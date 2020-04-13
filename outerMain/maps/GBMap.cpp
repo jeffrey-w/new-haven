@@ -7,7 +7,7 @@
 using std::pair;
 using std::vector;
 
-// Statically initialize error messages that are frequently encountered and/or expensive to create.
+// Statically initialize objects that are frequently used and/or expensive to create.
 std::string GBMap::INVALID_NUM_PLAYERS = "Number of players must be between "
 	+ std::to_string(PLAYERS_MIN) + " and " + std::to_string(PLAYERS_MAX) + ".";
 
@@ -105,9 +105,9 @@ void GBMap::display() const {
 void GBMap::display(int type, pair<int, int> square) const {
 	int index = 0;
 	ResourceToken resource(static_cast<ResourceType>(AbstractToken::validateType(type)));
-	ResourceToken* temp[HarvestTile::NUM_RESOURCES] = {};
+	AbstractToken* temp[HarvestTile::NUM_RESOURCES] = {};
 	for (auto& coordinate : coordinatesOf(square)) {
-		temp[index++] = static_cast<ResourceToken*>(graph->tokenAt(coordinate));
+		temp[index++] = graph->tokenAt(coordinate);
 		graph->setTokenAt(&resource, coordinate);
 	}
 	index = 0;
@@ -197,7 +197,7 @@ int numberOfSpaces(GBMap& map) {
 	for (auto& entry : tokens) {
 		map.graph->setTokenAt(entry.second, entry.first);
 	}
-	return nodes >> 2;
+	return nodes >> GBMap::PLAYERS_MIN;
 }
 
 std::ostream& operator<<(std::ostream& stream, const GBMap& map) {
