@@ -75,7 +75,7 @@ public:
 	// this Game's Deck is empty, or if this Game has not started.
 	void drawFromDeck();
 	// Induces the current Player to select a Building from this Game's BuildingPool. Throws an
-	// exception if the specified selection is out of range, or if it specifies a non-existant
+	// exception if the specified selection is out of range, if it specifies a non-existant
 	// building, or if this Game has not started.
 	void drawFromPool(int);
 	// Resets this Game's resource markers to zero, replenishes its BuildingPool, and induces the
