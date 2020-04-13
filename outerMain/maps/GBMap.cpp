@@ -54,10 +54,12 @@ std::vector<std::pair<int, int>> GBMap::corners() const {
 }
 
 int GBMap::squaresLeft() const {
+	int squares = graph->emptyNodes();
+	// Don't count corner squares.
 	if (*numPlayers == PLAYERS_MAX) {
-		return (graph->emptyNodes() - (PLAYERS_MAX << PLAYERS_MIN)) >> PLAYERS_MIN;
+		squares -= PLAYERS_MAX << PLAYERS_MIN;
 	}
-	return graph->emptyNodes() >> PLAYERS_MIN;
+	return squares >> PLAYERS_MIN;
 }
 
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
@@ -142,8 +144,7 @@ int GBMap::width() const {
 }
 
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) const {
-	validateSquare(square);
-	vector<pair<int, int>> coordinates = expand(square);
+	vector<pair<int, int>> coordinates = expand(validateSquare(square));
 	if (ensureEmpty) {
 		for (auto& coordinate : coordinates) {
 			if (graph->tokenAt(coordinate)) {
@@ -163,7 +164,7 @@ vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
 	return coordinates;
 }
 
-void GBMap::validateSquare(pair<int, int> square) const {
+pair<int, int> GBMap::validateSquare(pair<int, int> square) const {
 	int row = square.first, col = square.second;
 	switch (*numPlayers) {
 	case 4:
@@ -179,6 +180,7 @@ void GBMap::validateSquare(pair<int, int> square) const {
 	default:
 		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
 	}
+	return square;
 }
 
 bool GBMap::isOnCorner(int row, int col) const {
