@@ -11,6 +11,7 @@ Game::Game() : Game(DEFAULT_NUM_PLAYERS) {}
 
 Game::Game(int numPlayers) {
 	board = new GBMap(numPlayers);
+	shipment = nullptr;
 	resources = new GatherFacility();
 	tiles = harvestTileDeck();
 	buildings = buildingDeck();
@@ -20,6 +21,7 @@ Game::Game(int numPlayers) {
 
 Game::~Game() {
 	delete board;
+	delete shipment;
 	delete resources;
 	delete tiles;
 	delete buildings;
@@ -112,12 +114,12 @@ void Game::playTile(int selection, pair<int, int> square) {
 void Game::playShipment(pair<int, int> coordinate, int type) {
 	ensureSetup();
 	ResourceToken token(static_cast<ResourceType>(AbstractToken::validateType(type)));
-	HarvestTile* shipment = players->peek()->reap();
+	HarvestTile* tile = players->peek()->reap();
 	try {
 		board->calculateResources(coordinate, resources, &token);
-		board->setSquare(shipment, coordinate);
+		shipment = new Shipment{ tile, coordinate };
 	} catch (const std::exception& e) {
-		players->peek()->store(shipment);
+		players->peek()->store(tile);
 		throw e;
 	}
 }
@@ -151,12 +153,15 @@ void Game::drawFromPool(int selection) {
 	players->peek()->drawBuilding(pool, selection);
 }
 
-void Game::endTurn(bool shipped) {
+void Game::endTurn() {
 	ensureSetup();
 	resources->reset();
 	pool->replenish(buildings);
-	if (!shipped) {
+	if (shipment) {
+		board->setSquare(shipment->payload, shipment->coordinate);
 		players->next()->drawTile(tiles);
+		delete shipment;
+		shipment = nullptr;
 	}
 	else {
 		players->next();
