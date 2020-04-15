@@ -6,6 +6,8 @@
 
 class RosterView {
 
+public:
+
 	RosterView();
 	RosterView(const RosterView&) = delete;
 	~RosterView();
