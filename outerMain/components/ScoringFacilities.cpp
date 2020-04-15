@@ -37,6 +37,7 @@ void GatherFacility::reset() {
 	for (auto& entry : *count) {
 		entry.second = 0;
 	}
+	notify();
 }
 
 void GatherFacility::display() const {
