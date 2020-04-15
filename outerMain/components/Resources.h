@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdexcept>
+#include <string>
 #include <vector>
 
 #include "../observers/Observable.h"
@@ -159,7 +160,9 @@ public:
 	// Writes this HarvestTileHand to the standard outoput stream.
 	void display() const;
 
-	friend std::ostream& operator<<(std::ostream&, const HarvestTileHand&);
+protected:
+
+	std::string* toString() const override;
 
 private:
 
@@ -196,7 +199,9 @@ public:
 	// Writes this BuildingHand to the standard outoput stream.
 	void display() const;
 
-	friend std::ostream& operator<<(std::ostream&, const BuildingHand&);
+protected:
+
+	std::string* toString() const override;
 
 private:
 	
@@ -228,7 +233,9 @@ public:
 	// Writes this BuildingPool to the standard output stream.
 	void display() const;
 
-	friend std::ostream& operator<<(std::ostream&, const BuildingPool&);
+protected:
+
+	std::string* toString() const override;
 
 private:
 
