@@ -1,5 +1,3 @@
-#include <string>
-
 #include "components/Resources.h"
 #include "Game.h"
 #include "util/Debug.h"
@@ -172,32 +170,4 @@ void Game::ensureSetup() {
 	if (!atCapacity()) {
 		throw std::runtime_error("Game is not ready.");
 	}
-}
-
-void Game::displayBoard() const {
-	board->display();
-}
-
-void Game::displayBoard(int type, pair<int, int> square) const {
-	board->display(type, square);
-}
-
-void Game::displayTiles() const {
-	players->peek()->displayTiles();
-}
-
-void Game::displayVillage() const {
-	players->peek()->displayVillage();
-}
-
-void Game::displayResources() const {
-	resources->display();
-}
-
-void Game::displayBuildings() const {
-	players->peek()->displayBuildings();
-}
-
-void Game::displayPool() const {
-	pool->display();
 }

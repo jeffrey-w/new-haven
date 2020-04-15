@@ -82,25 +82,6 @@ public:
 	// current Player to draw a new HarvestTile if they did not just player their shipment tile.
 	// Throws an exception if this Game has not started.
 	void endTurn();
-	// Writes this Game's GBMap to the standard output stream.
-	void displayBoard() const;
-	// Writes this Game's GBMap to the standard output stream with four of the specified resource
-	// types occupying the specified square. Throws an exception if the specified type is invalid
-	// or if the specified square is not on this Games's GBMap.
-	void displayBoard(int, std::pair<int, int>) const;
-	// Writes the current Player's HarvestTileHand to the standard output stream. Throws an
-	// exception if this Game has not Players.
-	void displayTiles() const;
-	// Writes the current Player's VGMap to the standard output stream. Throws an exception if this
-	// Game has no Players.
-	void displayVillage() const;
-	// Writes this Game's resource markers to the standard output stream.
-	void displayResources() const;
-	// Writes the current Player's BuildingHand to the standard output stream. Throws an exception
-	// if this Game has no Players.
-	void displayBuildings() const;
-	// Writes this Game's BuildingPool to the standard output stream.
-	void displayPool() const;
 
 private:
 	
