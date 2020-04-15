@@ -7,6 +7,7 @@
 #include "ScoringFacilities.h"
 
 using std::map;
+using std::string;
 
 GatherFacility::GatherFacility() {
 	count = new map<int, int>();
@@ -29,6 +30,7 @@ int GatherFacility::countOf(int type) const {
 
 void GatherFacility::incrementBy(int type, int amount) {
 	(*count)[AbstractToken::validateType(type)] += amount;
+	notify();
 }
 
 void GatherFacility::reset() {
@@ -41,8 +43,9 @@ void GatherFacility::display() const {
 	std::cout << *this;
 }
 
-std::ostream& operator<<(std::ostream& stream, const GatherFacility& gather) {
-	for (auto& entry : *gather.count) {
+string* GatherFacility::toString() const {
+	std::ostringstream stream;
+	for (auto& entry : *count) {
 		int amount = entry.second;
 		switch (entry.first) {
 		case 0:
@@ -60,5 +63,6 @@ std::ostream& operator<<(std::ostream& stream, const GatherFacility& gather) {
 		}
 		stream << std::to_string(entry.second) + " ";
 	}
-	return stream << '\n';
+	stream << '\n';
+	return new string(stream.str());
 }
