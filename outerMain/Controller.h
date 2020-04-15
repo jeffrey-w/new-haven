@@ -30,7 +30,7 @@ private:
 
 	void displayPossessions() const;
 	bool rotateSelection();
-	bool placeSelection();
+	void placeSelection();
 	bool buildSelection();
 	bool selectBuilding(bool = true);
 
