@@ -1,5 +1,5 @@
-#include <iostream>
 #include <queue>
+#include <sstream>
 
 #include "../util/Debug.h"
 #include "VGMap.h"
@@ -130,10 +130,6 @@ int VGMap::countCols() {
 		}
 	}
 	return score;
-}
-
-void VGMap::display() const {
-	std::cout << *this;
 }
 
 string* VGMap::toString() const {

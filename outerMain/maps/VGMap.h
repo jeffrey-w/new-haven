@@ -1,6 +1,5 @@
 #pragma once
 
-#include <ostream>
 #include <string>
 
 #include "../components/ScoringFacilities.h"
@@ -41,8 +40,6 @@ public:
 	void setCircle(Building*, std::pair<int, int>);
 	// Counts the villagers that have been attracted to this VGMap.
 	int calculateScore();
-	// Writes this VGMap to the standard output stream.
-	void display() const;
 
 protected:
 
