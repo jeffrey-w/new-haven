@@ -124,12 +124,6 @@
     <ClCompile Include="views\PlayerView.cpp" />
     <ClCompile Include="util\Input.cpp" />
     <ClCompile Include="players\Roster.cpp" />
-    <ClCompile Include="test\ResourcesDriver.cpp" />
-    <ClCompile Include="test\GBMapDriver.cpp" />
-    <ClCompile Include="test\MapLoaderDriver.cpp" />
-    <ClCompile Include="test\PlayerDriver.cpp" />
-    <ClCompile Include="test\ScoringFacilitiesDriver.cpp" />
-    <ClCompile Include="test\VGMapDriver.cpp" />
     <ClCompile Include="pieces\AbstractToken.cpp" />
     <ClCompile Include="pieces\Building.cpp" />
     <ClCompile Include="pieces\BuildingToken.cpp" />
@@ -158,13 +152,6 @@
     <ClInclude Include="views\PlayerView.h" />
     <ClInclude Include="util\Input.h" />
     <ClInclude Include="players\Roster.h" />
-    <ClInclude Include="test\Drivers.h" />
-    <ClInclude Include="test\ResourcesDriver.h" />
-    <ClInclude Include="test\GBMapDriver.h" />
-    <ClInclude Include="test\MapLoaderDriver.h" />
-    <ClInclude Include="test\PlayerDriver.h" />
-    <ClInclude Include="test\ScoringFacilitiesDriver.h" />
-    <ClInclude Include="test\VGMapDriver.h" />
     <ClInclude Include="pieces\AbstractToken.h" />
     <ClInclude Include="pieces\Building.h" />
     <ClInclude Include="pieces\BuildingToken.h" />
