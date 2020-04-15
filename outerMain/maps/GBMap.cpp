@@ -1,4 +1,4 @@
-#include <iostream>
+#include <sstream>
 
 #include "../Game.h"
 #include "../util/Debug.h"
@@ -103,25 +103,6 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
 	graph->cleanupSearch();
 }
 
-void GBMap::display() const {
-	std::cout << *this;
-}
-
-void GBMap::display(int type, pair<int, int> square) const {
-	int index = 0;
-	ResourceToken resource(static_cast<ResourceType>(AbstractToken::validateType(type)));
-	AbstractToken* temp[HarvestTile::NUM_RESOURCES] = {};
-	for (auto& coordinate : coordinatesOf(square)) {
-		temp[index++] = graph->tokenAt(coordinate);
-		graph->setTokenAt(&resource, coordinate);
-	}
-	index = 0;
-	std::cout << *this;
-	for (auto& coordinate : coordinatesOf(square)) {
-		graph->setTokenAt(temp[index++], coordinate);
-	}
-}
-
 int GBMap::height() const {
 	switch (*numPlayers) {
 	case 2:
@@ -223,19 +204,4 @@ string* GBMap::toString() const {
 		stream << "\n\n\n";
 	}
 	return new string(stream.str());
-}
-
-int numberOfSpaces(GBMap& map) {
-	int nodes;
-	auto tokens = map.graph->tokens();
-	// Clear map so that all nodes will be counted.
-	for (auto& entry : tokens) {
-		map.graph->setTokenAt(nullptr, entry.first);
-	}
-	nodes = map.graph->search((*tokens.begin()).first);
-	// Put map back into its original state.
-	for (auto& entry : tokens) {
-		map.graph->setTokenAt(entry.second, entry.first);
-	}
-	return nodes >> GBMap::PLAYERS_MIN;
 }
