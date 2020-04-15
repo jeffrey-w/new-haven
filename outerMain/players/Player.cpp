@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Player.h"
 #include "../util/Debug.h"
 
@@ -138,18 +136,6 @@ HarvestTile* Player::reap() {
 
 void Player::store(HarvestTile* tile) {
 	tiles->receive(tile);
-}
-
-void Player::displayTiles() const {
-	std::cout << *tiles;
-}
-
-void Player::displayBuildings() const {
-	std::cout << *buildings;
-}
-
-void Player::displayVillage() const {
-	std::cout << *village;
 }
 
 bool Player::operator<(const Player& other) const {
