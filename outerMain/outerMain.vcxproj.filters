@@ -102,6 +102,12 @@
     <ClCompile Include="views\View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="views\RosterView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\GameView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pieces\AbstractPiece.h">
@@ -201,6 +207,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="views\View.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="views\RosterView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="views\GameView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
