@@ -40,7 +40,6 @@ void Controller::inputIDs() {
 
 void Controller::run() {
 	int exhausted;
-	bool shipment;
 	while (!game->gameOver()) {
 		displayPossessions();
 		// Prompt player to rotate tiles.
@@ -51,7 +50,7 @@ void Controller::run() {
 			}
 		}
 		// Play selected tile.
-		shipment = placeSelection();
+		placeSelection();
 		// Play buildings and share resources with other players.
 		for (int i = 0; i < game->numPlayers(); i++) {
 			while (in->decide("Player " + std::to_string(game->nextID())
@@ -83,7 +82,7 @@ void Controller::run() {
 			}
 		}
 		// Housekeeping before next turn.
-		game->endTurn(shipment);
+		game->endTurn();
 	}
 	// Determine and display winner(s).
 	std::cout << "And our winner(s) is:\n";
@@ -118,9 +117,8 @@ bool Controller::rotateSelection() {
 	} while (true);
 }
 
-bool Controller::placeSelection() {
+void Controller::placeSelection() {
 	int selection, row, col;
-	bool shipment = false;
 	do {
 		selection = in->get<int>("Select a tile", "Invalid selection.");
 		row = in->get<int>("Select a row", "Invalid row.");
@@ -134,10 +132,8 @@ bool Controller::placeSelection() {
 			try {
 				game->playShipment({ row, col }, type);
 				game->displayBoard(type, { row, col });
-				shipment = true;
 				break;
 			} catch (const std::exception& e) {
-				shipment = false;
 				std::cerr << e.what() << " Try again.\n";
 			}
 		}
@@ -151,7 +147,6 @@ bool Controller::placeSelection() {
 			}
 		}
 	} while (true);
-	return shipment;
 }
 
 bool Controller::buildSelection() {
