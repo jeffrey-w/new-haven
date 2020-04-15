@@ -6,8 +6,9 @@
 using std::string;
 
 View::View(Observable* o) {
-	rep = Observable::toString(*o);
+	rep = nullptr;
 	o->attach(this);
+	o->notify();
 }
 
 View::~View() {
