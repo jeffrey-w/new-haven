@@ -27,8 +27,6 @@ public:
 	void incrementBy(int, int);
 	// Resets the tallies for each resource type recorded on this GatherFacility to zero.
 	void reset();
-	// Writes this GatherFacility to the statndard output stream.
-	void display() const;
 
 protected:
 

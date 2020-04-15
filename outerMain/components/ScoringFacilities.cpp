@@ -1,4 +1,4 @@
-#include <iostream>
+#include <sstream>
 #include <string>
 
 #include "../maps/VGMap.h"
@@ -38,10 +38,6 @@ void GatherFacility::reset() {
 		entry.second = 0;
 	}
 	notify();
-}
-
-void GatherFacility::display() const {
-	std::cout << *this;
 }
 
 string* GatherFacility::toString() const {
