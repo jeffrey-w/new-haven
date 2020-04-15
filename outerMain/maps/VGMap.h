@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ostream>
+#include <string>
 
 #include "../components/ScoringFacilities.h"
 #include "../observers/Observable.h"
@@ -43,7 +44,9 @@ public:
 	// Writes this VGMap to the standard output stream.
 	void display() const;
 
-	friend std::ostream& operator<<(std::ostream&, const VGMap&);
+protected:
+
+	std::string* toString() const override;
 
 private:
 

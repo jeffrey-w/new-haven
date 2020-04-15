@@ -5,6 +5,7 @@
 #include "GBMap.h"
 
 using std::pair;
+using std::string;
 using std::vector;
 
 // Statically initialize objects that are frequently used and/or expensive to create.
@@ -70,6 +71,7 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
 	delete tile;
+	notify();
 }
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
@@ -79,6 +81,7 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
 		for (auto& coordinate : coordinatesOf(from, true)) {
 			graph->setTokenAt(new ResourceToken(*shipment), coordinate);
 		}
+		notify();
 	}
 	// Perform search for conntected resources starting from the four coordinates in from.
 	for (auto& coordinate : coordinatesOf(from)) {
@@ -187,6 +190,41 @@ bool GBMap::isOnCorner(int row, int col) const {
 	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
 }
 
+string* GBMap::toString() const {
+	int coordinate = 0;
+	std::ostringstream stream;
+	stream << '\t';
+	for (int i = 0; i < width(); i++) {
+		if (i & 1) {
+			stream << '\t';
+		}
+		else {
+			stream << coordinate++ << '\t';
+		}
+	}
+	coordinate = 0;
+	stream << "\n\n\n";
+	for (int i = 0; i < height(); i++) {
+		if (i & 1) {
+			stream << '\t';
+		}
+		else {
+			stream << coordinate++ << '\t';
+		}
+		for (int j = 0; j < width(); j++) {
+			ResourceToken* resource = static_cast<ResourceToken*>(graph->tokenAt({ i, j }));
+			if (resource) {
+				stream << *resource << '\t';
+			}
+			else {
+				stream << "-\t";
+			}
+		}
+		stream << "\n\n\n";
+	}
+	return new string(stream.str());
+}
+
 int numberOfSpaces(GBMap& map) {
 	int nodes;
 	auto tokens = map.graph->tokens();
@@ -200,38 +238,4 @@ int numberOfSpaces(GBMap& map) {
 		map.graph->setTokenAt(entry.second, entry.first);
 	}
 	return nodes >> GBMap::PLAYERS_MIN;
-}
-
-std::ostream& operator<<(std::ostream& stream, const GBMap& map) {
-	int coordinate = 0;
-	stream << '\t';
-	for (int i = 0; i < map.width(); i++) {
-		if (i & 1) {
-			stream << '\t';
-		}
-		else {
-			stream << coordinate++ << '\t';
-		}
-	}
-	coordinate = 0;
-	stream << "\n\n\n";
-	for (int i = 0; i < map.height(); i++) {
-		if (i & 1) {
-			stream << '\t';
-		}
-		else {
-			stream << coordinate++ << '\t';
-		}
-		for (int j = 0; j < map.width(); j++) {
-			ResourceToken* resource = static_cast<ResourceToken*>(map.graph->tokenAt({ i, j }));
-			if (resource) {
-				stream << *resource << '\t';
-			}
-			else {
-				stream << "-\t";
-			}
-		}
-		stream << "\n\n\n";
-	}
-	return stream;
 }

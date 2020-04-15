@@ -51,7 +51,10 @@ public:
 
 	// Returns the number of connected nodes on the graph underlying the specified GBMap.
 	friend int numberOfSpaces(GBMap&);
-	friend std::ostream& operator<<(std::ostream&, const GBMap&);
+
+protected:
+
+	std::string* toString() const override;
 
 private:
 

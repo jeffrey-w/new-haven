@@ -8,6 +8,7 @@ using std::array;
 using std::map;
 using std::pair;
 using std::queue;
+using std::string;
 
 VGMap::VGMap() {
 	graph = TokenGraph::gridOf(HEIGHT, WIDTH);
@@ -45,6 +46,7 @@ void VGMap::setCircle(Building* building, pair<int, int> circle) {
 	validatePlacement(building, circle);
 	graph->setTokenAt(building->tokenize(), circle);
 	delete building;
+	notify();
 }
 
 void VGMap::validatePlacement(const Building* building, pair<int, int> circle) {
@@ -84,12 +86,12 @@ int VGMap::countRows() {
 	int row, col, multiplier, score = 0;
 	BuildingToken* building;
 	for (row = 0; row < HEIGHT; row++) {
-		multiplier = 2;
+		multiplier = 1;
 		for (col = 0; col < WIDTH; col++) {
 			building = static_cast<BuildingToken*>(graph->tokenAt({ row, col }));
 			if (building) {
 				if (!building->isFaceUp()) {
-					multiplier = 1;
+					multiplier = 0;
 				}
 			}
 			else {
@@ -97,7 +99,7 @@ int VGMap::countRows() {
 			}
 		}
 		if (col == WIDTH) {
-			score += (WIDTH - row) * multiplier;
+			score += (WIDTH - row) << multiplier;
 		}
 	}
 	return score;
@@ -107,12 +109,12 @@ int VGMap::countCols() {
 	int row, col, multiplier, score = 0;
 	BuildingToken* building;
 	for (col = 0; col < WIDTH; col++) {
-		multiplier = 2;
+		multiplier = 1;
 		for (row = 0; row < HEIGHT; row++) {
 			building = static_cast<BuildingToken*>(graph->tokenAt({ row, col }));
 			if (building) {
 				if (!building->isFaceUp()) {
-					multiplier = 1;
+					multiplier = 0;
 				}
 			}
 			else {
@@ -124,7 +126,7 @@ int VGMap::countCols() {
 			 * Column scores are as follow:
 			 * 0:5 | 1:4 | 2:3 | 3:4 | 4:5
 			 */
-			score += (HEIGHT - col + (col > 2 ? 2 * (col - 2) : 0)) * multiplier;
+			score += (HEIGHT - col + (col > 2 ? 2 * (col - 2) : 0)) << multiplier;
 		}
 	}
 	return score;
@@ -134,25 +136,25 @@ void VGMap::display() const {
 	std::cout << *this;
 }
 
-std::ostream& operator<<(std::ostream& stream, const VGMap& map) {
+string* VGMap::toString() const {
+	std::ostringstream stream;
 	stream << '\t';
-	for (int i = 0; i < VGMap::WIDTH; i++) {
+	for (int i = 0; i < WIDTH; i++) {
 		stream << i << '\t';
 	}
 	stream << "\n\n\n";
-	for (int i = 0; i < VGMap::HEIGHT; i++) {
+	for (int i = 0; i < HEIGHT; i++) {
 		stream << i << '\t';
-		for (int j = 0; j < VGMap::WIDTH; j++) {
-			BuildingToken* building = static_cast<BuildingToken*>(map.graph->tokenAt({ i, j }));
+		for (int j = 0; j < WIDTH; j++) {
+			BuildingToken* building = static_cast<BuildingToken*>(graph->tokenAt({ i, j }));
 			if (building) {
-				building->display();
-				stream << '\t';
+				stream << *building << '\t';
 			}
 			else {
-				stream << VGMap::HEIGHT - i << "\t";
+				stream << HEIGHT - i << "\t";
 			}
 		}
 		stream << "\n\n\n";
 	}
-	return stream;
+	return new string(stream.str());
 }
