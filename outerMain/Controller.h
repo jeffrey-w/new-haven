@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "util/Input.h"
+#include "views/GameView.h"
 
 // Maps user input to model input, and updates view.
 class Controller {
@@ -26,9 +27,9 @@ public:
 private:
 
 	Game* game;
+	GameView* view;
 	Input* in;
 
-	void displayPossessions() const;
 	bool rotateSelection();
 	void placeSelection();
 	bool buildSelection();
