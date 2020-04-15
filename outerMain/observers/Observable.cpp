@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "Observable.h"
 
 using std::set;
