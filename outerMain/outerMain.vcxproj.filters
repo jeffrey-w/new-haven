@@ -93,10 +93,13 @@
     <ClCompile Include="components\ScoringFacilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="observers\Event.cpp">
+    <ClCompile Include="observers\Observable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="observers\Observable.cpp">
+    <ClCompile Include="views\PlayerView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="views\View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -188,13 +191,16 @@
     <ClInclude Include="components\ScoringFacilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="observers\Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="observers\Observable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="observers\Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="views\PlayerView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="views\View.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
