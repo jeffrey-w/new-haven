@@ -10,17 +10,16 @@ class Observable {
 
 public:
 
-	template <class T>
-	static std::string* toString(T& obj) {
-		std::stringstream stream;
-		stream << obj;
-		return new std::string(stream.str());
-	}
-
 	Observable();
 	~Observable();
 	void attach(Observer*);
 	void notify();
+
+	friend std::ostream& operator<<(std::ostream&, const Observable&);
+
+protected:
+
+	virtual std::string* toString() const = 0;
 
 private:
 
