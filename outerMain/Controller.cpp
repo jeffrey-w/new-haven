@@ -2,11 +2,13 @@
 
 Controller::Controller() {
 	game = nullptr;
+	view = new GameView();
 	in = new Input();
 }
 
 Controller::~Controller() {
 	delete game;
+	delete view;
 	delete in;
 }
 
@@ -41,7 +43,10 @@ void Controller::inputIDs() {
 void Controller::run() {
 	int exhausted;
 	while (!game->gameOver()) {
-		displayPossessions();
+		view->showBoard();
+		view->showTiles();
+		view->showVillage();
+		view->showBuildings();
 		// Prompt player to rotate tiles.
 		while (in->decide("Player " + std::to_string(game->nextID())
 			+ ", do you want to rotate any of your tiles?")) {
@@ -93,13 +98,6 @@ void Controller::run() {
 		<< " buildings erected, and " << game->buidlingsLeft() << " buildings left.";
 }
 
-void Controller::displayPossessions() const {
-	game->displayBoard();
-	game->displayTiles();
-	game->displayVillage();
-	game->displayBuildings();
-}
-
 bool Controller::rotateSelection() {
 	int selection;
 	do {
@@ -109,7 +107,7 @@ bool Controller::rotateSelection() {
 		}
 		try {
 			game->rotateTile(selection);
-			game->displayTiles();
+			view->showTiles();
 			return true;
 		} catch (const std::exception& e) {
 			std::cerr << e.what() << " Try again.\n";
@@ -131,7 +129,6 @@ void Controller::placeSelection() {
 			}
 			try {
 				game->playShipment({ row, col }, type);
-				game->displayBoard(type, { row, col });
 				break;
 			} catch (const std::exception& e) {
 				std::cerr << e.what() << " Try again.\n";
@@ -140,20 +137,20 @@ void Controller::placeSelection() {
 		else {
 			try {
 				game->playTile(selection, { row, col });
-				game->displayBoard();
 				break;
 			} catch (const std::exception& e) {
 				std::cerr << e.what() << " Try again.\n";
 			}
 		}
 	} while (true);
+	view->showBoard();
 }
 
 bool Controller::buildSelection() {
 	int selection = 0, row, col;
-	game->displayVillage();
-	game->displayResources();
-	game->displayBuildings();
+	view->showVillage();
+	view->showResources();
+	view->showBuildings();
 	do {
 		selection = in->get<int>("Select a building", "Ivalid selection.", true);
 		if (in->cancelled()) {
@@ -166,14 +163,14 @@ bool Controller::buildSelection() {
 			return true;
 		} catch (const std::exception& e) {
 			std::cerr << e.what() << " Try again.\n";
-			game->displayBuildings();
+			view->showBuildings();
 		}
 	} while (true);
 }
 
 bool Controller::selectBuilding(bool canCancel) {
 	int selection = 0;
-	game->displayPool();
+	view->showPool();
 	do {
 		selection = in->get<int>("Select a building", "Invalid selection.", canCancel);
 		if (in->cancelled()) {
