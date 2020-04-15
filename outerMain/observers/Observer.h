@@ -1,13 +1,12 @@
 #pragma once
 
-// Forward Declaration.
-class Event;
+#include <string>
 
 class Observer {
 
 public:
 
 	virtual ~Observer() = default;
-	virtual void update(Event) = 0;
+	virtual void update(std::string*) = 0;
 
 };
