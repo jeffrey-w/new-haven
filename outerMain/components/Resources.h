@@ -157,8 +157,6 @@ public:
 	// Adds the specified HarvestTile to this Hand as its shipment tile. Throws an exception if
 	// this Hand already has a shipment tile.
 	void receive(HarvestTile*);
-	// Writes this HarvestTileHand to the standard outoput stream.
-	void display() const;
 
 protected:
 
@@ -196,8 +194,6 @@ public:
 	// Returns the type of the selected Building. Throws an exception if the specified selection
 	// does not exist.
 	int typeOf(int) const;
-	// Writes this BuildingHand to the standard outoput stream.
-	void display() const;
 
 protected:
 
@@ -230,8 +226,6 @@ public:
 	void replenish(Deck<Building*>*);
 	// Removes the selected Building from this BuildingPool.
 	Building* remove(int);
-	// Writes this BuildingPool to the standard output stream.
-	void display() const;
 
 protected:
 

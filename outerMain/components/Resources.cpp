@@ -1,4 +1,4 @@
-#include <iostream>
+#include <sstream>
 
 #include "../maps/TokenGraph.h"
 #include "../maps/VGMap.h"
@@ -107,10 +107,6 @@ void HarvestTileHand::receive(HarvestTile* tile) {
 	notify();
 }
 
-void HarvestTileHand::display() const {
-	std::cout << *this;
-}
-
 string* HarvestTileHand::toString() const {
 	std::ostringstream stream;
 	stream << "1\t\t2\t\t";
@@ -165,10 +161,6 @@ int BuildingHand::validateSelection(int selection) const {
 		throw std::out_of_range("Selection not in range.");
 	}
 	return --selection;
-}
-
-void BuildingHand::display() const {
-	std::cout << *this;
 }
 
 string* BuildingHand::toString() const {
@@ -237,10 +229,6 @@ Building* BuildingPool::remove(int selection) {
 	(*pool)[selection] = nullptr;
 	notify();
 	return result;
-}
-
-void BuildingPool::display() const {
-	std::cout << *this;
 }
 
 string* BuildingPool::toString() const {
