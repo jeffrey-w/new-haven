@@ -1,7 +1,7 @@
-#include "Event.h"
 #include "Observable.h"
 
 using std::set;
+using std::string;
 
 Observable::Observable() {
 	observers = new set<Observer*>();
@@ -22,6 +22,6 @@ void Observable::attach(Observer* observer) {
 
 void Observable::notify() {
 	for (auto& observer : *observers) {
-		observer->update(Event(this));
+		observer->update(toString(*this));
 	}
 }
