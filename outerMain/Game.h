@@ -79,10 +79,9 @@ public:
 	// building, or if this Game has not started.
 	void drawFromPool(int);
 	// Resets this Game's resource markers to zero, replenishes its BuildingPool, and induces the
-	// current Player to draw a new HarvestTile if specified.Throws an exception if the current
-	// Player draws another HarvestTile but cannot hold it in their Hand, or if this Game has not
-	// started.
-	void endTurn(bool);
+	// current Player to draw a new HarvestTile if they did not just player their shipment tile.
+	// Throws an exception if this Game has not started.
+	void endTurn();
 	// Writes this Game's GBMap to the standard output stream.
 	void displayBoard() const;
 	// Writes this Game's GBMap to the standard output stream with four of the specified resource
@@ -104,8 +103,15 @@ public:
 	void displayPool() const;
 
 private:
+	
+	struct Shipment {
+
+		HarvestTile* payload;
+		std::pair<int, int> coordinate;
+	};
 
 	GBMap* board;
+	Shipment* shipment;
 	GatherFacility* resources;
 	Deck<HarvestTile*>* tiles;
 	Deck<Building*>* buildings;
