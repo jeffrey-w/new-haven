@@ -7,21 +7,18 @@ using std::pair;
 Player::Player() : Player(new HarvestTile()) {}
 
 Player::Player(HarvestTile* shipment) {
-	score = new int(0);
 	tiles = new HarvestTileHand(shipment);
 	buildings = new BuildingHand();
 	village = new VGMap();
 }
 
 Player::Player(const Player& other){
-	score = new int(*other.score);
 	tiles = new HarvestTileHand(*other.tiles);
 	buildings = new BuildingHand(*other.buildings);
 	village = new VGMap(*other.village);
 }
 
 Player::~Player(){
-	delete score;
 	delete tiles;
 	delete buildings;
 	delete village;
@@ -49,18 +46,6 @@ bool Player::canPlay(GatherFacility* resources) const {
 		}
 	}
 	return false;
-}
-
-int Player::built() const {
-	return village->buildingCount();
-}
-
-int Player::unbuilt() const {
-	return buildings->getSize();
-}
-
-int Player::getScore() const {
-	return *score;
 }
 
 void Player::drawBuilding(Deck<Building*>* deck) {
@@ -110,8 +95,8 @@ void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
 	resources->incrementBy(type, -cost);
 }
 
-void Player::calculateScore() {
-	*score = village->calculateScore();
+void Player::calculateScore(ScoreBoard* score, long id) {
+	score->update(id, village->calculateScore(), village->buildingCount(), buildings->getSize());
 }
 
 void Player::rotateTile(int selection) {
@@ -137,21 +122,6 @@ HarvestTile* Player::reap() {
 
 void Player::store(HarvestTile* tile) {
 	tiles->receive(tile);
-}
-
-bool Player::operator<(const Player& other) const {
-	if (*score != *other.score) {
-		return *score < *other.score;
-	}
-	if (built() != other.built()) {
-		return built() < other.built();
-	}
-	return other.unbuilt() < unbuilt();
-}
-
-bool Player::operator==(const Player& other) const {
-	return *score == *other.score && built() == other.built()
-		&& unbuilt() == other.unbuilt();
 }
 
 PlayerView* playerView(Player* player) {

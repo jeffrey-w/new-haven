@@ -6,6 +6,7 @@
 #include "../maps/VGMap.h"
 #include "../pieces/Building.h"
 #include "../pieces/HarvestTile.h"
+#include "../ScoreBoard.h"
 
 // Forward declaration.
 class PlayerView;
@@ -26,12 +27,6 @@ public:
 	// Returns true iff the this Player is able to build on their VGMap with the resources
 	// available in the specified GatherFacility.
 	bool canPlay(GatherFacility*) const;
-	// Returns the number of Buildings this Player has built.
-	int built() const;
-	// Returns the number of Buildings remaining in this Player's Hand.
-	int unbuilt() const;
-	// Returns this Player's score.
-	int getScore() const;
 	// Induces this Player to draw a Building from the specified Deck. Throws an exception if the
 	// specified Deck is null or empty.
 	void drawBuilding(Deck<Building*>*);
@@ -56,8 +51,9 @@ public:
 	// GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
 	// available to this Player are insufficiet to cover the specified cost.
 	void resourceTracker(GatherFacility*, int, int);
-	// Counts the villagers attracted to this Player's village.
-	void calculateScore();
+	// Records this Player's current score to the specified ScoreBoard under the specified id.
+	// Throws and exception if TODO
+	void calculateScore(ScoreBoard*, long);
 	// Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the
 	// specified slection is not consistent with this Player's hand.
 	void rotateTile(int);
@@ -73,14 +69,10 @@ public:
 	// exception if this Player already has a shipment tile.
 	void store(HarvestTile*);
 
-	bool operator<(const Player&) const;
-	bool operator==(const Player&) const;
-
 	friend PlayerView* playerView(Player*);
 
 private:
 	
-	int* score;
 	HarvestTileHand* tiles;
 	BuildingHand* buildings;
 	VGMap* village;
