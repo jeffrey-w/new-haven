@@ -95,8 +95,8 @@ void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
 	resources->incrementBy(type, -cost);
 }
 
-void Player::calculateScore(ScoreBoard* score, long id) {
-	score->update(id, village->calculateScore(), village->buildingCount(), buildings->getSize());
+void Player::calculateScore(ScoreBoard* scores, long id) {
+	scores->update(id, village->calculateScore(), village->buildingCount(), buildings->getSize());
 }
 
 void Player::rotateTile(int selection) {
