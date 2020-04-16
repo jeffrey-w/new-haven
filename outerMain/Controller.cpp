@@ -2,7 +2,7 @@
 
 Controller::Controller() {
 	game = nullptr;
-	view = new GameView();
+	view = nullptr;
 	in = new Input();
 }
 
@@ -38,6 +38,7 @@ void Controller::inputIDs() {
 			}
 		} while (true);
 	}
+	view = gameView(game);
 }
 
 void Controller::run() {
@@ -69,6 +70,7 @@ void Controller::run() {
 				}
 			}
 			game->yield();
+			view->rotate();
 		}
 		// Draw new buildings.
 		if ((exhausted = game->exhausted()) && !game->gameOver()) {
@@ -88,6 +90,7 @@ void Controller::run() {
 		}
 		// Housekeeping before next turn.
 		game->endTurn();
+		view->rotate();
 	}
 	// Determine and display winner(s).
 	std::cout << "And our winner(s) is:\n";
