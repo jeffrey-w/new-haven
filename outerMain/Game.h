@@ -33,17 +33,6 @@ public:
 	int exhausted() const;
 	// Returns true iff this Game's GBMap has only one unoccupied square.
 	int gameOver() const;
-	// Returns a list of the winning Player(s) IDs. Throws an exception if this Game has no Players.
-	std::list<long> winners() const;
-	// Returns the score of the winner of this Game. Throws an exception if this Game has no
-	// Players.
-	int highscore() const;
-	// Returns the number of Buildings that the winner of this Game failed to play. Throws an
-	// exception if this Game has no Players.
-	int buidlingsLeft() const;
-	// Returns the number of Buildings the the winner of this Game played. Throws an exception if
-	// this Game has no Players.
-	int buildingsPlayed() const;
 	// Adds a new Player with the specified id to this Game's Roster. Throws an exception if this
 	// Game's Roster is already full, or if the specified id is invalid or already taken.
 	void addPlayer(long);
@@ -101,6 +90,7 @@ private:
 	Deck<Building*>* buildings;
 	BuildingPool* pool;
 	Roster* players;
+	ScoreBoard* scores;
 
 	bool atCapacity() const;
 	void setup();
