@@ -152,3 +152,7 @@ bool Player::operator==(const Player& other) const {
 	return *score == *other.score && built() == other.built()
 		&& unbuilt() == other.unbuilt();
 }
+
+PlayerView* playerView(Player* player) {
+	return new PlayerView(player->tiles, player->buildings, player->village);
+}

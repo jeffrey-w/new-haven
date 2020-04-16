@@ -6,6 +6,7 @@
 #include "../maps/VGMap.h"
 #include "../pieces/Building.h"
 #include "../pieces/HarvestTile.h"
+#include "../views/PlayerView.h"
 
 // The players of New Haven.
 class Player {
@@ -72,6 +73,8 @@ public:
 
 	bool operator<(const Player&) const;
 	bool operator==(const Player&) const;
+
+	friend PlayerView* playerView(Player*);
 
 private:
 	
