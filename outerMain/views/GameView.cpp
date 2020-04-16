@@ -1,5 +1,32 @@
 #include "GameView.h"
 
+GameView::~GameView() {
+	delete board;
+	delete resources;
+	delete pool;
+	delete players;
+}
+
+void GameView::addBoard(GBMap* board) {
+	this->board = new View(board);
+}
+
+void GameView::addResources(GatherFacility* resources) {
+	this->resources = new View(resources);
+}
+
+void GameView::addPool(BuildingPool* pool) {
+	this->pool = new View(pool);
+}
+
+void GameView::addPlayers(Roster* players) {
+	this->players = rosterView(players);
+}
+
+void GameView::rotate() {
+	players->rotate();
+}
+
 void GameView::showBoard() const {
 	board->show();
 }
