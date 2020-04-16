@@ -51,6 +51,7 @@ HarvestTile* HarvestTileHand::select(int selection) {
 
 void HarvestTileHand::rotate(int selection) {
 	validateSelection(selection, false)->rotate();
+	notify();
 }
 
 HarvestTile* HarvestTileHand::validateSelection(int selection, bool remove) {
@@ -81,7 +82,6 @@ HarvestTile* HarvestTileHand::validateSelection(int selection, bool remove) {
 	default:
 		throw std::invalid_argument("Must select [1]st or [2]nd.");
 	}
-	notify();
 	return tile;
 }
 
@@ -113,7 +113,7 @@ string* HarvestTileHand::toString() const {
 	if (shipment) {
 		stream << "3 - Shipment";
 	}
-	stream << 'n';
+	stream << '\n';
 	HarvestTile::printHand(stream, *one, *two, shipment);
 	return new string(stream.str());
 }
