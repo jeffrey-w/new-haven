@@ -61,24 +61,30 @@ ResourceToken* HarvestTile::tokenize() {
 
 void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, const HarvestTile& two,
 		bool shipment) {
-	printHalf(stream, one, *one.current);
-	printHalf(stream, two, *two.current);
+	one.printHalf(stream, *one.current);
+	two.printHalf(stream, *two.current);
 	if (shipment) {
 		stream << "-- | --";
 	}
 	stream << '\n';
-	printHalf(stream, one, (*one.current + NUM_RESOURCES - 1) & NUM_RESOURCES - 1, true);
-	printHalf(stream, two, (*two.current + NUM_RESOURCES - 1) & NUM_RESOURCES - 1, true);
+	one.printHalf(stream, (*one.current + NUM_RESOURCES - 1) & NUM_RESOURCES - 1, true);
+	two.printHalf(stream, (*two.current + NUM_RESOURCES - 1) & NUM_RESOURCES - 1, true);
 	if (shipment) {
 		stream << "-- | --";
 	}
 	stream << '\n';
 }
 
-void HarvestTile::printHalf(std::ostream& stream, const HarvestTile& tile, int from,
-		bool countdown) {
+std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
+	tile.printHalf(stream, *tile.current);
+	tile.printHalf(stream, (*tile.current + HarvestTile::NUM_RESOURCES - 1)
+		& HarvestTile::NUM_RESOURCES - 1, true);
+	return std::cout << '\n';
+}
+
+void HarvestTile::printHalf(std::ostream& stream, int from, bool countdown) const {
 	for (int i = 0; i < NUM_RESOURCES >> 1; i++) {
-		stream << *(*tile.resources)[from];
+		stream << *(*resources)[from];
 		if (countdown) {
 			from--;
 		}
@@ -93,11 +99,4 @@ void HarvestTile::printHalf(std::ostream& stream, const HarvestTile& tile, int f
 			stream << " | ";
 		}
 	}
-}
-
-std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
-	HarvestTile::printHalf(stream, tile, *tile.current);
-	HarvestTile::printHalf(stream, tile, (*tile.current + HarvestTile::NUM_RESOURCES - 1)
-		& HarvestTile::NUM_RESOURCES - 1, true);
-	return std::cout << '\n';
 }

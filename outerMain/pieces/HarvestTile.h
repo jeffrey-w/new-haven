@@ -43,7 +43,7 @@ private:
 	int* current;
 	std::vector<ResourceToken*>* resources;
 
-	static void printHalf(std::ostream&, const HarvestTile&, int, bool = false);
+	void printHalf(std::ostream&, int, bool = false) const;
 
 	// For GBMapLoader.
 	HarvestTile(int);
