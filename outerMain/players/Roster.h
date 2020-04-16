@@ -26,11 +26,6 @@ public:
 	// Returns the ID of the Player at the front of this Roster. Throws an exception if this Roster
 	// is empty.
 	long nextID() const;
-	// Returns the Player in this Roster with the highest score. Throws an exception if this Roster
-	// is empty.
-	Player max() const;
-	// Returns a list of the winning Player(s) IDs. Throws an exception if this Roster is empty.
-	std::list<long> winners() const;
 	// Adds the specified Player to this Roster with the specified id. Throws an exception if the
 	// specified id already belongs to another member of this Roster, or if the specified Player is
 	// null.

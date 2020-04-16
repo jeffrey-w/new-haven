@@ -38,33 +38,6 @@ long Roster::nextID() const {
 	return ids->front();
 }
 
-Player Roster::max() const {
-	Player* max = nullptr;
-	for (auto& entry : *players) {
-		entry.second->calculateScore();
-		if (!max || *max < *entry.second) {
-			max = entry.second;
-		}
-	}
-	if (max) {
-		return Player(*max);
-	}
-	else {
-		throw std::runtime_error("Roster is empty.");
-	}
-}
-
-list<long> Roster::winners() const {
-	list<long> winners;
-	Player winner = max();
-	for (auto& entry : *players) {
-		if (*entry.second == winner) {
-			winners.push_back(entry.first);
-		}
-	}
-	return winners;
-}
-
 void Roster::add(long id, Player* player) {
 	if (id < 1) {
 		throw std::invalid_argument("ID must be positive.");
