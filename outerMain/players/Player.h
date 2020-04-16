@@ -6,7 +6,9 @@
 #include "../maps/VGMap.h"
 #include "../pieces/Building.h"
 #include "../pieces/HarvestTile.h"
-#include "../views/PlayerView.h"
+
+// Forward declaration.
+class PlayerView;
 
 // The players of New Haven.
 class Player {

@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../util/Debug.h"
+#include "../views/PlayerView.h"
 
 using std::pair;
 
