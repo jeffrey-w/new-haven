@@ -15,6 +15,7 @@ Game::Game(int numPlayers) {
 	buildings = buildingDeck();
 	pool = new BuildingPool();
 	players = new Roster();
+	scores = new ScoreBoard();
 }
 
 Game::~Game() {
@@ -25,6 +26,7 @@ Game::~Game() {
 	delete buildings;
 	delete pool;
 	delete players;
+	delete scores;
 }
 
 int Game::numPlayers() const {
@@ -53,22 +55,6 @@ int Game::gameOver() const {
 	return board->squaresLeft() == 1;
 }
 
-std::list<long> Game::winners() const {
-	return players->winners();
-}
-
-int Game::highscore() const {
-	return players->max().getScore();
-}
-
-int Game::buidlingsLeft() const {
-	return players->max().unbuilt();
-}
-
-int Game::buildingsPlayed() const {
-	return players->max().built();
-}
-
 void Game::addPlayer(long id) {
 	if (atCapacity()) {
 		throw std::runtime_error("Too many players.");
@@ -76,6 +62,7 @@ void Game::addPlayer(long id) {
 	Player* player = new Player(tiles->draw());
 	try {
 		players->add(id, player);
+		scores->add(id);
 	} catch (const std::invalid_argument& e) {
 		delete player;
 		throw e;
@@ -134,6 +121,7 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) {
 		resources->incrementBy(type, cost);
 		throw e;
 	}
+	current->calculateScore(scores, players->nextID());
 }
 
 void Game::yield() {
