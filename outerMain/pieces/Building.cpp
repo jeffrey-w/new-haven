@@ -42,10 +42,6 @@ void Building::flip() {
 	token->flip();
 }
 
-void Building::display() const {
-	token->display();
-}
-
 std::ostream& operator<<(std::ostream& stream, const Building& building) {
 	return stream << *building.token;
 }

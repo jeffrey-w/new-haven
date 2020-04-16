@@ -59,10 +59,6 @@ ResourceToken* HarvestTile::tokenize() {
 	return returnToken;
 }
 
-void HarvestTile::display() const {
-	std::cout << *this;
-}
-
 void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, const HarvestTile& two,
 		bool shipment) {
 	printHalf(stream, one, *one.current);

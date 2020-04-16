@@ -59,10 +59,6 @@ int BuildingToken::getValue() const {
 	return *value;
 }
 
-void BuildingToken::display() const {
-	std::cout << *this;
-}
-
 std::ostream& operator<<(std::ostream& stream, const BuildingToken& token) {
 	switch (*token.type) {
 		case BuildingType::FOREST:

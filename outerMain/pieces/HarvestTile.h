@@ -35,8 +35,6 @@ public:
 	void rotate();
 	// Iteratively returns the ResourceTokens that constitute this HarvestTile.
 	ResourceToken* tokenize();
-	// Writes this HarvestTile to the standard output stream.
-	void display() const;
 
 	friend std::ostream& operator<<(std::ostream&, const HarvestTile&);
 

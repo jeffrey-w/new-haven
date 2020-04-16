@@ -11,7 +11,5 @@ public:
 	virtual ~AbstractPiece() = default;
 	// Iteratively returns the tokens that constitute this AbstractPiece.
 	virtual AbstractToken* tokenize() = 0;
-	// Writes this Piece to the standard output stream.
-	virtual void display() const = 0;
 
 };

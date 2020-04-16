@@ -33,8 +33,6 @@ public:
 	int getValue() const;
 	// Flips this BuildingToken. If it was previously face up, it becomes face down and vice versa.
 	void flip();
-	// Writes this BuildingToken to the standard output stream.
-	void display() const;
 
 	friend std::ostream& operator<<(std::ostream&, const BuildingToken&);
 

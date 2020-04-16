@@ -28,10 +28,6 @@ int ResourceToken::getType() const {
 	return static_cast<int>(*type);
 }
 
-void ResourceToken::display() const {
-	std::cout << *this;
-}
-
 std::ostream& operator<<(std::ostream& stream, const ResourceToken& token) {
 	switch (*token.type) {
 	case ResourceType::SHEEP:

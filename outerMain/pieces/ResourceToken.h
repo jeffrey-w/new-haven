@@ -26,8 +26,6 @@ public:
 	~ResourceToken();
 	// Returns the type of this ResourceToken.
 	int getType() const;
-	// Writes this ResourceToken to the standard output stream
-	void display() const;
 
 	friend std::ostream& operator<<(std::ostream&, const ResourceToken&);
 

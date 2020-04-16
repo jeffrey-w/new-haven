@@ -33,8 +33,6 @@ public:
 	BuildingToken* tokenize();
 	// Flips this Building. If it was previously face up, it becomes face down and vice versa.
 	void flip();
-	// Writes this Building to the standard output stream.
-	void display() const;
 
 	friend std::ostream& operator<<(std::ostream&, const Building&);
 
