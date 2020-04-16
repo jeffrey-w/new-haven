@@ -4,6 +4,7 @@
 #include <list>
 #include <map>
 
+#include "../views/RosterView.h"
 #include "Player.h"
 
 // A collection of New Haven Players.
@@ -45,6 +46,8 @@ public:
 	// Distributes a prescribed number of HarvestTiles and Buildings from the specified Decks to
 	// each Player in this Roster. Throws an exception if either of the specified Decks are null.
 	void deal(Deck<HarvestTile*>*, Deck<Building*>*);
+
+	friend RosterView* rosterView(Roster*);
 
 private:
 	

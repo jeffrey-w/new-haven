@@ -118,3 +118,11 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>* buildings) {
 		}
 	}
 }
+
+RosterView* rosterView(Roster* roster) {
+	RosterView* view = new RosterView();
+	for (auto& entry : *roster->players) {
+		view->addView(playerView(entry.second));
+	}
+	return view;
+}
