@@ -22,6 +22,10 @@ void Observable::attach(Observer* observer) {
 	}
 }
 
+void Observable::detach(Observer* observer) {
+	observers->erase(observer);
+}
+
 void Observable::notify() {
 	for (auto& observer : *observers) {
 		observer->update(toString());

@@ -12,6 +12,7 @@ public:
 	Observable();
 	~Observable();
 	void attach(Observer*);
+	void detach(Observer*);
 	void notify();
 
 	friend std::ostream& operator<<(std::ostream&, const Observable&);
