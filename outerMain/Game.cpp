@@ -157,12 +157,11 @@ void Game::endTurn() {
 	pool->replenish(buildings);
 	if (shipment) {
 		board->setSquare(shipment->payload, shipment->coordinate);
-		players->next()->drawTile(tiles);
 		delete shipment;
 		shipment = nullptr;
 	}
 	else {
-		players->next();
+		players->next()->drawTile(tiles);
 	}
 }
 
@@ -170,4 +169,13 @@ void Game::ensureSetup() {
 	if (!atCapacity()) {
 		throw std::runtime_error("Game is not ready.");
 	}
+}
+
+GameView* gameView(Game* game) {
+	GameView* view = new GameView();
+	view->addBoard(game->board);
+	view->addResources(game->resources);
+	view->addPool(game->pool);
+	view->addPlayers(game->players);
+	return view;
 }
