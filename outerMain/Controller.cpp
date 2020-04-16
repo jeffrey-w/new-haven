@@ -94,11 +94,7 @@ void Controller::run() {
 	}
 	// Determine and display winner(s).
 	std::cout << "And our winner(s) is:\n";
-	for (auto& id : game->winners()) {
-		std::cout << "Player " << id << std::endl;
-	}
-	std::cout << "with " << game->highscore() << " villagers, " << game->buildingsPlayed()
-		<< " buildings erected, and " << game->buidlingsLeft() << " buildings left.";
+	// TODO game winning logic with observer
 }
 
 bool Controller::rotateSelection() {
