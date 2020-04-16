@@ -5,6 +5,7 @@
 #include "maps/GBMap.h"
 #include "players/Player.h"
 #include "players/Roster.h"
+#include "views/GameView.h"
 
 // A game of New Haven.
 class Game {
@@ -82,6 +83,8 @@ public:
 	// current Player to draw a new HarvestTile if they did not just player their shipment tile.
 	// Throws an exception if this Game has not started.
 	void endTurn();
+
+	friend GameView* gameView(Game*);
 
 private:
 	
