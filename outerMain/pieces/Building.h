@@ -30,7 +30,7 @@ public:
 	// Returns the value of this Building.
 	int getValue() const;
 	// Returns the BuildingToken that constitutes this Building.
-	BuildingToken* tokenize();
+	BuildingToken* tokenize() override;
 	// Flips this Building. If it was previously face up, it becomes face down and vice versa.
 	void flip();
 

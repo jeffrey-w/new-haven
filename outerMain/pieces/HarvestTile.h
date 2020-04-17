@@ -34,7 +34,7 @@ public:
 	// Rotates this HarvestTile 90 degrees counterclockwise.
 	void rotate();
 	// Iteratively returns the ResourceTokens that constitute this HarvestTile.
-	ResourceToken* tokenize();
+	ResourceToken* tokenize() override;
 
 	friend std::ostream& operator<<(std::ostream&, const HarvestTile&);
 

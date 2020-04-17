@@ -28,7 +28,7 @@ public:
 	// Returns true iff this BuildingToken is face up.
 	bool isFaceUp() const;
 	// Returns the type of this BuildingToken.
-	int getType() const;
+	int getType() const override;
 	// Returns the value of this BuildingToken.
 	int getValue() const;
 	// Flips this BuildingToken. If it was previously face up, it becomes face down and vice versa.

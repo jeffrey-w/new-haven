@@ -25,7 +25,7 @@ public:
 	// Destroys this ResourceToken object.
 	~ResourceToken();
 	// Returns the type of this ResourceToken.
-	int getType() const;
+	int getType() const override;
 
 	friend std::ostream& operator<<(std::ostream&, const ResourceToken&);
 
