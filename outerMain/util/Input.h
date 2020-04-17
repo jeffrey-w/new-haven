@@ -25,7 +25,7 @@ public:
 	t get(const std::string& prompt, const std::string& fail, bool canCancel = false) {
 		t result = t();
 		std::string input;
-		_cancelled = false;
+		*_cancelled = false;
 		do {
 			std::cout << prompt;
 			if (canCancel) {
