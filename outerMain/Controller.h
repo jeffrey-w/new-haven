@@ -26,7 +26,7 @@ public:
 
 private:
 
-	Game* game;
+	Game* model;
 	GameView* view;
 	Input* in;
 

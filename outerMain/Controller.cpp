@@ -1,13 +1,13 @@
 #include "Controller.h"
 
 Controller::Controller() {
-	game = nullptr;
+	model = nullptr;
 	view = nullptr;
 	in = new Input();
 }
 
 Controller::~Controller() {
-	delete game;
+	delete model;
 	delete view;
 	delete in;
 }
@@ -15,22 +15,22 @@ Controller::~Controller() {
 void Controller::initGame() {
 	do {
 		try {
-			game = new Game(in->get<int>("Enter number of players", "Must enter a number."));
+			model = new Game(in->get<int>("Enter number of players", "Must enter a number."));
 		} catch (const std::invalid_argument& e) {
 			std::cerr << e.what() << std::endl;
 			if (in->decide("Accept default number of players (" 
 				+ std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?")) {
-				game = new Game();
+				model = new Game();
 			}
 		}
-	} while (!game);
+	} while (!model);
 }
 
 void Controller::inputIDs() {
-	for (int i = 0; i < game->numPlayers(); i++) {
+	for (int i = 0; i < model->numPlayers(); i++) {
 		do {
 			try {
-				game->addPlayer(in->get<long>("Enter ID for player "
+				model->addPlayer(in->get<long>("Enter ID for player "
 					+ std::to_string(i + 1), "Invalid ID."));
 				break;
 			} catch (const std::invalid_argument& e) {
@@ -38,18 +38,18 @@ void Controller::inputIDs() {
 			}
 		} while (true);
 	}
-	view = gameView(game);
+	view = gameView(model);
 }
 
 void Controller::run() {
 	int exhausted;
-	while (!game->gameOver()) {
+	while (!model->gameOver()) {
 		view->showBoard();
 		view->showTiles();
 		view->showVillage();
 		view->showBuildings();
 		// Prompt player to rotate tiles.
-		while (in->decide("Player " + std::to_string(game->nextID())
+		while (in->decide("Player " + std::to_string(model->nextID())
 			+ ", do you want to rotate any of your tiles?")) {
 			if (!rotateSelection()) {
 				break;
@@ -58,10 +58,10 @@ void Controller::run() {
 		// Play selected tile.
 		placeSelection();
 		// Play buildings and share resources with other players.
-		for (int i = 0; i < game->numPlayers(); i++) {
-			while (in->decide("Player " + std::to_string(game->nextID())
+		for (int i = 0; i < model->numPlayers(); i++) {
+			while (in->decide("Player " + std::to_string(model->nextID())
 				+ ", do you want to play a building?")) {
-				if (!game->canPlay()) {
+				if (!model->canPlay()) {
 					std::cout << "You have no more valid moves.\n";
 					break;
 				}
@@ -69,12 +69,12 @@ void Controller::run() {
 					break;
 				}
 			}
-			game->yield();
+			model->yield();
 			view->rotate();
 		}
 		// Draw new buildings.
-		if ((exhausted = game->exhausted()) && !game->gameOver()) {
-			std::cout << "Player " << game->nextID() << ", you must draw " << exhausted
+		if ((exhausted = model->exhausted()) && !model->gameOver()) {
+			std::cout << "Player " << model->nextID() << ", you must draw " << exhausted
 				<< " buildings.\n";
 			selectBuilding(false);
 			for (int i = 0; i < exhausted - 1; i++) {
@@ -84,12 +84,12 @@ void Controller::run() {
 					}
 				}
 				else {
-					game->drawFromDeck();
+					model->drawFromDeck();
 				}
 			}
 		}
 		// Housekeeping before next turn.
-		game->endTurn();
+		model->endTurn();
 		view->rotate();
 	}
 	// Determine and display winner(s).
@@ -105,7 +105,7 @@ bool Controller::rotateSelection() {
 			return false;
 		}
 		try {
-			game->rotateTile(selection);
+			model->rotateTile(selection);
 			view->showTiles();
 			return true;
 		} catch (const std::exception& e) {
@@ -127,7 +127,7 @@ void Controller::placeSelection() {
 				continue;
 			}
 			try {
-				game->playShipment({ row, col }, type);
+				model->playShipment({ row, col }, type);
 				break;
 			} catch (const std::exception& e) {
 				std::cerr << e.what() << " Try again.\n";
@@ -135,7 +135,7 @@ void Controller::placeSelection() {
 		}
 		else {
 			try {
-				game->playTile(selection, { row, col });
+				model->playTile(selection, { row, col });
 				break;
 			} catch (const std::exception& e) {
 				std::cerr << e.what() << " Try again.\n";
@@ -158,7 +158,7 @@ bool Controller::buildSelection() {
 		row = in->get<int>("Select a row", "Invalid row.");
 		col = in->get<int>("Select a column", "Invalid column.");
 		try {
-			game->playBuilding(selection, { row, col });
+			model->playBuilding(selection, { row, col });
 			return true;
 		} catch (const std::exception& e) {
 			std::cerr << e.what() << " Try again.\n";
@@ -176,7 +176,7 @@ bool Controller::selectBuilding(bool canCancel) {
 			return false;
 		}
 		try {
-			game->drawFromPool(selection);
+			model->drawFromPool(selection);
 			return true;
 		} catch (const std::exception& e) {
 			std::cerr << e.what() << " Try again.\n";
