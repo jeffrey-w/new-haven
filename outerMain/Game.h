@@ -19,6 +19,8 @@ public:
 	// Constructs a new Game object with the specified number of Players. Throws an exception if
 	// the specified number of players is not between two and four inclusive.
 	Game(int);
+	// Constructs a new Game object with the same state as the specified Game.
+	Game(const Game&);
 	// Destroys this Game.
 	~Game();
 	// Returns the number of Players playing this Game.

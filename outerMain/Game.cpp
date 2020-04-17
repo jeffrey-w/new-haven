@@ -18,6 +18,19 @@ Game::Game(int numPlayers) {
 	scores = new ScoreBoard();
 }
 
+Game::Game(const Game& other) {
+	board = new GBMap(*other.board);
+	if (other.shipment) {
+		shipment = new Shipment{ other.shipment->payload, other.shipment->coordinate };
+	}
+	resources = new GatherFacility(*other.resources);
+	tiles = new Deck<HarvestTile*>(*other.tiles);
+	buildings = new Deck<Building*>(*other.buildings);
+	pool = new BuildingPool(*other.pool);
+	players = new Roster(*other.players);
+	scores = new ScoreBoard(*other.scores);
+}
+
 Game::~Game() {
 	delete board;
 	delete shipment;
