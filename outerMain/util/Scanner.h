@@ -48,5 +48,6 @@ private:
 
 	char advance();
 	bool isDigit(char);
+
 };
 
