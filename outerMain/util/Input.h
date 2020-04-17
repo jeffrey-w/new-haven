@@ -19,11 +19,13 @@ public:
 	bool cancelled() const;
 	// Prompts the user for and collects their input to a yes or no question.
 	bool decide(const std::string&);
-	// Gets user input and interprets it as the specified type.
+	// Gets user input and interprets it as the specified type. If specified, the user may cancel
+	// this prompt for input.
 	template <typename t>
 	t get(const std::string& prompt, const std::string& fail, bool canCancel = false) {
 		t result = t();
 		std::string input;
+		_cancelled = false;
 		do {
 			std::cout << prompt;
 			if (canCancel) {
