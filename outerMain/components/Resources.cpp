@@ -115,6 +115,7 @@ string* HarvestTileHand::toString() const {
 	}
 	stream << '\n';
 	HarvestTile::printHand(stream, *one, *two, shipment);
+	stream << '\n';
 	return new string(stream.str());
 }
 
@@ -177,7 +178,7 @@ string* BuildingHand::toString() const {
 			stream << "-\t";
 		}
 	}
-	stream << '\n';
+	stream << "\n\n";
 	return new string(stream.str());
 }
 
@@ -245,7 +246,7 @@ string* BuildingPool::toString() const {
 			stream << "-\t";
 		}
 	}
-	stream << '\n';
+	stream << "\n\n";
 	return new string(stream.str());
 }
 
