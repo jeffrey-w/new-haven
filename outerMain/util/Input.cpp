@@ -9,7 +9,7 @@ Input::~Input() {
 }
 
 bool Input::cancelled() const {
-	return _cancelled;
+	return *_cancelled;
 }
 
 bool Input::decide(const std::string& prompt) {
