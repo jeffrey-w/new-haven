@@ -51,21 +51,30 @@ void Controller::run() {
 		// Prompt player to rotate tiles.
 		while (in->decide("Player " + std::to_string(model->nextID())
 			+ ", do you want to rotate any of your tiles?")) {
-			if (!rotateSelection()) {
+			if (rotateSelection()) {
+				view->showTiles();
+			}
+			else {
 				break;
 			}
 		}
 		// Play selected tile.
 		placeSelection();
+		view->showBoard();
 		// Play buildings and share resources with other players.
 		for (int i = 0; i < model->numPlayers(); i++) {
 			while (in->decide("Player " + std::to_string(model->nextID())
 				+ ", do you want to play a building?")) {
-				if (!model->canPlay()) {
-					std::cout << "You have no more valid moves.\n";
-					break;
+				if (model->canPlay()) {
+						view->showVillage();
+						view->showResources();
+						view->showBuildings();
+					if (!buildSelection()) {
+						break;
+					}
 				}
-				if (!buildSelection()) {
+				else {
+					std::cout << "You have no more valid moves.\n";
 					break;
 				}
 			}
@@ -76,11 +85,16 @@ void Controller::run() {
 		if ((exhausted = model->exhausted()) && !model->gameOver()) {
 			std::cout << "Player " << model->nextID() << ", you must draw " << exhausted
 				<< " buildings.\n";
+			view->showPool();
 			selectBuilding(false);
 			for (int i = 0; i < exhausted - 1; i++) {
+				view->showPool();
 				if (in->decide("Do you want to draw a building from the pool?")) {
 					if (!(selectBuilding())) {
 						i--;
+					}
+					else {
+						view->showPool();
 					}
 				}
 				else {
@@ -106,7 +120,6 @@ bool Controller::rotateSelection() {
 		}
 		try {
 			model->rotateTile(selection);
-			view->showTiles();
 			return true;
 		} catch (const std::exception& e) {
 			std::cerr << e.what() << " Try again.\n";
@@ -142,14 +155,10 @@ void Controller::placeSelection() {
 			}
 		}
 	} while (true);
-	view->showBoard();
 }
 
 bool Controller::buildSelection() {
 	int selection = 0, row, col;
-	view->showVillage();
-	view->showResources();
-	view->showBuildings();
 	do {
 		selection = in->get<int>("Select a building", "Ivalid selection.", true);
 		if (in->cancelled()) {
@@ -162,14 +171,12 @@ bool Controller::buildSelection() {
 			return true;
 		} catch (const std::exception& e) {
 			std::cerr << e.what() << " Try again.\n";
-			view->showBuildings();
 		}
 	} while (true);
 }
 
 bool Controller::selectBuilding(bool canCancel) {
 	int selection = 0;
-	view->showPool();
 	do {
 		selection = in->get<int>("Select a building", "Invalid selection.", canCancel);
 		if (in->cancelled()) {
