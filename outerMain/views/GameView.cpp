@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "GameView.h"
 
 GameView::~GameView() {
@@ -28,25 +30,31 @@ void GameView::rotate() {
 }
 
 void GameView::showBoard() const {
+	std::cout << "Game Board\n";
 	board->show();
 }
 
 void GameView::showResources() const {
+	std::cout << "Resources\n";
 	resources->show();
 }
 
 void GameView::showPool() const {
+	std::cout << "Building Pool\n";
 	pool->show();
 }
 
 void GameView::showTiles() const {
+	std::cout << "Harvest Tiles\n";
 	players->showTiles();
 }
 
 void GameView::showBuildings() const {
+	std::cout << "Buildings\n";
 	players->showBuildings();
 }
 
 void GameView::showVillage() const {
+	std::cout << "Village Board\n";
 	players->showVillage();
 }
