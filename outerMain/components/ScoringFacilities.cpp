@@ -60,6 +60,6 @@ string* GatherFacility::toString() const {
 		}
 		stream << std::to_string(entry.second) + " ";
 	}
-	stream << '\n';
+	stream << "\n\n";
 	return new string(stream.str());
 }
