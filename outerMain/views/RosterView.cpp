@@ -16,6 +16,9 @@ RosterView::~RosterView() {
 }
 
 void RosterView::addView(PlayerView* view) {
+	if (!view) {
+		throw std::invalid_argument("Cannot observe the null subject.");
+	}
 	players->push_back(view);
 }
 
