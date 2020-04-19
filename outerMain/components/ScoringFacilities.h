@@ -43,13 +43,15 @@ class BuildFacility {
 
 public:
 
-	BuildFacility();
+	BuildFacility(int);
 	BuildFacility(const BuildFacility&);
 	~BuildFacility();
 	int getVillagers() const;
 	int getBuilt() const;
 	int getUnbuilt() const;
-	void update(int, int, int);
+	void setVillagers(int);
+	void setBuilt(int);
+	void setUnbuilt(int);
 
 	bool operator<(const BuildFacility&) const;
 	bool operator==(const BuildFacility&) const;
@@ -60,7 +62,7 @@ private:
 	int* built;
 	int* unbuilt;
 
-	void init(int, int, int);
+	BuildFacility();
 	int validateScore(int);
 
 };
