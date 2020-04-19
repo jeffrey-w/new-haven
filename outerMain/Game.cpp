@@ -169,6 +169,7 @@ void Game::ensureSetup() {
 
 GameView* gameView(Game* game) {
 	GameView* view = new GameView();
+	view->addStats(game->players);
 	view->addBoard(game->board);
 	view->addResources(game->resources);
 	view->addPool(game->pool);
