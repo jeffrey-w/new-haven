@@ -130,6 +130,7 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) {
 		resources->incrementBy(type, cost);
 		throw e;
 	}
+	players->notify();
 }
 
 void Game::yield() {
