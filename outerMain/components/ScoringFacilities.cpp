@@ -64,10 +64,20 @@ string* GatherFacility::toString() const {
 	return new string(stream.str());
 }
 
-BuildFacility::BuildFacility() : villagers(0), built(0), unbuilt(0) {}
+BuildFacility::BuildFacility(int unbuilt) : BuildFacility() {
+	setUnbuilt(unbuilt);
+}
 
 BuildFacility::BuildFacility(const BuildFacility& other) : BuildFacility() {
-	init(*other.villagers, *other.built, *other.unbuilt);
+	setVillagers(*other.villagers);
+	setBuilt(*other.built);
+	setUnbuilt(*other.unbuilt);
+}
+
+BuildFacility::BuildFacility() {
+	villagers = new int(0);
+	built = new int(0);
+	unbuilt = new int(0);
 }
 
 BuildFacility::~BuildFacility() {
@@ -88,8 +98,23 @@ int BuildFacility::getUnbuilt() const {
 	return *unbuilt;
 }
 
-void BuildFacility::update(int villagers, int built, int unbuilt) {
-	init(villagers, built, unbuilt);
+void BuildFacility::setVillagers(int villagers) {
+	*this->villagers = validateScore(villagers);
+}
+
+void BuildFacility::setBuilt(int built) {
+	*this->built = validateScore(built);
+}
+
+void BuildFacility::setUnbuilt(int unbuilt) {
+	*this->unbuilt = validateScore(unbuilt);
+}
+
+int BuildFacility::validateScore(int score) {
+	if (score < 0) {
+		throw std::invalid_argument("Score must be nonnegative.");
+	}
+	return score;
 }
 
 bool BuildFacility::operator<(const BuildFacility& other) const {
@@ -104,17 +129,4 @@ bool BuildFacility::operator<(const BuildFacility& other) const {
 
 bool BuildFacility::operator==(const BuildFacility& other) const {
 	return *villagers == *other.villagers && *built == *other.built && *unbuilt == *other.unbuilt;
-}
-
-void BuildFacility::init(int villagers, int built, int unbuilt) {
-	*this->villagers = validateScore(villagers);
-	*this->built = validateScore(built);
-	*this->unbuilt = validateScore(unbuilt);
-}
-
-int BuildFacility::validateScore(int score) {
-	if (score < 0) {
-		throw std::invalid_argument("Score must be nonnegative.");
-	}
-	return score;
 }
