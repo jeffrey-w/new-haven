@@ -63,3 +63,58 @@ string* GatherFacility::toString() const {
 	stream << "\n\n";
 	return new string(stream.str());
 }
+
+BuildFacility::BuildFacility() : villagers(0), built(0), unbuilt(0) {}
+
+BuildFacility::BuildFacility(const BuildFacility& other) : BuildFacility() {
+	init(*other.villagers, *other.built, *other.unbuilt);
+}
+
+BuildFacility::~BuildFacility() {
+	delete villagers;
+	delete built;
+	delete unbuilt;
+}
+
+int BuildFacility::getVillagers() const {
+	return *villagers;
+}
+
+int BuildFacility::getBuilt() const {
+	return *built;
+}
+
+int BuildFacility::getUnbuilt() const {
+	return *unbuilt;
+}
+
+void BuildFacility::update(int villagers, int built, int unbuilt) {
+	init(villagers, built, unbuilt);
+}
+
+bool BuildFacility::operator<(const BuildFacility& other) const {
+	if (*villagers != *other.villagers) {
+		return *other.villagers < *villagers;
+	}
+	if (*built != *other.built) {
+		return *other.built < *built;
+	}
+	return *unbuilt < *other.unbuilt;
+}
+
+bool BuildFacility::operator==(const BuildFacility& other) const {
+	return *villagers == *other.villagers && *built == *other.built && *unbuilt == *other.unbuilt;
+}
+
+void BuildFacility::init(int villagers, int built, int unbuilt) {
+	*this->villagers = validateScore(villagers);
+	*this->built = validateScore(built);
+	*this->unbuilt = validateScore(unbuilt);
+}
+
+int BuildFacility::validateScore(int score) {
+	if (score < 0) {
+		throw std::invalid_argument("Score must be nonnegative.");
+	}
+	return score;
+}

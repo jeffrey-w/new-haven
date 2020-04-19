@@ -39,3 +39,28 @@ private:
 
 };
 
+class BuildFacility {
+
+public:
+
+	BuildFacility();
+	BuildFacility(const BuildFacility&);
+	~BuildFacility();
+	int getVillagers() const;
+	int getBuilt() const;
+	int getUnbuilt() const;
+	void update(int, int, int);
+
+	bool operator<(const BuildFacility&) const;
+	bool operator==(const BuildFacility&) const;
+
+private:
+
+	int* villagers;
+	int* built;
+	int* unbuilt;
+
+	void init(int, int, int);
+	int validateScore(int);
+
+};
