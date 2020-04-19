@@ -5,6 +5,7 @@
 using std::string;
 
 GameView::~GameView() {
+	delete stats;
 	delete board;
 	delete resources;
 	delete pool;
