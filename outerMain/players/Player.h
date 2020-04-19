@@ -6,7 +6,6 @@
 #include "../maps/VGMap.h"
 #include "../pieces/Building.h"
 #include "../pieces/HarvestTile.h"
-#include "../ScoreBoard.h"
 
 // Forward declaration.
 class PlayerView;
@@ -51,9 +50,6 @@ public:
 	// GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
 	// available to this Player are insufficiet to cover the specified cost.
 	void resourceTracker(GatherFacility*, int, int);
-	// Records this Player's current score to the specified ScoreBoard under the specified id.
-	// Throws and exception if TODO
-	void calculateScore(ScoreBoard*, long);
 	// Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the
 	// specified slection is not consistent with this Player's hand.
 	void rotateTile(int);
@@ -69,6 +65,9 @@ public:
 	// exception if this Player already has a shipment tile.
 	void store(HarvestTile*);
 
+	bool operator<(const Player&) const;
+	bool operator==(const Player&) const;
+
 	friend PlayerView* playerView(Player*);
 
 private:
@@ -76,6 +75,8 @@ private:
 	HarvestTileHand* tiles;
 	BuildingHand* buildings;
 	VGMap* village;
+	BuildFacility* score;
 
+	void calculateScore();
 
 };

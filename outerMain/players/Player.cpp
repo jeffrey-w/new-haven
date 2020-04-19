@@ -10,18 +10,21 @@ Player::Player(HarvestTile* shipment) {
 	tiles = new HarvestTileHand(shipment);
 	buildings = new BuildingHand();
 	village = new VGMap();
+	score = new BuildFacility();
 }
 
 Player::Player(const Player& other){
 	tiles = new HarvestTileHand(*other.tiles);
 	buildings = new BuildingHand(*other.buildings);
 	village = new VGMap(*other.village);
+	score = new BuildFacility(*other.score);
 }
 
 Player::~Player(){
 	delete tiles;
 	delete buildings;
 	delete village;
+	delete score;
 }
 
 bool Player::canPlay(GatherFacility* resources) const {
@@ -79,6 +82,11 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
 		buildings->insert(building);
 		throw e;
 	}
+	calculateScore();
+}
+
+void Player::calculateScore() {
+	score->update(village->calculateScore(), village->buildingCount(), buildings->getSize());
 }
 
 int Player::buildingType(int selection) const {
@@ -93,10 +101,6 @@ void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
 		throw std::runtime_error("Not enough resoures.");
 	}
 	resources->incrementBy(type, -cost);
-}
-
-void Player::calculateScore(ScoreBoard* scores, long id) {
-	scores->update(id, village->calculateScore(), village->buildingCount(), buildings->getSize());
 }
 
 void Player::rotateTile(int selection) {
@@ -122,6 +126,14 @@ HarvestTile* Player::reap() {
 
 void Player::store(HarvestTile* tile) {
 	tiles->receive(tile);
+}
+
+bool Player::operator<(const Player& other) const {
+	return *other.score < *score;
+}
+
+bool Player::operator==(const Player& other) const {
+	return *score == *other.score;
 }
 
 PlayerView* playerView(Player* player) {
