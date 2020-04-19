@@ -26,6 +26,12 @@ public:
 	// Returns true iff the this Player is able to build on their VGMap with the resources
 	// available in the specified GatherFacility.
 	bool canPlay(GatherFacility*) const;
+	// Returns the number of villagers this Player has attracted to their VGMap.
+	int getVillagers() const;
+	// Returns the number of Buildings this Player has built on thier VGMap.
+	int getBuilt() const;
+	// Returns the number of Buildings in this Player's BuildingHand.
+	int getUnbuilt() const;
 	// Induces this Player to draw a Building from the specified Deck. Throws an exception if the
 	// specified Deck is null or empty.
 	void drawBuilding(Deck<Building*>*);

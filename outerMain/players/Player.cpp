@@ -51,6 +51,18 @@ bool Player::canPlay(GatherFacility* resources) const {
 	return false;
 }
 
+int Player::getVillagers() const {
+	return score->getVillagers();
+}
+
+int Player::getBuilt() const {
+	return score->getBuilt();
+}
+
+int Player::getUnbuilt() const {
+	return score->getUnbuilt();
+}
+
 void Player::drawBuilding(Deck<Building*>* deck) {
 	if (!deck) {
 		throw std::invalid_argument("Cannot draw from the null deck.");
