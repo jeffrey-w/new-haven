@@ -13,19 +13,19 @@ GameView::~GameView() {
 }
 
 void GameView::addStats(Roster* players) {
-	stats = new View(players);
+	stats = new View(validateObservable(players));
 }
 
 void GameView::addBoard(GBMap* board) {
-	this->board = new View(board);
+	this->board = new View(validateObservable(board));
 }
 
 void GameView::addResources(GatherFacility* resources) {
-	this->resources = new View(resources);
+	this->resources = new View(validateObservable(resources));
 }
 
 void GameView::addPool(BuildingPool* pool) {
-	this->pool = new View(pool);
+	this->pool = new View(validateObservable(pool));
 }
 
 void GameView::addPlayers(Roster* players) {
@@ -37,36 +37,57 @@ void GameView::rotate() {
 }
 
 void GameView::showStats(const string& header) const {
-	std::cout << header << '\n';
-	stats->show();
+	if (stats) {
+		std::cout << header << '\n';
+		stats->show();
+	}
 }
 
 void GameView::showBoard() const {
-	std::cout << "Game Board\n";
-	board->show();
+	if (board) {
+		std::cout << "Game Board\n";
+		board->show();
+	}
 }
 
 void GameView::showResources() const {
-	std::cout << "Resources\n";
-	resources->show();
+	if (resources) {
+		std::cout << "Resources\n";
+		resources->show();
+	}
 }
 
 void GameView::showPool() const {
-	std::cout << "Building Pool\n";
-	pool->show();
+	if (pool) {
+		std::cout << "Building Pool\n";
+		pool->show();
+	}
 }
 
 void GameView::showTiles() const {
-	std::cout << "Harvest Tiles\n";
-	players->showTiles();
+	if (players) {
+		std::cout << "Harvest Tiles\n";
+		players->showTiles();
+	}
 }
 
 void GameView::showBuildings() const {
-	std::cout << "Buildings\n";
-	players->showBuildings();
+	if (players) {
+		std::cout << "Buildings\n";
+		players->showBuildings();
+	}
 }
 
 void GameView::showVillage() const {
-	std::cout << "Village Board\n";
-	players->showVillage();
+	if (players) {
+		std::cout << "Village Board\n";
+		players->showVillage();
+	}
+}
+
+Observable* GameView::validateObservable(Observable* observable) {
+	if (!observable) {
+		throw std::invalid_argument("Cannot observe the null subject.");
+	}
+	return observable;
 }
