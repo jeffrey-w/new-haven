@@ -39,18 +39,33 @@ private:
 
 };
 
+// Records statistics about a Player's VGMap and BuildingHand.
 class BuildFacility {
 
 public:
 
+	// Constructs a new BuildFacility object with the specified number of unbuilt Buildings
+	// recorded onto it. Throws an exception if the specified number of unbuilt buildings is
+	// negative.
 	BuildFacility(int);
+	// Constructs a new BuildFacility in the same state as the sepcified BuildFacility.
 	BuildFacility(const BuildFacility&);
+	// Destroys this BuildFacility.
 	~BuildFacility();
+	// Returns the number of villagers recorded by this BuildFacility.
 	int getVillagers() const;
+	// Returns the number of built Buildings recorded by this BuildFacility.
 	int getBuilt() const;
+	// Returns the number of unbuilt Buildings recorded by this BuildFacility.
 	int getUnbuilt() const;
+	// Sets the nubmer of villagers recorded by this BuildFacility to that specified. Throws an
+	// exception if the specified number is negative.
 	void setVillagers(int);
+	// Sets the nubmer of built Buildings recorded by this BuildFacility to that specified. Throws
+	// an exception if the specified number is negative.
 	void setBuilt(int);
+	// Sets the nubmer of unbuilt Buildings recorded by this BuildFacility to that specified.
+	// Throws an exception if the specified number is negative.
 	void setUnbuilt(int);
 
 	bool operator<(const BuildFacility&) const;
