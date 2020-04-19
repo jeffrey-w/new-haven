@@ -6,6 +6,9 @@
 using std::string;
 
 View::View(Observable* o) {
+	if (!o) {
+		throw std::invalid_argument("Cannot observe the null subject.");
+	}
 	rep = nullptr;
 	o->attach(this);
 	o->notify();
