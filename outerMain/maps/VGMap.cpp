@@ -99,7 +99,7 @@ int VGMap::countRows() {
 			}
 		}
 		if (col == WIDTH) {
-			score += (WIDTH - row) << multiplier;
+			score += (HEIGHT - row) << multiplier;
 		}
 	}
 	return score;
