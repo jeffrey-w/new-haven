@@ -94,12 +94,12 @@ void BuildFacility::update(int villagers, int built, int unbuilt) {
 
 bool BuildFacility::operator<(const BuildFacility& other) const {
 	if (*villagers != *other.villagers) {
-		return *other.villagers < *villagers;
+		return *villagers < *other.villagers;
 	}
 	if (*built != *other.built) {
-		return *other.built < *built;
+		return *built < *other.built;
 	}
-	return *unbuilt < *other.unbuilt;
+	return *other.unbuilt < *unbuilt;
 }
 
 bool BuildFacility::operator==(const BuildFacility& other) const {
