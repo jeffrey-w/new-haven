@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 #include "AbstractToken.h"
 
 // The token type that inhabits spaces on a VGMap.
