@@ -8,6 +8,9 @@ RosterView::RosterView() {
 }
 
 RosterView::~RosterView() {
+	for (auto& player : *players) {
+		delete player;
+	}
 	delete current;
 	delete players;
 }
