@@ -153,6 +153,7 @@ void Game::endTurn() {
 	resources->reset();
 	pool->replenish(buildings);
 	if (shipment) {
+		players->next();
 		board->setSquare(shipment->payload, shipment->coordinate);
 		delete shipment;
 		shipment = nullptr;
