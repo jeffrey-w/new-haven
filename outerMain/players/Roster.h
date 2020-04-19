@@ -42,6 +42,7 @@ public:
 	// each Player in this Roster. Throws an exception if either of the specified Decks are null.
 	void deal(Deck<HarvestTile*>*, Deck<Building*>*);
 
+
 	friend RosterView* rosterView(Roster*);
 
 private:
@@ -50,6 +51,7 @@ private:
 	std::map<long, Player*>* players;
 
 	Player* front(bool);
+	std::multimap<Player&, long> invert();
 
 };
 
