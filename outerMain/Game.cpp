@@ -159,6 +159,7 @@ void Game::endTurn() {
 	else {
 		players->next()->drawTile(tiles);
 	}
+	players->notify();
 }
 
 void Game::ensureSetup() {
