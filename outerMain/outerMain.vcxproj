@@ -117,7 +117,6 @@
   <ItemGroup>
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="views\GameView.cpp" />
     <ClCompile Include="observers\Observable.cpp" />
     <ClCompile Include="views\RosterView.cpp" />
@@ -145,7 +144,6 @@
   <ItemGroup>
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="views\GameView.h" />
     <ClInclude Include="observers\Observable.h" />
     <ClInclude Include="observers\Observer.h" />
