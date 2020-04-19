@@ -92,8 +92,8 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>* buildings) {
 	}
 }
 
-std::multimap<Player&, long> Roster::invert() {
-	std::multimap<Player&, long> sorted;
+std::multimap<const Player&, long> Roster::invert() {
+	std::multimap<const Player&, long> sorted;
 	for (auto& entry : *players) {
 		sorted.insert({ *entry.second, entry.first });
 	}
