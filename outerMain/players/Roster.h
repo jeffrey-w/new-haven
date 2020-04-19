@@ -8,7 +8,7 @@
 #include "Player.h"
 
 // A collection of New Haven Players.
-class Roster {
+class Roster : public Observable {
 	
 	static constexpr int TILE_HAND_SIZE = 2;
 
@@ -45,13 +45,17 @@ public:
 
 	friend RosterView* rosterView(Roster*);
 
+protected:
+
+	std::string* toString() const override;
+
 private:
 	
 	std::deque<long>* ids;
 	std::map<long, Player*>* players;
 
 	Player* front(bool);
-	std::multimap<const Player&, long> invert();
+	std::multimap<const Player&, long> invert() const;
 
 };
 

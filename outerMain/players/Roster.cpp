@@ -1,9 +1,12 @@
+#include <sstream>
+
 #include "Roster.h"
 #include "../util/Debug.h"
 
 using std::deque;
 using std::list;
 using std::map;
+using std::string;
 
 Roster::Roster() {
 	ids = new deque<long>();
@@ -92,7 +95,19 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>* buildings) {
 	}
 }
 
-std::multimap<const Player&, long> Roster::invert() {
+string* Roster::toString() const {
+	std::ostringstream stream;
+	for (auto& entry : invert()) {
+		stream << "Player " << entry.second << '\n';
+		stream << "villagers: " << entry.first.getVillagers();
+		stream << " built: " << entry.first.getBuilt();
+		stream << " unbuilt: " << entry.first.getUnbuilt() << '\n';
+	}
+	stream << '\n';
+	return new string(stream.str());
+}
+
+std::multimap<const Player&, long> Roster::invert() const {
 	std::multimap<const Player&, long> sorted;
 	for (auto& entry : *players) {
 		sorted.insert({ *entry.second, entry.first });
