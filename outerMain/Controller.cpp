@@ -44,6 +44,7 @@ void Controller::inputIDs() {
 void Controller::run() {
 	int exhausted;
 	while (!model->gameOver()) {
+		view->showStats();
 		view->showBoard();
 		view->showTiles();
 		view->showVillage();
@@ -108,7 +109,7 @@ void Controller::run() {
 	}
 	// Determine and display winner(s).
 	std::cout << "And our winner(s) is:\n";
-	// TODO game winning logic with observer
+	view->showStats();
 }
 
 bool Controller::rotateSelection() {
