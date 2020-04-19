@@ -10,9 +10,6 @@ Observable::Observable() {
 }
 
 Observable::~Observable() {
-	for (auto& observer : *observers) {
-		delete observer;
-	}
 	delete observers;
 }
 
