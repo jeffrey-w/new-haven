@@ -17,7 +17,7 @@ public:
 	void addPool(BuildingPool*);
 	void addPlayers(Roster*);
 	void rotate();
-	void showStats() const;
+	void showStats(const std::string&) const;
 	void showBoard() const;
 	void showResources() const;
 	void showPool() const;

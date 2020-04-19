@@ -2,6 +2,8 @@
 
 #include "GameView.h"
 
+using std::string;
+
 GameView::~GameView() {
 	delete board;
 	delete resources;
@@ -33,8 +35,8 @@ void GameView::rotate() {
 	players->rotate();
 }
 
-void GameView::showStats() const {
-	std::cout << "Game Stats\n";
+void GameView::showStats(const string& header) const {
+	std::cout << header << '\n';
 	stats->show();
 }
 
