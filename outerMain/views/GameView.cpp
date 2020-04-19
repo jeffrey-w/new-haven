@@ -9,6 +9,10 @@ GameView::~GameView() {
 	delete players;
 }
 
+void GameView::addStats(Roster* players) {
+	stats = new View(players);
+}
+
 void GameView::addBoard(GBMap* board) {
 	this->board = new View(board);
 }
@@ -27,6 +31,11 @@ void GameView::addPlayers(Roster* players) {
 
 void GameView::rotate() {
 	players->rotate();
+}
+
+void GameView::showStats() const {
+	std::cout << "Game Stats\n";
+	stats->show();
 }
 
 void GameView::showBoard() const {

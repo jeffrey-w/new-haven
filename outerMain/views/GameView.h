@@ -11,11 +11,13 @@ public:
 	GameView() = default;
 	GameView(const GameView&) = delete;
 	~GameView();
+	void addStats(Roster*);
 	void addBoard(GBMap*);
 	void addResources(GatherFacility*);
 	void addPool(BuildingPool*);
 	void addPlayers(Roster*);
 	void rotate();
+	void showStats() const;
 	void showBoard() const;
 	void showResources() const;
 	void showPool() const;
@@ -25,6 +27,7 @@ public:
 
 private:
 
+	View* stats;
 	View* board;
 	View* resources;
 	View* pool;
