@@ -15,7 +15,6 @@ Game::Game(int numPlayers) {
 	buildings = buildingDeck();
 	pool = new BuildingPool();
 	players = new Roster();
-	scores = new ScoreBoard();
 }
 
 Game::Game(const Game& other) {
@@ -28,7 +27,6 @@ Game::Game(const Game& other) {
 	buildings = new Deck<Building*>(*other.buildings);
 	pool = new BuildingPool(*other.pool);
 	players = new Roster(*other.players);
-	scores = new ScoreBoard(*other.scores);
 }
 
 Game::~Game() {
@@ -39,7 +37,6 @@ Game::~Game() {
 	delete buildings;
 	delete pool;
 	delete players;
-	delete scores;
 }
 
 int Game::numPlayers() const {
@@ -75,7 +72,6 @@ void Game::addPlayer(long id) {
 	Player* player = new Player(tiles->draw());
 	try {
 		players->add(id, player);
-		scores->add(id);
 	} catch (const std::invalid_argument& e) {
 		delete player;
 		throw e;
@@ -134,7 +130,6 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) {
 		resources->incrementBy(type, cost);
 		throw e;
 	}
-	current->calculateScore(scores, players->nextID());
 }
 
 void Game::yield() {

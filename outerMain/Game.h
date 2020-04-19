@@ -92,7 +92,6 @@ private:
 	Deck<Building*>* buildings;
 	BuildingPool* pool;
 	Roster* players;
-	ScoreBoard* scores;
 
 	bool atCapacity() const;
 	void setup();
