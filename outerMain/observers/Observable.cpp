@@ -14,9 +14,10 @@ Observable::~Observable() {
 }
 
 void Observable::attach(Observer* observer) {
-	if(!observers->count(observer)) {
-		observers->insert(observer);
+	if (!observer) {
+		throw std::invalid_argument("Cannot be subject to the null observer.");
 	}
+	observers->insert(observer);
 }
 
 void Observable::detach(Observer* observer) {
