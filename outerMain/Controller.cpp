@@ -70,7 +70,10 @@ void Controller::run() {
 						view->showVillage();
 						view->showResources();
 						view->showBuildings();
-					if (!buildSelection()) {
+					if (buildSelection()) {
+						view->showStats("Game stats");
+					}
+					else {
 						break;
 					}
 				}
