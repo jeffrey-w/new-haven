@@ -1,6 +1,6 @@
 #pragma once
 
-#include <exception>
+#include <ostream>
 
 #include "AbstractPiece.h"
 #include "BuildingToken.h"
