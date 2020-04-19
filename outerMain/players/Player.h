@@ -83,6 +83,4 @@ private:
 	VGMap* village;
 	BuildFacility* score;
 
-	void calculateScore();
-
 };
