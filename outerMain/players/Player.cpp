@@ -10,7 +10,7 @@ Player::Player(HarvestTile* shipment) {
 	tiles = new HarvestTileHand(shipment);
 	buildings = new BuildingHand();
 	village = new VGMap();
-	score = new BuildFacility();
+	score = new BuildFacility(buildings->getSize());
 }
 
 Player::Player(const Player& other){
@@ -68,10 +68,12 @@ void Player::drawBuilding(Deck<Building*>* deck) {
 		throw std::invalid_argument("Cannot draw from the null deck.");
 	}
 	buildings->insert(deck->draw());
+	score->setUnbuilt(buildings->getSize());
 }
 
 void Player::drawBuilding(BuildingPool* pool, int selection) {
 	buildings->insert(pool->remove(selection));
+	score->setUnbuilt(buildings->getSize());
 }
 
 void Player::drawTile(Deck<HarvestTile*>* deck) {
@@ -94,11 +96,8 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
 		buildings->insert(building);
 		throw e;
 	}
-	calculateScore();
-}
-
-void Player::calculateScore() {
-	score->update(village->calculateScore(), village->buildingCount(), buildings->getSize());
+	score->setVillagers(village->calculateScore());
+	score->setBuilt(village->buildingCount());
 }
 
 int Player::buildingType(int selection) const {
