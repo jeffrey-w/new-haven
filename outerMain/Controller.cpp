@@ -43,15 +43,16 @@ void Controller::inputIDs() {
 
 void Controller::run() {
 	int exhausted;
+	std::string current;
 	while (!model->gameOver()) {
+		current = "Player" + std::to_string(model->nextID());
 		view->showStats("Game stats");
 		view->showBoard();
 		view->showTiles();
 		view->showVillage();
 		view->showBuildings();
 		// Prompt player to rotate tiles.
-		while (in->decide("Player " + std::to_string(model->nextID())
-			+ ", do you want to rotate any of your tiles?")) {
+		while (in->decide(current + ", do you want to rotate any tiles?")) {
 			if (rotateSelection()) {
 				view->showTiles();
 			}
@@ -64,8 +65,7 @@ void Controller::run() {
 		view->showBoard();
 		// Play buildings and share resources with other players.
 		for (int i = 0; i < model->numPlayers(); i++) {
-			while (in->decide("Player " + std::to_string(model->nextID())
-				+ ", do you want to play a building?")) {
+			while (in->decide(current + ", do you want to play a building?")) {
 				if (model->canPlay()) {
 						view->showVillage();
 						view->showResources();
@@ -87,8 +87,7 @@ void Controller::run() {
 		}
 		// Draw new buildings.
 		if ((exhausted = model->exhausted()) && !model->gameOver()) {
-			std::cout << "Player " << model->nextID() << ", you must draw " << exhausted
-				<< " buildings.\n";
+			std::cout << current << ", you must draw " << exhausted << " buildings.\n";
 			view->showPool();
 			selectBuilding(false);
 			for (int i = 0; i < exhausted - 1; i++) {
