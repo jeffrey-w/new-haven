@@ -1,4 +1,3 @@
-#include <queue>
 #include <sstream>
 
 #include "../util/Debug.h"
@@ -7,7 +6,6 @@
 using std::array;
 using std::map;
 using std::pair;
-using std::queue;
 using std::string;
 
 VGMap::VGMap() {
