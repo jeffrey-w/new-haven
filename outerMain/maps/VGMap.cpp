@@ -3,7 +3,6 @@
 #include "../util/Debug.h"
 #include "VGMap.h"
 
-using std::array;
 using std::map;
 using std::pair;
 using std::string;
