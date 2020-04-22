@@ -9,7 +9,7 @@ public:
 
 	// Destroys this Observer.
 	virtual ~Observer() = default;
-	// Modifies the state of this Observer to reflect changes to its subject.
-	virtual void update(std::string*) = 0;
+	// Receives notifications of changes to this Observer's subject.
+	virtual void update() = 0;
 
 };
