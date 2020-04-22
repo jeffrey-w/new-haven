@@ -2,15 +2,26 @@
 
 #include "View.h"
 
-View::View(Observable* subject) {
+using std::string;
+
+View::View(Observable* subject, string* header) {
 	if (!subject) {
 		throw std::invalid_argument("Cannot observe the null subject.");
 	}
+	if (!header) {
+		throw std::invalid_argument("Cannot pass the null header");
+	}
 	subject->attach(this);
 	this->subject = subject;
+	this->header = header;
 }
 
-void View::show() const {
+View::~View() {
+	delete header;
+}
+
+void View::show(const string* header) const {
+	std::cout << (header ? *header : *this->header) << '\n';
 	std::cout << *subject;
 }
 
