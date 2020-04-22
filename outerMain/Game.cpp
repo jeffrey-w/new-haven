@@ -118,7 +118,6 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 		players->peek()->store(tile);
 		throw e;
 	}
-	board->notify();
 	resources->notify();
 }
 
