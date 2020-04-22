@@ -1,5 +1,7 @@
 #include "Controller.h"
 
+std::string Controller::WINNER_PROMPT = "And the final scores are...";
+
 Controller::Controller() {
 	model = nullptr;
 	view = nullptr;
@@ -45,6 +47,10 @@ void Controller::run() {
 	int exhausted;
 	std::string _current;
 	while (!model->gameOver()) {
+		view->showBoard();
+		view->showTiles();
+		view->showVillage();
+		view->showBuildings();
 		_current = current();
 		while (in->decide(_current + ", do you want to rotate any tiles?")) {
 			if (!rotateSelection()) {
@@ -55,6 +61,8 @@ void Controller::run() {
 		placeSelection();
 		// Play buildings and share resources with other players.
 		for (int i = 0; i < model->numPlayers(); i++) {
+			view->showVillage();
+			view->showBuildings();
 			while (in->decide(_current + ", do you want to play a building?")) {
 				if (model->canPlay()) {
 					if (!buildSelection()) {
@@ -71,6 +79,7 @@ void Controller::run() {
 			_current = current();
 		}
 		if ((exhausted = model->exhausted()) && !model->gameOver()) {
+			view->showPool();
 			std::cout << _current << ", you must draw " << exhausted << " buildings.\n";
 			selectBuilding(false);
 			for (int i = 0; i < exhausted - 1; i++) {
@@ -89,7 +98,7 @@ void Controller::run() {
 		view->rotate();
 	}
 	// Display winner(s).
-	view->showStats("And the final scores are...");
+	view->showStats(&WINNER_PROMPT);
 }
 
 bool Controller::rotateSelection() {
