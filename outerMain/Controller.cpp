@@ -46,11 +46,11 @@ void Controller::run() {
 	std::string current;
 	while (!model->gameOver()) {
 		current = "Player" + std::to_string(model->nextID());
-		view->showStats("Game stats");
-		view->showBoard();
-		view->showTiles();
-		view->showVillage();
-		view->showBuildings();
+		//view->showStats("Game stats");
+		//view->showBoard();
+		//view->showTiles();
+		//view->showVillage();
+		//view->showBuildings();
 		// Prompt player to rotate tiles.
 		while (in->decide(current + ", do you want to rotate any tiles?")) {
 			if (rotateSelection()) {
@@ -62,16 +62,16 @@ void Controller::run() {
 		}
 		// Play selected tile.
 		placeSelection();
-		view->showBoard();
+		//view->showBoard();
 		// Play buildings and share resources with other players.
 		for (int i = 0; i < model->numPlayers(); i++) {
 			while (in->decide(current + ", do you want to play a building?")) {
 				if (model->canPlay()) {
-						view->showVillage();
-						view->showResources();
-						view->showBuildings();
+						//view->showVillage();
+						//view->showResources();
+						//view->showBuildings();
 					if (buildSelection()) {
-						view->showStats("Game stats");
+						//view->showStats("Game stats");
 					}
 					else {
 						break;
@@ -91,13 +91,13 @@ void Controller::run() {
 			view->showPool();
 			selectBuilding(false);
 			for (int i = 0; i < exhausted - 1; i++) {
-				view->showPool();
+				/*view->showPool();*/
 				if (in->decide("Do you want to draw a building from the pool?")) {
 					if (!(selectBuilding())) {
 						i--;
 					}
 					else {
-						view->showPool();
+						/*view->showPool();*/
 					}
 				}
 				else {
