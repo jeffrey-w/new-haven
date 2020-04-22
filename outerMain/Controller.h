@@ -34,6 +34,7 @@ private:
 	void placeSelection();
 	bool buildSelection();
 	bool selectBuilding(bool = true);
+	std::string current();
 
 };
 
