@@ -26,10 +26,10 @@ void Observable::detach(Observer* observer) {
 
 void Observable::notify() {
 	for (auto& observer : *observers) {
-		observer->update(toString());
+		observer->update();
 	}
 }
 
 std::ostream& operator<<(std::ostream& stream, const Observable& o) {
-	return stream << o.toString();
+	return stream << *o.toString();
 }
