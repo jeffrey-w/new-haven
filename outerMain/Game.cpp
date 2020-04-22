@@ -103,6 +103,8 @@ void Game::playTile(int selection, pair<int, int> square) {
 	ensureSetup();
 	players->peek()->placeTile(selection, board, square);
 	board->calculateResources(square, resources);
+	board->notify();
+	resources->notify();
 }
 
 void Game::playShipment(pair<int, int> coordinate, int type) {
@@ -116,6 +118,8 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 		players->peek()->store(tile);
 		throw e;
 	}
+	board->notify();
+	resources->notify();
 }
 
 void Game::playBuilding(int selection, pair<int, int> coordinate) {
@@ -131,6 +135,7 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) {
 		throw e;
 	}
 	players->notify();
+	resources->notify();
 }
 
 void Game::yield() {
