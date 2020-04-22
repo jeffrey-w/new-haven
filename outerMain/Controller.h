@@ -8,6 +8,7 @@
 class Controller {
 
 	static constexpr int SHIPMENT = 3;
+	static std::string WINNER_PROMPT;
 
 public:
 
