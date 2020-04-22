@@ -71,7 +71,6 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
 	delete tile;
-	notify();
 }
 
 void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
@@ -81,7 +80,6 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
 		for (auto& coordinate : coordinatesOf(from, true)) {
 			graph->setTokenAt(new ResourceToken(*shipment), coordinate);
 		}
-		notify();
 	}
 	// Perform search for conntected resources starting from the four coordinates in from.
 	for (auto& coordinate : coordinatesOf(from)) {

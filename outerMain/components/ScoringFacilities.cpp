@@ -30,14 +30,12 @@ int GatherFacility::countOf(int type) const {
 
 void GatherFacility::incrementBy(int type, int amount) {
 	(*count)[AbstractToken::validateType(type)] += amount;
-	notify();
 }
 
 void GatherFacility::reset() {
 	for (auto& entry : *count) {
 		entry.second = 0;
 	}
-	notify();
 }
 
 string* GatherFacility::toString() const {

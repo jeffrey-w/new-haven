@@ -38,7 +38,6 @@ void HarvestTileHand::insert(HarvestTile* tile) {
 	else {
 		one = tile;
 	}
-	notify();
 }
 
 bool HarvestTileHand::isFull() const {
@@ -51,7 +50,6 @@ HarvestTile* HarvestTileHand::select(int selection) {
 
 void HarvestTileHand::rotate(int selection) {
 	validateSelection(selection, false)->rotate();
-	notify();
 }
 
 HarvestTile* HarvestTileHand::validateSelection(int selection, bool remove) {
@@ -95,7 +93,6 @@ HarvestTile* HarvestTileHand::ship() {
 	}
 	HarvestTile* tile = shipment;
 	shipment = nullptr;
-	notify();
 	return tile;
 }
 
@@ -104,7 +101,6 @@ void HarvestTileHand::receive(HarvestTile* tile) {
 		throw std::runtime_error("Shipment already exists.");
 	}
 	shipment = tile;
-	notify();
 }
 
 string* HarvestTileHand::toString() const {
@@ -142,14 +138,12 @@ size_t BuildingHand::getSize() const {
 
 void BuildingHand::insert(Building* building) {
 	owned->push_back(building);
-	notify();
 }
 
 Building* BuildingHand::select(int selection) {
 	int index = validateSelection(selection);
 	Building* building = (*owned)[index];
 	owned->erase(owned->begin() + index);
-	notify();
 	return building;
 }
 
@@ -216,7 +210,6 @@ void BuildingPool::replenish(Deck<Building*>* deck) {
 			(*pool)[i] = deck->draw();
 		}
 	}
-	notify();
 }
 
 Building* BuildingPool::remove(int selection) {
@@ -228,7 +221,6 @@ Building* BuildingPool::remove(int selection) {
 		throw std::invalid_argument("Building unavailable.");
 	}
 	(*pool)[selection] = nullptr;
-	notify();
 	return result;
 }
 

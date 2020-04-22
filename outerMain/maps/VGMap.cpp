@@ -43,7 +43,6 @@ void VGMap::setCircle(Building* building, pair<int, int> circle) {
 	validatePlacement(building, circle);
 	graph->setTokenAt(building->tokenize(), circle);
 	delete building;
-	notify();
 }
 
 void VGMap::validatePlacement(const Building* building, pair<int, int> circle) {
