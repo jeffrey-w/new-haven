@@ -69,11 +69,14 @@ void Player::drawBuilding(Deck<Building*>* deck) {
 	}
 	buildings->insert(deck->draw());
 	score->setUnbuilt(buildings->getSize());
+	buildings->notify();
 }
 
 void Player::drawBuilding(BuildingPool* pool, int selection) {
 	buildings->insert(pool->remove(selection));
 	score->setUnbuilt(buildings->getSize());
+	buildings->notify();
+	pool->notify();
 }
 
 void Player::drawTile(Deck<HarvestTile*>* deck) {
@@ -96,6 +99,8 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
 		buildings->insert(building);
 		throw e;
 	}
+	village->notify();
+	buildings->notify();
 	score->setVillagers(village->calculateScore());
 	score->setBuilt(village->buildingCount());
 	score->setUnbuilt(buildings->getSize());
@@ -117,6 +122,7 @@ void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
 
 void Player::rotateTile(int selection) {
 	tiles->rotate(selection);
+	tiles->notify();
 }
 
 void Player::placeTile(int selection, GBMap* map, pair<int, int> square) {
