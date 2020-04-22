@@ -43,10 +43,10 @@ void Controller::inputIDs() {
 
 void Controller::run() {
 	int exhausted;
-	std::string current;
+	std::string _current;
 	while (!model->gameOver()) {
-		current = "Player" + std::to_string(model->nextID());
-		while (in->decide(current + ", do you want to rotate any tiles?")) {
+		_current = current();
+		while (in->decide(_current + ", do you want to rotate any tiles?")) {
 			if (!rotateSelection()) {
 				break;
 			}
@@ -55,7 +55,7 @@ void Controller::run() {
 		placeSelection();
 		// Play buildings and share resources with other players.
 		for (int i = 0; i < model->numPlayers(); i++) {
-			while (in->decide(current + ", do you want to play a building?")) {
+			while (in->decide(_current + ", do you want to play a building?")) {
 				if (model->canPlay()) {
 					if (!buildSelection()) {
 						break;
@@ -68,10 +68,10 @@ void Controller::run() {
 			}
 			model->yield();
 			view->rotate();
+			_current = current();
 		}
 		if ((exhausted = model->exhausted()) && !model->gameOver()) {
-			std::cout << current << ", you must draw " << exhausted << " buildings.\n";
-			view->showPool();
+			std::cout << _current << ", you must draw " << exhausted << " buildings.\n";
 			selectBuilding(false);
 			for (int i = 0; i < exhausted - 1; i++) {
 				if (in->decide("Do you want to draw a building from the pool?")) {
@@ -170,4 +170,8 @@ bool Controller::selectBuilding(bool canCancel) {
 			std::cerr << e.what() << " Try again.\n";
 		}
 	} while (true);
+}
+
+std::string Controller::current() {
+	return "Player " + std::to_string(model->nextID());
 }
