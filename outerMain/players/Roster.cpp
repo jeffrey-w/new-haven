@@ -95,7 +95,7 @@ void Roster::deal(Deck<HarvestTile*>* tiles, Deck<Building*>* buildings) {
 	}
 }
 
-string* Roster::toString() const {
+string Roster::toString() const {
 	std::ostringstream stream;
 	for (auto& entry : invert()) {
 		stream << "Player " << entry.second << '\n';
@@ -104,7 +104,7 @@ string* Roster::toString() const {
 		stream << " unbuilt: " << entry.first.getUnbuilt() << '\n';
 	}
 	stream << '\n';
-	return new string(stream.str());
+	return stream.str();
 }
 
 std::multimap<const Player&, long> Roster::invert() const {

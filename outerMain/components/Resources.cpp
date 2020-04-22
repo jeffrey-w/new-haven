@@ -103,7 +103,7 @@ void HarvestTileHand::receive(HarvestTile* tile) {
 	shipment = tile;
 }
 
-string* HarvestTileHand::toString() const {
+string HarvestTileHand::toString() const {
 	std::ostringstream stream;
 	stream << "1\t\t2\t\t";
 	if (shipment) {
@@ -112,7 +112,7 @@ string* HarvestTileHand::toString() const {
 	stream << '\n';
 	HarvestTile::printHand(stream, *one, *two, shipment);
 	stream << '\n';
-	return new string(stream.str());
+	return stream.str();
 }
 
 BuildingHand::BuildingHand() {
@@ -158,7 +158,7 @@ int BuildingHand::validateSelection(int selection) const {
 	return --selection;
 }
 
-string* BuildingHand::toString() const {
+string BuildingHand::toString() const {
 	std::ostringstream stream;
 	for (int i = 0; i < owned->size(); i++) {
 		stream << i + 1 << '\t';
@@ -173,7 +173,7 @@ string* BuildingHand::toString() const {
 		}
 	}
 	stream << "\n\n";
-	return new string(stream.str());
+	return stream.str();
 }
 
 BuildingPool::BuildingPool() {
@@ -224,7 +224,7 @@ Building* BuildingPool::remove(int selection) {
 	return result;
 }
 
-string* BuildingPool::toString() const {
+string BuildingPool::toString() const {
 	std::ostringstream stream;
 	for (int i = 0; i < POOL_SIZE; i++) {
 		stream << i + 1 << '\t';
@@ -239,7 +239,7 @@ string* BuildingPool::toString() const {
 		}
 	}
 	stream << "\n\n";
-	return new string(stream.str());
+	return stream.str();
 }
 
 Deck<HarvestTile*>* harvestTileDeck() {

@@ -38,7 +38,7 @@ void GatherFacility::reset() {
 	}
 }
 
-string* GatherFacility::toString() const {
+string GatherFacility::toString() const {
 	std::ostringstream stream;
 	for (auto& entry : *count) {
 		int amount = entry.second;
@@ -59,7 +59,7 @@ string* GatherFacility::toString() const {
 		stream << std::to_string(entry.second) + " ";
 	}
 	stream << "\n\n";
-	return new string(stream.str());
+	return stream.str();
 }
 
 BuildFacility::BuildFacility(int unbuilt) : BuildFacility() {

@@ -128,7 +128,7 @@ int VGMap::countCols() {
 	return score;
 }
 
-string* VGMap::toString() const {
+string VGMap::toString() const {
 	std::ostringstream stream;
 	stream << '\t';
 	for (int i = 0; i < WIDTH; i++) {
@@ -148,5 +148,5 @@ string* VGMap::toString() const {
 		}
 		stream << "\n\n\n";
 	}
-	return new string(stream.str());
+	return stream.str();
 }

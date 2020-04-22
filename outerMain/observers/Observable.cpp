@@ -31,5 +31,5 @@ void Observable::notify() {
 }
 
 std::ostream& operator<<(std::ostream& stream, const Observable& o) {
-	return stream << *o.toString();
+	return stream << o.toString();
 }

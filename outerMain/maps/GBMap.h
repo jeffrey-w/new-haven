@@ -45,7 +45,7 @@ public:
 
 protected:
 
-	std::string* toString() const override;
+	std::string toString() const override;
 
 private:
 

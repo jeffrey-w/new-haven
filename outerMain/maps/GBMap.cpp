@@ -170,7 +170,7 @@ bool GBMap::isOnCorner(int row, int col) const {
 	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
 }
 
-string* GBMap::toString() const {
+string GBMap::toString() const {
 	int coordinate = 0;
 	std::ostringstream stream;
 	stream << '\t';
@@ -202,5 +202,5 @@ string* GBMap::toString() const {
 		}
 		stream << "\n\n\n";
 	}
-	return new string(stream.str());
+	return stream.str();
 }
