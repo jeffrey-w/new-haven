@@ -33,7 +33,7 @@ public:
 	// Selects the next Player to observe.
 	void rotate();
 	// Displays statistics for every Player Observed by this GameView with the specified header.
-	void showStats(const std::string&) const;
+	void showStats(const std::string*) const;
 	// Displays the GBMap Observed by this GameView.
 	void showBoard() const;
 	// Displays the GatherFacility observed by this GameView.
