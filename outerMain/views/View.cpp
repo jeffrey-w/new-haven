@@ -1,28 +1,19 @@
 #include <iostream>
-#include <sstream>
 
 #include "View.h"
 
-using std::string;
-
-View::View(Observable* o) {
-	if (!o) {
+View::View(Observable* subject) {
+	if (!subject) {
 		throw std::invalid_argument("Cannot observe the null subject.");
 	}
-	rep = nullptr;
-	o->attach(this);
-	o->notify();
-}
-
-View::~View() {
-	delete rep;
+	subject->attach(this);
+	this->subject = subject;
 }
 
 void View::show() const {
-	std::cout << *rep;
+	std::cout << *subject;
 }
 
-void View::update(string* rep) {
-	delete this->rep;
-	this->rep = rep;
+void View::update() {
+	show();
 }

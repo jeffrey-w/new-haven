@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 #include "../observers/Observable.h"
 #include "../observers/Observer.h"
 
@@ -16,15 +14,15 @@ public:
 	// Supress copy constructor.
 	View(const View&) = delete;
 	// Destroys this View.
-	~View();
+	~View() = default;
 	// Displays the subject of this View.
 	void show() const;
 	// Modifies the state of this View to reflect changes to its subject.
-	void update(std::string*) override;
+	void update() override;
 
 private:
 
-	std::string* rep;
+	Observable* subject;
 
 };
 
