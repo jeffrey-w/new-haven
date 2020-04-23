@@ -70,6 +70,7 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
 	for (auto& coordinate : coordinatesOf(square, true)) {
 		graph->setTokenAt(tile->tokenize(), coordinate);
 	}
+	notify();
 	delete tile;
 }
 

@@ -69,13 +69,11 @@ void Player::drawBuilding(Deck<Building*>* deck) {
 	}
 	buildings->insert(deck->draw());
 	score->setUnbuilt(buildings->getSize());
-	buildings->notify();
 }
 
 void Player::drawBuilding(BuildingPool* pool, int selection) {
 	buildings->insert(pool->remove(selection));
 	score->setUnbuilt(buildings->getSize());
-	buildings->notify();
 	pool->notify();
 }
 
@@ -99,8 +97,6 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
 		buildings->insert(building);
 		throw e;
 	}
-	village->notify();
-	buildings->notify();
 	score->setVillagers(village->calculateScore());
 	score->setBuilt(village->buildingCount());
 	score->setUnbuilt(buildings->getSize());

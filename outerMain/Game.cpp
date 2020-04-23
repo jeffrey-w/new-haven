@@ -103,7 +103,6 @@ void Game::playTile(int selection, pair<int, int> square) {
 	ensureSetup();
 	players->peek()->placeTile(selection, board, square);
 	board->calculateResources(square, resources);
-	board->notify();
 	resources->notify();
 }
 

@@ -138,6 +138,7 @@ size_t BuildingHand::getSize() const {
 
 void BuildingHand::insert(Building* building) {
 	owned->push_back(building);
+	notify();
 }
 
 Building* BuildingHand::select(int selection) {
