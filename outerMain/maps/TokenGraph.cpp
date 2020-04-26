@@ -159,10 +159,9 @@ void TokenGraph::setupSearchAttributes(AbstractToken* match) {
 	for (auto& entry : *nodes) {
 		Node* n = entry.second;
 		// Don't search Nodes more than once
-		if (*n->color == Node::BLACK) {
-			continue;
+		if (*n->color != Node::BLACK) {
+			n->init(n->token, match, n->adjacents);
 		}
-		n->init(n->token, match, n->adjacents);
 	}
 }
 
