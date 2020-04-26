@@ -100,6 +100,7 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
 	score->setVillagers(village->calculateScore());
 	score->setBuilt(village->buildingCount());
 	score->setUnbuilt(buildings->getSize());
+	buildings->notify();
 }
 
 int Player::buildingType(int selection) const {
