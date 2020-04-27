@@ -52,12 +52,13 @@ void Controller::run() {
 		view->showVillage();
 		view->showBuildings();
 		_current = current();
+		// Rotate tiles.
 		while (in->decide(_current + ", do you want to rotate any tiles?")) {
 			if (!rotateSelection()) {
 				break;
 			}
 		}
-		// Play selected tile.
+		// Select and play tile.
 		placeSelection();
 		// Play buildings and share resources with other players.
 		for (int i = 0; i < model->numPlayers(); i++) {
@@ -78,6 +79,7 @@ void Controller::run() {
 			view->rotate();
 			_current = current();
 		}
+		// Draw buildings.
 		if ((exhausted = model->exhausted()) && !model->gameOver()) {
 			view->showPool();
 			std::cout << _current << ", you must draw " << exhausted << " buildings.\n";
