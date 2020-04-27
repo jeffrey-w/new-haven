@@ -83,6 +83,7 @@ private:
 
 		HarvestTile* payload;
 		std::pair<int, int> coordinate;
+
 	};
 
 	GBMap* board;
