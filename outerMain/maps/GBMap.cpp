@@ -19,19 +19,19 @@ GBMap::GBMap(int numPlayers) {
 	graph = TokenGraph::gridOf(height(), width());
 }
 
-void GBMap::setNumPlayers(int numPlayers) {
-	if (numPlayers < PLAYERS_MIN || numPlayers > PLAYERS_MAX) {
-		throw std::invalid_argument(INVALID_NUM_PLAYERS);
-	}
-	this->numPlayers = new int(numPlayers);
-}
-
 GBMap::GBMap(const GBMap& other) : GBMap(*other.numPlayers) {
 	for (auto& entry : other.graph->tokens()) {
 		ResourceToken* orig = static_cast<ResourceToken*>(entry.second);
 		ResourceToken* resource = orig ? new ResourceToken(*orig) : nullptr;
 		graph->setTokenAt(resource, entry.first);
 	}
+}
+
+void GBMap::setNumPlayers(int numPlayers) {
+	if (numPlayers < PLAYERS_MIN || numPlayers > PLAYERS_MAX) {
+		throw std::invalid_argument(INVALID_NUM_PLAYERS);
+	}
+	this->numPlayers = new int(numPlayers);
 }
 
 GBMap::~GBMap() {
@@ -48,9 +48,9 @@ std::vector<std::pair<int, int>> GBMap::corners() const {
 	int rows = (height() - 1) >> 1, cols = (width() - 1) >> 1;
 	vector <pair<int, int>> corners;
 	corners.push_back({ 0, lower });
-	corners.push_back({ 0, cols  - lower});
-	corners.push_back({ rows, lower});
-	corners.push_back({ rows, cols - lower});
+	corners.push_back({ 0, cols  - lower });
+	corners.push_back({ rows, lower });
+	corners.push_back({ rows, cols - lower });
 	return corners;
 }
 
