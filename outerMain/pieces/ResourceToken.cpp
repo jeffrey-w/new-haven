@@ -9,7 +9,7 @@ using ResourceType = ResourceToken::ResourceType;
 ResourceToken::ResourceToken() : ResourceToken(randomType()) {}
 
 ResourceToken::ResourceType ResourceToken::randomType() {
-	return static_cast<ResourceType>(Random::next(0, 3));
+	return static_cast<ResourceType>(Random::next(0, AbstractToken::NUM_TYPES - 1));
 }
 
 ResourceToken::ResourceToken(ResourceType type) {
