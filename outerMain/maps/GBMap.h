@@ -12,7 +12,7 @@
 class GBMap : public Observable {
 
 	static constexpr int DIM_MIN = 10, DIM_MAX = 14;
-	static constexpr int PLAYERS_MIN = 2, PLAYERS_MAX = 4;
+	static constexpr int PLAYERS_MIN = 2, PLAYERS_MID = 3, PLAYERS_MAX = 4;
 	static std::string INVALID_NUM_PLAYERS;
 
 public:

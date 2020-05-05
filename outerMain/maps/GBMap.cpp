@@ -42,7 +42,7 @@ int GBMap::getNumPlayers() const {
 	return *numPlayers;
 }
 
-std::vector<std::pair<int, int>> GBMap::corners() const {
+vector<pair<int, int>> GBMap::corners() const {
 	int lower = *numPlayers == PLAYERS_MAX ? 1 : 0;
 	int rows = (height() - 1) >> 1, cols = (width() - 1) >> 1;
 	vector <pair<int, int>> corners;
@@ -104,10 +104,10 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources,
 
 int GBMap::height() const {
 	switch (*numPlayers) {
-	case 2:
+	case PLAYERS_MIN:
 		return DIM_MIN;
-	case 3:
-	case 4:
+	case PLAYERS_MID:
+	case PLAYERS_MAX:
 		return DIM_MAX;
 	default:
 		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
@@ -116,10 +116,10 @@ int GBMap::height() const {
 
 int GBMap::width() const {
 	switch (*numPlayers) {
-	case 2:
-	case 3:
+	case PLAYERS_MIN:
+	case PLAYERS_MID:
 		return DIM_MIN;
-	case 4:
+	case PLAYERS_MAX:
 		return DIM_MAX;
 	default:
 		throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
@@ -150,12 +150,12 @@ vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
 pair<int, int> GBMap::validateSquare(pair<int, int> square) const {
 	int row = square.first, col = square.second;
 	switch (*numPlayers) {
-	case 4:
+	case PLAYERS_MAX:
 		if (isOnCorner(row, col)) {
 			throw std::invalid_argument("Cannot place tiles on corners.");
 		}
-	case 2:
-	case 3:
+	case PLAYERS_MID:
+	case PLAYERS_MIN:
 		if (row < 0 || row >= width() || col < 0 || col >= height()) {
 			throw std::invalid_argument("Square is not on board.");
 		}
