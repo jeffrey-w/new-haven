@@ -21,9 +21,8 @@ GBMap::GBMap(int numPlayers) {
 
 GBMap::GBMap(const GBMap& other) : GBMap(*other.numPlayers) {
 	for (auto& entry : other.graph->tokens()) {
-		ResourceToken* orig = static_cast<ResourceToken*>(entry.second);
-		ResourceToken* resource = orig ? new ResourceToken(*orig) : nullptr;
-		graph->setTokenAt(resource, entry.first);
+		AbstractToken* token = entry.second;
+		graph->setTokenAt(token? token->clone() : nullptr, entry.first);
 	}
 }
 
@@ -193,9 +192,9 @@ string GBMap::toString() const {
 			stream << coordinate++ << '\t';
 		}
 		for (int j = 0; j < width(); j++) {
-			ResourceToken* resource = static_cast<ResourceToken*>(graph->tokenAt({ i, j }));
-			if (resource) {
-				stream << *resource << '\t';
+			AbstractToken* token = graph->tokenAt({ i, j });
+			if (token) {
+				stream << *token << '\t';
 			}
 			else {
 				stream << "-\t";
