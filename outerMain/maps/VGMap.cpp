@@ -13,9 +13,8 @@ VGMap::VGMap() {
 
 VGMap::VGMap(const VGMap& other) : VGMap() {
 	for (auto& entry : other.graph->tokens()) {
-		BuildingToken* orig = static_cast<BuildingToken*>(entry.second);
-		BuildingToken* building = orig ? new BuildingToken(*orig) : nullptr;
-		graph->setTokenAt(building, entry.first);
+		AbstractToken* token = entry.second;
+		graph->setTokenAt(token ? token->clone() : nullptr, entry.first);
 	}
 }
 
@@ -139,9 +138,9 @@ string VGMap::toString() const {
 	for (int i = 0; i < HEIGHT; i++) {
 		stream << i << '\t';
 		for (int j = 0; j < WIDTH; j++) {
-			BuildingToken* building = static_cast<BuildingToken*>(graph->tokenAt({ i, j }));
-			if (building) {
-				stream << *building << '\t';
+			AbstractToken* token = graph->tokenAt({ i, j });
+			if (token) {
+				stream << *token << '\t';
 			}
 			else {
 				stream << HEIGHT - i << "\t";
