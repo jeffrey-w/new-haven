@@ -1,4 +1,4 @@
-#include <iostream>
+#include <sstream>
 
 #include "../util/Debug.h"
 #include "../util/Random.h"
@@ -24,12 +24,17 @@ ResourceToken::~ResourceToken() {
 	delete type;
 }
 
+ResourceToken* ResourceToken::clone() const {
+	return new ResourceToken(*this);
+}
+
 int ResourceToken::getType() const {
 	return static_cast<int>(*type);
 }
 
-std::ostream& operator<<(std::ostream& stream, const ResourceToken& token) {
-	switch (*token.type) {
+std::string ResourceToken::toString() const {
+	std::ostringstream stream;
+	switch (*type) {
 	case ResourceType::SHEEP:
 		stream << "SH";
 		break;
@@ -43,5 +48,5 @@ std::ostream& operator<<(std::ostream& stream, const ResourceToken& token) {
 		stream << "WH";
 		break;
 	}
-	return stream;
+	return stream.str();
 }

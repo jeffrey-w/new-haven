@@ -24,10 +24,14 @@ public:
 	ResourceToken(const ResourceToken&);
 	// Destroys this ResourceToken object.
 	~ResourceToken();
+	// Returns a deep copy of this ResourceToken.
+	ResourceToken* clone() const override;
 	// Returns the type of this ResourceToken.
 	int getType() const override;
 
-	friend std::ostream& operator<<(std::ostream&, const ResourceToken&);
+protected:
+
+	std::string toString() const override;
 
 private:
 	

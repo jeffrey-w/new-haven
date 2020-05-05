@@ -20,3 +20,7 @@ int AbstractToken::validateType(int type) {
 	}
 	return type;
 }
+
+std::ostream& operator<<(std::ostream& stream, const AbstractToken& token) {
+	return stream << token.toString();
+}

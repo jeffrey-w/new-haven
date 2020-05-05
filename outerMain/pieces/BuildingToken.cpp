@@ -1,5 +1,4 @@
-#include <iostream>
-#include <string>
+#include <sstream>
 
 #include "../maps/VGMap.h"
 #include "../util/Debug.h"
@@ -43,6 +42,10 @@ BuildingToken::~BuildingToken() {
 	delete faceUp;
 }
 
+BuildingToken* BuildingToken::clone() const {
+	return new BuildingToken(*this);
+}
+
 void BuildingToken::flip() {
 	*faceUp = !(*faceUp);
 }
@@ -59,8 +62,9 @@ int BuildingToken::getValue() const {
 	return *value;
 }
 
-std::ostream& operator<<(std::ostream& stream, const BuildingToken& token) {
-	switch (*token.type) {
+std::string BuildingToken::toString() const {
+	std::ostringstream stream;
+	switch (*type) {
 		case BuildingType::FOREST:
 			stream << "F";
 			break;
@@ -74,5 +78,6 @@ std::ostream& operator<<(std::ostream& stream, const BuildingToken& token) {
 			stream << "W";
 			break;
 	}
-	return stream << *token.value;
+	stream << *value;
+	return stream.str();
 }

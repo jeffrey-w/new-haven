@@ -1,7 +1,5 @@
 #pragma once
 
-#include <ostream>
-
 #include "AbstractToken.h"
 
 // The token type that inhabits spaces on a VGMap.
@@ -27,6 +25,8 @@ public:
 	BuildingToken(const BuildingToken&);
 	// Destroys this BuildingToken.
 	~BuildingToken();
+	// Returns a deep copy of thos BuildingToken.
+	BuildingToken* clone() const override;
 	// Returns true iff this BuildingToken is face up.
 	bool isFaceUp() const;
 	// Returns the type of this BuildingToken.
@@ -36,7 +36,9 @@ public:
 	// Flips this BuildingToken. If it was previously face up, it becomes face down and vice versa.
 	void flip();
 
-	friend std::ostream& operator<<(std::ostream&, const BuildingToken&);
+protected:
+
+	std::string toString() const override;
 
 private:
 
