@@ -24,7 +24,7 @@ public:
 	// this prompt for input.
 	template <typename t>
 	t get(const std::string& prompt, const std::string& fail, bool canCancel = false) {
-		t result = t();
+		t result;
 		std::string input;
 		*_cancelled = false;
 		do {
