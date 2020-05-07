@@ -45,7 +45,7 @@ int GBMap::getNumPlayers() const {
 vector<pair<int, int>> GBMap::corners() const {
 	int lower = *numPlayers == PLAYERS_MAX ? 1 : 0;
 	int rows = (height() - 1) >> 1, cols = (width() - 1) >> 1;
-	vector <pair<int, int>> corners;
+	vector<pair<int, int>> corners;
 	corners.push_back({ 0, lower });
 	corners.push_back({ 0, cols  - lower });
 	corners.push_back({ rows, lower });
