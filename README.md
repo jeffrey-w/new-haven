@@ -10,9 +10,19 @@ The player who has attracted the most villagers at the end of the game wins!
 
 Building New Haven requires CMake.
 
-Navigate to your desired output directory and enter the following commands:
+First, clone this repository:
 
 ```
-cmake -G [desired build file type] <relative path to CMakeLists.txt>
-cmake --build . --target new-haven
+git clone https://github.com/jeffrey-w/New-Haven-2.git
+cd New-Haven-2
+```
+
+To build and install New Haven, enter the following commands:
+
+```
+mkdir bin
+cd bin
+cmake -G "Unix Makefiles" ../outerMain/
+make
+make install
 ```
