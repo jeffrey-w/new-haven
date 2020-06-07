@@ -24,3 +24,4 @@ add_executable(new-haven
     views/RosterView.cpp
     views/View.cpp
 )
+install(TARGETS new-haven DESTINATION bin)
