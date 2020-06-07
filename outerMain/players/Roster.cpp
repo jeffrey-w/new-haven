@@ -1,7 +1,6 @@
 #include <sstream>
 
 #include "Roster.h"
-#include "../util/Debug.h"
 
 using std::deque;
 using std::list;
@@ -107,8 +106,8 @@ string Roster::toString() const {
 	return stream.str();
 }
 
-std::multimap<const Player&, long> Roster::invert() const {
-	std::multimap<const Player&, long> sorted;
+std::multimap<const Player, long> Roster::invert() const {
+	std::multimap<const Player, long> sorted;
 	for (auto& entry : *players) {
 		sorted.insert({ *entry.second, entry.first });
 	}

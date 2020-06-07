@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "../util/Debug.h"
 #include "HarvestTile.h"
 
 using std::vector;

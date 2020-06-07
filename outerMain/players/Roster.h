@@ -55,7 +55,7 @@ private:
 	std::map<long, Player*>* players;
 
 	Player* front(bool);
-	std::multimap<const Player&, long> invert() const;
+	std::multimap<const Player, long> invert() const;
 
 };
 

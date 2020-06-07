@@ -1,6 +1,5 @@
 #include <stdexcept>
 
-#include "../util/Debug.h"
 #include "Building.h"
 
 Building::Building() {

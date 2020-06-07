@@ -1,6 +1,5 @@
 #include <sstream>
 
-#include "../util/Debug.h"
 #include "VGMap.h"
 
 using std::map;

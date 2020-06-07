@@ -2,7 +2,6 @@
 
 #include "../maps/TokenGraph.h"
 #include "../maps/VGMap.h"
-#include "../util/Debug.h"
 #include "Resources.h"
 
 using std::string;

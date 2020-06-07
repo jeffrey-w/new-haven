@@ -2,8 +2,7 @@
 #include <string>
 
 #include "../maps/VGMap.h"
-#include "../pieces/HarvestTile.h"
-#include "../util/Debug.h"
+#include "../pieces/AbstractToken.h"
 #include "ScoringFacilities.h"
 
 using std::map;
