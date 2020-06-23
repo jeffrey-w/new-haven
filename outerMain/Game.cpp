@@ -72,7 +72,8 @@ void Game::addPlayer(long id) {
 	try {
 		players->add(id, player);
 	} catch (const std::invalid_argument& e) {
-		delete player;
+        tiles->add(player->reap());
+        delete player;
 		throw e;
 	}
 	if (atCapacity()) {
