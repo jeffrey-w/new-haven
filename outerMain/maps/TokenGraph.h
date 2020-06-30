@@ -32,7 +32,7 @@ public:
 	// Returns the number of empty nodes on this TokenGraph.
 	int emptyNodes() const;
 	// Returns the Token occupying this TokenGraph at the specified coordinate, or null if the Node
-	// is empty. Throws an exceptionif the specified coordinate does not referecnce a Node of this
+	// is empty. Throws an exception if the specified coordinate does not referecnce a Node of this
 	// TokenGraph.
 	AbstractToken* tokenAt(std::pair<int, int>) const;
 	// Returns true iff this TokenGraph contains a Token of the specified type.
@@ -41,9 +41,8 @@ public:
 	// specified coordinate contain a Token of the specified type. Throws an exception if the
 	// specified coordinate does not reference a Node of this TokenGraph.
 	bool adjacentHolds(std::pair<int, int>, int) const;
-	// Places the specified Token into the Node at the specified coordinate of this TokenGraph. The
-	// status of the specified Token will be placed after calls to this method return. Throws an
-	// exception if the specified coordinate does not reference a Node of this TokenGraph.
+	// Places the specified Token into the Node at the specified coordinate of this TokenGraph. Throws
+    // an exception if the specified coordinate does not reference a Node of this TokenGraph.
 	void setTokenAt(AbstractToken*, std::pair<int, int>);
 	// Removes the Token occupying the node at the specified coordinate of this. Throws an
 	// exception if the specifeid coordinate does not reference a Node of this TokenGraph.
