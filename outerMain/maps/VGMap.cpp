@@ -58,9 +58,8 @@ void VGMap::validatePlacement(const Building* building, pair<int, int> circle) {
 	if (graph->tokenAt(circle)) {
 		throw std::invalid_argument("Circle is already occupied.");
 	}
-	type = building->getType();
 	// Type check (if type is already on map).
-	if(graph->hasType(type) && !graph->adjacentHolds(circle, type)) {
+	if(hasType(building->getType()) && !graph->adjacentHolds(circle, building->getType())) {
 		throw std::runtime_error("Building must be placed adjacent to same type.");
 	}
 	// Value check (if face up).
@@ -121,7 +120,7 @@ int VGMap::countCols() {
 			 * Column scores are as follow:
 			 * 0:5 | 1:4 | 2:3 | 3:4 | 4:5
 			 */
-			score += (HEIGHT - col + (col > 2 ? 2 * (col - 2) : 0)) << multiplier;
+			score += (HEIGHT - col + (col > 2 ? (col - 2) << 1 : 0)) << multiplier;
 		}
 	}
 	return score;
