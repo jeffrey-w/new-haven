@@ -3,7 +3,6 @@
 
 using std::pair;
 
-
 Game::Game() : Game(DEFAULT_NUM_PLAYERS) {}
 
 Game::Game(int numPlayers) {
@@ -21,6 +20,9 @@ Game::Game(const Game& other) {
 	if (other.shipment) {
 		shipment = new Shipment{ other.shipment->payload, other.shipment->coordinate };
 	}
+    else {
+        shipment = nullptr;
+    }
 	resources = new GatherFacility(*other.resources);
 	tiles = new Deck<HarvestTile*>(*other.tiles);
 	buildings = new Deck<Building*>(*other.buildings);
