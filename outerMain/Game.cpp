@@ -18,7 +18,7 @@ Game::Game(int numPlayers) {
 Game::Game(const Game& other) {
 	board = new GBMap(*other.board);
 	if (other.shipment) {
-		shipment = new Shipment{ other.shipment->payload, other.shipment->coordinate };
+		shipment = new Shipment{ new HarvestTile(*other.shipment->payload), other.shipment->coordinate };
 	}
     else {
         shipment = nullptr;
