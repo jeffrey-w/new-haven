@@ -60,5 +60,6 @@ private:
 	std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false) const;
 	std::pair<int, int> validateSquare(std::pair<int, int>) const;
 	bool isOnCorner(int, int) const;
+    bool isOverBoard(int, int) const;
 
 };

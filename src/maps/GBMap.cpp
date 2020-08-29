@@ -159,7 +159,7 @@ pair<int, int> GBMap::validateSquare(pair<int, int> square) const {
 		}
 	case PLAYERS_MID:
 	case PLAYERS_MIN:
-		if (row < 0 || row >= width() || col < 0 || col >= height()) {
+		if (isOverBoard(row, col)) {
 			throw std::invalid_argument("Square is not on board.");
 		}
 		break;
@@ -171,6 +171,10 @@ pair<int, int> GBMap::validateSquare(pair<int, int> square) const {
 
 bool GBMap::isOnCorner(int row, int col) const {
 	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
+}
+
+bool GBMap::isOverBoard(int row, int col) const {
+    return row < 0 || row > (height() - 1) >> 1 || col < 0 || col > (width() - 1) >> 1;
 }
 
 string GBMap::toString() const {
