@@ -22,7 +22,5 @@ To build and install New Haven, enter the following commands:
 ```
 mkdir bin
 cd bin
-cmake -G "Unix Makefiles" ../outerMain/
-make
-make install
+cmake -G <desired build files> ../src/
 ```
