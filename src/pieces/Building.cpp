@@ -3,44 +3,44 @@
 #include "Building.h"
 
 Building::Building() {
-	// Default constructor returns a random BuildingToken.
-	token = new BuildingToken();
+    // Default constructor returns a random BuildingToken.
+    token = new BuildingToken();
 }
 
 Building::Building(BuildingType type, int value) {
-	token = new BuildingToken(type, value);
+    token = new BuildingToken(type, value);
 }
 
-Building::Building(const Building& other) {
-	token = new BuildingToken(*other.token);
+Building::Building(const Building &other) {
+    token = new BuildingToken(*other.token);
 }
 
 Building::~Building() {
-	delete token;
+    delete token;
 }
 
 int Building::getType() const {
-	return token->getType();
+    return token->getType();
 }
 
 bool Building::isFaceUp() const {
-	return token->isFaceUp();
+    return token->isFaceUp();
 }
 
 int Building::getValue() const {
-	return token->getValue();
+    return token->getValue();
 }
 
-BuildingToken* Building::tokenize() {
-	BuildingToken* token = this->token;
-	this->token = nullptr;
-	return token;
+BuildingToken *Building::tokenize() {
+    BuildingToken *token = this->token;
+    this->token = nullptr;
+    return token;
 }
 
 void Building::flip() {
-	token->flip();
+    token->flip();
 }
 
-std::ostream& operator<<(std::ostream& stream, const Building& building) {
-	return stream << *building.token;
+std::ostream &operator<<(std::ostream &stream, const Building &building) {
+    return stream << *building.token;
 }
