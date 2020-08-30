@@ -8,16 +8,16 @@ The player who has attracted the most villagers at the end of the game wins!
 
 ## Build Instructions
 
-Building New Haven requires CMake.
+New Haven may be build from the command line using CMake.
 
 First, clone this repository:
 
 ```
-git clone https://github.com/jeffrey-w/New-Haven-2.git
-cd New-Haven-2
+git clone https://github.com/jeffrey-w/new-haven.git
+cd new-haven
 ```
 
-To build and install New Haven, enter the following commands:
+To build the game, enter the following commands:
 
 ```
 mkdir bin
