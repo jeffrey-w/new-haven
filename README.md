@@ -8,7 +8,7 @@ The player who has attracted the most villagers at the end of the game wins!
 
 ## Build Instructions
 
-New Haven may be build from the command line using CMake.
+New Haven may be built from the command line using CMake.
 
 First, clone this repository:
 
