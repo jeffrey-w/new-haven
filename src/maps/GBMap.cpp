@@ -170,7 +170,7 @@ pair<int, int> GBMap::validateSquare(pair<int, int> square) const {
 }
 
 bool GBMap::isOnCorner(int row, int col) const {
-	return (row == 0 || row == height() - 1) && (col == 0 || col == width() - 1);
+	return (row == 0 || row == (height() - 1) >> 1 ) && (col == 0 || col == (width() - 1) >> 1);
 }
 
 bool GBMap::isOverBoard(int row, int col) const {
