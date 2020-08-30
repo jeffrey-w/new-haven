@@ -133,7 +133,7 @@ void Player::placeTile(int selection, GBMap* map, pair<int, int> square) {
 		map->setSquare(tile, square);
 	} catch (const std::exception& e) {
 		tiles->insert(tile);
-		throw e;
+        std::rethrow_exception(std::current_exception());
 	}
 }
 

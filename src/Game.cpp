@@ -117,7 +117,7 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 		shipment = new Shipment{ tile, coordinate };
 	} catch (const std::exception& e) {
 		players->peek()->store(tile);
-		throw e;
+        std::rethrow_exception(std::current_exception());
 	}
 	resources->notify();
 }
