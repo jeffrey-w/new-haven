@@ -7,7 +7,6 @@
 
 // Records the number of resources available to Players.
 class GatherFacility : public Observable {
-
   public:
     // Constructs a new GatherFacility object.
     GatherFacility();
@@ -37,7 +36,6 @@ class GatherFacility : public Observable {
 
 // Records statistics about a Player's VGMap and BuildingHand.
 class BuildFacility {
-
   public:
     // Constructs a new BuildFacility object with the specified number of unbuilt Buildings
     // recorded onto it. Throws an exception if the specified number of unbuilt buildings is

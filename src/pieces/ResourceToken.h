@@ -4,7 +4,6 @@
 
 // The token type that comprises HarvestTiles.
 class ResourceToken : public AbstractToken {
-
   public:
     // The types a ResourceToken may have. (Corresponding BuildingTypes have corresponding
     // ordinals.)

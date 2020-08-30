@@ -4,7 +4,6 @@
 
 // Subscribes to Observables for updates.
 class Observer {
-
   public:
     // Destroys this Observer.
     virtual ~Observer() = default;

@@ -12,7 +12,6 @@ class PlayerView;
 
 // The players of New Haven.
 class Player {
-
   public:
     // Constructs a new Player object.
     Player();

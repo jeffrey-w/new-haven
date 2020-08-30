@@ -6,7 +6,6 @@
 
 // A facility for getting user input.
 class Input {
-
   public:
     // Constructs a new Input object.
     Input();
@@ -21,7 +20,8 @@ class Input {
 
     // Gets user input and interprets it as the specified type. If specified, the user may cancel
     // this prompt for input.
-    template <typename t> t get(const std::string& prompt, const std::string& fail, bool canCancel = false) {
+    template<typename t>
+    t get(const std::string& prompt, const std::string& fail, bool canCancel = false) {
         t result;
         std::string input;
         *_cancelled = false;

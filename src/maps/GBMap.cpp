@@ -9,9 +9,10 @@ using std::vector;
 
 // Statically initialize objects that are frequently used and/or expensive to create.
 std::string GBMap::INVALID_NUM_PLAYERS =
-    "Number of players must be between " + std::to_string(PLAYERS_MIN) + " and " + std::to_string(PLAYERS_MAX) + ".";
+        "Number of players must be between " + std::to_string(PLAYERS_MIN) + " and " + std::to_string(PLAYERS_MAX) + ".";
 
-GBMap::GBMap() : GBMap(Game::DEFAULT_NUM_PLAYERS) {}
+GBMap::GBMap() : GBMap(Game::DEFAULT_NUM_PLAYERS) {
+}
 
 GBMap::GBMap(int numPlayers) {
     setNumPlayers(numPlayers);

@@ -5,7 +5,6 @@
 
 // A utility to read a serialized GBMap and return it as an object.
 class GBMapLoader {
-
   public:
     // Suppress default constructor.
     GBMapLoader() = delete;

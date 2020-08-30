@@ -3,7 +3,8 @@
 
 using std::pair;
 
-Player::Player() : Player(new HarvestTile()) {}
+Player::Player() : Player(new HarvestTile()) {
+}
 
 Player::Player(HarvestTile* shipment) {
     tiles = new HarvestTileHand(shipment);

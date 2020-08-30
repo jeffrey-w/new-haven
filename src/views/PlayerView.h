@@ -5,7 +5,6 @@
 
 // Provides Views for a Player's posessions.
 class PlayerView {
-
   public:
     // Constructs a new PlayerView observing the specified Hands and VGMap. Throws an exception if
     // andy of the specified Observables are null.

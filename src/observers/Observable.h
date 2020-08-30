@@ -7,7 +7,6 @@
 
 // A subject to Observers.
 class Observable {
-
   public:
     // Constructs a new Observable object.
     Observable();

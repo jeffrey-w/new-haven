@@ -5,7 +5,6 @@
 
 // A utility to read a serialized VGMap and return it as an object.
 class VGMapLoader {
-
   public:
     // Suppress default constructor.
     VGMapLoader() = delete;

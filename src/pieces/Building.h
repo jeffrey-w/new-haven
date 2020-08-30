@@ -9,7 +9,6 @@ using BuildingType = BuildingToken::BuildingType;
 
 // The Piece that occupies BuildingDecks, BuildingHands, and BuildingPools.
 class Building : public AbstractPiece {
-
     friend class VGMapLoader;
 
   public:

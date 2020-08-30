@@ -5,7 +5,7 @@
 using std::vector;
 
 std::string HarvestTile::INVALID_ORIENTATION =
-    "Tile must have an orientation between 0 and " + std::to_string(HarvestTile::NUM_RESOURCES - 1) + ".";
+        "Tile must have an orientation between 0 and " + std::to_string(HarvestTile::NUM_RESOURCES - 1) + ".";
 
 HarvestTile::HarvestTile() : HarvestTile(0) {
     for (int i = 0; i < NUM_RESOURCES; i++) {
@@ -14,8 +14,8 @@ HarvestTile::HarvestTile() : HarvestTile(0) {
     }
 }
 
-HarvestTile::HarvestTile(ResourceToken* one, ResourceToken* two, ResourceToken* three, ResourceToken* four)
-    : HarvestTile(0) {
+HarvestTile::HarvestTile(ResourceToken* one, ResourceToken* two, ResourceToken* three, ResourceToken* four) :
+        HarvestTile(0) {
     resources->push_back(one);
     resources->push_back(two);
     resources->push_back(three);
@@ -80,7 +80,7 @@ std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
 }
 
 void HarvestTile::printHalf(std::ostream& stream, int from, bool countdown) const {
-    for (int i = 0; i<NUM_RESOURCES>> 1; i++) {
+    for (int i = 0; i<NUM_RESOURCES> > 1; i++) {
         stream << *(*resources)[from];
         if (countdown) {
             from--;

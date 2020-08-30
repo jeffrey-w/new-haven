@@ -3,7 +3,8 @@
 
 using std::pair;
 
-Game::Game() : Game(DEFAULT_NUM_PLAYERS) {}
+Game::Game() : Game(DEFAULT_NUM_PLAYERS) {
+}
 
 Game::Game(int numPlayers) {
     board = new GBMap(numPlayers);
@@ -18,7 +19,7 @@ Game::Game(int numPlayers) {
 Game::Game(const Game& other) {
     board = new GBMap(*other.board);
     if (other.shipment) {
-        shipment = new Shipment{new HarvestTile(*other.shipment->payload), other.shipment->coordinate};
+        shipment = new Shipment {new HarvestTile(*other.shipment->payload), other.shipment->coordinate};
     } else {
         shipment = nullptr;
     }
@@ -113,7 +114,7 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
     HarvestTile* tile = players->peek()->reap();
     try {
         board->calculateResources(coordinate, resources, &token);
-        shipment = new Shipment{tile, coordinate};
+        shipment = new Shipment {tile, coordinate};
     } catch (const std::exception& e) {
         players->peek()->store(tile);
         std::rethrow_exception(std::current_exception());

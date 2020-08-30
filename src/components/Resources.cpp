@@ -7,7 +7,8 @@
 using std::string;
 using std::vector;
 
-HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}
+HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {
+}
 
 HarvestTileHand::HarvestTileHand(HarvestTile* shipment) {
     one = nullptr;
@@ -244,13 +245,15 @@ Deck<HarvestTile*>* harvestTileDeck() {
         for (int j = 0; j < numTypes; j++) {
             if (i != j) {
                 // For each resource type i and each type j, add a new tile with three i and one j.
-                tiles->add(new HarvestTile(
-                    new ResourceToken(static_cast<ResourceType>(i)), new ResourceToken(static_cast<ResourceType>(i)),
-                    new ResourceToken(static_cast<ResourceType>(j)), new ResourceToken(static_cast<ResourceType>(i))));
+                tiles->add(new HarvestTile(new ResourceToken(static_cast<ResourceType>(i)),
+                        new ResourceToken(static_cast<ResourceType>(i)),
+                        new ResourceToken(static_cast<ResourceType>(j)),
+                        new ResourceToken(static_cast<ResourceType>(i))));
                 // For each resource type i and each type j, add a new tile with two i and two j.
-                tiles->add(new HarvestTile(
-                    new ResourceToken(static_cast<ResourceType>(i)), new ResourceToken(static_cast<ResourceType>(j)),
-                    new ResourceToken(static_cast<ResourceType>(j)), new ResourceToken(static_cast<ResourceType>(i))));
+                tiles->add(new HarvestTile(new ResourceToken(static_cast<ResourceType>(i)),
+                        new ResourceToken(static_cast<ResourceType>(j)),
+                        new ResourceToken(static_cast<ResourceType>(j)),
+                        new ResourceToken(static_cast<ResourceType>(i))));
             }
         }
     }
@@ -261,16 +264,16 @@ Deck<HarvestTile*>* harvestTileDeck() {
                     // For each resource type i, each type j, and each type k, add a new tile
                     // with two i (on the first column), one j, and one k.
                     tiles->add(new HarvestTile(new ResourceToken(static_cast<ResourceType>(i)),
-                                               new ResourceToken(static_cast<ResourceType>(j)),
-                                               new ResourceToken(static_cast<ResourceType>(k)),
-                                               new ResourceToken(static_cast<ResourceType>(i))));
+                            new ResourceToken(static_cast<ResourceType>(j)),
+                            new ResourceToken(static_cast<ResourceType>(k)),
+                            new ResourceToken(static_cast<ResourceType>(i))));
                     if (j < k) {
                         // For each resource type i, each type j, and each type k, add a new tile
                         // with two i (on the main diagonal), one j, and one k.
                         tiles->add(new HarvestTile(new ResourceToken(static_cast<ResourceType>(i)),
-                                                   new ResourceToken(static_cast<ResourceType>(j)),
-                                                   new ResourceToken(static_cast<ResourceType>(i)),
-                                                   new ResourceToken(static_cast<ResourceType>(k))));
+                                new ResourceToken(static_cast<ResourceType>(j)),
+                                new ResourceToken(static_cast<ResourceType>(i)),
+                                new ResourceToken(static_cast<ResourceType>(k))));
                     }
                 }
             }

@@ -9,7 +9,6 @@
 
 // The Board on which Players build their village.
 class VGMap : public Observable {
-
   public:
     static constexpr int HEIGHT = 6, WIDTH = 5;
 

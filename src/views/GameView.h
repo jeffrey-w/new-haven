@@ -6,7 +6,6 @@
 
 // Provides Views for several New Haven objects.
 class GameView {
-
   public:
     // Constructs a new GameView object.
     GameView() = default;

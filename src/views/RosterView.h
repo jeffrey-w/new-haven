@@ -6,7 +6,6 @@
 
 // A collection of PlayerViews.
 class RosterView {
-
   public:
     // Constructs a new RosterView.
     RosterView();

@@ -4,7 +4,6 @@
 
 // A utility to read the contents of a file.
 class Scanner {
-
   public:
     // Suppress default constructor.
     Scanner() = delete;

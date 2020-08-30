@@ -4,7 +4,6 @@
 
 // The token type that inhabits spaces on a VGMap.
 class BuildingToken : public AbstractToken {
-
   public:
     // The types a BuildingToken may have. (Corresponding ResourceTypes has corresponding
     // ordinals.)

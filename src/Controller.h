@@ -6,7 +6,6 @@
 
 // Maps user input to model input, and updates view.
 class Controller {
-
     static constexpr int SHIPMENT = 3;
     static std::string WINNER_PROMPT;
 

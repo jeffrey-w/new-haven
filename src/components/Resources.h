@@ -12,8 +12,8 @@
 #include "../util/Random.h"
 
 // A stack of pieces.
-template <class T> class Deck {
-
+template<class T>
+class Deck {
   public:
     // Constructs a new Deck object.
     Deck() {
@@ -67,8 +67,8 @@ template <class T> class Deck {
     std::vector<T>* pieces;
 };
 
-template <class T> class Deck<T*> {
-
+template<class T>
+class Deck<T*> {
   public:
     Deck() {
         pieces = new std::vector<T*>();
@@ -124,7 +124,6 @@ Deck<Building*>* buildingDeck();
 
 // The collection of HarvestTiles owned by a Player.
 class HarvestTileHand : public Observable {
-
   public:
     // Constructs a new HarvestTileHand object.
     HarvestTileHand();
@@ -166,7 +165,6 @@ class HarvestTileHand : public Observable {
 
 // The collection of Buildings owned by a Player.
 class BuildingHand : public Observable {
-
   public:
     // Constructs a new BuildingHand object.
     BuildingHand();
@@ -196,7 +194,6 @@ class BuildingHand : public Observable {
 
 // A common collection of Buildings.
 class BuildingPool : public Observable {
-
     static constexpr int POOL_SIZE = 5;
 
   public:

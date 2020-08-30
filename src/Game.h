@@ -9,7 +9,6 @@
 
 // A game of New Haven.
 class Game {
-
   public:
     static constexpr int DEFAULT_NUM_PLAYERS = 2;
 
@@ -78,7 +77,6 @@ class Game {
 
   private:
     struct Shipment {
-
         HarvestTile* payload;
         std::pair<int, int> coordinate;
     };

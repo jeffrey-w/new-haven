@@ -7,7 +7,6 @@
 
 // Observes a New Haven object.
 class View : public Observer {
-
   public:
     // Constructs a new View object and registers it with the specified Observable. Throws an
     // exception if the specified Observable is null.

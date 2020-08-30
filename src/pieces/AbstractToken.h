@@ -4,7 +4,6 @@
 
 // The base class from which all Tokens (i.e. occupants of TokenGraphs) shall be derived.
 class AbstractToken {
-
   public:
     static constexpr int NUM_TYPES = 4;
 

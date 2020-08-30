@@ -10,7 +10,6 @@ using ResourceType = ResourceToken::ResourceType;
 
 // The Piece that occupies HarvestTileDecks and HarvesTileHands.
 class HarvestTile : public AbstractPiece {
-
     friend class GBMapLoader;
 
     static std::string INVALID_ORIENTATION;

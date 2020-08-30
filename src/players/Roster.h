@@ -9,7 +9,6 @@
 
 // A collection of New Haven Players.
 class Roster : public Observable {
-
     static constexpr int TILE_HAND_SIZE = 2;
 
   public:

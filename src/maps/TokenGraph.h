@@ -7,7 +7,6 @@
 
 // A graph that holds AbstractTokens.
 class TokenGraph {
-
   public:
     // Static factory method: returns a TokenGraph configured as a grid of the specified height
     // and width.
@@ -64,7 +63,6 @@ class TokenGraph {
 
   private:
     class Node {
-
       public:
         // White: requires processing, Gray: in processing, Black: processed, Red: do not process
         static constexpr int WHITE = 0, GRAY = 1, BLACK = 2, RED = 3;

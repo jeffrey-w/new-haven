@@ -4,7 +4,8 @@
 #include "../util/Random.h"
 #include "BuildingToken.h"
 
-BuildingToken::BuildingToken() : BuildingToken(randomType(), randomValue()) {}
+BuildingToken::BuildingToken() : BuildingToken(randomType(), randomValue()) {
+}
 
 BuildingToken::BuildingType BuildingToken::randomType() {
     return static_cast<BuildingType>(Random::next(0, 3));
