@@ -18,7 +18,7 @@ void Controller::initGame() {
     do {
         try {
             model = new Game(in->get<int>("Enter number of players", "Must enter a number."));
-        } catch (const std::invalid_argument &e) {
+        } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << std::endl;
             if (in->decide("Accept default number of players (" + std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?")) {
                 model = new Game();
@@ -33,7 +33,7 @@ void Controller::inputIDs() {
             try {
                 model->addPlayer(in->get<long>("Enter ID for player " + std::to_string(i + 1), "Invalid ID."));
                 break;
-            } catch (const std::invalid_argument &e) {
+            } catch (const std::invalid_argument& e) {
                 std::cerr << e.what() << " Try again.\n";
             }
         } while (true);
@@ -109,7 +109,7 @@ bool Controller::rotateSelection() {
         try {
             model->rotateTile(selection);
             return true;
-        } catch (const std::exception &e) {
+        } catch (const std::exception& e) {
             std::cerr << e.what() << " Try again.\n";
         }
     } while (true);
@@ -129,14 +129,14 @@ void Controller::placeSelection() {
             try {
                 model->playShipment({row, col}, type);
                 break;
-            } catch (const std::exception &e) {
+            } catch (const std::exception& e) {
                 std::cerr << e.what() << " Try again.\n";
             }
         } else {
             try {
                 model->playTile(selection, {row, col});
                 break;
-            } catch (const std::exception &e) {
+            } catch (const std::exception& e) {
                 std::cerr << e.what() << " Try again.\n";
             }
         }
@@ -155,7 +155,7 @@ bool Controller::buildSelection() {
         try {
             model->playBuilding(selection, {row, col});
             return true;
-        } catch (const std::exception &e) {
+        } catch (const std::exception& e) {
             std::cerr << e.what() << " Try again.\n";
         }
     } while (true);
@@ -171,7 +171,7 @@ bool Controller::selectBuilding(bool canCancel) {
         try {
             model->drawFromPool(selection);
             return true;
-        } catch (const std::exception &e) {
+        } catch (const std::exception& e) {
             std::cerr << e.what() << " Try again.\n";
         }
     } while (true);

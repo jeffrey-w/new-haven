@@ -15,7 +15,7 @@ GatherFacility::GatherFacility() {
     }
 }
 
-GatherFacility::GatherFacility(const GatherFacility &other) {
+GatherFacility::GatherFacility(const GatherFacility& other) {
     count = new map<int, int>(*other.count);
 }
 
@@ -32,14 +32,14 @@ void GatherFacility::incrementBy(int type, int amount) {
 }
 
 void GatherFacility::reset() {
-    for (auto &entry : *count) {
+    for (auto& entry : *count) {
         entry.second = 0;
     }
 }
 
 string GatherFacility::toString() const {
     std::ostringstream stream;
-    for (auto &entry : *count) {
+    for (auto& entry : *count) {
         int amount = entry.second;
         switch (entry.first) {
         case 0:
@@ -65,7 +65,7 @@ BuildFacility::BuildFacility(int unbuilt) : BuildFacility() {
     setUnbuilt(unbuilt);
 }
 
-BuildFacility::BuildFacility(const BuildFacility &other) : BuildFacility() {
+BuildFacility::BuildFacility(const BuildFacility& other) : BuildFacility() {
     setVillagers(*other.villagers);
     setBuilt(*other.built);
     setUnbuilt(*other.unbuilt);
@@ -114,7 +114,7 @@ int BuildFacility::validateScore(int score) {
     return score;
 }
 
-bool BuildFacility::operator<(const BuildFacility &other) const {
+bool BuildFacility::operator<(const BuildFacility& other) const {
     if (*villagers != *other.villagers) {
         return *villagers < *other.villagers;
     }
@@ -124,6 +124,6 @@ bool BuildFacility::operator<(const BuildFacility &other) const {
     return *other.unbuilt < *unbuilt;
 }
 
-bool BuildFacility::operator==(const BuildFacility &other) const {
+bool BuildFacility::operator==(const BuildFacility& other) const {
     return *villagers == *other.villagers && *built == *other.built && *unbuilt == *other.unbuilt;
 }

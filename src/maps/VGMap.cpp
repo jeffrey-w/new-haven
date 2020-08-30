@@ -10,9 +10,9 @@ VGMap::VGMap() {
     graph = TokenGraph::gridOf(HEIGHT, WIDTH);
 }
 
-VGMap::VGMap(const VGMap &other) : VGMap() {
-    for (auto &entry : other.graph->tokens()) {
-        AbstractToken *token = entry.second;
+VGMap::VGMap(const VGMap& other) : VGMap() {
+    for (auto& entry : other.graph->tokens()) {
+        AbstractToken* token = entry.second;
         graph->setTokenAt(token ? token->clone() : nullptr, entry.first);
     }
 }
@@ -37,14 +37,14 @@ bool VGMap::adjacentHolds(pair<int, int> circle, int type) const {
     return graph->adjacentHolds(circle, type);
 }
 
-void VGMap::setCircle(Building *building, pair<int, int> circle) {
+void VGMap::setCircle(Building* building, pair<int, int> circle) {
     validatePlacement(building, circle);
     graph->setTokenAt(building->tokenize(), circle);
     notify();
     delete building;
 }
 
-void VGMap::validatePlacement(const Building *building, pair<int, int> circle) {
+void VGMap::validatePlacement(const Building* building, pair<int, int> circle) {
     int row = circle.first, col = circle.second, type;
     // Null check.
     if (!building) {
@@ -68,7 +68,7 @@ void VGMap::validatePlacement(const Building *building, pair<int, int> circle) {
     }
 }
 
-bool VGMap::valuesMatch(const Building *building, int row) {
+bool VGMap::valuesMatch(const Building* building, int row) {
     return building->getValue() == HEIGHT - row;
 }
 
@@ -78,11 +78,11 @@ int VGMap::calculateScore() {
 
 int VGMap::countRows() {
     int row, col, multiplier, score = 0;
-    BuildingToken *building;
+    BuildingToken* building;
     for (row = 0; row < HEIGHT; row++) {
         multiplier = 1;
         for (col = 0; col < WIDTH; col++) {
-            building = static_cast<BuildingToken *>(graph->tokenAt({row, col}));
+            building = static_cast<BuildingToken*>(graph->tokenAt({row, col}));
             if (building) {
                 if (!building->isFaceUp()) {
                     multiplier = 0;
@@ -100,11 +100,11 @@ int VGMap::countRows() {
 
 int VGMap::countCols() {
     int row, col, multiplier, score = 0;
-    BuildingToken *building;
+    BuildingToken* building;
     for (col = 0; col < WIDTH; col++) {
         multiplier = 1;
         for (row = 0; row < HEIGHT; row++) {
-            building = static_cast<BuildingToken *>(graph->tokenAt({row, col}));
+            building = static_cast<BuildingToken*>(graph->tokenAt({row, col}));
             if (building) {
                 if (!building->isFaceUp()) {
                     multiplier = 0;
@@ -134,7 +134,7 @@ string VGMap::toString() const {
     for (int i = 0; i < HEIGHT; i++) {
         stream << i << '\t';
         for (int j = 0; j < WIDTH; j++) {
-            AbstractToken *token = graph->tokenAt({i, j});
+            AbstractToken* token = graph->tokenAt({i, j});
             if (token) {
                 stream << *token << '\t';
             } else {

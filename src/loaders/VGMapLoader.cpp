@@ -5,7 +5,7 @@
 using std::pair;
 using std::string;
 
-VGMapLoader::VGMapLoader(const string &path) {
+VGMapLoader::VGMapLoader(const string& path) {
     scanner = new Scanner(path);
 }
 
@@ -13,9 +13,9 @@ VGMapLoader::~VGMapLoader() {
     delete scanner;
 }
 
-VGMap *VGMapLoader::load() {
-    Building *building = nullptr;
-    VGMap *map = new VGMap();
+VGMap* VGMapLoader::load() {
+    Building* building = nullptr;
+    VGMap* map = new VGMap();
     while (scanner->hasNext()) {
         try {
             building = nextBuilding();
@@ -24,7 +24,7 @@ VGMap *VGMapLoader::load() {
             if (scanner->hasNext()) {
                 scanner->consume('\n', errorMessage("Expect a new line"));
             }
-        } catch (const std::exception &e) {
+        } catch (const std::exception& e) {
             delete building;
             delete map;
             throw e;
@@ -33,11 +33,11 @@ VGMap *VGMapLoader::load() {
     return map;
 }
 
-Building *VGMapLoader::nextBuilding() {
+Building* VGMapLoader::nextBuilding() {
     bool faceup;
     int value;
     BuildingType type;
-    Building *building = nullptr;
+    Building* building = nullptr;
     try {
         scanner->consume('<', errorMessage("Expect a '<'"));
         type = static_cast<BuildingType>(scanner->nextInt());
@@ -52,7 +52,7 @@ Building *VGMapLoader::nextBuilding() {
         if (faceup) {
             building->flip();
         }
-    } catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         delete building;
         throw e;
     }
@@ -69,6 +69,6 @@ pair<int, int> VGMapLoader::nextCircle() {
     return pair<int, int>(one, two);
 }
 
-string VGMapLoader::errorMessage(const string &msg) {
+string VGMapLoader::errorMessage(const string& msg) {
     return msg + " at line " + std::to_string(scanner->line()) + ":" + std::to_string(scanner->column()) + ".";
 }

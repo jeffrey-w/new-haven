@@ -5,14 +5,14 @@ using std::pair;
 
 Player::Player() : Player(new HarvestTile()) {}
 
-Player::Player(HarvestTile *shipment) {
+Player::Player(HarvestTile* shipment) {
     tiles = new HarvestTileHand(shipment);
     buildings = new BuildingHand();
     village = new VGMap();
     score = new BuildFacility(buildings->getSize());
 }
 
-Player::Player(const Player &other) {
+Player::Player(const Player& other) {
     tiles = new HarvestTileHand(*other.tiles);
     buildings = new BuildingHand(*other.buildings);
     village = new VGMap(*other.village);
@@ -26,7 +26,7 @@ Player::~Player() {
     delete score;
 }
 
-bool Player::canPlay(GatherFacility *resources) const {
+bool Player::canPlay(GatherFacility* resources) const {
     int type;
     for (int i = 0; i < VGMap::HEIGHT; i++) {
         for (int j = 0; j < VGMap::WIDTH; j++) {
@@ -64,7 +64,7 @@ int Player::getUnbuilt() const {
     return score->getUnbuilt();
 }
 
-void Player::drawBuilding(Deck<Building *> *deck) {
+void Player::drawBuilding(Deck<Building*>* deck) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
     }
@@ -72,13 +72,13 @@ void Player::drawBuilding(Deck<Building *> *deck) {
     score->setUnbuilt(buildings->getSize());
 }
 
-void Player::drawBuilding(BuildingPool *pool, int selection) {
+void Player::drawBuilding(BuildingPool* pool, int selection) {
     buildings->insert(pool->remove(selection));
     score->setUnbuilt(buildings->getSize());
     pool->notify();
 }
 
-void Player::drawTile(Deck<HarvestTile *> *deck) {
+void Player::drawTile(Deck<HarvestTile*>* deck) {
     if (!deck) {
         throw std::invalid_argument("Cannot draw from the null deck.");
     }
@@ -86,7 +86,7 @@ void Player::drawTile(Deck<HarvestTile *> *deck) {
 }
 
 void Player::buildVillage(int selection, pair<int, int> circle) {
-    Building *building = buildings->select(selection);
+    Building* building = buildings->select(selection);
     if (building->getValue() == VGMap::HEIGHT - circle.first) {
         if (!building->isFaceUp()) {
             building->flip();
@@ -94,7 +94,7 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
     }
     try {
         village->setCircle(building, circle);
-    } catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         buildings->insert(building);
         std::rethrow_exception(std::current_exception());
     }
@@ -108,7 +108,7 @@ int Player::buildingType(int selection) const {
     return buildings->typeOf(selection);
 }
 
-void Player::resourceTracker(GatherFacility *resources, int type, int cost) {
+void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
     if (!resources) {
         throw std::invalid_argument("Cannot draw from null resources.");
     }
@@ -123,35 +123,35 @@ void Player::rotateTile(int selection) {
     tiles->notify();
 }
 
-void Player::placeTile(int selection, GBMap *map, pair<int, int> square) {
+void Player::placeTile(int selection, GBMap* map, pair<int, int> square) {
     if (!map) {
         throw std::invalid_argument("Cannot place on the null map.");
     }
-    HarvestTile *tile = tiles->select(selection);
+    HarvestTile* tile = tiles->select(selection);
     try {
         map->setSquare(tile, square);
-    } catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         tiles->insert(tile);
         std::rethrow_exception(std::current_exception());
     }
 }
 
-HarvestTile *Player::reap() {
+HarvestTile* Player::reap() {
     return tiles->ship();
 }
 
-void Player::store(HarvestTile *tile) {
+void Player::store(HarvestTile* tile) {
     tiles->receive(tile);
 }
 
-bool Player::operator<(const Player &other) const {
+bool Player::operator<(const Player& other) const {
     return *other.score < *score;
 }
 
-bool Player::operator==(const Player &other) const {
+bool Player::operator==(const Player& other) const {
     return *score == *other.score;
 }
 
-PlayerView *playerView(Player *player) {
+PlayerView* playerView(Player* player) {
     return new PlayerView(player->tiles, player->buildings, player->village);
 }

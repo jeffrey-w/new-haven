@@ -11,7 +11,7 @@ Building::Building(BuildingType type, int value) {
     token = new BuildingToken(type, value);
 }
 
-Building::Building(const Building &other) {
+Building::Building(const Building& other) {
     token = new BuildingToken(*other.token);
 }
 
@@ -31,8 +31,8 @@ int Building::getValue() const {
     return token->getValue();
 }
 
-BuildingToken *Building::tokenize() {
-    BuildingToken *token = this->token;
+BuildingToken* Building::tokenize() {
+    BuildingToken* token = this->token;
     this->token = nullptr;
     return token;
 }
@@ -41,6 +41,6 @@ void Building::flip() {
     token->flip();
 }
 
-std::ostream &operator<<(std::ostream &stream, const Building &building) {
+std::ostream& operator<<(std::ostream& stream, const Building& building) {
     return stream << *building.token;
 }

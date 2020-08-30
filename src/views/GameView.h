@@ -11,28 +11,28 @@ class GameView {
     // Constructs a new GameView object.
     GameView() = default;
     // Suppress copy constructor.
-    GameView(const GameView &) = delete;
+    GameView(const GameView&) = delete;
     // Destroys this GameView.
     ~GameView();
     // Registers an Observer with the specified Roster. Throws an exception if the specified Roster
     // is null.
-    void addStats(Roster *);
+    void addStats(Roster*);
     // Registers an Observer with the specified GBMap. Throws an exception if the specified GBMap
     // is null.
-    void addBoard(GBMap *);
+    void addBoard(GBMap*);
     // Registers an Observer with the specified GatherFacility. Throws an exception if the
     // specified GatherFacility is null.
-    void addResources(GatherFacility *);
+    void addResources(GatherFacility*);
     // Registers an Observer with the specified BuildingPool. Throws an exception if the specified
     // BuildingPool is null.
-    void addPool(BuildingPool *);
+    void addPool(BuildingPool*);
     // Registers Observers with the Players in the specified Roster. Throws an exception if the
     // specified Roster is null.
-    void addPlayers(Roster *);
+    void addPlayers(Roster*);
     // Selects the next Player to observe.
     void rotate();
     // Displays statistics for every Player Observed by this GameView with the specified header.
-    void showStats(const std::string *) const;
+    void showStats(const std::string*) const;
     // Displays the GBMap Observed by this GameView.
     void showBoard() const;
     // Displays the GatherFacility observed by this GameView.
@@ -47,11 +47,11 @@ class GameView {
     void showVillage() const;
 
   private:
-    View *stats;
-    View *board;
-    View *resources;
-    View *pool;
-    RosterView *players;
+    View* stats;
+    View* board;
+    View* resources;
+    View* pool;
+    RosterView* players;
 
-    static Observable *validateObservable(Observable *);
+    static Observable* validateObservable(Observable*);
 };

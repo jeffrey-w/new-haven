@@ -9,5 +9,5 @@ class AbstractPiece {
     // Destroys this AbstractPiece.
     virtual ~AbstractPiece() = default;
     // Iteratively returns the tokens that constitute this AbstractPiece.
-    virtual AbstractToken *tokenize() = 0;
+    virtual AbstractToken* tokenize() = 0;
 };

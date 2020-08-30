@@ -4,7 +4,7 @@
 
 #include "AbstractToken.h"
 
-bool AbstractToken::areSameType(AbstractToken *a, AbstractToken *b) {
+bool AbstractToken::areSameType(AbstractToken* a, AbstractToken* b) {
     if (!a) {
         return !b;
     }
@@ -19,6 +19,6 @@ int AbstractToken::validateType(int type) {
     return type;
 }
 
-std::ostream &operator<<(std::ostream &stream, const AbstractToken &token) {
+std::ostream& operator<<(std::ostream& stream, const AbstractToken& token) {
     return stream << token.toString();
 }

@@ -9,13 +9,13 @@ using std::vector;
 
 HarvestTileHand::HarvestTileHand() : HarvestTileHand(new HarvestTile()) {}
 
-HarvestTileHand::HarvestTileHand(HarvestTile *shipment) {
+HarvestTileHand::HarvestTileHand(HarvestTile* shipment) {
     one = nullptr;
     two = nullptr;
     this->shipment = shipment;
 }
 
-HarvestTileHand::HarvestTileHand(const HarvestTileHand &other) {
+HarvestTileHand::HarvestTileHand(const HarvestTileHand& other) {
     one = other.one ? new HarvestTile(*other.one) : nullptr;
     two = other.two ? new HarvestTile(*other.two) : nullptr;
     shipment = other.shipment ? new HarvestTile(*other.shipment) : nullptr;
@@ -27,7 +27,7 @@ HarvestTileHand::~HarvestTileHand() {
     delete shipment;
 }
 
-void HarvestTileHand::insert(HarvestTile *tile) {
+void HarvestTileHand::insert(HarvestTile* tile) {
     if (isFull()) {
         throw std::runtime_error("This hand is full.");
     }
@@ -42,7 +42,7 @@ bool HarvestTileHand::isFull() const {
     return one && two;
 }
 
-HarvestTile *HarvestTileHand::select(int selection) {
+HarvestTile* HarvestTileHand::select(int selection) {
     return validateSelection(selection, true);
 }
 
@@ -50,8 +50,8 @@ void HarvestTileHand::rotate(int selection) {
     validateSelection(selection, false)->rotate();
 }
 
-HarvestTile *HarvestTileHand::validateSelection(int selection, bool remove) {
-    HarvestTile *tile;
+HarvestTile* HarvestTileHand::validateSelection(int selection, bool remove) {
+    HarvestTile* tile;
     switch (selection) {
     case 1:
         if (one) {
@@ -83,16 +83,16 @@ bool HarvestTileHand::isEmpty() const {
     return !(one || two);
 }
 
-HarvestTile *HarvestTileHand::ship() {
+HarvestTile* HarvestTileHand::ship() {
     if (!shipment) {
         throw std::runtime_error("Shipment tile already played.");
     }
-    HarvestTile *tile = shipment;
+    HarvestTile* tile = shipment;
     shipment = nullptr;
     return tile;
 }
 
-void HarvestTileHand::receive(HarvestTile *tile) {
+void HarvestTileHand::receive(HarvestTile* tile) {
     if (shipment) {
         throw std::runtime_error("Shipment already exists.");
     }
@@ -112,17 +112,17 @@ string HarvestTileHand::toString() const {
 }
 
 BuildingHand::BuildingHand() {
-    owned = new vector<Building *>();
+    owned = new vector<Building*>();
 }
 
-BuildingHand::BuildingHand(const BuildingHand &other) : BuildingHand() {
-    for (auto &building : *other.owned) {
+BuildingHand::BuildingHand(const BuildingHand& other) : BuildingHand() {
+    for (auto& building : *other.owned) {
         owned->push_back(new Building(*building));
     }
 }
 
 BuildingHand::~BuildingHand() {
-    for (auto &building : *owned) {
+    for (auto& building : *owned) {
         delete building;
     }
     delete owned;
@@ -132,14 +132,14 @@ size_t BuildingHand::getSize() const {
     return owned->size();
 }
 
-void BuildingHand::insert(Building *building) {
+void BuildingHand::insert(Building* building) {
     owned->push_back(building);
     notify();
 }
 
-Building *BuildingHand::select(int selection) {
+Building* BuildingHand::select(int selection) {
     int index = validateSelection(selection);
-    Building *building = (*owned)[index];
+    Building* building = (*owned)[index];
     owned->erase(owned->begin() + index);
     return building;
 }
@@ -173,21 +173,21 @@ string BuildingHand::toString() const {
 }
 
 BuildingPool::BuildingPool() {
-    pool = new vector<Building *>();
+    pool = new vector<Building*>();
     for (int i = 0; i < POOL_SIZE; i++) {
         pool->push_back(nullptr);
     }
 }
 
-BuildingPool::BuildingPool(const BuildingPool &other) {
-    pool = new vector<Building *>();
-    for (auto &building : *other.pool) {
+BuildingPool::BuildingPool(const BuildingPool& other) {
+    pool = new vector<Building*>();
+    for (auto& building : *other.pool) {
         pool->push_back(new Building(*building));
     }
 }
 
 BuildingPool::~BuildingPool() {
-    for (auto &building : *pool) {
+    for (auto& building : *pool) {
         delete building;
     }
     delete pool;
@@ -197,7 +197,7 @@ size_t BuildingPool::getSize() const {
     return pool->size();
 }
 
-void BuildingPool::replenish(Deck<Building *> *deck) {
+void BuildingPool::replenish(Deck<Building*>* deck) {
     for (int i = 0; i < POOL_SIZE; i++) {
         if (deck->isEmpty()) {
             break;
@@ -208,8 +208,8 @@ void BuildingPool::replenish(Deck<Building *> *deck) {
     }
 }
 
-Building *BuildingPool::remove(int selection) {
-    Building *result = nullptr;
+Building* BuildingPool::remove(int selection) {
+    Building* result = nullptr;
     if (selection < 1 || selection > POOL_SIZE) {
         throw std::out_of_range("Pool only has five buildings.");
     }
@@ -226,7 +226,7 @@ string BuildingPool::toString() const {
         stream << i + 1 << '\t';
     }
     stream << '\n';
-    for (auto &building : *pool) {
+    for (auto& building : *pool) {
         if (building) {
             stream << *building << '\t';
         } else {
@@ -237,9 +237,9 @@ string BuildingPool::toString() const {
     return stream.str();
 }
 
-Deck<HarvestTile *> *harvestTileDeck() {
+Deck<HarvestTile*>* harvestTileDeck() {
     int numTypes = AbstractToken::NUM_TYPES;
-    Deck<HarvestTile *> *tiles = new Deck<HarvestTile *>();
+    Deck<HarvestTile*>* tiles = new Deck<HarvestTile*>();
     for (int i = 0; i < numTypes; i++) {
         for (int j = 0; j < numTypes; j++) {
             if (i != j) {
@@ -280,8 +280,8 @@ Deck<HarvestTile *> *harvestTileDeck() {
     return tiles;
 }
 
-Deck<Building *> *buildingDeck() {
-    Deck<Building *> *buildings = new Deck<Building *>();
+Deck<Building*>* buildingDeck() {
+    Deck<Building*>* buildings = new Deck<Building*>();
     for (int i = 0; i < VGMap::HEIGHT; i++) {
         for (int j = 0; j < VGMap::HEIGHT; j++) {
             for (int k = 0; k < AbstractToken::NUM_TYPES; k++) {

@@ -5,7 +5,7 @@
 using std::ifstream;
 using std::string;
 
-Scanner::Scanner(const string &path) {
+Scanner::Scanner(const string& path) {
     _line = new int(1);
     _col = new int(1);
     stream = new ifstream(path);
@@ -32,7 +32,7 @@ bool Scanner::hasNext() {
     return stream->peek() != EOF;
 }
 
-void Scanner::consume(char expected, const string &msg) {
+void Scanner::consume(char expected, const string& msg) {
     if (stream->peek() != expected) {
         throw std::runtime_error(msg);
     }
@@ -55,7 +55,7 @@ bool Scanner::nextBool() {
 
 int Scanner::nextInt() {
     int length = 0, result;
-    char *buffer;
+    char* buffer;
     if (!hasNext()) {
         throw std::out_of_range("At end of file.");
     }

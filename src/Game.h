@@ -19,7 +19,7 @@ class Game {
     // the specified number of players is not between two and four inclusive.
     Game(int);
     // Constructs a new Game object with the same state as the specified Game.
-    Game(const Game &);
+    Game(const Game&);
     // Destroys this Game.
     ~Game();
     // Returns the number of Players playing this Game.
@@ -74,22 +74,22 @@ class Game {
     // Throws an exception if this Game has not started.
     void endTurn();
 
-    friend GameView *gameView(Game *);
+    friend GameView* gameView(Game*);
 
   private:
     struct Shipment {
 
-        HarvestTile *payload;
+        HarvestTile* payload;
         std::pair<int, int> coordinate;
     };
 
-    GBMap *board;
-    Shipment *shipment;
-    GatherFacility *resources;
-    Deck<HarvestTile *> *tiles;
-    Deck<Building *> *buildings;
-    BuildingPool *pool;
-    Roster *players;
+    GBMap* board;
+    Shipment* shipment;
+    GatherFacility* resources;
+    Deck<HarvestTile*>* tiles;
+    Deck<Building*>* buildings;
+    BuildingPool* pool;
+    Roster* players;
 
     bool atCapacity() const;
     void setup();

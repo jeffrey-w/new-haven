@@ -19,7 +19,7 @@ class Building : public AbstractPiece {
     // the specified value is not between one and the Height of a VGMap.
     Building(BuildingType, int);
     // Constructs a new Building object with the same attributes as the specified Building.
-    Building(const Building &);
+    Building(const Building&);
     // Destroys this Building.
     ~Building();
     // Returns the type of this Building.
@@ -29,12 +29,12 @@ class Building : public AbstractPiece {
     // Returns the value of this Building.
     int getValue() const;
     // Returns the BuildingToken that constitutes this Building.
-    BuildingToken *tokenize() override;
+    BuildingToken* tokenize() override;
     // Flips this Building. If it was previously face up, it becomes face down and vice versa.
     void flip();
 
-    friend std::ostream &operator<<(std::ostream &, const Building &);
+    friend std::ostream& operator<<(std::ostream&, const Building&);
 
   private:
-    BuildingToken *token;
+    BuildingToken* token;
 };

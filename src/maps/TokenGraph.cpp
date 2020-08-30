@@ -8,8 +8,8 @@ using std::pair;
 using std::queue;
 using std::set;
 
-TokenGraph *TokenGraph::gridOf(int height, int width) {
-    TokenGraph *graph = new TokenGraph();
+TokenGraph* TokenGraph::gridOf(int height, int width) {
+    TokenGraph* graph = new TokenGraph();
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             // Add nodes before edges to avoid dereferencing null pointers.
@@ -32,14 +32,14 @@ TokenGraph *TokenGraph::gridOf(int height, int width) {
 
 TokenGraph::TokenGraph() {
     types = new int[AbstractToken::NUM_TYPES];
-    nodes = new map<pair<int, int>, Node *>();
+    nodes = new map<pair<int, int>, Node*>();
     for (int i = 0; i < AbstractToken::NUM_TYPES; i++) {
         types[i] = 0;
     }
 }
 
 TokenGraph::~TokenGraph() {
-    for (auto &node : *nodes) {
+    for (auto& node : *nodes) {
         delete node.second;
     }
     delete[] types;
@@ -51,8 +51,8 @@ void TokenGraph::addNode(pair<int, int> coordinate) {
 }
 
 void TokenGraph::addEdge(pair<int, int> one, pair<int, int> two) {
-    Node *m = nodeAt(one);
-    Node *n = nodeAt(two);
+    Node* m = nodeAt(one);
+    Node* n = nodeAt(two);
     m->adjacents->insert(n);
     n->adjacents->insert(m);
 }
@@ -69,7 +69,7 @@ int TokenGraph::emptyNodes() const {
     return nodes->size() - occupied;
 }
 
-AbstractToken *TokenGraph::tokenAt(pair<int, int> coordinate) const {
+AbstractToken* TokenGraph::tokenAt(pair<int, int> coordinate) const {
     return nodeAt(coordinate)->token;
 }
 
@@ -78,7 +78,7 @@ bool TokenGraph::hasType(int type) const {
 }
 
 bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) const {
-    for (auto &adjacent : *nodeAt(coordinate)->adjacents) {
+    for (auto& adjacent : *nodeAt(coordinate)->adjacents) {
         // Null check.
         if (!adjacent->token) {
             continue;
@@ -90,8 +90,8 @@ bool TokenGraph::adjacentHolds(pair<int, int> coordinate, int tokenType) const {
     return false;
 }
 
-void TokenGraph::setTokenAt(AbstractToken *token, pair<int, int> coordinate) {
-    Node *n = nodeAt(coordinate);
+void TokenGraph::setTokenAt(AbstractToken* token, pair<int, int> coordinate) {
+    Node* n = nodeAt(coordinate);
     if (n->token) {
         types[n->token->getType()]--;
     }
@@ -102,7 +102,7 @@ void TokenGraph::setTokenAt(AbstractToken *token, pair<int, int> coordinate) {
 }
 
 void TokenGraph::removeTokenAt(pair<int, int> coordinate) {
-    Node *n = nodeAt(coordinate);
+    Node* n = nodeAt(coordinate);
     types[n->token->getType()]--;
     delete n->token;
     n->token = nullptr;
@@ -117,12 +117,12 @@ bool TokenGraph::isSearched(std::pair<int, int> coordinate) {
 }
 
 void TokenGraph::cleanupSearch() {
-    for (auto &entry : *nodes) {
+    for (auto& entry : *nodes) {
         *entry.second->color = Node::WHITE;
     }
 }
 
-TokenGraph::Node *TokenGraph::nodeAt(pair<int, int> coordinate) const {
+TokenGraph::Node* TokenGraph::nodeAt(pair<int, int> coordinate) const {
     return (*nodes)[validateCoordinate(coordinate)];
 }
 
@@ -133,15 +133,15 @@ pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) const {
     return coordinate;
 }
 
-int TokenGraph::search(Node *s) {
+int TokenGraph::search(Node* s) {
     int count = 1;
     setupSearchAttributes(s->token);
     *s->color = Node::GRAY;
-    queue<Node *> q = queue<Node *>();
+    queue<Node*> q = queue<Node*>();
     q.push(s);
     while (!q.empty()) {
-        Node *u = q.front();
-        for (auto &v : *u->adjacents) {
+        Node* u = q.front();
+        for (auto& v : *u->adjacents) {
             if (*v->color == Node::WHITE) {
                 *v->color = Node::GRAY;
                 q.push(v);
@@ -154,9 +154,9 @@ int TokenGraph::search(Node *s) {
     return count;
 }
 
-void TokenGraph::setupSearchAttributes(AbstractToken *match) {
-    for (auto &entry : *nodes) {
-        Node *n = entry.second;
+void TokenGraph::setupSearchAttributes(AbstractToken* match) {
+    for (auto& entry : *nodes) {
+        Node* n = entry.second;
         // Don't search Nodes more than once
         if (*n->color != Node::BLACK) {
             n->init(n->token, match, n->adjacents);
@@ -164,9 +164,9 @@ void TokenGraph::setupSearchAttributes(AbstractToken *match) {
     }
 }
 
-map<pair<int, int>, AbstractToken *> TokenGraph::tokens() {
-    map<pair<int, int>, AbstractToken *> tokens;
-    for (auto &entry : *nodes) {
+map<pair<int, int>, AbstractToken*> TokenGraph::tokens() {
+    map<pair<int, int>, AbstractToken*> tokens;
+    for (auto& entry : *nodes) {
         tokens.insert({entry.first, entry.second->token});
     }
     return tokens;
@@ -182,9 +182,9 @@ TokenGraph::Node::~Node() {
     delete color;
 }
 
-void TokenGraph::Node::init(AbstractToken *token, AbstractToken *match, set<Node *> *adjacents) {
+void TokenGraph::Node::init(AbstractToken* token, AbstractToken* match, set<Node*>* adjacents) {
     this->token = token;
-    this->adjacents = (adjacents) ? adjacents : new set<Node *>();
+    this->adjacents = (adjacents) ? adjacents : new set<Node*>();
     // This node will be searched if it's connected to source of search.
     if (AbstractToken::areSameType(match, token)) {
         *color = WHITE;

@@ -14,7 +14,7 @@ class Controller {
     // Constructs a new Controller object.
     Controller();
     // Suppress copy constructor.
-    Controller(const Controller &) = delete;
+    Controller(const Controller&) = delete;
     // Deletes this Controller.
     ~Controller();
     // Initializes a Game from user input.
@@ -25,9 +25,9 @@ class Controller {
     void run();
 
   private:
-    Game *model;
-    GameView *view;
-    Input *in;
+    Game* model;
+    GameView* view;
+    Input* in;
 
     bool rotateSelection();
     void placeSelection();

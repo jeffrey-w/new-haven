@@ -11,20 +11,20 @@ class VGMapLoader {
     VGMapLoader() = delete;
     // Constructs a new VGMapLoader from the specified path. Throws an exception if the file at the
     // specified path cannot be opened.
-    VGMapLoader(const std::string &);
+    VGMapLoader(const std::string&);
     // Suppress copy constructor.
-    VGMapLoader(VGMapLoader &) = delete;
+    VGMapLoader(VGMapLoader&) = delete;
     // Destroys this VGMapLoader.
     ~VGMapLoader();
     // Returns a VGMap read from the file specified at the creation of this GBMapLoader. Throws an
     // exception if the specified file is not properly formatted or if it contains invalid map data.
-    VGMap *load();
+    VGMap* load();
 
   private:
-    Scanner *scanner;
+    Scanner* scanner;
 
-    Building *nextBuilding();
+    Building* nextBuilding();
     std::pair<int, int> nextCircle();
 
-    std::string errorMessage(const std::string &);
+    std::string errorMessage(const std::string&);
 };

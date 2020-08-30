@@ -14,7 +14,7 @@ HarvestTile::HarvestTile() : HarvestTile(0) {
     }
 }
 
-HarvestTile::HarvestTile(ResourceToken *one, ResourceToken *two, ResourceToken *three, ResourceToken *four)
+HarvestTile::HarvestTile(ResourceToken* one, ResourceToken* two, ResourceToken* three, ResourceToken* four)
     : HarvestTile(0) {
     resources->push_back(one);
     resources->push_back(two);
@@ -22,10 +22,10 @@ HarvestTile::HarvestTile(ResourceToken *one, ResourceToken *two, ResourceToken *
     resources->push_back(four);
 }
 
-HarvestTile::HarvestTile(const HarvestTile &other) {
+HarvestTile::HarvestTile(const HarvestTile& other) {
     current = new int(*other.current);
-    resources = new vector<ResourceToken *>();
-    for (auto &resource : *other.resources) {
+    resources = new vector<ResourceToken*>();
+    for (auto& resource : *other.resources) {
         resources->push_back(new ResourceToken(*resource));
     }
 }
@@ -35,11 +35,11 @@ HarvestTile::HarvestTile(int orientation) {
         throw std::invalid_argument(INVALID_ORIENTATION);
     }
     current = new int(orientation);
-    resources = new vector<ResourceToken *>();
+    resources = new vector<ResourceToken*>();
 }
 
 HarvestTile::~HarvestTile() {
-    for (auto &resource : *resources) {
+    for (auto& resource : *resources) {
         delete resource;
     }
     delete current;
@@ -50,15 +50,15 @@ void HarvestTile::rotate() {
     *current = ++(*current) & NUM_RESOURCES - 1;
 }
 
-ResourceToken *HarvestTile::tokenize() {
-    ResourceToken *returnToken = (*resources)[*current];
+ResourceToken* HarvestTile::tokenize() {
+    ResourceToken* returnToken = (*resources)[*current];
     (*resources)[(*current)++] = nullptr;
     // Avoid an expensive division op.
     *current &= NUM_RESOURCES - 1;
     return returnToken;
 }
 
-void HarvestTile::printHand(std::ostream &stream, const HarvestTile &one, const HarvestTile &two, bool shipment) {
+void HarvestTile::printHand(std::ostream& stream, const HarvestTile& one, const HarvestTile& two, bool shipment) {
     one.printHalf(stream, *one.current);
     two.printHalf(stream, *two.current);
     if (shipment) {
@@ -73,13 +73,13 @@ void HarvestTile::printHand(std::ostream &stream, const HarvestTile &one, const 
     stream << '\n';
 }
 
-std::ostream &operator<<(std::ostream &stream, const HarvestTile &tile) {
+std::ostream& operator<<(std::ostream& stream, const HarvestTile& tile) {
     tile.printHalf(stream, *tile.current);
     tile.printHalf(stream, (*tile.current + HarvestTile::NUM_RESOURCES - 1) & HarvestTile::NUM_RESOURCES - 1, true);
     return std::cout << '\n';
 }
 
-void HarvestTile::printHalf(std::ostream &stream, int from, bool countdown) const {
+void HarvestTile::printHalf(std::ostream& stream, int from, bool countdown) const {
     for (int i = 0; i<NUM_RESOURCES>> 1; i++) {
         stream << *(*resources)[from];
         if (countdown) {

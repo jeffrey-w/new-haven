@@ -13,7 +13,7 @@ class GatherFacility : public Observable {
     GatherFacility();
     // Constructs a new GatherFacility object initialized to the same state as the specified
     // GatherFacility.
-    GatherFacility(const GatherFacility &);
+    GatherFacility(const GatherFacility&);
     // Destroys this GatherFacility.
     ~GatherFacility();
     // Returns the amount of the sepcified resource type that has been recorded on this
@@ -32,7 +32,7 @@ class GatherFacility : public Observable {
 
   private:
     // key: ResourceType value: amount
-    std::map<int, int> *count;
+    std::map<int, int>* count;
 };
 
 // Records statistics about a Player's VGMap and BuildingHand.
@@ -44,7 +44,7 @@ class BuildFacility {
     // negative.
     BuildFacility(int);
     // Constructs a new BuildFacility in the same state as the sepcified BuildFacility.
-    BuildFacility(const BuildFacility &);
+    BuildFacility(const BuildFacility&);
     // Destroys this BuildFacility.
     ~BuildFacility();
     // Returns the number of villagers recorded by this BuildFacility.
@@ -63,13 +63,13 @@ class BuildFacility {
     // Throws an exception if the specified number is negative.
     void setUnbuilt(int);
 
-    bool operator<(const BuildFacility &) const;
-    bool operator==(const BuildFacility &) const;
+    bool operator<(const BuildFacility&) const;
+    bool operator==(const BuildFacility&) const;
 
   private:
-    int *villagers;
-    int *built;
-    int *unbuilt;
+    int* villagers;
+    int* built;
+    int* unbuilt;
 
     BuildFacility();
     int validateScore(int);

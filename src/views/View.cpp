@@ -4,7 +4,7 @@
 
 using std::string;
 
-View::View(Observable *subject, string *header) {
+View::View(Observable* subject, string* header) {
     if (!subject) {
         throw std::invalid_argument("Cannot observe the null subject.");
     }
@@ -20,7 +20,7 @@ View::~View() {
     delete header;
 }
 
-void View::show(const string *header) const {
+void View::show(const string* header) const {
     std::cout << (header ? *header : *this->header) << '\n';
     std::cout << *subject;
 }

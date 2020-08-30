@@ -11,12 +11,12 @@ class RosterView {
     // Constructs a new RosterView.
     RosterView();
     // Suppress copy constructor.
-    RosterView(const RosterView &) = delete;
+    RosterView(const RosterView&) = delete;
     // Destroys this RosterView.
     ~RosterView();
     // Adds the specified PlayerView to this RosterView. Throws an exception if the specified
     // PlayerView is null.
-    void addView(PlayerView *);
+    void addView(PlayerView*);
     // Selects the next Player to observe.
     void rotate();
     // Displays the HarvestTileHand observed by this RosterView.
@@ -27,6 +27,6 @@ class RosterView {
     void showVillage() const;
 
   private:
-    int *current;
-    std::vector<PlayerView *> *players;
+    int* current;
+    std::vector<PlayerView*>* players;
 };

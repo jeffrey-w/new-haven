@@ -10,9 +10,9 @@ class Scanner {
     Scanner() = delete;
     // Constructs a new Scanner object from the specified file path. Throws an exception if the
     // file at the specified path cannot be opened.
-    Scanner(const std::string &);
+    Scanner(const std::string&);
     // Suppress copy constructor.
-    Scanner(Scanner &) = delete;
+    Scanner(Scanner&) = delete;
     // Destroys this Scanner.
     ~Scanner();
     // Returns the line number of the file specified at the creation of this Scanner that it is
@@ -27,7 +27,7 @@ class Scanner {
     // Reads the next character of the file specified at the creation of this Scanner and matches
     // it against the specified character. Throws an exception initialized with the specified
     // message if the characters do not match.
-    void consume(char, const std::string &);
+    void consume(char, const std::string&);
     // Returns the next character of the file specified at the ceration of this Scanner. Throws an
     // exception if the file has been consumed.
     char nextChar();
@@ -40,9 +40,9 @@ class Scanner {
     int nextInt();
 
   private:
-    int *_line;
-    int *_col;
-    std::ifstream *stream;
+    int* _line;
+    int* _col;
+    std::ifstream* stream;
 
     char advance();
     bool isDigit(char);

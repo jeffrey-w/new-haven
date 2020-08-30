@@ -15,7 +15,7 @@ ResourceToken::ResourceToken(ResourceType type) {
     this->type = new ResourceType(type);
 }
 
-ResourceToken::ResourceToken(const ResourceToken &other) : AbstractToken(other) {
+ResourceToken::ResourceToken(const ResourceToken& other) : AbstractToken(other) {
     type = new ResourceType(*other.type);
 }
 
@@ -23,7 +23,7 @@ ResourceToken::~ResourceToken() {
     delete type;
 }
 
-ResourceToken *ResourceToken::clone() const {
+ResourceToken* ResourceToken::clone() const {
     return new ResourceToken(*this);
 }
 

@@ -12,7 +12,7 @@ bool Input::cancelled() const {
     return *_cancelled;
 }
 
-bool Input::decide(const std::string &prompt) {
+bool Input::decide(const std::string& prompt) {
     bool decision, undecided = true;
     do {
         std::cout << prompt << " Y/n: ";

@@ -22,7 +22,7 @@ class GBMap : public Observable {
     // the specified number of players is not between two and four inclusive.
     GBMap(int);
     // Constructs a new GBMap object with the same configuration as the specified GBMap.
-    GBMap(const GBMap &);
+    GBMap(const GBMap&);
     // Destroys this GBMap.
     ~GBMap();
     // Returns the number of Playrs playing on this GBMap.
@@ -34,20 +34,20 @@ class GBMap : public Observable {
     // Places the specified HarvestTile onto the specified square of this GBMap. The specified
     // HarvestTile is destroyed. Throws an exception if the specified HarvestTile is null; or if
     // the specified square is not on this GBMap or if it is already occupied.
-    void setSquare(HarvestTile *, std::pair<int, int>);
+    void setSquare(HarvestTile*, std::pair<int, int>);
     // Counts, starting from the specified square, and records on the specified GatherFacility the
     // number of connected resources of each type on this GBMap. If the specified ResourceToken is
     // not null, then four copies of it will occupy the specified square before counting begins,
     // and then removed afterwards. Throws an exception if the specified square is not on this
     // GBMap.
-    void calculateResources(std::pair<int, int>, GatherFacility *, ResourceToken * = nullptr);
+    void calculateResources(std::pair<int, int>, GatherFacility*, ResourceToken* = nullptr);
 
   protected:
     std::string toString() const override;
 
   private:
-    int *numPlayers;
-    TokenGraph *graph;
+    int* numPlayers;
+    TokenGraph* graph;
 
     static std::vector<std::pair<int, int>> expand(std::pair<int, int>);
 

@@ -4,18 +4,18 @@ using std::vector;
 
 RosterView::RosterView() {
     current = new int(0);
-    players = new vector<PlayerView *>();
+    players = new vector<PlayerView*>();
 }
 
 RosterView::~RosterView() {
-    for (auto &player : *players) {
+    for (auto& player : *players) {
         delete player;
     }
     delete current;
     delete players;
 }
 
-void RosterView::addView(PlayerView *view) {
+void RosterView::addView(PlayerView* view) {
     if (!view) {
         throw std::invalid_argument("Cannot observe the null subject.");
     }

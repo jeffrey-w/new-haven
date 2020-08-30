@@ -16,7 +16,7 @@ class VGMap : public Observable {
     // Constructs a new VGMap object.
     VGMap();
     // Constructs a new VGMap object with the same configuration as the specified VGMap.
-    VGMap(const VGMap &);
+    VGMap(const VGMap&);
     // Destroys this VGMap.
     ~VGMap();
     // Returns true iff no Building occupies this VGMap at the specified circle. Throws an Exception
@@ -36,7 +36,7 @@ class VGMap : public Observable {
     // (2) the specified circle is not on this VGMap or it is already occupied,
     // (3) the specified Building is not being placed adjacent to another of the same type, or
     // (4) the specified Building is being played face up on a circle that is not the correct value.
-    void setCircle(Building *, std::pair<int, int>);
+    void setCircle(Building*, std::pair<int, int>);
     // Counts the villagers that have been attracted to this VGMap.
     int calculateScore();
 
@@ -44,11 +44,11 @@ class VGMap : public Observable {
     std::string toString() const override;
 
   private:
-    TokenGraph *graph;
+    TokenGraph* graph;
 
-    static bool valuesMatch(const Building *, int);
+    static bool valuesMatch(const Building*, int);
 
-    void validatePlacement(const Building *, std::pair<int, int>);
+    void validatePlacement(const Building*, std::pair<int, int>);
     int countRows();
     int countCols();
 };

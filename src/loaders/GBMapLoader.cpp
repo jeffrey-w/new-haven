@@ -5,7 +5,7 @@
 using std::pair;
 using std::string;
 
-GBMapLoader::GBMapLoader(const string &path) {
+GBMapLoader::GBMapLoader(const string& path) {
     scanner = new Scanner(path);
 }
 
@@ -13,16 +13,16 @@ GBMapLoader::~GBMapLoader() {
     delete scanner;
 }
 
-GBMap *GBMapLoader::load() {
-    HarvestTile *tile = nullptr;
-    GBMap *map = new GBMap(getNumPlayers());
+GBMap* GBMapLoader::load() {
+    HarvestTile* tile = nullptr;
+    GBMap* map = new GBMap(getNumPlayers());
     while (scanner->hasNext()) {
         try {
             scanner->consume('\n', errorMessage("Expect a new line"));
             tile = nextTile();
             pair<int, int> square = nextSquare();
             map->setSquare(tile, square);
-        } catch (const std::exception &e) {
+        } catch (const std::exception& e) {
             delete tile;
             delete map;
             throw e;
@@ -39,8 +39,8 @@ int GBMapLoader::getNumPlayers() {
     return numPlayers;
 }
 
-HarvestTile *GBMapLoader::nextTile() {
-    HarvestTile *tile = nullptr;
+HarvestTile* GBMapLoader::nextTile() {
+    HarvestTile* tile = nullptr;
     try {
         scanner->consume('<', errorMessage("Expect a '<'"));
         tile = new HarvestTile(scanner->nextInt());
@@ -54,14 +54,14 @@ HarvestTile *GBMapLoader::nextTile() {
                 scanner->consume('>', errorMessage("Expect a '>'"));
             }
         }
-    } catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         delete tile;
         throw e;
     }
     return tile;
 }
 
-ResourceToken *GBMapLoader::nextToken() {
+ResourceToken* GBMapLoader::nextToken() {
     return new ResourceToken(static_cast<ResourceType>(scanner->nextInt()));
 }
 
@@ -75,6 +75,6 @@ pair<int, int> GBMapLoader::nextSquare() {
     return pair<int, int>(one, two);
 }
 
-string GBMapLoader::errorMessage(const string &msg) {
+string GBMapLoader::errorMessage(const string& msg) {
     return msg + " at line " + std::to_string(scanner->line()) + ":" + std::to_string(scanner->column()) + ".";
 }

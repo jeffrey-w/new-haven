@@ -15,11 +15,11 @@ class ResourceToken : public AbstractToken {
     // Constructs a new ResourceToken object with the specified type.
     ResourceToken(ResourceType);
     // Constructs a new ResourceToken object with the same type as the specified ResourceToken.
-    ResourceToken(const ResourceToken &);
+    ResourceToken(const ResourceToken&);
     // Destroys this ResourceToken object.
     ~ResourceToken();
     // Returns a deep copy of this ResourceToken.
-    ResourceToken *clone() const override;
+    ResourceToken* clone() const override;
     // Returns the type of this ResourceToken.
     int getType() const override;
 
@@ -27,7 +27,7 @@ class ResourceToken : public AbstractToken {
     std::string toString() const override;
 
   private:
-    ResourceType *type;
+    ResourceType* type;
 
     static ResourceToken::ResourceType randomType();
 };

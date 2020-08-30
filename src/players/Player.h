@@ -17,14 +17,14 @@ class Player {
     // Constructs a new Player object.
     Player();
     // Constructs a new Player object with the specified shipment tile;
-    Player(HarvestTile *);
+    Player(HarvestTile*);
     // Constructs a new Player object with the same attributes as the specified Player.
-    Player(const Player &);
+    Player(const Player&);
     // Destroys this Player.
     ~Player();
     // Returns true iff the this Player is able to build on their VGMap with the resources
     // available in the specified GatherFacility.
-    bool canPlay(GatherFacility *) const;
+    bool canPlay(GatherFacility*) const;
     // Returns the number of villagers this Player has attracted to their VGMap.
     int getVillagers() const;
     // Returns the number of Buildings this Player has built on thier VGMap.
@@ -33,14 +33,14 @@ class Player {
     int getUnbuilt() const;
     // Induces this Player to draw a Building from the specified Deck. Throws an exception if the
     // specified Deck is null or empty.
-    void drawBuilding(Deck<Building *> *);
+    void drawBuilding(Deck<Building*>*);
     // Induces this Player to select a Building from the specified BuildingPool. Throws an
     // exception if the specified BuildingPool is null, if the specified selection is out of range,
     // or if it specifies a non-existant building.
-    void drawBuilding(BuildingPool *, int);
+    void drawBuilding(BuildingPool*, int);
     // Induces this Player to draw a HarvestTile from the specified Deck. Throws an exception if
     // the specified Deck is null or empty.
-    void drawTile(Deck<HarvestTile *> *);
+    void drawTile(Deck<HarvestTile*>*);
     // Returns the type of the selected Building. Throws an exception if the selected building is
     // not consistent with this Player's hand.
     int buildingType(int) const;
@@ -54,7 +54,7 @@ class Player {
     // specified cost. Throws an exception if the specified type is out of the specified
     // GatherFacility's bounds, if the specified GatherFacility is null, or if the resources
     // available to this Player are insufficiet to cover the specified cost.
-    void resourceTracker(GatherFacility *, int, int);
+    void resourceTracker(GatherFacility*, int, int);
     // Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the
     // specified slection is not consistent with this Player's hand.
     void rotateTile(int);
@@ -62,22 +62,22 @@ class Player {
     // specified square. Throws an exception if the specified tile selection is not consistent with
     // this Player's Hand, if the specified GBMap is null; or if the specified square is not on the
     // GBMap this Player is playing on or it is already occupied.
-    void placeTile(int, GBMap *, std::pair<int, int>);
+    void placeTile(int, GBMap*, std::pair<int, int>);
     // Returns this Player's shipment tile. Throws an exception if this Player has already played
     // thier shipment tile.
-    HarvestTile *reap();
+    HarvestTile* reap();
     // Adds the specified HarvestTile to this Player's Hand as its shipment tile. Throws an
     // exception if this Player already has a shipment tile.
-    void store(HarvestTile *);
+    void store(HarvestTile*);
 
-    bool operator<(const Player &) const;
-    bool operator==(const Player &) const;
+    bool operator<(const Player&) const;
+    bool operator==(const Player&) const;
 
-    friend PlayerView *playerView(Player *);
+    friend PlayerView* playerView(Player*);
 
   private:
-    HarvestTileHand *tiles;
-    BuildingHand *buildings;
-    VGMap *village;
-    BuildFacility *score;
+    HarvestTileHand* tiles;
+    BuildingHand* buildings;
+    VGMap* village;
+    BuildFacility* score;
 };

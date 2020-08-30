@@ -18,9 +18,9 @@ GBMap::GBMap(int numPlayers) {
     graph = TokenGraph::gridOf(height(), width());
 }
 
-GBMap::GBMap(const GBMap &other) : GBMap(*other.numPlayers) {
-    for (auto &entry : other.graph->tokens()) {
-        AbstractToken *token = entry.second;
+GBMap::GBMap(const GBMap& other) : GBMap(*other.numPlayers) {
+    for (auto& entry : other.graph->tokens()) {
+        AbstractToken* token = entry.second;
         graph->setTokenAt(token ? token->clone() : nullptr, entry.first);
     }
 }
@@ -61,27 +61,27 @@ int GBMap::squaresLeft() const {
     return squares >> PLAYERS_MIN;
 }
 
-void GBMap::setSquare(HarvestTile *tile, pair<int, int> square) {
+void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
     if (!tile) {
         throw std::invalid_argument("Cannot place the null tile.");
     }
-    for (auto &coordinate : coordinatesOf(square, true)) {
+    for (auto& coordinate : coordinatesOf(square, true)) {
         graph->setTokenAt(tile->tokenize(), coordinate);
     }
     notify();
     delete tile;
 }
 
-void GBMap::calculateResources(pair<int, int> from, GatherFacility *resources, ResourceToken *shipment) {
+void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources, ResourceToken* shipment) {
     // Place shipment tile if it has been played.
     if (shipment) {
-        for (auto &coordinate : coordinatesOf(from, true)) {
+        for (auto& coordinate : coordinatesOf(from, true)) {
             graph->setTokenAt(new ResourceToken(*shipment), coordinate);
         }
         notify();
     }
     // Perform search for conntected resources starting from the four coordinates in from.
-    for (auto &coordinate : coordinatesOf(from)) {
+    for (auto& coordinate : coordinatesOf(from)) {
         // Coordinate is occupied and has not been reached by a previous search.
         if (graph->tokenAt(coordinate) && !graph->isSearched(coordinate)) {
             int type = graph->tokenAt(coordinate)->getType();
@@ -92,7 +92,7 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility *resources, R
     }
     // Remove shipment tile.
     if (shipment) {
-        for (auto &coordinate : coordinatesOf(from)) {
+        for (auto& coordinate : coordinatesOf(from)) {
             graph->removeTokenAt(coordinate);
         }
     }
@@ -127,7 +127,7 @@ int GBMap::width() const {
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) const {
     vector<pair<int, int>> coordinates = expand(validateSquare(square));
     if (ensureEmpty) {
-        for (auto &coordinate : coordinates) {
+        for (auto& coordinate : coordinates) {
             if (graph->tokenAt(coordinate)) {
                 throw std::invalid_argument("Square is already occupied.");
             }
@@ -196,7 +196,7 @@ string GBMap::toString() const {
             stream << coordinate++ << '\t';
         }
         for (int j = 0; j < width(); j++) {
-            AbstractToken *token = graph->tokenAt({i, j});
+            AbstractToken* token = graph->tokenAt({i, j});
             if (token) {
                 stream << *token << '\t';
             } else {

@@ -15,7 +15,7 @@ Game::Game(int numPlayers) {
     players = new Roster();
 }
 
-Game::Game(const Game &other) {
+Game::Game(const Game& other) {
     board = new GBMap(*other.board);
     if (other.shipment) {
         shipment = new Shipment{new HarvestTile(*other.shipment->payload), other.shipment->coordinate};
@@ -23,8 +23,8 @@ Game::Game(const Game &other) {
         shipment = nullptr;
     }
     resources = new GatherFacility(*other.resources);
-    tiles = new Deck<HarvestTile *>(*other.tiles);
-    buildings = new Deck<Building *>(*other.buildings);
+    tiles = new Deck<HarvestTile*>(*other.tiles);
+    buildings = new Deck<Building*>(*other.buildings);
     pool = new BuildingPool(*other.pool);
     players = new Roster(*other.players);
 }
@@ -69,10 +69,10 @@ void Game::addPlayer(long id) {
     if (atCapacity()) {
         throw std::runtime_error("Too many players.");
     }
-    Player *player = new Player(tiles->draw());
+    Player* player = new Player(tiles->draw());
     try {
         players->add(id, player);
-    } catch (const std::invalid_argument &e) {
+    } catch (const std::invalid_argument& e) {
         tiles->add(player->reap());
         delete player;
         throw e;
@@ -87,7 +87,7 @@ bool Game::atCapacity() const {
 }
 
 void Game::setup() {
-    for (auto &square : board->corners()) {
+    for (auto& square : board->corners()) {
         board->setSquare(tiles->draw(), square);
     }
     pool->replenish(buildings);
@@ -110,11 +110,11 @@ void Game::playTile(int selection, pair<int, int> square) {
 void Game::playShipment(pair<int, int> coordinate, int type) {
     ensureSetup();
     ResourceToken token(static_cast<ResourceType>(AbstractToken::validateType(type)));
-    HarvestTile *tile = players->peek()->reap();
+    HarvestTile* tile = players->peek()->reap();
     try {
         board->calculateResources(coordinate, resources, &token);
         shipment = new Shipment{tile, coordinate};
-    } catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         players->peek()->store(tile);
         std::rethrow_exception(std::current_exception());
     }
@@ -124,12 +124,12 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
 void Game::playBuilding(int selection, pair<int, int> coordinate) {
     ensureSetup();
     int type, cost = VGMap::HEIGHT - coordinate.first;
-    Player *current = players->peek();
+    Player* current = players->peek();
     type = current->buildingType(selection);
     current->resourceTracker(resources, type, cost);
     try {
         current->buildVillage(selection, coordinate);
-    } catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         resources->incrementBy(type, cost);
         std::rethrow_exception(std::current_exception());
     }
@@ -173,8 +173,8 @@ void Game::ensureSetup() {
     }
 }
 
-GameView *gameView(Game *game) {
-    GameView *view = new GameView();
+GameView* gameView(Game* game) {
+    GameView* view = new GameView();
     view->addStats(game->players);
     view->addBoard(game->board);
     view->addResources(game->resources);

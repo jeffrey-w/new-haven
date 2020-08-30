@@ -19,29 +19,29 @@ class HarvestTile : public AbstractPiece {
     // The number of resources that a HarvestTile holds.
     constexpr static int NUM_RESOURCES = 4;
 
-    static void printHand(std::ostream &, const HarvestTile &, const HarvestTile &, bool);
+    static void printHand(std::ostream&, const HarvestTile&, const HarvestTile&, bool);
 
     // Constructs a new HarvestTile object.
     HarvestTile();
     // Constructs a new HarvestTile object containing the specified ResourceTokens.
-    HarvestTile(ResourceToken *, ResourceToken *, ResourceToken *, ResourceToken *);
+    HarvestTile(ResourceToken*, ResourceToken*, ResourceToken*, ResourceToken*);
     // Constructs a new HarvestTile object with the same resources and configuration as the
     // specified HarvestTile.
-    HarvestTile(const HarvestTile &);
+    HarvestTile(const HarvestTile&);
     // Destroys this HarvestTile.
     ~HarvestTile();
     // Rotates this HarvestTile 90 degrees counterclockwise.
     void rotate();
     // Iteratively returns the ResourceTokens that constitute this HarvestTile.
-    ResourceToken *tokenize() override;
+    ResourceToken* tokenize() override;
 
-    friend std::ostream &operator<<(std::ostream &, const HarvestTile &);
+    friend std::ostream& operator<<(std::ostream&, const HarvestTile&);
 
   private:
-    int *current;
-    std::vector<ResourceToken *> *resources;
+    int* current;
+    std::vector<ResourceToken*>* resources;
 
-    void printHalf(std::ostream &, int, bool = false) const;
+    void printHalf(std::ostream&, int, bool = false) const;
 
     // For GBMapLoader.
     HarvestTile(int);

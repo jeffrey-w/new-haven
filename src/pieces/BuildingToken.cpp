@@ -27,7 +27,7 @@ int BuildingToken::validateValue(int value) {
     return value;
 }
 
-BuildingToken::BuildingToken(const BuildingToken &other) : AbstractToken(other) {
+BuildingToken::BuildingToken(const BuildingToken& other) : AbstractToken(other) {
     type = new BuildingType(*other.type);
     value = new int(*other.value);
     faceUp = new bool(*other.faceUp);
@@ -39,7 +39,7 @@ BuildingToken::~BuildingToken() {
     delete faceUp;
 }
 
-BuildingToken *BuildingToken::clone() const {
+BuildingToken* BuildingToken::clone() const {
     return new BuildingToken(*this);
 }
 
