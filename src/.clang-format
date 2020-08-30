@@ -1,0 +1,9 @@
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortBlocksOnASingleLine: false
+BraceWrapping:
+    BeforeElse: false
+ColumnLimit: 120
+IndentWidth: 4
