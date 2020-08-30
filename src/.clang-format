@@ -7,3 +7,4 @@ BraceWrapping:
     BeforeElse: false
 ColumnLimit: 120
 IndentWidth: 4
+PointerAlignment: Left
