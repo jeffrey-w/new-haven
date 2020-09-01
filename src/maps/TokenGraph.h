@@ -62,8 +62,7 @@ class TokenGraph {
     std::map<std::pair<int, int>, AbstractToken*> tokens();
 
   private:
-    class Node {
-      public:
+    struct Node {
         // White: requires processing, Gray: in processing, Black: processed, Red: do not process
         static constexpr int WHITE = 0, GRAY = 1, BLACK = 2, RED = 3;
 
