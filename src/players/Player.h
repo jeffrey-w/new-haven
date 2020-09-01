@@ -46,8 +46,8 @@ class Player {
     // Induces this Player to build the selected Building on their VGMap at the specified circle.
     // Throws an exception if any of the following conditions hold:
     // (1) the selected building is not consistent with this Player's hand,
-    // (2) the specified circle is not on this Player's VGMap or it is already occupied,
-    // (3) the specified Building is not being placed adjacent to another of the same type, or
+    // (2) the specified circle is not on this Player's VGMap or it is already occupied, or
+    // (3) the specified Building is not being placed adjacent to another of the same type.
     void buildVillage(int, std::pair<int, int>);
     // Adjusts the specified GatherFacility's count of the specified type according to the
     // specified cost. Throws an exception if the specified type is out of the specified
