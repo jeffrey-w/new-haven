@@ -25,6 +25,6 @@ To build the game, enter the following commands:
 ```
 mkdir bin
 cd bin
-cmake -G <desired build files> ../src/
+cmake -G <desired build files> ../
 cmake --build .
 ```
