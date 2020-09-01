@@ -1,0 +1,7 @@
+---
+Checks: '-*, clang-analyzer-*, -modernize-use-trailing-return-type, performance-*, portability-*, readability-*'
+WarningsAsErrors: '*'
+HeaderFilterRegex: ''
+FormatStyle: none
+
+...
