@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iterator>
 #include <string>
 #include <vector>
 
@@ -12,14 +11,12 @@ using ResourceType = ResourceToken::ResourceType;
 // The Piece that occupies HarvestTileDecks and HarvesTileHands.
 class HarvestTile : public AbstractPiece {
 
-    friend class GBMapLoader;
-
-    static std::string INVALID_ORIENTATION;
-    
   public:
 
     // The number of resources that a HarvestTile holds.
     constexpr static int NUM_RESOURCES = 4;
+
+    static void printHand(std::ostream&, HarvestTile*, HarvestTile*, HarvestTile*);
 
     // Constructs a new HarvestTile object.
     HarvestTile();
@@ -29,18 +26,29 @@ class HarvestTile : public AbstractPiece {
     HarvestTile(const HarvestTile&);
     // Destroys this HarvestTile.
     ~HarvestTile();
-    // Rotates this HarvestTile 90 degrees counterclockwise.
+    // Rotates this HarvestTile 90 degrees counterclockwise. Throws an exception if this tile is already in the
+    // process of being tokenized.
     void rotate();
-    // Iteratively returns the ResourceTokens that constitute this HarvestTile.
+    // Iteratively returns the ResourceTokens that constitute this HarvestTile. Throws an exception if this tile has
+    // already been tokenized.
     ResourceToken* tokenize() override;
 
   private:
 
-    static int randomOrientation();
+    struct Orientation {
 
-    int* current;
-    std::vector<ResourceToken*>* resources;
+        constexpr static int UPPER_LEFT = 0, UPPER_RIGHT = 1, LOWER_LEFT = 2, LOWER_RIGHT = 3;
 
-    HarvestTile(int);
+        int origin;
+        int pos;
+
+        Orientation();
+        void reorient();
+        int current();
+
+    };
+
+    Orientation orientation;
+    std::vector<ResourceToken*> resources;
 
 };
