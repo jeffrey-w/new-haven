@@ -107,7 +107,7 @@ string HarvestTileHand::toString() const {
         stream << "3 - Shipment";
     }
     stream << '\n';
-    HarvestTile::printHand(stream, *one, *two, shipment);
+    HarvestTile::printHand(stream, one, two, shipment);
     stream << '\n';
     return stream.str();
 }
