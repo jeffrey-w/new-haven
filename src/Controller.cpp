@@ -5,22 +5,20 @@ std::string Controller::WINNER_PROMPT = "And the final scores are...";
 Controller::Controller() {
     model = nullptr;
     view = nullptr;
-    in = new Input();
 }
 
 Controller::~Controller() {
     delete model;
     delete view;
-    delete in;
 }
 
 void Controller::initGame() {
     do {
         try {
-            model = new Game(in->get<int>("Enter number of players", "Must enter a number."));
+            model = new Game(in.get<int>("Enter number of players", "Must enter a number."));
         } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << std::endl;
-            if (in->decide("Accept default number of players (" + std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?")) {
+            if (in.decide("Accept default number of players (" + std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?")) {
                 model = new Game();
             }
         }
@@ -31,7 +29,7 @@ void Controller::inputIDs() {
     for (int i = 0; i < model->numPlayers(); i++) {
         do {
             try {
-                model->addPlayer(in->get<long>("Enter ID for player " + std::to_string(i + 1), "Invalid ID."));
+                model->addPlayer(in.get<long>("Enter ID for player " + std::to_string(i + 1), "Invalid ID."));
                 break;
             } catch (const std::invalid_argument& e) {
                 std::cerr << e.what() << " Try again.\n";
@@ -51,7 +49,7 @@ void Controller::run() {
         view->showBuildings();
         _current = current();
         // Rotate tiles.
-        while (in->decide(_current + ", do you want to rotate any tiles?")) {
+        while (in.decide(_current + ", do you want to rotate any tiles?")) {
             if (!rotateSelection()) {
                 break;
             }
@@ -62,7 +60,7 @@ void Controller::run() {
         for (int i = 0; i < model->numPlayers(); i++) {
             view->showVillage();
             view->showBuildings();
-            while (in->decide(_current + ", do you want to play a building?")) {
+            while (in.decide(_current + ", do you want to play a building?")) {
                 if (model->canPlay()) {
                     if (!buildSelection()) {
                         break;
@@ -82,7 +80,7 @@ void Controller::run() {
             std::cout << _current << ", you must draw " << exhausted << " buildings.\n";
             selectBuilding(false);
             for (int i = 0; i < exhausted - 1; i++) {
-                if (in->decide("Do you want to draw a building from the pool?")) {
+                if (in.decide("Do you want to draw a building from the pool?")) {
                     if (!(selectBuilding())) {
                         i--;
                     }
@@ -102,12 +100,12 @@ void Controller::run() {
 bool Controller::rotateSelection() {
     int selection;
     do {
-        selection = in->get<int>("Select a tile to rotate", "Invalid selection.", true);
-        if (in->cancelled()) {
+        selection = in.get<int>("Select a tile to rotate", "Invalid selection.", true);
+        if (in.cancelled()) {
             return false;
         }
         try {
-            model->rotateTile(selection);
+            model->rotateTile(--selection);
             return true;
         } catch (const std::exception& e) {
             std::cerr << e.what() << " Try again.\n";
@@ -118,12 +116,12 @@ bool Controller::rotateSelection() {
 void Controller::placeSelection() {
     int selection, row, col;
     do {
-        selection = in->get<int>("Select a tile", "Invalid selection.");
-        row = in->get<int>("Select a row", "Invalid row.");
-        col = in->get<int>("Select a column", "Invalid column");
+        selection = in.get<int>("Select a tile", "Invalid selection.");
+        row = in.get<int>("Select a row", "Invalid row.");
+        col = in.get<int>("Select a column", "Invalid column");
         if (selection == SHIPMENT) {
-            int type = in->get<int>("Select resouce - 0: SH, 1: ST, 2: TI, 3: WH", "Invalid type.", true);
-            if (in->cancelled()) {
+            int type = in.get<int>("Select resouce - 0: SH, 1: ST, 2: TI, 3: WH", "Invalid type.", true);
+            if (in.cancelled()) {
                 continue;
             }
             try {
@@ -134,7 +132,7 @@ void Controller::placeSelection() {
             }
         } else {
             try {
-                model->playTile(selection, {row, col});
+                model->playTile(--selection, {row, col});
                 break;
             } catch (const std::exception& e) {
                 std::cerr << e.what() << " Try again.\n";
@@ -146,14 +144,14 @@ void Controller::placeSelection() {
 bool Controller::buildSelection() {
     int selection = 0, row, col;
     do {
-        selection = in->get<int>("Select a building", "Ivalid selection.", true);
-        if (in->cancelled()) {
+        selection = in.get<int>("Select a building", "Ivalid selection.", true);
+        if (in.cancelled()) {
             return false;
         }
-        row = in->get<int>("Select a row", "Invalid row.");
-        col = in->get<int>("Select a column", "Invalid column.");
+        row = in.get<int>("Select a row", "Invalid row.");
+        col = in.get<int>("Select a column", "Invalid column.");
         try {
-            model->playBuilding(selection, {row, col});
+            model->playBuilding(--selection, {row, col});
             return true;
         } catch (const std::exception& e) {
             std::cerr << e.what() << " Try again.\n";
@@ -164,12 +162,12 @@ bool Controller::buildSelection() {
 bool Controller::selectBuilding(bool canCancel) {
     int selection = 0;
     do {
-        selection = in->get<int>("Select a building", "Invalid selection.", canCancel);
-        if (in->cancelled()) {
+        selection = in.get<int>("Select a building", "Invalid selection.", canCancel);
+        if (in.cancelled()) {
             return false;
         }
         try {
-            model->drawFromPool(selection);
+            model->drawFromPool(--selection);
             return true;
         } catch (const std::exception& e) {
             std::cerr << e.what() << " Try again.\n";
