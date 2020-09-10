@@ -62,7 +62,7 @@ int Game::exhausted() const {
     return exhausted;
 }
 
-int Game::gameOver() const {
+bool Game::gameOver() const {
     return board->squaresLeft() == 1;
 }
 
