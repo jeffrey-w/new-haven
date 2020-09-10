@@ -126,22 +126,27 @@ int VGMap::countCols() {
 
 string VGMap::toString() const {
     std::ostringstream stream;
-    stream << '\t';
-    for (int i = 0; i < WIDTH; i++) {
-        stream << i << '\t';
-    }
-    stream << "\n\n\n";
+    stream << "   1    2    3    4    5";
+    stream << '\n';
+    stream << "  ┏━━━━━━━━━━━━━━━━━━━━━━┓\n";
     for (int i = 0; i < HEIGHT; i++) {
-        stream << i << '\t';
+        stream << (char)('A' + i);
+        stream << " ┃";
         for (int j = 0; j < WIDTH; j++) {
-            AbstractToken* token = graph->tokenAt({i, j});
+            AbstractToken* token = graph->tokenAt({ i, j});
             if (token) {
-                stream << *token << '\t';
+                stream << *token;
             } else {
-                stream << HEIGHT - i << "\t";
+                stream << HEIGHT - i;
+            }
+            if (j < WIDTH - 1) {
+                stream << "    ";
+            } else {
+                stream << " ";
             }
         }
-        stream << "\n\n\n";
+        stream << "┃\n";
+        stream << "  ┃                      ┃\n";
     }
     return stream.str();
 }
