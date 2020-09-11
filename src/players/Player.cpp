@@ -32,11 +32,9 @@ bool Player::canPlay(GatherFacility* resources) const {
     for (int i = 0; i < VGMap::HEIGHT; i++) {
         for (int j = 0; j < VGMap::WIDTH; j++) {
             if (village->emptyAt({i, j})) {
-                // This is theoretically linear in the size of this Player's BuildingHand, however,
-                // in practice, that is bound by the constant initial size of the Building Deck
-                // being played with.
+                // This is theoretically linear in the size of this Player's BuildingHand, however, in practice, that is bound by the constant initial size of the Building Deck being played with.
                 for (int k = 0; k < buildings->getSize(); k++) {
-                    type = buildings->typeOf(k + 1);
+                    type = buildings->typeOf(k);
                     if (VGMap::HEIGHT - i <= resources->countOf(type)) {
                         if (village->hasType(type)) {
                             if (village->adjacentHolds({i, j}, type)) {
