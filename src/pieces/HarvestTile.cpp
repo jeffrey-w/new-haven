@@ -24,6 +24,7 @@ HarvestTile::HarvestTile(const HarvestTile& other) {
     for (auto& resource : other.resources) {
         resources.push_back(new ResourceToken(*resource));
     }
+    orientation = other.orientation;
 }
 
 HarvestTile::~HarvestTile() {
@@ -43,79 +44,86 @@ ResourceToken* HarvestTile::tokenize() {
     return token;
 }
 
-void HarvestTile::printHand(std::ostream& stream, HarvestTile* one, HarvestTile* two, HarvestTile* shipment) {
-    int iters = shipment ? NUM_RESOURCES - 1 : NUM_RESOURCES >> 1;
-    bool isRegular; // TODO rename this
-    HarvestTile* tile;
-    HarvestTile* tiles[NUM_RESOURCES - 1] = {one, two, shipment};
-    for (int i = 0; i < iters; i++) {
-        stream << "╔════════╤════════╗\t";
+void HarvestTile::printTiles(std::ostream& stream, const vector<HarvestTile*> tiles) {
+    int number = 1;
+    bool isRegular;
+    for (auto& tile : tiles) {
+        if (tile) {
+            stream << "╔════════╤════════╗\t";
+        }
     }
     stream << '\n';
-    for (int i = 0; i < iters; i++) {
+    for (auto& tile : tiles) {
+        if (tile) {
+            stream << "║        │        ║\t";
+        }
+    }
+    stream << '\n';
+    for (auto& tile : tiles) {
+        isRegular = number++ < NUM_RESOURCES - 1;
+        if (tile) {
+            stream << "║   ";
+            if (isRegular) {
+                stream << *tile->resources[tile->orientation.origin & NUM_RESOURCES - 1];
+            } else {
+                stream << "--";
+            }
+            stream << "   │   ";
+            if (isRegular) {
+                stream << *tile->resources[tile->orientation.origin + Orientation::UPPER_RIGHT & NUM_RESOURCES - 1];
+            } else {
+                stream << "--";
+            }
+            stream << "   ║\t";
+        }
+    }
+    number  = 1;
+    stream << '\n';
+    for (auto& tile : tiles) {
         stream << "║        │        ║\t";
     }
     stream << '\n';
-    for (int i = 0; i < iters; i++) {
-        isRegular = i + 1 < NUM_RESOURCES - 1;
-        tile = tiles[i];
-        stream << "║   ";
-        if (isRegular) {
-            stream << *tile->resources[tile->orientation.origin + 0 & NUM_RESOURCES - 1];
-        } else {
-            stream << "--";
-        }
-        stream << "   │   ";
-        if (isRegular) {
-            stream << *tile->resources[tile->orientation.origin + 1 & NUM_RESOURCES - 1];
-        } else {
-            stream << "--";
-        }
-        stream << "   ║\t";
-    }
-    stream << '\n';
-    for (int i = 0; i < iters; i++) {
-        stream << "║        │        ║\t";
-    }
-    stream << '\n';
-    for (int i = 0; i < iters; i++) {
+    for (auto& tile : tiles) {
         stream << "╟────────┼────────╢\t";
     }
     stream << '\n';
-    for (int i = 0; i < iters; i++) {
+    for (auto& tile : tiles) {
         stream << "║        │        ║\t";
     }
     stream << '\n';
-    for (int i = 0; i < iters; i++) {
-        isRegular = i + 1 < NUM_RESOURCES - 1;
-        tile = tiles[i];
-        stream << "║   ";
-        if (isRegular) {
-            stream << *tile->resources[tile->orientation.origin + 3 & NUM_RESOURCES - 1];
-        } else {
-            stream << "--";
+    for (auto& tile : tiles) {
+        isRegular = number++ < NUM_RESOURCES - 1;
+        if (tile) {
+            stream << "║   ";
+            if (isRegular) {
+                stream << *tile->resources[tile->orientation.origin + Orientation::LOWER_RIGHT & NUM_RESOURCES - 1];
+            } else {
+                stream << "--";
+            }
+            stream << "   │   ";
+            if (isRegular) {
+                stream << *tile->resources[tile->orientation.origin + Orientation::LOWER_LEFT & NUM_RESOURCES - 1];
+            } else {
+                stream << "--";
+            }
+            stream << "   ║\t";
         }
-        stream << "   │   ";
-        if (isRegular) {
-            stream << *tile->resources[tile->orientation.origin + 2 & NUM_RESOURCES - 1];
-        } else {
-            stream << "--";
+    }
+    number = 1;
+    stream << '\n';
+    for (auto& tile : tiles) {
+        if (tile) {
+            stream << "║        │        ║\t";
         }
-        stream << "   ║\t";
     }
     stream << '\n';
-    for (int i = 0; i < iters; i++) {
-        stream << "║        │       ┌╨┐\t";
-    }
-    stream << '\n';
-    for (int i = 0; i < iters; i++) {
-        stream << "╚════════╧═══════╡";
-        stream << i + 1;
-        stream << "│\t";
-    }
-    stream << '\n';
-    for (int i = 0; i < iters; i++) {
-        stream << "                 └─┘\t";
+    for (auto& tile : tiles) {
+        if (tile) {
+            stream << "╚════════╧═══════[";
+            stream << number;
+            stream << "]\t";
+        }
+        number++;
     }
     stream << '\n';
 }
