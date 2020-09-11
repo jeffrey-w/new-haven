@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ostream>
+#include <vector>
 
 #include "AbstractPiece.h"
 #include "BuildingToken.h"
@@ -9,13 +10,14 @@ using BuildingType = BuildingToken::BuildingType;
 
 // The Piece that occupies BuildingDecks, BuildingHands, and BuildingPools.
 class Building : public AbstractPiece {
-    friend class VGMapLoader;
 
   public:
+
+    static void printBuildings(std::ostream&, const std::vector<Building*>&); // TODO make args cons
+
     // Constructs a new Building object.
     Building();
-    // Constructs a new Building object with the specifeid type and value. Throws an exception if
-    // the specified value is not between one and the Height of a VGMap.
+    // Constructs a new Building object with the specifeid type and value. Throws an exception if the specified value is not between one and the Height of a VGMap.
     Building(BuildingType, int);
     // Constructs a new Building object with the same attributes as the specified Building.
     Building(const Building&);
@@ -32,8 +34,8 @@ class Building : public AbstractPiece {
     // Flips this Building. If it was previously face up, it becomes face down and vice versa.
     void flip();
 
-    friend std::ostream& operator<<(std::ostream&, const Building&);
-
   private:
+
     BuildingToken* token;
+
 };
