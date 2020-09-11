@@ -16,7 +16,7 @@ class HarvestTile : public AbstractPiece {
     // The number of resources that a HarvestTile holds.
     constexpr static int NUM_RESOURCES = 4;
 
-    static void printHand(std::ostream&, HarvestTile*, HarvestTile*, HarvestTile*);
+    static void printTiles(std::ostream&, const std::vector<HarvestTile*>);
 
     // Constructs a new HarvestTile object.
     HarvestTile();
