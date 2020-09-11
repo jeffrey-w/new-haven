@@ -128,7 +128,7 @@ string VGMap::toString() const {
     std::ostringstream stream;
     stream << "   1    2    3    4    5";
     stream << '\n';
-    stream << "  ┏━━━━━━━━━━━━━━━━━━━━━━┓\n";
+    stream << "  ┏━━━━━━━━━━━━━━━━━━━━━┓\n";
     for (int i = 0; i < HEIGHT; i++) {
         stream << (char)('A' + i);
         stream << " ┃";
@@ -141,12 +141,13 @@ string VGMap::toString() const {
             }
             if (j < WIDTH - 1) {
                 stream << "    ";
-            } else {
-                stream << " ";
             }
         }
         stream << "┃\n";
-        stream << "  ┃                      ┃\n";
+        if (i < HEIGHT - 1) {
+            stream << "  ┃                     ┃\n";
+        }
     }
+    stream << "  ┗━━━━━━━━━━━━━━━━━━━━━┛\n";
     return stream.str();
 }
