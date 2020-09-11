@@ -2,6 +2,8 @@
 
 #include "Building.h"
 
+using std::vector;
+
 Building::Building() {
     // Default constructor returns a random BuildingToken.
     token = new BuildingToken();
@@ -41,6 +43,43 @@ void Building::flip() {
     token->flip();
 }
 
-std::ostream& operator<<(std::ostream& stream, const Building& building) {
-    return stream << *building.token;
+void Building::printBuildings(std::ostream& stream, const vector<Building*>& buildings) {
+    int number = 1;
+    for (auto& building : buildings) {
+        if(building) {
+            stream << "╔═╤══════╗\t";
+        }
+    }
+    stream << '\n';
+    for (auto& building : buildings) {
+        if (building) {
+            stream << "║";
+            stream << building->getValue();
+            stream << "│      ║\t";
+        }
+    }
+    stream << '\n';
+    for (auto& building : buildings) {
+        if (building) {
+            stream << "╟─┘ ";
+            stream << *building->token;
+            stream << "   ║\t";
+        }
+    }
+    stream << '\n';
+    for (auto& building : buildings) {
+        if (building) {
+            stream << "║        ║\t";
+        }
+    }
+    stream << '\n';
+    for (auto& building : buildings) {
+        if (building) {
+            stream << "╚═══════[";
+            stream << number;
+            stream << "]\t";
+        }
+        number++;
+    }
+    stream << '\n';
 }
