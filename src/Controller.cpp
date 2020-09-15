@@ -1,3 +1,5 @@
+#include <cctype>
+
 #include "Controller.h"
 
 std::string Controller::WINNER_PROMPT = "And the final scores are...";
@@ -117,7 +119,7 @@ void Controller::placeSelection() {
     int selection, row, col;
     do {
         selection = in.get<int>("Select a tile", "Invalid selection.");
-        row = in.get<int>("Select a row", "Invalid row.");
+        row = toupper(in.get<char>("Select a row", "Invalid row.")) - ROW_OFFSET;
         col = in.get<int>("Select a column", "Invalid column");
         if (selection == SHIPMENT) {
             int type = in.get<int>("Select resouce - 0: SH, 1: ST, 2: TI, 3: WH", "Invalid type.", true);
@@ -125,14 +127,14 @@ void Controller::placeSelection() {
                 continue;
             }
             try {
-                model->playShipment({row, col}, type);
+                model->playShipment({row, --col}, type);
                 break;
             } catch (const std::exception& e) {
                 std::cerr << e.what() << " Try again.\n";
             }
         } else {
             try {
-                model->playTile(--selection, {row, col});
+                model->playTile(--selection, {row, --col});
                 break;
             } catch (const std::exception& e) {
                 std::cerr << e.what() << " Try again.\n";
@@ -142,16 +144,16 @@ void Controller::placeSelection() {
 }
 
 bool Controller::buildSelection() {
-    int selection = 0, row, col;
+    int selection, row, col;
     do {
         selection = in.get<int>("Select a building", "Ivalid selection.", true);
         if (in.cancelled()) {
             return false;
         }
-        row = in.get<int>("Select a row", "Invalid row.");
+        row = toupper(in.get<char>("Select a row", "Invalid row.")) - ROW_OFFSET;
         col = in.get<int>("Select a column", "Invalid column.");
         try {
-            model->playBuilding(--selection, {row, col});
+            model->playBuilding(--selection, {row, --col});
             return true;
         } catch (const std::exception& e) {
             std::cerr << e.what() << " Try again.\n";
