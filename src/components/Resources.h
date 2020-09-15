@@ -16,10 +16,8 @@ template<class T>
 class Deck {
 
   public:
-
     // Constructs a new Deck object.
-    Deck() {
-    }
+    Deck() = default;
 
     // Constructs a new Deck object with the same contents as the speciifed Deck.
     Deck(const Deck& other) : Deck() {
@@ -29,8 +27,7 @@ class Deck {
     }
 
     // Destroys this Deck.
-    ~Deck() {
-    }
+    ~Deck() = default;
 
     // Returns true iff this Deck has no pieces in it.
     bool isEmpty() const {
@@ -63,9 +60,7 @@ class Deck {
     }
 
   private:
-
     std::vector<T> pieces;
-
 };
 
 // Partial specialization to handle pointer types.
@@ -73,9 +68,7 @@ template<class T>
 class Deck<T*> {
 
   public:
-
-    Deck() {
-    }
+    Deck() = default;
 
     Deck(const Deck& other) : Deck() {
         for (auto& piece : other.pieces) {
@@ -115,10 +108,7 @@ class Deck<T*> {
     }
 
   private:
-
     std::vector<T*> pieces;
-
-
 };
 
 // Returns a shuffled Deck of 60 HarvestTiles.
@@ -130,7 +120,6 @@ Deck<Building*>* buildingDeck();
 class HarvestTileHand : public Observable {
 
   public:
-
     constexpr static int SIZE = 3;
 
     // Constructs a new HarvestTileHand object.
@@ -143,34 +132,33 @@ class HarvestTileHand : public Observable {
     ~HarvestTileHand();
     // Adds the specified HarvestTile to this HarvestTileHand. Throws an exception if this HarvestTileHand is full.
     void insert(HarvestTile*);
-    // Returns the HarvestTile selected by a Player. Throws an exception if the specified selection is not between one and two inclusive, or the specified selection does not exit.
+    // Returns the HarvestTile selected by a Player. Throws an exception if the specified selection is not between one
+    // and two inclusive, or the specified selection does not exit.
     HarvestTile* select(int);
-    // Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the specified slection is not betwewn one and two inclusive, or the specified seleciton does not exist.
+    // Rotates the selected HarvestTile 90 degrees counterclockwise. Throws an exception if the specified slection is
+    // not betwewn one and two inclusive, or the specified seleciton does not exist.
     void rotate(int);
     // Returns this HarvestTileHand's shipment tile. Throws an exception if this Hand does not contain a shipment tile.
     HarvestTile* ship();
-    // Adds the specified HarvestTile to this Hand as its shipment tile. Throws an exception if this Hand already has a shipment tile.
+    // Adds the specified HarvestTile to this Hand as its shipment tile. Throws an exception if this Hand already has a
+    // shipment tile.
     void receive(HarvestTile*);
 
   protected:
-
     std::string toString() const override;
 
   private:
-
     std::vector<HarvestTile*> tiles;
 
     bool isEmpty() const;
     bool isFull() const;
     HarvestTile* validateSelection(int, bool);
-
 };
 
 // The collection of Buildings owned by a Player.
 class BuildingHand : public Observable {
 
   public:
-
     // Constructs a new BuildingHand object.
     BuildingHand() = default;
     // Constructs a new BuildingHand object with the same contents as the specified BuildingHand.
@@ -189,15 +177,12 @@ class BuildingHand : public Observable {
     int typeOf(int) const;
 
   protected:
-
     std::string toString() const override;
 
   private:
-
     std::vector<Building*> buildings;
 
     int validateSelection(int) const;
-
 };
 
 // A common collection of Buildings.
@@ -206,7 +191,6 @@ class BuildingPool : public Observable {
     static constexpr int SIZE = 5;
 
   public:
-
     // Constructs a new BuildingPool object.
     BuildingPool();
     // Constructs a new BuildingPool object with the same contents as the specified BuildingPool.
@@ -221,11 +205,8 @@ class BuildingPool : public Observable {
     Building* remove(int);
 
   protected:
-
     std::string toString() const override;
 
   private:
-
     std::vector<Building*> buildings;
-
 };
