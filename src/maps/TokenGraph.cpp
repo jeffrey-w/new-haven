@@ -164,7 +164,7 @@ void TokenGraph::setupSearchAttributes(AbstractToken* match) {
     }
 }
 
-map<pair<int, int>, AbstractToken*> TokenGraph::tokens() {
+map<pair<int, int>, AbstractToken*> TokenGraph::tokens() const {
     map<pair<int, int>, AbstractToken*> tokens;
     for (auto& entry : *nodes) {
         tokens.insert({entry.first, entry.second->token});
