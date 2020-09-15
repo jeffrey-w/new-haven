@@ -12,7 +12,6 @@ using ResourceType = ResourceToken::ResourceType;
 class HarvestTile : public AbstractPiece {
 
   public:
-
     // The number of resources that a HarvestTile holds.
     constexpr static int NUM_RESOURCES = 4;
 
@@ -34,7 +33,6 @@ class HarvestTile : public AbstractPiece {
     ResourceToken* tokenize() override;
 
   private:
-
     struct Orientation {
 
         constexpr static int UPPER_LEFT = 0, UPPER_RIGHT = 1, LOWER_LEFT = 2, LOWER_RIGHT = 3;
@@ -45,10 +43,8 @@ class HarvestTile : public AbstractPiece {
         Orientation();
         void reorient();
         int current();
-
     };
 
     Orientation orientation;
     std::vector<ResourceToken*> resources;
-
 };
