@@ -16,50 +16,55 @@ GBMap::GBMap() : GBMap(Game::DEFAULT_NUM_PLAYERS) {
 
 GBMap::GBMap(int numPlayers) {
     setNumPlayers(numPlayers);
-    graph = TokenGraph::gridOf(height(), width());
+    graph = TokenGraph::gridOf(DIM, DIM);
 }
 
-GBMap::GBMap(const GBMap& other) : GBMap(*other.numPlayers) {
+GBMap::GBMap(const GBMap& other) : GBMap(other.numPlayers) {
     for (auto& entry : other.graph->tokens()) {
         AbstractToken* token = entry.second;
         graph->setTokenAt(token ? token->clone() : nullptr, entry.first);
     }
 }
 
+GBMap::~GBMap() {
+    delete graph;
+}
+
 void GBMap::setNumPlayers(int numPlayers) {
     if (numPlayers < PLAYERS_MIN || numPlayers > PLAYERS_MAX) {
         throw std::invalid_argument(INVALID_NUM_PLAYERS);
     }
-    this->numPlayers = new int(numPlayers);
-}
-
-GBMap::~GBMap() {
-    delete numPlayers;
-    delete graph;
+    this->numPlayers = numPlayers;
 }
 
 int GBMap::getNumPlayers() const {
-    return *numPlayers;
+    return numPlayers;
 }
 
 vector<pair<int, int>> GBMap::corners() const {
-    int lower = *numPlayers == PLAYERS_MAX ? 1 : 0;
-    int rows = (height() - 1) >> 1, cols = (width() - 1) >> 1;
+    int min = numPlayers == PLAYERS_MIN ? 1 : 0, max = (DIM - PLAYERS_MIN) >> 1;
     vector<pair<int, int>> corners;
-    corners.push_back({0, lower});
-    corners.push_back({0, cols - lower});
-    corners.push_back({rows, lower});
-    corners.push_back({rows, cols - lower});
+    corners.push_back({min, 1});
+    corners.push_back({min, max - 1});
+    corners.push_back({max - min, 1});
+    corners.push_back({max - min, max - 1});
     return corners;
 }
 
 int GBMap::squaresLeft() const {
-    int squares = graph->emptyNodes();
-    // Don't count corner squares.
-    if (*numPlayers == PLAYERS_MAX) {
-        squares -= PLAYERS_MAX << PLAYERS_MIN;
+    int squares = graph->emptyNodes() >> PLAYERS_MIN, border;
+    switch (numPlayers) {
+    case PLAYERS_MIN:
+        border = (DIM << 1) - PLAYERS_MAX;
+        break;
+    case PLAYERS_MID:
+        border = DIM;
+        break;
+    case PLAYERS_MAX:
+        border = PLAYERS_MAX;
+        break;
     }
-    return squares >> PLAYERS_MIN;
+    return squares -= border;
 }
 
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
@@ -97,32 +102,8 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources, R
             graph->removeTokenAt(coordinate);
         }
     }
-    // Clean up graph for next search.
+    // Clean up graph->for next search.
     graph->cleanupSearch();
-}
-
-int GBMap::height() const {
-    switch (*numPlayers) {
-    case PLAYERS_MIN:
-        return DIM_MIN;
-    case PLAYERS_MID:
-    case PLAYERS_MAX:
-        return DIM_MAX;
-    default:
-        throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
-    }
-}
-
-int GBMap::width() const {
-    switch (*numPlayers) {
-    case PLAYERS_MIN:
-    case PLAYERS_MID:
-        return DIM_MIN;
-    case PLAYERS_MAX:
-        return DIM_MAX;
-    default:
-        throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
-    }
 }
 
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) const {
@@ -139,72 +120,74 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEm
 
 vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
     vector<pair<int, int>> coordinates;
-    // Upper left.
     coordinates.push_back({(square.first << 1), (square.second << 1)});
-    // Upper right.
     coordinates.push_back({(square.first << 1), (square.second << 1) + 1});
-    // Lower right.
-    coordinates.push_back({(square.first << 1) + 1, (square.second << 1) + 1});
-    // Lower left.
     coordinates.push_back({(square.first << 1) + 1, (square.second << 1)});
+    coordinates.push_back({(square.first << 1) + 1, (square.second << 1) + 1});
     return coordinates;
 }
 
 pair<int, int> GBMap::validateSquare(pair<int, int> square) const {
-    int row = square.first, col = square.second;
-    switch (*numPlayers) {
-    case PLAYERS_MAX:
-        if (isOnCorner(row, col)) {
-            throw std::invalid_argument("Cannot place tiles on corners.");
-        }
-    case PLAYERS_MID:
-    case PLAYERS_MIN:
-        if (isOverBoard(row, col)) {
-            throw std::invalid_argument("Square is not on board.");
-        }
-        break;
-    default:
-        throw std::logic_error("FATAL ERROR: numPlayers has unexpected value.");
+    if (isOverBoard(square.first, square.second, true)) {
+        throw std::invalid_argument("Illegal coordinate.");
     }
     return square;
 }
 
-bool GBMap::isOnCorner(int row, int col) const {
-    return (row == 0 || row == (height() - 1) >> 1) && (col == 0 || col == (width() - 1) >> 1);
-}
-
-bool GBMap::isOverBoard(int row, int col) const {
-    return row < 0 || row > (height() - 1) >> 1 || col < 0 || col > (width() - 1) >> 1;
-}
-
 string GBMap::toString() const {
-    int coordinate = 0;
     std::ostringstream stream;
-    stream << '\t';
-    for (int i = 0; i < width(); i++) {
-        if (i & 1) {
-            stream << '\t';
-        } else {
-            stream << coordinate++ << '\t';
-        }
-    }
-    coordinate = 0;
-    stream << "\n\n\n";
-    for (int i = 0; i < height(); i++) {
-        if (i & 1) {
-            stream << '\t';
-        } else {
-            stream << coordinate++ << '\t';
-        }
-        for (int j = 0; j < width(); j++) {
-            AbstractToken* token = graph->tokenAt({i, j});
-            if (token) {
-                stream << *token << '\t';
+    stream << "       1         2         3         4         5         6         7\n";
+    stream << "  ┏━━━━┯━━━━┳━━━━┯━━━━┳━━━━┯━━━━┳━━━━┯━━━━┳━━━━┯━━━━┳━━━━┯━━━━┳━━━━┯━━━━┓\n";
+    for (int i = 0, row = 0; i < DIM; i++) {
+        stream << "  ┃ ";
+        for (int j = 0; j < DIM; j++) {
+            if (isOverBoard(i, j)) {
+                stream << "░░";
             } else {
-                stream << "-\t";
+                AbstractToken* token = graph->tokenAt({i, j});
+                if (token) {
+                    stream << *token;
+                } else {
+                    stream << "--";
+                }
+            }
+            if (j & 1) {
+                stream << " ┃ ";
+            } else {
+                stream << " │ ";
             }
         }
-        stream << "\n\n\n";
+        stream << '\n';
+        if (i & 1 && i < DIM - PLAYERS_MIN) {
+            stream << "  ┣━━━━┿━━━━╋━━━━┿━━━━╋━━━━┿━━━━╋━━━━┿━━━━╋━━━━┿━━━━╋━━━━┿━━━━╋━━━━┿━━━━┫\n";
+            row++;
+        } else if (i < DIM - 1) {
+            stream << (char)('A' + row);
+            stream << " ┠────┼────╂────┼────╂────┼────╂────┼────╂────┼────╂────┼────╂────┼────┨\n";
+        }
     }
+    stream << "  ┗━━━━┷━━━━┻━━━━┷━━━━┻━━━━┷━━━━┻━━━━┷━━━━┻━━━━┷━━━━┻━━━━┷━━━━┻━━━━┷━━━━┛\n";
     return stream.str();
+}
+
+bool GBMap::isOverBoard(int row, int col, bool compressCoordinates) const {
+    if (numPlayers == PLAYERS_MAX && isOnCorner(row, col, compressCoordinates)) {
+        return true;
+    }
+    int rowMin = numPlayers == PLAYERS_MIN ? PLAYERS_MIN : 0,
+        rowMax = numPlayers == PLAYERS_MIN ? DIM - PLAYERS_MIN - 1 : DIM - 1;
+    int colMin = numPlayers == PLAYERS_MAX ? 0 : PLAYERS_MIN,
+        colMax = numPlayers == PLAYERS_MAX ? DIM - 1 : DIM - PLAYERS_MIN - 1;
+    if (compressCoordinates) {
+        rowMin >>= 1;
+        rowMax >>= 1;
+        colMin >>= 1;
+        colMax >>= 1;
+    }
+    return row < rowMin || row > rowMax || col < colMin || col > colMax;
+}
+
+bool GBMap::isOnCorner(int row, int col, bool compressCoordinates) {
+    int min = compressCoordinates ? 1 : PLAYERS_MIN, max = (compressCoordinates ? (DIM - 1) >> 1 : DIM - 1) - min;
+    return (row < min || row > max) && (col < min || col > max);
 }
