@@ -153,7 +153,7 @@ BuildingPool::BuildingPool(const BuildingPool& other) {
 }
 
 BuildingPool::~BuildingPool() {
-    for (auto & building : buildings) {
+    for (auto& building : buildings) {
         delete building;
     }
 }
@@ -215,13 +215,15 @@ Deck<HarvestTile*>* harvestTileDeck() {
         for (int j = 0; j < numTypes; j++) {
             for (int k = 0; k < numTypes; k++) {
                 if (!(i == j || i == k || j == k)) {
-                    // For each resource type i, each type j, and each type k, add a new tile with two i (on the first column), one j, and one k.
+                    // For each resource type i, each type j, and each type k, add a new tile with two i (on the first
+                    // column), one j, and one k.
                     tiles->add(new HarvestTile(new ResourceToken(static_cast<ResourceType>(i)),
                             new ResourceToken(static_cast<ResourceType>(j)),
                             new ResourceToken(static_cast<ResourceType>(i)),
                             new ResourceToken(static_cast<ResourceType>(k))));
                     if (j < k) {
-                        // For each resource type i, each type j, and each type k, add a new tile with two i (on the main diagonal), one j, and one k.
+                        // For each resource type i, each type j, and each type k, add a new tile with two i (on the
+                        // main diagonal), one j, and one k.
                         tiles->add(new HarvestTile(new ResourceToken(static_cast<ResourceType>(i)),
                                 new ResourceToken(static_cast<ResourceType>(j)),
                                 new ResourceToken(static_cast<ResourceType>(k)),
