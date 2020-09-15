@@ -7,11 +7,10 @@
 // Maps user input to model input, and updates view.
 class Controller {
 
-    static constexpr int SHIPMENT = 3;
+    static constexpr int SHIPMENT = 3, ROW_OFFSET = 65;
     static std::string WINNER_PROMPT;
 
   public:
-
     // Constructs a new Controller object.
     Controller();
     // Suppress copy constructor.
@@ -26,7 +25,6 @@ class Controller {
     void run();
 
   private:
-
     Game* model;
     GameView* view;
     Input in;
@@ -36,5 +34,4 @@ class Controller {
     bool buildSelection();
     bool selectBuilding(bool = true);
     std::string current();
-
 };
