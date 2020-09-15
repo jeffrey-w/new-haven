@@ -34,9 +34,8 @@ class GatherFacility : public Observable {
 class BuildFacility {
 
   public:
-    // Constructs a new BuildFacility object with the specified number of unbuilt Buildings recorded onto it. Throws an
-    // exception if the specified number of unbuilt buildings is negative.
-    BuildFacility(int);
+    // Constructs a new BuildFacility object.
+    BuildFacility();
     // Constructs a new BuildFacility in the same state as the sepcified BuildFacility.
     BuildFacility(const BuildFacility&);
     // Returns the number of villagers recorded by this BuildFacility.
@@ -63,6 +62,5 @@ class BuildFacility {
     int built;
     int unbuilt;
 
-    BuildFacility() = default;
     int validateScore(int);
 };
