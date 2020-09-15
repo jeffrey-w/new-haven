@@ -12,12 +12,12 @@ using BuildingType = BuildingToken::BuildingType;
 class Building : public AbstractPiece {
 
   public:
-
     static void printBuildings(std::ostream&, const std::vector<Building*>&); // TODO make args cons
 
     // Constructs a new Building object.
     Building();
-    // Constructs a new Building object with the specifeid type and value. Throws an exception if the specified value is not between one and the Height of a VGMap.
+    // Constructs a new Building object with the specifeid type and value. Throws an exception if the specified value is
+    // not between one and the Height of a VGMap.
     Building(BuildingType, int);
     // Constructs a new Building object with the same attributes as the specified Building.
     Building(const Building&);
@@ -35,7 +35,5 @@ class Building : public AbstractPiece {
     void flip();
 
   private:
-
     BuildingToken* token;
-
 };
