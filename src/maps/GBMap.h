@@ -10,7 +10,8 @@
 
 // The common board onto which HarvestTiles are placed.
 class GBMap : public Observable {
-    static constexpr int DIM_MIN = 10, DIM_MAX = 14;
+
+    static constexpr int DIM = 14;
     static constexpr int PLAYERS_MIN = 2, PLAYERS_MID = 3, PLAYERS_MAX = 4;
     static std::string INVALID_NUM_PLAYERS;
 
@@ -30,31 +31,30 @@ class GBMap : public Observable {
     std::vector<std::pair<int, int>> corners() const;
     // Returns the number of unoccupied spaces on this GBMap.
     int squaresLeft() const;
-    // Places the specified HarvestTile onto the specified square of this GBMap. The specified
-    // HarvestTile is destroyed. Throws an exception if the specified HarvestTile is null; or if
-    // the specified square is not on this GBMap or if it is already occupied.
+    // Places the specified HarvestTile onto the specified square of this GBMap. The specified HarvestTile is destroyed.
+    // Throws an exception if the specified HarvestTile is null; or if the specified square is not on this GBMap or if
+    // it is already occupied.
     void setSquare(HarvestTile*, std::pair<int, int>);
-    // Counts, starting from the specified square, and records on the specified GatherFacility the
-    // number of connected resources of each type on this GBMap. If the specified ResourceToken is
-    // not null, then four copies of it will occupy the specified square before counting begins,
-    // and then removed afterwards. Throws an exception if the specified square is not on this
-    // GBMap.
+    // Counts, starting from the specified square, and records on the specified GatherFacility the number of connected
+    // resources of each type on this GBMap. If the specified ResourceToken is not null, then four copies of it will
+    // occupy the specified square before counting begins, and then removed afterwards. Throws an exception if the
+    // specified square is not on this GBMap.
     void calculateResources(std::pair<int, int>, GatherFacility*, ResourceToken* = nullptr);
 
   protected:
     std::string toString() const override;
 
   private:
-    int* numPlayers;
+    int numPlayers;
     TokenGraph* graph;
 
     static std::vector<std::pair<int, int>> expand(std::pair<int, int>);
+    static bool isOnCorner(int, int, bool);
 
     void setNumPlayers(int);
     int height() const;
     int width() const;
     std::vector<std::pair<int, int>> coordinatesOf(std::pair<int, int>, bool = false) const;
     std::pair<int, int> validateSquare(std::pair<int, int>) const;
-    bool isOnCorner(int, int) const;
-    bool isOverBoard(int, int) const;
+    bool isOverBoard(int, int, bool = false) const;
 };
