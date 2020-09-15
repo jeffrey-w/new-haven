@@ -46,7 +46,7 @@ void Building::flip() {
 void Building::printBuildings(std::ostream& stream, const vector<Building*>& buildings) {
     int number = 1;
     for (auto& building : buildings) {
-        if(building) {
+        if (building) {
             stream << "╔═╤══════╗\t";
         }
     }
@@ -61,7 +61,7 @@ void Building::printBuildings(std::ostream& stream, const vector<Building*>& bui
     stream << '\n';
     for (auto& building : buildings) {
         if (building) {
-            stream << "╟─┘ ";
+            stream << "╟─┘  ";
             stream << *building->token;
             stream << "   ║\t";
         }
