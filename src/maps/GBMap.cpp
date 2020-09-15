@@ -88,12 +88,9 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources, R
     }
     // Perform search for conntected resources starting from the four coordinates in from.
     for (auto& coordinate : coordinatesOf(from)) {
-        // Coordinate is occupied and has not been reached by a previous search.
-        if (graph->tokenAt(coordinate) && !graph->isSearched(coordinate)) {
-            int type = graph->tokenAt(coordinate)->getType();
-            // Only search if it's possible to locate like resources.
-            int amount = graph->hasType(type) ? graph->search(coordinate) : 1;
-            resources->incrementBy(type, amount);
+        // Coordinate is occupied.
+        if (graph->tokenAt(coordinate)) {
+            resources->incrementBy(graph->tokenAt(coordinate)->getType(), graph->search(coordinate));
         }
     }
     // Remove shipment tile.
@@ -102,8 +99,6 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources, R
             graph->removeTokenAt(coordinate);
         }
     }
-    // Clean up graph->for next search.
-    graph->cleanupSearch();
 }
 
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) const {
@@ -174,10 +169,10 @@ bool GBMap::isOverBoard(int row, int col, bool compressCoordinates) const {
     if (numPlayers == PLAYERS_MAX && isOnCorner(row, col, compressCoordinates)) {
         return true;
     }
-    int rowMin = numPlayers == PLAYERS_MIN ? PLAYERS_MIN : 0,
-        rowMax = numPlayers == PLAYERS_MIN ? DIM - PLAYERS_MIN - 1 : DIM - 1;
-    int colMin = numPlayers == PLAYERS_MAX ? 0 : PLAYERS_MIN,
-        colMax = numPlayers == PLAYERS_MAX ? DIM - 1 : DIM - PLAYERS_MIN - 1;
+    int rowMin = numPlayers == PLAYERS_MIN ? PLAYERS_MIN : 0;
+    int rowMax = numPlayers == PLAYERS_MIN ? DIM - PLAYERS_MIN - 1 : DIM - 1;
+    int colMin = numPlayers == PLAYERS_MAX ? 0 : PLAYERS_MIN;
+    int colMax = numPlayers == PLAYERS_MAX ? DIM - 1 : DIM - PLAYERS_MIN - 1;
     if (compressCoordinates) {
         rowMin >>= 1;
         rowMax >>= 1;
