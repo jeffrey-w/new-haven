@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "HarvestTile.h"
 #include "../util/Random.h"
+#include "HarvestTile.h"
 
 using std::vector;
 
@@ -9,7 +9,7 @@ HarvestTile::HarvestTile() {
     for (int i = 0; i < NUM_RESOURCES; i++) {
         // Default constructor returns a random ResourceToken.
         resources.push_back(new ResourceToken());
-   }
+    }
 }
 
 HarvestTile::HarvestTile(ResourceToken* one, ResourceToken* two, ResourceToken* three, ResourceToken* four) {
@@ -77,7 +77,7 @@ void HarvestTile::printTiles(std::ostream& stream, const vector<HarvestTile*> ti
             stream << "   ║\t";
         }
     }
-    number  = 1;
+    number = 1;
     stream << '\n';
     for (auto& tile : tiles) {
         stream << "║        │        ║\t";
