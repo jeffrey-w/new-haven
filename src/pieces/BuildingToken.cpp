@@ -64,16 +64,16 @@ std::string BuildingToken::toString() const {
     std::ostringstream stream;
     switch (*type) {
     case BuildingType::FOREST:
-        stream << "Fo";
+        stream << "F";
         break;
     case BuildingType::MEADOW:
-        stream << "Me";
+        stream << "M";
         break;
     case BuildingType::QUARRY:
-        stream << "Qu";
+        stream << "Q";
         break;
     case BuildingType::WHEATFIELD:
-        stream << "Wh";
+        stream << "W";
         break;
     }
     return stream.str();
