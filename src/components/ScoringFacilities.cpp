@@ -47,8 +47,7 @@ string GatherFacility::toString() const {
     return stream.str();
 }
 
-BuildFacility::BuildFacility(int unbuilt) : BuildFacility() {
-    setUnbuilt(unbuilt);
+BuildFacility::BuildFacility() : villagers(0), built(0), unbuilt(0) {
 }
 
 BuildFacility::BuildFacility(const BuildFacility& other) : BuildFacility() {
