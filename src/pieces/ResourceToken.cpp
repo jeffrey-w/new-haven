@@ -3,8 +3,6 @@
 #include "../util/Random.h"
 #include "ResourceToken.h"
 
-using ResourceType = ResourceToken::ResourceType;
-
 ResourceToken::ResourceToken() : ResourceToken(randomType()) {
 }
 
@@ -13,15 +11,11 @@ ResourceToken::ResourceType ResourceToken::randomType() {
 }
 
 ResourceToken::ResourceToken(ResourceType type) {
-    this->type = new ResourceType(type);
+    this->type = type;
 }
 
 ResourceToken::ResourceToken(const ResourceToken& other) : AbstractToken(other) {
-    type = new ResourceType(*other.type);
-}
-
-ResourceToken::~ResourceToken() {
-    delete type;
+    type = other.type;
 }
 
 ResourceToken* ResourceToken::clone() const {
@@ -29,12 +23,12 @@ ResourceToken* ResourceToken::clone() const {
 }
 
 int ResourceToken::getType() const {
-    return static_cast<int>(*type);
+    return static_cast<int>(type);
 }
 
 std::string ResourceToken::toString() const {
     std::ostringstream stream;
-    switch (*type) {
+    switch (type) {
     case ResourceType::SHEEP:
         stream << "SH";
         break;
