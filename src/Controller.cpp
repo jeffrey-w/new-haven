@@ -17,10 +17,10 @@ Controller::~Controller() {
 void Controller::initGame() {
     do {
         try {
-            model = new Game(in.get<int>("Enter number of players", "Must enter a number."));
+            model = new Game(in.get<int>("Enter number of players", "Must enter a number.", 0));
         } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << std::endl;
-            if (in.decide("Accept default number of players (" + std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?")) {
+            if (Input::decide("Accept default number of players (" + std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?")) {
                 model = new Game();
             }
         }
@@ -31,7 +31,7 @@ void Controller::inputIDs() {
     for (int i = 0; i < model->numPlayers(); i++) {
         do {
             try {
-                model->addPlayer(in.get<long>("Enter ID for player " + std::to_string(i + 1), "Invalid ID."));
+                model->addPlayer(in.get<long>("Enter ID for player " + std::to_string(i + 1), "Invalid ID.", 0));
                 break;
             } catch (const std::invalid_argument& e) {
                 std::cerr << e.what() << " Try again.\n";
@@ -51,7 +51,7 @@ void Controller::run() {
         view->showBuildings();
         _current = current();
         // Rotate tiles.
-        while (in.decide(_current + ", do you want to rotate any tiles?")) {
+        while (Input::decide(_current + ", do you want to rotate any tiles?")) {
             if (!rotateSelection()) {
                 break;
             }
@@ -62,7 +62,7 @@ void Controller::run() {
         for (int i = 0; i < model->numPlayers(); i++) {
             view->showVillage();
             view->showBuildings();
-            while (in.decide(_current + ", do you want to play a building?")) {
+            while (Input::decide(_current + ", do you want to play a building?")) {
                 if (model->canPlay()) {
                     if (!buildSelection()) {
                         break;
@@ -82,7 +82,7 @@ void Controller::run() {
             std::cout << _current << ", you must draw " << exhausted << " buildings.\n";
             selectBuilding(false);
             for (int i = 0; i < exhausted - 1; i++) {
-                if (in.decide("Do you want to draw a building from the pool?")) {
+                if (Input::decide("Do you want to draw a building from the pool?")) {
                     if (!(selectBuilding())) {
                         i--;
                     }
@@ -102,7 +102,7 @@ void Controller::run() {
 bool Controller::rotateSelection() {
     int selection;
     do {
-        selection = in.get<int>("Select a tile to rotate", "Invalid selection.", true);
+        selection = in.get<int>("Select a tile to rotate", "Invalid selection.", 0, true);
         if (in.cancelled()) {
             return false;
         }
@@ -118,16 +118,16 @@ bool Controller::rotateSelection() {
 void Controller::placeSelection() {
     int selection, row, col;
     do {
-        selection = in.get<int>("Select a tile", "Invalid selection.");
-        row = toupper(in.get<char>("Select a row", "Invalid row.")) - ROW_OFFSET;
-        col = in.get<int>("Select a column", "Invalid column");
+        selection = in.get<int>("Select a tile", "Invalid selection.", 0);
+        row = toupper(in.get<char>("Select a row", "Invalid row.", 0)) - ROW_OFFSET;
+        col = in.get<int>("Select a column", "Invalid column", 0);
         if (selection == SHIPMENT) {
-            int type = in.get<int>("Select resouce - 0: SH, 1: ST, 2: TI, 3: WH", "Invalid type.", true);
+            int type = in.get<int>("Select resouce - 1: SH, 2: ST, 3: TI, 4: WH", "Invalid type.", 0, true);
             if (in.cancelled()) {
                 continue;
             }
             try {
-                model->playShipment({row, --col}, type);
+                model->playShipment({row, --col}, --type);
                 break;
             } catch (const std::exception& e) {
                 std::cerr << e.what() << " Try again.\n";
@@ -146,12 +146,12 @@ void Controller::placeSelection() {
 bool Controller::buildSelection() {
     int selection, row, col;
     do {
-        selection = in.get<int>("Select a building", "Ivalid selection.", true);
+        selection = in.get<int>("Select a building", "Ivalid selection.", 0, true);
         if (in.cancelled()) {
             return false;
         }
-        row = toupper(in.get<char>("Select a row", "Invalid row.")) - ROW_OFFSET;
-        col = in.get<int>("Select a column", "Invalid column.");
+        row = toupper(in.get<char>("Select a row", "Invalid row.", 0)) - ROW_OFFSET;
+        col = in.get<int>("Select a column", "Invalid column.", 0);
         try {
             model->playBuilding(--selection, {row, --col});
             return true;
@@ -164,7 +164,7 @@ bool Controller::buildSelection() {
 bool Controller::selectBuilding(bool canCancel) {
     int selection = 0;
     do {
-        selection = in.get<int>("Select a building", "Invalid selection.", canCancel);
+        selection = in.get<int>("Select a building", "Invalid selection.", 0, canCancel);
         if (in.cancelled()) {
             return false;
         }
