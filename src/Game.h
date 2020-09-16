@@ -1,7 +1,5 @@
 #pragma once
 
-#include <list>
-
 #include "maps/GBMap.h"
 #include "players/Player.h"
 #include "players/Roster.h"
