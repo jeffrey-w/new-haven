@@ -4,6 +4,7 @@
 
 // The base class from which all Pieces (i.e. occupants of Decks and Hands) shall be derived.
 class AbstractPiece {
+
   public:
     // Destroys this AbstractPiece.
     virtual ~AbstractPiece() = default;
