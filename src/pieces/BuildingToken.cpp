@@ -16,9 +16,9 @@ int BuildingToken::randomValue() {
 }
 
 BuildingToken::BuildingToken(BuildingType type, int value) {
-    this->type = new BuildingType(type);
-    this->value = new int(validateValue(value));
-    this->faceUp = new bool(false);
+    this->type = type;
+    this->value = validateValue(value);
+    this->faceUp = false;
 }
 
 int BuildingToken::validateValue(int value) {
@@ -29,15 +29,9 @@ int BuildingToken::validateValue(int value) {
 }
 
 BuildingToken::BuildingToken(const BuildingToken& other) : AbstractToken(other) {
-    type = new BuildingType(*other.type);
-    value = new int(*other.value);
-    faceUp = new bool(*other.faceUp);
-}
-
-BuildingToken::~BuildingToken() {
-    delete type;
-    delete value;
-    delete faceUp;
+    type = other.type;
+    value = other.value;
+    faceUp = other.faceUp;
 }
 
 BuildingToken* BuildingToken::clone() const {
@@ -45,24 +39,24 @@ BuildingToken* BuildingToken::clone() const {
 }
 
 void BuildingToken::flip() {
-    *faceUp = !(*faceUp);
+    faceUp = !faceUp;
 }
 
 bool BuildingToken::isFaceUp() const {
-    return *faceUp;
+    return faceUp;
 }
 
 int BuildingToken::getType() const {
-    return static_cast<int>(*type);
+    return static_cast<int>(type);
 }
 
 int BuildingToken::getValue() const {
-    return *value;
+    return value;
 }
 
 std::string BuildingToken::toString() const {
     std::ostringstream stream;
-    switch (*type) {
+    switch (type) {
     case BuildingType::FOREST:
         stream << "F";
         break;
