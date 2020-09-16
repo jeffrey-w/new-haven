@@ -7,13 +7,11 @@
 
 // A subject to Observers.
 class Observable {
+
   public:
     // Constructs a new Observable object.
-    Observable();
-    // Destroys this Observable.
-    ~Observable();
-    // Registers the speficied Observer with this Observable. Throws an exception if the specified
-    // Observer is null.
+    Observable() = default;
+    // Registers the speficied Observer with this Observable. Throws an exception if the specified Observer is null.
     void attach(Observer*);
     // Deregisters the specified Observer with this Observable.
     void detach(Observer*);
@@ -26,5 +24,5 @@ class Observable {
     virtual std::string toString() const = 0;
 
   private:
-    std::set<Observer*>* observers;
+    std::set<Observer*> observers;
 };
