@@ -6,25 +6,24 @@
 
 // A facility for getting user input.
 class Input {
+
   public:
+    // Prompts the user for and collects their input to the specified yes or no question.
+    static bool decide(const std::string&);
+
     // Constructs a new Input object.
     Input();
     // Suppress copy constructor.
     Input(const Input&) = delete;
-    // Destroys this Input.
-    ~Input();
     // Returns true iff the previously polled input was cancelled.
     bool cancelled() const;
-    // Prompts the user for and collects their input to a yes or no question.
-    bool decide(const std::string&);
 
-    // Gets user input and interprets it as the specified type. If specified, the user may cancel
-    // this prompt for input.
-    template<typename t>
-    t get(const std::string& prompt, const std::string& fail, bool canCancel = false) {
-        t result;
+    // Gets user input and interprets it as the specified type. The specified prompt and fail messages inform the user what type of input is expected and whether an error has ocurred. The specified placeholder initializes the returned value. If specified, the user may cancel this prompt for input.
+    template<typename T>
+    T get(const std::string& prompt, const std::string& fail, T placeholder, bool canCancel = false) {
+        T result = placeholder;
         std::string input;
-        *_cancelled = false;
+        _cancelled = false;
         do {
             std::cout << prompt;
             if (canCancel) {
@@ -35,7 +34,7 @@ class Input {
             if (canCancel) {
                 char c = std::stringstream(input).get();
                 if (c == 'c' || c == 'C') {
-                    *_cancelled = true;
+                    _cancelled = true;
                     break;
                 }
             }
@@ -49,5 +48,5 @@ class Input {
     }
 
   private:
-    bool* _cancelled;
+    bool _cancelled;
 };
