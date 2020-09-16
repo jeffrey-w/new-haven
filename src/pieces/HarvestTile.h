@@ -13,7 +13,7 @@ class HarvestTile : public AbstractPiece {
 
   public:
     // The number of resources that a HarvestTile holds.
-    constexpr static int NUM_RESOURCES = 4;
+    static constexpr int NUM_RESOURCES = 4;
 
     static void printTiles(std::ostream&, const std::vector<HarvestTile*>);
 
@@ -35,7 +35,7 @@ class HarvestTile : public AbstractPiece {
   private:
     struct Orientation {
 
-        constexpr static int UPPER_LEFT = 0, UPPER_RIGHT = 1, LOWER_LEFT = 2, LOWER_RIGHT = 3;
+        static constexpr int UPPER_LEFT = 0, UPPER_RIGHT = 1, LOWER_LEFT = 2, LOWER_RIGHT = 3;
 
         int origin;
         int pos;
