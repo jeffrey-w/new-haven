@@ -1,17 +1,5 @@
 #include "Input.h"
 
-Input::Input() {
-    _cancelled = new bool(false);
-}
-
-Input::~Input() {
-    delete _cancelled;
-}
-
-bool Input::cancelled() const {
-    return *_cancelled;
-}
-
 bool Input::decide(const std::string& prompt) {
     bool decision, undecided = true;
     do {
@@ -33,4 +21,12 @@ bool Input::decide(const std::string& prompt) {
         std::cin.ignore();
     } while (undecided);
     return decision;
+}
+
+Input::Input() {
+    _cancelled = false;
+}
+
+bool Input::cancelled() const {
+    return _cancelled;
 }
