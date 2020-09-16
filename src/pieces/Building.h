@@ -12,7 +12,7 @@ using BuildingType = BuildingToken::BuildingType;
 class Building : public AbstractPiece {
 
   public:
-    static void printBuildings(std::ostream&, const std::vector<Building*>&); // TODO make args cons
+    static void printBuildings(std::ostream&, const std::vector<Building*>&);
 
     // Constructs a new Building object.
     Building();
