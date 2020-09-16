@@ -4,9 +4,9 @@
 
 // The token type that comprises HarvestTiles.
 class ResourceToken : public AbstractToken {
+
   public:
-    // The types a ResourceToken may have. (Corresponding BuildingTypes have corresponding
-    // ordinals.)
+    // The types a ResourceToken may have. (Corresponding BuildingTypes have corresponding ordinals.)
     enum class ResourceType { SHEEP, STONE, TIMBER, WHEAT };
 
     // Constructs a new ResourceToken object with a random type.
@@ -15,8 +15,6 @@ class ResourceToken : public AbstractToken {
     ResourceToken(ResourceType);
     // Constructs a new ResourceToken object with the same type as the specified ResourceToken.
     ResourceToken(const ResourceToken&);
-    // Destroys this ResourceToken object.
-    ~ResourceToken();
     // Returns a deep copy of this ResourceToken.
     ResourceToken* clone() const override;
     // Returns the type of this ResourceToken.
@@ -26,7 +24,7 @@ class ResourceToken : public AbstractToken {
     std::string toString() const override;
 
   private:
-    ResourceType* type;
+    ResourceType type;
 
     static ResourceToken::ResourceType randomType();
 };
