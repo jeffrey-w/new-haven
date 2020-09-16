@@ -21,7 +21,7 @@ VGMap::~VGMap() {
     delete graph;
 }
 
-bool VGMap::emptyAt(pair<int, int> circle) {
+bool VGMap::emptyAt(pair<int, int> circle) const {
     return graph->emptyAt(circle);
 }
 

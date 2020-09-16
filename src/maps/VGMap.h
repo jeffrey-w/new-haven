@@ -18,7 +18,7 @@ class VGMap : public Observable {
     VGMap(const VGMap&);
     // Returns true iff no Building occupies this VGMap at the specified circle. Throws an Exception
     // if the specified circle does not reference a circle of this VGMap.
-    bool emptyAt(std::pair<int, int>);
+    bool emptyAt(std::pair<int, int>) const;
     // Destroys this VGMap.
     ~VGMap();
     // Returns the number of Buildings on this VGMap.
