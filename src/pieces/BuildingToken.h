@@ -4,20 +4,17 @@
 
 // The token type that inhabits spaces on a VGMap.
 class BuildingToken : public AbstractToken {
+
   public:
-    // The types a BuildingToken may have. (Corresponding ResourceTypes has corresponding
-    // ordinals.)
+    // The types a BuildingToken may have. (Corresponding ResourceTypes has corresponding ordinals.)
     enum class BuildingType { MEADOW, QUARRY, FOREST, WHEATFIELD };
 
     // Constructs a new BuildingToken object with a random type.
     BuildingToken();
-    // Constructs a new BuildingToken object with the specified type and value. Throws an exception
-    // if the specified value is not between one and the height of a VGMap.
+    // Constructs a new BuildingToken object with the specified type and value. Throws an exception if the specified value is not between one and the height of a VGMap.
     BuildingToken(BuildingType, int);
     // Constructs a new BuildingToken object witht the same type and value as the specified BuildingToken.
     BuildingToken(const BuildingToken&);
-    // Destroys this BuildingToken.
-    ~BuildingToken();
     // Returns a deep copy of thos BuildingToken.
     BuildingToken* clone() const override;
     // Returns true iff this BuildingToken is face up.
@@ -33,9 +30,9 @@ class BuildingToken : public AbstractToken {
     std::string toString() const override;
 
   private:
-    BuildingType* type;
-    int* value;
-    bool* faceUp;
+    BuildingType type;
+    int value;
+    bool faceUp;
 
     static BuildingType randomType();
     static int randomValue();
