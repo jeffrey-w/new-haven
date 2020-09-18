@@ -6,6 +6,7 @@
 
 // A collection of PlayerViews.
 class RosterView {
+
   public:
     // Constructs a new RosterView.
     RosterView();
@@ -13,8 +14,7 @@ class RosterView {
     RosterView(const RosterView&) = delete;
     // Destroys this RosterView.
     ~RosterView();
-    // Adds the specified PlayerView to this RosterView. Throws an exception if the specified
-    // PlayerView is null.
+    // Adds the specified PlayerView to this RosterView. Throws an exception if the specified PlayerView is null.
     void addView(PlayerView*);
     // Selects the next Player to observe.
     void rotate();
@@ -26,6 +26,6 @@ class RosterView {
     void showVillage() const;
 
   private:
-    int* current;
-    std::vector<PlayerView*>* players;
+    int current;
+    std::vector<PlayerView*> players;
 };
