@@ -2,8 +2,6 @@
 
 #include "Controller.h"
 
-std::string Controller::WINNER_PROMPT = "And the final scores are...";
-
 Controller::Controller() {
     model = nullptr;
     view = nullptr;
@@ -96,7 +94,7 @@ void Controller::run() {
         view->rotate();
     }
     // Display winner(s).
-    view->showStats(&WINNER_PROMPT);
+    view->showStats("And the final scores are...");
 }
 
 bool Controller::rotateSelection() {
