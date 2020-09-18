@@ -5,9 +5,9 @@
 
 // Provides Views for a Player's posessions.
 class PlayerView {
+
   public:
-    // Constructs a new PlayerView observing the specified Hands and VGMap. Throws an exception if
-    // andy of the specified Observables are null.
+    // Constructs a new PlayerView observing the specified Hands and VGMap. Throws an exception if any of the specified Observables are null.
     PlayerView(HarvestTileHand*, BuildingHand*, VGMap*);
     // Suppress copy constructor.
     PlayerView(const PlayerView&) = delete;
