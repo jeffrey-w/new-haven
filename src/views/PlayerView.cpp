@@ -3,9 +3,9 @@
 using std::string;
 
 PlayerView::PlayerView(HarvestTileHand* tiles, BuildingHand* buildings, VGMap* village) {
-    this->tiles = new View(tiles, new string("Tiles"));
-    this->buildings = new View(buildings, new string("Buildings"));
-    this->village = new View(village, new string("Village Board"));
+    this->tiles = new View(tiles, "Tiles");
+    this->buildings = new View(buildings, "Buildings");
+    this->village = new View(village, "Village Board");
 }
 
 PlayerView::~PlayerView() {
