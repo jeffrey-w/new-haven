@@ -13,19 +13,19 @@ GameView::~GameView() {
 }
 
 void GameView::addStats(Roster* players) {
-    stats = new View(validateObservable(players), new string("Game Stats"));
+    stats = new View(validateObservable(players), "Game Stats");
 }
 
 void GameView::addBoard(GBMap* board) {
-    this->board = new View(validateObservable(board), new string("Game Board"));
+    this->board = new View(validateObservable(board), "Game Board");
 }
 
 void GameView::addResources(GatherFacility* resources) {
-    this->resources = new View(validateObservable(resources), new string("Resources"));
+    this->resources = new View(validateObservable(resources), "Resources");
 }
 
 void GameView::addPool(BuildingPool* pool) {
-    this->pool = new View(validateObservable(pool), new string("Building Pool"));
+    this->pool = new View(validateObservable(pool), "Building Pool");
 }
 
 void GameView::addPlayers(Roster* players) {
@@ -36,7 +36,7 @@ void GameView::rotate() {
     players->rotate();
 }
 
-void GameView::showStats(const string* header) const {
+void GameView::showStats(const string& header) const {
     if (stats) {
         stats->show(header);
     }
