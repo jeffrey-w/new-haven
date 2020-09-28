@@ -8,7 +8,13 @@
 // A graph that holds AbstractTokens.
 class TokenGraph {
 
+  class Node;
+
   public:
+
+    typedef std::map<std::pair<int,int>, Node*>::iterator iterator;
+    typedef std::map<std::pair<int,int>, Node*>::const_iterator const_iterator;
+
     // Static factory method: returns a TokenGraph configured as a grid of the specified height and width.
     static TokenGraph* gridOf(int, int);
 
@@ -49,6 +55,12 @@ class TokenGraph {
     int search(std::pair<int, int>);
     // Returns a mapping from the coordinates of this TokenGraph to the Tokens at those coordinates.
     std::map<std::pair<int, int>, AbstractToken*> tokens() const;
+    // Returns an iterator pointing to the first element on this TokenGraph.
+    iterator begin();
+    const_iterator begin() const;
+    // Returns an iterator pointing to the last element on this TokenGraph.
+    iterator end();
+    const_iterator end() const;
 
   private:
     struct Node {

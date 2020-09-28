@@ -166,6 +166,22 @@ map<pair<int, int>, AbstractToken*> TokenGraph::tokens() const {
     return tokens;
 }
 
+TokenGraph::iterator TokenGraph::begin() {
+    return nodes.begin();
+}
+
+TokenGraph::const_iterator TokenGraph::begin() const {
+    return begin();
+}
+
+TokenGraph::iterator TokenGraph::end() {
+    return nodes.end();
+}
+
+TokenGraph::const_iterator TokenGraph::end() const {
+    return end();
+}
+
 TokenGraph::Node::Node() {
     init(nullptr, nullptr);
 }
