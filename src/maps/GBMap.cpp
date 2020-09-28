@@ -20,8 +20,8 @@ GBMap::GBMap(int numPlayers) {
 }
 
 GBMap::GBMap(const GBMap& other) : GBMap(other.numPlayers) {
-    for (auto& entry : other.graph->tokens()) {
-        AbstractToken* token = entry.second;
+    for (auto& entry : *other.graph) {
+        AbstractToken* token = entry.second->token;
         graph->setTokenAt(token ? token->clone() : nullptr, entry.first);
     }
 }
@@ -42,7 +42,7 @@ int GBMap::getNumPlayers() const {
 }
 
 vector<pair<int, int>> GBMap::corners() const {
-    int min = numPlayers == PLAYERS_MIN ? 1 : 0, max = (DIM - PLAYERS_MIN) >> 1;
+    int min = numPlayers == PLAYERS_MIN ? 1 : 0, max = DIM - PLAYERS_MIN >> 1;
     vector<pair<int, int>> corners;
     corners.push_back({min, 1});
     corners.push_back({min, max - 1});
