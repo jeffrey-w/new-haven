@@ -28,3 +28,9 @@ cd bin
 cmake -G <desired build files> ../
 cmake --build .
 ```
+
+## Open issues
+
+- Automate view display logic
+- Change uses of std::map to std::unordered\_map
+- Implement iterator for TokenGraph and its clients
