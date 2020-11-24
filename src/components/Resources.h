@@ -151,7 +151,6 @@ class HarvestTileHand : public Observable {
     std::vector<HarvestTile*> tiles;
 
     bool isEmpty() const;
-    bool isFull() const;
     HarvestTile* validateSelection(int, bool);
 };
 

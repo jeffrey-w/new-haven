@@ -30,19 +30,13 @@ HarvestTileHand::~HarvestTileHand() {
 }
 
 void HarvestTileHand::insert(HarvestTile* tile) {
-    if (isFull()) {
-        throw std::runtime_error("This hand is full.");
-    }
     for (int i = 0; i < SIZE - 1; i++) {
         if (!tiles[i]) {
             tiles[i] = tile;
             return;
         }
     }
-}
-
-bool HarvestTileHand::isFull() const {
-    return tiles[0] && tiles[1];
+    throw std::runtime_error("This hand is full.");
 }
 
 HarvestTile* HarvestTileHand::select(int selection) {
