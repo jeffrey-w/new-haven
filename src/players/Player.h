@@ -18,8 +18,6 @@ class Player {
     Player();
     // Constructs a new Player object with the specified shipment tile;
     Player(HarvestTile*);
-    // Constructs a new Player object with the same attributes as the specified Player.
-    Player(const Player&);
     // Returns true iff the this Player is able to build on their VGMap with the resources
     // available in the specified GatherFacility.
     bool canPlay(GatherFacility*) const;

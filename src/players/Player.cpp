@@ -6,15 +6,7 @@ using std::pair;
 Player::Player() : Player(new HarvestTile()) {
 }
 
-Player::Player(HarvestTile* shipment) {
-    tiles = HarvestTileHand(shipment);
-}
-
-Player::Player(const Player& other) {
-    tiles = HarvestTileHand(other.tiles);
-    buildings = BuildingHand(other.buildings);
-    village = VGMap(other.village);
-    score = BuildFacility(other.score);
+Player::Player(HarvestTile* shipment) : tiles(HarvestTileHand(shipment)) {
 }
 
 bool Player::canPlay(GatherFacility* resources) const {
