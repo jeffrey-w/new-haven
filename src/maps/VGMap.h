@@ -23,7 +23,8 @@ class VGMap : public Observable {
     ~VGMap();
     // Returns the number of Buildings on this VGMap.
     int buildingCount() const;
-    // Returns true iff this VGMap contains a Building of the specified type.
+    // Returns true iff this VGMap contains a Building of the specified type. Throws an exception
+    // if the specified type is not within presceibed bounds.
     bool hasType(int) const;
     // Returns true iff any of the circles of this VGMap that are adjacent to the one at the
     // specified coordinate contain a Building of the specified type. Throws an exception if the

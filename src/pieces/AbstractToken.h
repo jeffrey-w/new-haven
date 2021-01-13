@@ -10,7 +10,7 @@ class AbstractToken {
 
     // Returns true iff the specified Tokens have the same type.
     static bool areSameType(AbstractToken*, AbstractToken*);
-    // Ensures that the specified type is within prescribed bounds.
+    // Ensures that the specified type is within prescribed bounds. Throws an exception if not.
     static int validateType(int);
 
     // Destroys this AbstractToken.
