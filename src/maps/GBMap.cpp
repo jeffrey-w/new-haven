@@ -64,7 +64,7 @@ int GBMap::squaresLeft() const {
         border = PLAYERS_MAX;
         break;
     }
-    return squares -= border;
+    return squares - border;
 }
 
 void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
@@ -99,6 +99,7 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources, R
             graph->removeTokenAt(coordinate);
         }
     }
+    graph->cleanupSearch();
 }
 
 vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEmpty) const {
@@ -169,16 +170,10 @@ bool GBMap::isOverBoard(int row, int col, bool compressCoordinates) const {
     if (numPlayers == PLAYERS_MAX && isOnCorner(row, col, compressCoordinates)) {
         return true;
     }
-    int rowMin = numPlayers == PLAYERS_MIN ? PLAYERS_MIN : 0;
-    int rowMax = numPlayers == PLAYERS_MIN ? DIM - PLAYERS_MIN - 1 : DIM - 1;
-    int colMin = numPlayers == PLAYERS_MAX ? 0 : PLAYERS_MIN;
-    int colMax = numPlayers == PLAYERS_MAX ? DIM - 1 : DIM - PLAYERS_MIN - 1;
-    if (compressCoordinates) {
-        rowMin >>= 1;
-        rowMax >>= 1;
-        colMin >>= 1;
-        colMax >>= 1;
-    }
+    int rowMin = (numPlayers == PLAYERS_MIN ? PLAYERS_MIN : 0) >> (compressCoordinates ? 1 : 0) ;
+    int rowMax = (numPlayers == PLAYERS_MIN ? DIM - PLAYERS_MIN - 1 : DIM - 1) >> (compressCoordinates ? 1 : 0);
+    int colMin = (numPlayers == PLAYERS_MAX ? 0 : PLAYERS_MIN) >> (compressCoordinates ? 1 : 0);
+    int colMax = (numPlayers == PLAYERS_MAX ? DIM - 1 : DIM - PLAYERS_MIN - 1) >> (compressCoordinates ? 1 : 0);
     return row < rowMin || row > rowMax || col < colMin || col > colMax;
 }
 
