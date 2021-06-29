@@ -119,12 +119,15 @@ pair<int, int> TokenGraph::validateCoordinate(pair<int, int> coordinate) const {
 }
 
 int TokenGraph::search(Node* s) {
-    int count = (s->color == Node::BLACK) ? 0 : 1;
+    if (s->color == Node::BLACK) {
+        return 0;
+    }
+    int count = 1;
     setupSearchAttributes(s->token);
     s->color = Node::GRAY;
     queue<Node*> q;
     q.push(s);
-    while (!q.empty() && count) {
+    while (!q.empty()) {
         Node* u = q.front();
         for (auto& v : u->adjacents) {
             if (v->color == Node::WHITE) {
@@ -135,9 +138,6 @@ int TokenGraph::search(Node* s) {
         }
         u->color = Node::BLACK;
         q.pop();
-    }
-    if (!(++searches & AbstractToken::NUM_TYPES - 1)) {
-        cleanupSearch();
     }
     return count;
 }

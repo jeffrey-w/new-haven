@@ -53,6 +53,9 @@ class TokenGraph {
     // Returns the number of Nodes that are connected to the source Node and contain the same type of Token as the
     // source. Throws an exception if the specified coordinate does not reference a Node of this TokenGraph.
     int search(std::pair<int, int>);
+    // Puts the Nodes of this TokenGraph into a native state (i.e. the one that they are in before any search has been
+    // performed).
+    void cleanupSearch();
     // Returns a mapping from the coordinates of this TokenGraph to the Tokens at those coordinates.
     std::map<std::pair<int, int>, AbstractToken*> tokens() const;
     // Returns an iterator pointing to the first element on this TokenGraph.
@@ -90,5 +93,4 @@ class TokenGraph {
     std::pair<int, int> validateCoordinate(std::pair<int, int>) const;
     int search(Node*);
     void setupSearchAttributes(AbstractToken*);
-    void cleanupSearch();
 };
