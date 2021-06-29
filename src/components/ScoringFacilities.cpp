@@ -51,9 +51,7 @@ BuildFacility::BuildFacility() : villagers(0), built(0), unbuilt(0) {
 }
 
 BuildFacility::BuildFacility(const BuildFacility& other) : BuildFacility() {
-    setVillagers(other.villagers);
-    setBuilt(other.built);
-    setUnbuilt(other.unbuilt);
+    setScores(other.villagers, other.built, other.unbuilt);
 }
 
 int BuildFacility::getVillagers() const {
@@ -78,6 +76,12 @@ void BuildFacility::setBuilt(int built) {
 
 void BuildFacility::setUnbuilt(int unbuilt) {
     this->unbuilt = validateScore(unbuilt);
+}
+
+void BuildFacility::setScores(int villagers, int built, int unbuilt) {
+    setVillagers(villagers);
+    setBuilt(built);
+    setUnbuilt(unbuilt);
 }
 
 int BuildFacility::validateScore(int score) {

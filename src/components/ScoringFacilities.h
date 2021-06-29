@@ -53,6 +53,9 @@ class BuildFacility {
     // Sets the nubmer of unbuilt Buildings recorded by this BuildFacility to that specified. Throws an exception if the
     // specified number is negative.
     void setUnbuilt(int);
+    // Sets the number of villagers, built, and unbuilt Buildings recorded by this BuildingFacility to that specified.
+    // Throws an exception if the specified numbers are negative.
+    void setScores(int, int, int);
 
     bool operator<(const BuildFacility&) const;
     bool operator==(const BuildFacility&) const;

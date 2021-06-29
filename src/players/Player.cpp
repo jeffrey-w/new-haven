@@ -80,9 +80,7 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
         buildings.insert(building);
         std::rethrow_exception(std::current_exception());
     }
-    score.setVillagers(village.calculateScore());
-    score.setBuilt(village.buildingCount());
-    score.setUnbuilt(buildings.getSize());
+    score.setScores(village.calculateScore(), village.buildingCount(), buildings.getSize());
     buildings.notify();
 }
 
