@@ -43,12 +43,9 @@ int GBMap::getNumPlayers() const {
 
 vector<pair<int, int>> GBMap::corners() const {
     int min = numPlayers == PLAYERS_MIN ? 1 : 0, max = DIM - PLAYERS_MIN >> 1;
-    vector<pair<int, int>> corners;
-    corners.push_back({min, 1});
-    corners.push_back({min, max - 1});
-    corners.push_back({max - min, 1});
-    corners.push_back({max - min, max - 1});
-    return corners;
+    return vector<pair<int, int>> {
+        {min, 1}, {min, max - 1}, {max - min, 1}, {max - min, max -1}
+    };
 }
 
 int GBMap::squaresLeft() const {
@@ -116,11 +113,12 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEm
 
 vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
     vector<pair<int, int>> coordinates;
-    coordinates.push_back({(square.first << 1), (square.second << 1)});
-    coordinates.push_back({(square.first << 1), (square.second << 1) + 1});
-    coordinates.push_back({(square.first << 1) + 1, (square.second << 1)});
-    coordinates.push_back({(square.first << 1) + 1, (square.second << 1) + 1});
-    return coordinates;
+    return vector<pair<int, int>> {
+        {(square.first << 1), (square.second << 1)},
+        {(square.first << 1), (square.second << 1) + 1},
+        {(square.first << 1) + 1, (square.second << 1)},
+        {(square.first << 1) + 1, (square.second << 1) + 1}
+    };
 }
 
 pair<int, int> GBMap::validateSquare(pair<int, int> square) const {
