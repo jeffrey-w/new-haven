@@ -31,7 +31,6 @@ TokenGraph* TokenGraph::gridOf(int height, int width) {
 }
 
 TokenGraph::TokenGraph() {
-    searches = 0;
     for (int i = 0; i < AbstractToken::NUM_TYPES; i++) {
         types[i] = 0;
     }

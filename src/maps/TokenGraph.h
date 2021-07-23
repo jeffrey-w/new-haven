@@ -85,7 +85,6 @@ class TokenGraph {
         void init(AbstractToken*, AbstractToken*);
     };
 
-    int searches;
     int types[AbstractToken::NUM_TYPES];
     std::map<std::pair<int, int>, Node*> nodes;
 
