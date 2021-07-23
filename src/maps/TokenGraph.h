@@ -60,9 +60,11 @@ class TokenGraph {
     std::map<std::pair<int, int>, AbstractToken*> tokens() const;
     // Returns an iterator pointing to the first element on this TokenGraph.
     iterator begin();
+    // Returns an iterator pointing to the first element on this TokenGraph.
     const_iterator begin() const;
     // Returns an iterator pointing to the last element on this TokenGraph.
     iterator end();
+    // Returns an iterator pointing to the last element on this TokenGraph.
     const_iterator end() const;
 
   private:
