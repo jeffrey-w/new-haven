@@ -117,7 +117,7 @@ void Game::playShipment(pair<int, int> coordinate, int type) {
         shipment = new Shipment {tile, coordinate};
     } catch (const std::exception& e) {
         players->peek()->store(tile);
-        std::rethrow_exception(std::current_exception());
+        throw;
     }
     resources->notify();
 }
@@ -132,7 +132,7 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) {
         current->buildVillage(selection, coordinate);
     } catch (const std::exception& e) {
         resources->incrementBy(type, cost);
-        std::rethrow_exception(std::current_exception());
+        throw;
     }
     players->notify();
     resources->notify();

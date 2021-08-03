@@ -80,7 +80,7 @@ void Player::buildVillage(int selection, pair<int, int> circle) {
         village.setCircle(building, circle);
     } catch (const std::exception& e) {
         buildings.insert(building);
-        std::rethrow_exception(std::current_exception());
+        throw;
     }
     score.setScores(village.calculateScore(), village.buildingCount(), buildings.getSize());
     buildings.notify();
@@ -114,7 +114,7 @@ void Player::placeTile(int selection, GBMap* map, pair<int, int> square) {
         map->setSquare(tile, square);
     } catch (const std::exception& e) {
         tiles.insert(tile);
-        std::rethrow_exception(std::current_exception());
+        throw;
     }
 }
 
