@@ -24,26 +24,23 @@ class Input {
         T result = placeholder;
         std::string input;
         _cancelled = false;
-        do {
-            std::cout << prompt;
-            if (canCancel) {
-                std::cout << " (or press 'C' to cancel)";
+    loop:
+        std::cout << prompt;
+        if (canCancel) {
+            std::cout << " (or press 'C' to cancel)";
+        }
+        std::cout << ": ";
+        std::getline(std::cin, input);
+        if (canCancel) {
+            char c = std::stringstream(input).get();
+            if (c == 'c' || c == 'C') {
+                _cancelled = true;
             }
-            std::cout << ": ";
-            std::getline(std::cin, input);
-            if (canCancel) {
-                char c = std::stringstream(input).get();
-                if (c == 'c' || c == 'C') {
-                    _cancelled = true;
-                    break;
-                }
-            }
-            if ((std::stringstream(input) >> result).fail()) {
-                std::cerr << fail << " try again.\n";
-            } else {
-                break;
-            }
-        } while (true);
+        }
+        if (!_cancelled && (std::stringstream(input) >> result).fail()) {
+            std::cerr << fail << " try again.\n";
+            goto loop;
+        }
         return result;
     }
 
