@@ -112,7 +112,6 @@ vector<pair<int, int>> GBMap::coordinatesOf(pair<int, int> square, bool ensureEm
 }
 
 vector<pair<int, int>> GBMap::expand(pair<int, int> square) {
-    vector<pair<int, int>> coordinates;
     return vector<pair<int, int>> {
         {(square.first << 1), (square.second << 1)},
         {(square.first << 1), (square.second << 1) + 1},

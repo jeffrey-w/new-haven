@@ -25,7 +25,7 @@ class GBMap : public Observable {
     GBMap(const GBMap&);
     // Destroys this GBMap.
     ~GBMap();
-    // Returns the number of Playrs playing on this GBMap.
+    // Returns the number of Players playing on this GBMap.
     int getNumPlayers() const;
     // Returns the coordinates of the corner squares on this GBMap.
     std::vector<std::pair<int, int>> corners() const;
