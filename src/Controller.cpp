@@ -13,29 +13,40 @@ Controller::~Controller() {
 }
 
 void Controller::initGame() {
+    GameBuilder* builder = nullptr;
     do {
         try {
-            model = new Game(in.get<int>("Enter number of players", "Must enter a number.", 0));
+            builder = new GameBuilder(in.get<int>(
+                "Enter number of players", "Must enter a number.", 0));
         } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << std::endl;
-            if (Input::decide("Accept default number of players (" + std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?")) {
-                model = new Game();
+            if (acceptDefaultNumberOfPlayers()) {
+                builder = new GameBuilder(Game::DEFAULT_NUM_PLAYERS);
             }
         }
-    } while (!model);
+    } while (!builder);
+    inputIDs(builder);
+    model = builder->build();
+    view = gameView(model);
 }
 
-void Controller::inputIDs() {
-    for (int i = 0; i < model->numPlayers(); i++) {
+bool Controller::acceptDefaultNumberOfPlayers() {
+    return Input::decide(
+        "Accept default number of players (" + std::to_string(Game::DEFAULT_NUM_PLAYERS) + ")?");
+}
+
+void Controller::inputIDs(GameBuilder* builder) {
+    int numPlayers = 0;
+    while (!builder->atCapacity()) {
 loop:
         try {
-            model->addPlayer(in.get<long>("Enter ID for player " + std::to_string(i + 1), "Invalid ID.", 0));
+            numPlayers = builder->addPlayer(
+                in.get<long>("Enter ID for player " + std::to_string(numPlayers + 1), "Invalid ID.", 0));
         } catch (const std::invalid_argument& e) {
             std::cerr << e.what() << " Try again.\n";
             goto loop;
         }
     }
-    view = gameView(model);
 }
 
 void Controller::run() {

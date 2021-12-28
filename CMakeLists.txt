@@ -3,6 +3,7 @@ project(New-Haven VERSION 1.0.0 LANGUAGES CXX)
 add_executable(new-haven
     src/Controller.cpp
     src/Game.cpp
+    src/GameBuilder.cpp
     src/main.cpp
     src/components/Resources.cpp
     src/components/ScoringFacilities.cpp

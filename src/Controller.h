@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Game.h"
+#include "GameBuilder.h"
 #include "util/Input.h"
 #include "views/GameView.h"
 
@@ -19,8 +19,6 @@ class Controller {
     ~Controller();
     // Initializes a Game from user input.
     void initGame();
-    // Adds Players to this Controller's Game.
-    void inputIDs();
     // Runs a Game of New Haven.
     void run();
 
@@ -29,6 +27,8 @@ class Controller {
     GameView* view;
     Input in;
 
+    bool acceptDefaultNumberOfPlayers();
+    void inputIDs(GameBuilder*);
     bool rotateSelection();
     void placeSelection();
     bool buildSelection();

@@ -8,15 +8,12 @@
 // A game of New Haven.
 class Game {
 
+  friend class GameBuilder;
+
   public:
 
     static constexpr int DEFAULT_NUM_PLAYERS = 2;
 
-    // Constructs a new Game object.
-    Game();
-    // Constructs a new Game object with the specified number of Players. Throws an exception if the specified number
-    // of players is not between two and four inclusive.
-    Game(int);
     // Constructs a new Game object with the same state as the specified Game.
     Game(const Game&);
     // Destroys this Game.
@@ -89,8 +86,6 @@ class Game {
     BuildingPool* pool;
     Roster* players;
 
-    bool atCapacity() const;
-    void setup();
-    void ensureSetup();
+    Game(GBMap*, Deck<HarvestTile*>*, Deck<Building*>*, BuildingPool*, Roster*);
 
 };
