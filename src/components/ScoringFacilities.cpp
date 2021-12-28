@@ -22,8 +22,18 @@ int GatherFacility::countOf(int type) const {
     return count.at(AbstractToken::validateType(type));
 }
 
-void GatherFacility::incrementBy(int type, int amount) {
-    count[AbstractToken::validateType(type)] += amount;
+void GatherFacility::use(int type, int cost) {
+    if (count[AbstractToken::validateType(type)] < cost) {
+        throw std::runtime_error("Not enough resoures.");
+    }
+    count[type] -= cost;
+}
+
+void GatherFacility::save(int type, int amount) {
+    if (count[AbstractToken::validateType(type)] < 0) {
+        throw std::runtime_error("Cannot save negative resources.");
+    }
+    count[type] += amount;
 }
 
 void GatherFacility::reset() {

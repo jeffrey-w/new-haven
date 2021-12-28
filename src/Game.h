@@ -8,10 +8,9 @@
 // A game of New Haven.
 class Game {
 
-  friend class GameBuilder;
+    friend class GameBuilder;
 
   public:
-
     static constexpr int DEFAULT_NUM_PLAYERS = 2;
 
     // Constructs a new Game object with the same state as the specified Game.
@@ -70,12 +69,10 @@ class Game {
     friend GameView* gameView(Game*);
 
   private:
-
     struct Shipment {
 
         HarvestTile* payload;
         std::pair<int, int> coordinate;
-
     };
 
     GBMap* board;
@@ -87,5 +84,4 @@ class Game {
     Roster* players;
 
     Game(GBMap*, Deck<HarvestTile*>*, Deck<Building*>*, BuildingPool*, Roster*);
-
 };

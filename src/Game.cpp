@@ -90,11 +90,11 @@ void Game::playBuilding(int selection, pair<int, int> coordinate) {
     int type, cost = VGMap::HEIGHT - coordinate.first;
     Player* current = players->peek();
     type = current->buildingType(selection);
-    current->resourceTracker(resources, type, cost);
+    resources->use(type, cost);
     try {
         current->buildVillage(selection, coordinate);
     } catch (const std::exception& e) {
-        resources->incrementBy(type, cost);
+        resources->save(type, cost);
         throw;
     }
     players->notify();

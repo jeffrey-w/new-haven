@@ -90,16 +90,6 @@ int Player::buildingType(int selection) const {
     return buildings.typeOf(selection);
 }
 
-void Player::resourceTracker(GatherFacility* resources, int type, int cost) {
-    if (!resources) {
-        throw std::invalid_argument("Cannot draw from null resources.");
-    }
-    if (resources->countOf(type) < cost) {
-        throw std::runtime_error("Not enough resoures.");
-    }
-    resources->incrementBy(type, -cost);
-} // TODO move this
-
 void Player::rotateTile(int selection) {
     tiles.rotate(selection);
     tiles.notify();

@@ -87,7 +87,7 @@ void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources, R
     for (auto& coordinate : coordinatesOf(from)) {
         // Coordinate is occupied.
         if (graph->tokenAt(coordinate)) {
-            resources->incrementBy(graph->tokenAt(coordinate)->getType(), graph->search(coordinate));
+            resources->save(graph->tokenAt(coordinate)->getType(), graph->search(coordinate));
         }
     }
     // Remove shipment tile.
