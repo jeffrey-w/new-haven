@@ -3,7 +3,7 @@
 
 using std::pair;
 
-Game::Game(GBMap* board, Deck<HarvestTile*>* tiles, Deck<Building*>* builduings, BuildingPool* pool, Roster* players) {
+Game::Game(GBMap* board, Deck<HarvestTile*>* tiles, Deck<Building*>* buildings, BuildingPool* pool, Roster* players) {
     this->board = board;
     this->tiles = tiles;
     this->buildings = buildings;

@@ -27,6 +27,7 @@ void Controller::initGame() {
     inputIDs(builder);
     model = builder->build();
     view = gameView(model);
+    delete builder;
 }
 
 bool Controller::acceptDefaultNumberOfPlayers() {
