@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "components/Resources.h"
 
 using std::pair;
 
@@ -10,7 +9,7 @@ Game::Game(GBMap* board, Deck<HarvestTile*>* tiles, Deck<Building*>* buildings, 
     this->pool = pool;
     this->players = players;
     shipment = nullptr;
-    resources = new GatherFacility();
+    resources = new ResourceTracker();
 }
 
 Game::Game(const Game& other) {
@@ -20,7 +19,7 @@ Game::Game(const Game& other) {
     } else {
         shipment = nullptr;
     }
-    resources = new GatherFacility(*other.resources);
+    resources = new ResourceTracker(*other.resources);
     tiles = new Deck<HarvestTile*>(*other.tiles);
     buildings = new Deck<Building*>(*other.buildings);
     pool = new BuildingPool(*other.pool);

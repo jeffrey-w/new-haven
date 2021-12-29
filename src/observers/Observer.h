@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 // Subscribes to Observables for updates.
 class Observer {
 

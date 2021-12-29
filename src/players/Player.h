@@ -1,10 +1,13 @@
 #pragma once
 
-#include "../components/Resources.h"
-#include "../components/ScoringFacilities.h"
+#include "../components/BuildingHand.h"
+#include "../components/BuildingPool.h"
+#include "../components/Deck.h"
+#include "../components/HarvestTileHand.h"
+#include "../components/ResourceTracker.h"
+#include "../components/ScoreBoard.h"
 #include "../maps/GBMap.h"
 #include "../maps/VGMap.h"
-#include "../pieces/Building.h"
 #include "../pieces/HarvestTile.h"
 
 // Forward declaration.
@@ -19,8 +22,8 @@ class Player {
     // Constructs a new Player object with the specified shipment tile;
     Player(HarvestTile*);
     // Returns true iff the this Player is able to build on their VGMap with the resources
-    // available in the specified GatherFacility.
-    bool canPlay(GatherFacility*) const;
+    // available in the specified Resources.
+    bool canPlay(ResourceTracker*) const;
     // Returns the number of villagers this Player has attracted to their VGMap.
     int getVillagers() const;
     // Returns the number of Buildings this Player has built on thier VGMap.
@@ -67,5 +70,5 @@ class Player {
     HarvestTileHand tiles;
     BuildingHand buildings;
     VGMap village;
-    BuildFacility score;
+    ScoreBoard score;
 };

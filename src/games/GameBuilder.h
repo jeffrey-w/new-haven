@@ -1,9 +1,7 @@
 #pragma once
 
-#include <map>
-
+#include "../players/Player.h"
 #include "Game.h"
-#include "players/Player.h"
 
 class GameBuilder {
 

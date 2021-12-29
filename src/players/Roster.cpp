@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <list>
 #include <sstream>
 
 #include "Roster.h"

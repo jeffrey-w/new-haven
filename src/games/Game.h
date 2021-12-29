@@ -1,9 +1,8 @@
 #pragma once
 
-#include "maps/GBMap.h"
-#include "players/Player.h"
-#include "players/Roster.h"
-#include "views/GameView.h"
+#include "../maps/GBMap.h"
+#include "../players/Roster.h"
+#include "../views/GameView.h"
 
 // A game of New Haven.
 class Game {
@@ -77,7 +76,7 @@ class Game {
 
     GBMap* board;
     Shipment* shipment;
-    GatherFacility* resources;
+    ResourceTracker* resources;
     Deck<HarvestTile*>* tiles;
     Deck<Building*>* buildings;
     BuildingPool* pool;

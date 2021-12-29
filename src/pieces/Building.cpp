@@ -1,5 +1,3 @@
-#include <stdexcept>
-
 #include "Building.h"
 
 using std::vector;

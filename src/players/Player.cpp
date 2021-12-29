@@ -9,7 +9,7 @@ Player::Player() : Player(new HarvestTile()) {
 Player::Player(HarvestTile* shipment) : tiles(HarvestTileHand(shipment)) {
 }
 
-bool Player::canPlay(GatherFacility* resources) const {
+bool Player::canPlay(ResourceTracker* resources) const {
     int type;
     for (int i = 0; i < VGMap::HEIGHT; i++) {
         for (int j = 0; j < VGMap::WIDTH; j++) {

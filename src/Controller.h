@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameBuilder.h"
+#include "games/GameBuilder.h"
 #include "util/Input.h"
 #include "views/GameView.h"
 

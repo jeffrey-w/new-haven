@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "../util/Random.h"
 #include "HarvestTile.h"
 

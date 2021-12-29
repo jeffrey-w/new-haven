@@ -1,5 +1,3 @@
-#include <cctype>
-
 #include "Controller.h"
 
 Controller::Controller() {

@@ -18,8 +18,8 @@ class GameView {
     void addStats(Roster*);
     // Registers an Observer with the specified GBMap. Throws an exception if the specified GBMap is null.
     void addBoard(GBMap*);
-    // Registers an Observer with the specified GatherFacility. Throws an exception if the specified GatherFacility is null.
-    void addResources(GatherFacility*);
+    // Registers an Observer with the specified Resources. Throws an exception if the specified Resources is null.
+    void addResources(ResourceTracker*);
     // Registers an Observer with the specified BuildingPool. Throws an exception if the specified BuildingPool is null.
     void addPool(BuildingPool*);
     // Registers Observers with the Players in the specified Roster. Throws an exception if the specified Roster is null.
@@ -30,7 +30,7 @@ class GameView {
     void showStats(const std::string&) const;
     // Displays the GBMap Observed by this GameView.
     void showBoard() const;
-    // Displays the GatherFacility observed by this GameView.
+    // Displays the Resources observed by this GameView.
     void showResources() const;
     // Displays the BuildingPool observed by this GameView.
     void showPool() const;

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <deque>
-#include <list>
-#include <map>
 
+#include "../components/Deck.h"
+#include "../observers/Observable.h"
 #include "../views/RosterView.h"
 #include "Player.h"
 

@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "GameView.h"
 
 using std::string;
@@ -20,7 +18,7 @@ void GameView::addBoard(GBMap* board) {
     this->board = new View(validateObservable(board), "Game Board");
 }
 
-void GameView::addResources(GatherFacility* resources) {
+void GameView::addResources(ResourceTracker* resources) {
     this->resources = new View(validateObservable(resources), "Resources");
 }
 

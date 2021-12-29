@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-
-#include "../components/ScoringFacilities.h"
 #include "../observers/Observable.h"
 #include "../pieces/Building.h"
 #include "TokenGraph.h"

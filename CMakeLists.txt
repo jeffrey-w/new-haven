@@ -2,11 +2,15 @@ cmake_minimum_required(VERSION 3.2)
 project(New-Haven VERSION 1.0.0 LANGUAGES CXX)
 add_executable(new-haven
     src/Controller.cpp
-    src/Game.cpp
-    src/GameBuilder.cpp
     src/main.cpp
-    src/components/Resources.cpp
-    src/components/ScoringFacilities.cpp
+    src/components/BuildingHand.cpp
+    src/components/BuildingPool.cpp
+    src/components/Deck.cpp
+    src/components/HarvestTileHand.cpp
+    src/components/ResourceTracker.cpp
+    src/components/ScoreBoard.cpp
+    src/games/Game.cpp
+    src/games/GameBuilder.cpp
     src/maps/GBMap.cpp
     src/maps/TokenGraph.cpp
     src/maps/VGMap.cpp

@@ -1,6 +1,8 @@
 #include <sstream>
+#include <stdexcept>
 
-#include "../Game.h"
+#include "../games/Game.h"
+#include "../pieces/AbstractToken.h"
 #include "GBMap.h"
 
 using std::pair;
@@ -75,7 +77,7 @@ void GBMap::setSquare(HarvestTile* tile, pair<int, int> square) {
     delete tile;
 }
 
-void GBMap::calculateResources(pair<int, int> from, GatherFacility* resources, ResourceToken* shipment) {
+void GBMap::calculateResources(pair<int, int> from, ResourceTracker* resources, ResourceToken* shipment) {
     // Place shipment tile if it has been played.
     if (shipment) {
         for (auto& coordinate : coordinatesOf(from, true)) {
